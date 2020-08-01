@@ -1,5 +1,5 @@
 //
-//  labelCustomClass.swift
+//  ImageViewCustomClass.swift
 //  hseProject_1
 //
 //  Created by Ильдар Нигметзянов on 31.07.2020.
@@ -8,9 +8,10 @@
 
 import UIKit
 
+ @IBDesignable class ImageViewCustomClass: UIImageView {
 
-@IBDesignable class LabelCustomClass: UILabel {
-
+    
+    
     @IBInspectable var borderWidth: CGFloat = 1 {
         didSet {
             layer.borderWidth = self.borderWidth
@@ -37,16 +38,16 @@ import UIKit
     }
     
     @IBInspectable
-    var roundedCornersOnRight: Bool = false {
-        didSet {
-            self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
-        }
-    }
-    
-    @IBInspectable
-    var roundedCornersOnLeft: Bool = false {
-        didSet {
-            self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        }
-    }
+       var roundedCornersOnRight: Bool = false {
+           didSet {
+               self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
+           }
+       }
+       
+       @IBInspectable
+       var roundedCornersOnLeft: Bool = false {
+           didSet {
+               self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+           }
+       }
 }

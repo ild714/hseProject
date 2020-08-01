@@ -9,17 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var numberOfPeopleLabel: UILabel!
-    @IBOutlet weak var co2ImageView: UIImageView!
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        co2ImageView.layer.cornerRadius = 10
-//        co2ImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-//        co2ImageView.backgroundColor = .systemBlue
     }
 
 
