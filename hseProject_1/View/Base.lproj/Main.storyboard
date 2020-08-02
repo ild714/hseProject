@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,11 +12,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="hseProject_1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ViewCustom" customModule="hseProject_1" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комната 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eg-wn-qJm">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="zSG-eY-kic"/>
@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPa-OA-bLw">
-                                <rect key="frame" x="369" y="12" width="25" height="25"/>
+                                <rect key="frame" x="369" y="56" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="1fm-GN-jsf"/>
                                     <constraint firstAttribute="height" constant="25" id="eMh-cw-vzV"/>
@@ -35,13 +35,13 @@
                                 <state key="normal" image="icons8-настройки-50"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="3I6-Y3-qSo">
-                                <rect key="frame" x="12" y="83" width="391.66666666666669" height="214"/>
+                                <rect key="frame" x="12" y="127" width="391.5" height="214"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yU-Dj-KiD">
-                                        <rect key="frame" x="0.0" y="0.0" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="391.5" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="termo" translatesAutoresizingMaskIntoConstraints="NO" id="rOi-7U-Zc7" customClass="ImageViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="qjQ-Cf-TtK"/>
@@ -64,10 +64,10 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZDO-h5-y9J">
-                                                <rect key="frame" x="37.666666666666671" y="0.0" width="158.33333333333331" height="40"/>
+                                                <rect key="frame" x="37.5" y="0.0" width="158.5" height="40"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Температура в комнате:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OUI-ZH-Zz2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="158.33333333333334" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="158.5" height="40"/>
                                                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
@@ -76,14 +76,14 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="22.0℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iSG-41-5bu">
-                                                <rect key="frame" x="196" y="0.0" width="97.666666666666686" height="40"/>
+                                                <rect key="frame" x="196" y="0.0" width="98" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.0℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="pNS-i3-CPQ" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="293.66666666666669" y="0.0" width="98" height="40"/>
+                                                <rect key="frame" x="294" y="0.0" width="97.5" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -102,10 +102,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArH-ln-g1T">
-                                        <rect key="frame" x="0.0" y="58" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="58" width="391.5" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-вода-50" translatesAutoresizingMaskIntoConstraints="NO" id="1tw-TV-y1P" customClass="ImageViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Jjx-47-TkZ"/>
@@ -123,21 +123,21 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Влажность:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="YuE-Nx-ljn">
-                                                <rect key="frame" x="37.666666666666671" y="0.0" width="158.33333333333331" height="40"/>
+                                                <rect key="frame" x="37.5" y="0.0" width="158.5" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35.0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="lbE-kO-XJC">
-                                                <rect key="frame" x="196" y="0.0" width="97.666666666666686" height="40"/>
+                                                <rect key="frame" x="196" y="0.0" width="98" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40.0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="knY-tJ-mid" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="293.66666666666669" y="0.0" width="98" height="40"/>
+                                                <rect key="frame" x="294" y="0.0" width="97.5" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -155,10 +155,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdJ-k5-mRG">
-                                        <rect key="frame" x="0.0" y="116" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="116" width="391.5" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-co2-50" translatesAutoresizingMaskIntoConstraints="NO" id="nTf-MB-eYt" customClass="ImageViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="37.5" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="f9d-ka-8e7"/>
@@ -189,7 +189,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CO2 в воздухе:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="66d-ki-k1E" customClass="SemiRoundLabel" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="37.666666666666671" y="0.0" width="158.33333333333331" height="40"/>
+                                                <rect key="frame" x="37.5" y="0.0" width="158.5" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -211,7 +211,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="452.0ppm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ER1-BO-EiW" customClass="SemiRoundLabel" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="196" y="0.0" width="97.666666666666686" height="40"/>
+                                                <rect key="frame" x="196" y="0.0" width="98" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -233,7 +233,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="600.0ppm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Krh-cO-9bt" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="293.66666666666669" y="0.0" width="98" height="40"/>
+                                                <rect key="frame" x="294" y="0.0" width="97.5" height="40"/>
                                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -270,10 +270,10 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lai-Lb-Ao5">
-                                        <rect key="frame" x="0.0" y="174" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="174" width="391.5" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Количество людей в комнате:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="KLm-S5-BN1" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="233.33333333333334" height="40"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="233.5" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="dTc-YI-UwT"/>
@@ -310,7 +310,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UjR-Pr-unn" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="233.33333333333331" y="0.0" width="158.33333333333331" height="40"/>
+                                                <rect key="frame" x="233.5" y="0.0" width="158" height="40"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -348,7 +348,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qh1-Co-rf3">
-                                <rect key="frame" x="63" y="328" width="288" height="35"/>
+                                <rect key="frame" x="63" y="372" width="288" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vC-IS-BPl" customClass="ButtonCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="35"/>
@@ -382,7 +382,7 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изменить температуру" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="NsF-Ik-Fgz" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изменить температуру" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="NsF-Ik-Fgz" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                         <rect key="frame" x="45" y="0.0" width="198" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="h0i-D8-W2Z"/>
@@ -443,15 +443,39 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Проветрить комнаты" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="wCj-pf-0dW" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                <rect key="frame" x="81" y="433" width="250" height="35"/>
+                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="dZm-Nr-RvQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.10103169326462241" green="0.58671793737055844" blue="0.14241828533647022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="wCj-pf-0dW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="4yw-qs-dt6"/>
                             <constraint firstItem="Qh1-Co-rf3" firstAttribute="top" secondItem="3I6-Y3-qSo" secondAttribute="bottom" constant="31" id="9y0-to-h5E"/>
                             <constraint firstItem="3I6-Y3-qSo" firstAttribute="top" secondItem="5eg-wn-qJm" secondAttribute="bottom" constant="33.000000000000014" id="E0X-bi-L2o"/>
                             <constraint firstItem="5eg-wn-qJm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HEo-sj-yK3"/>
+                            <constraint firstItem="wCj-pf-0dW" firstAttribute="top" secondItem="NsF-Ik-Fgz" secondAttribute="bottom" constant="26" id="HYT-Q2-FIP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zPa-OA-bLw" secondAttribute="trailing" constant="20" id="RGq-WT-t3R"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qh1-Co-rf3" secondAttribute="trailing" constant="63" id="Ryw-ia-pMe"/>
                             <constraint firstItem="Qh1-Co-rf3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63" id="apj-mx-CVC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wCj-pf-0dW" secondAttribute="trailing" constant="83" id="bD7-Ww-3DE"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5eg-wn-qJm" secondAttribute="trailing" id="ckX-CC-jGX"/>
                             <constraint firstItem="5eg-wn-qJm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="d4J-o6-l8V"/>
                             <constraint firstItem="zPa-OA-bLw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="lk8-bL-j0u"/>
