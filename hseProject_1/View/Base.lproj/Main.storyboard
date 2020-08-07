@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,38 +11,46 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="hseProject_1" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ViewCustom" customModule="hseProject_1" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комната 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eg-wn-qJm">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комната 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5eg-wn-qJm" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="375" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="zSG-eY-kic"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zPa-OA-bLw">
-                                <rect key="frame" x="369" y="12" width="25" height="25"/>
+                                <rect key="frame" x="330" y="56" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="1fm-GN-jsf"/>
                                     <constraint firstAttribute="height" constant="25" id="eMh-cw-vzV"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" image="icons8-настройки-50"/>
+                                <state key="normal" image="icons8-settings-50"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="3I6-Y3-qSo">
-                                <rect key="frame" x="12" y="83" width="391.66666666666669" height="214"/>
+                                <rect key="frame" x="12" y="127" width="352.66666666666669" height="214"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yU-Dj-KiD">
-                                        <rect key="frame" x="0.0" y="0.0" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="352.66666666666669" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="termo" translatesAutoresizingMaskIntoConstraints="NO" id="rOi-7U-Zc7" customClass="ImageViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" red="0.34468853565492952" green="0.83517750190845064" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="qjQ-Cf-TtK"/>
                                                 </constraints>
@@ -51,7 +59,7 @@
                                                         <real key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -64,27 +72,28 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZDO-h5-y9J">
-                                                <rect key="frame" x="37.666666666666671" y="0.0" width="158.33333333333331" height="40"/>
+                                                <rect key="frame" x="37.666666666666671" y="0.0" width="138.66666666666663" height="40"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Температура в комнате:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OUI-ZH-Zz2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="158.33333333333334" height="40"/>
-                                                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Температура в комнате:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OUI-ZH-Zz2" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="138.66666666666666" height="40"/>
+                                                        <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
+                                                <color key="backgroundColor" red="0.34468853565492952" green="0.83517750190845064" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="22.0℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iSG-41-5bu">
-                                                <rect key="frame" x="196" y="0.0" width="97.666666666666686" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="176.33333333333334" y="0.0" width="88.333333333333343" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853565492952" green="0.83517750190845064" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22.0℃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="pNS-i3-CPQ" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="293.66666666666669" y="0.0" width="98" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="264.66666666666669" y="0.0" width="88" height="40"/>
+                                                <color key="backgroundColor" red="0.24308299243993367" green="0.73930790474717045" blue="0.88295887305702958" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -102,11 +111,11 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArH-ln-g1T">
-                                        <rect key="frame" x="0.0" y="58" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="58" width="352.66666666666669" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-вода-50" translatesAutoresizingMaskIntoConstraints="NO" id="1tw-TV-y1P" customClass="ImageViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="40"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="Jjx-47-TkZ"/>
                                                     <constraint firstAttribute="width" constant="37.5" id="acu-ob-UjS"/>
@@ -114,7 +123,7 @@
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
@@ -123,30 +132,27 @@
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Влажность:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="YuE-Nx-ljn">
-                                                <rect key="frame" x="37.666666666666671" y="0.0" width="158.33333333333331" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="37.666666666666671" y="0.0" width="138.66666666666663" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="35.0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="lbE-kO-XJC">
-                                                <rect key="frame" x="196" y="0.0" width="97.666666666666686" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="176.33333333333334" y="0.0" width="88.333333333333343" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40.0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="knY-tJ-mid" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="293.66666666666669" y="0.0" width="98" height="40"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="264.66666666666669" y="0.0" width="88" height="40"/>
+                                                <color key="backgroundColor" red="0.24313725490196078" green="0.74117647058823533" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCornersOnRight" value="YES"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
@@ -155,11 +161,11 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdJ-k5-mRG">
-                                        <rect key="frame" x="0.0" y="116" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="116" width="352.66666666666669" height="40"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-co2-50" translatesAutoresizingMaskIntoConstraints="NO" id="nTf-MB-eYt" customClass="ImageViewCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="f9d-ka-8e7"/>
                                                 </constraints>
@@ -183,26 +189,26 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCornersOnLeft" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CO2 в воздухе:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="66d-ki-k1E" customClass="SemiRoundLabel" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="37.666666666666671" y="0.0" width="158.33333333333331" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="CO2 в воздухе:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="66d-ki-k1E" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                                <rect key="frame" x="37.666666666666671" y="0.0" width="138.66666666666663" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                         <real key="value" value="1"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="topLeft" value="NO"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="topRight" value="NO"/>
@@ -210,18 +216,18 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="bottomLeft" value="NO"/>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="452.0ppm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ER1-BO-EiW" customClass="SemiRoundLabel" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="196" y="0.0" width="97.666666666666686" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="452.0ppm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ER1-BO-EiW" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                                <rect key="frame" x="176.33333333333334" y="0.0" width="88.333333333333343" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="10"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                        <real key="value" value="1"/>
+                                                        <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                         <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,8 +239,8 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="600.0ppm" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Krh-cO-9bt" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="293.66666666666669" y="0.0" width="98" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="264.66666666666669" y="0.0" width="88" height="40"/>
+                                                <color key="backgroundColor" red="0.24313725490196078" green="0.74117647058823533" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -254,9 +260,6 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="topLeft" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="topRight" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="bottomRight" value="YES"/>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                         <real key="value" value="14"/>
                                                     </userDefinedRuntimeAttribute>
@@ -270,11 +273,11 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lai-Lb-Ao5">
-                                        <rect key="frame" x="0.0" y="174" width="391.66666666666669" height="40"/>
+                                        <rect key="frame" x="0.0" y="174" width="352.66666666666669" height="40"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Количество людей в комнате:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="KLm-S5-BN1" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="233.33333333333334" height="40"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="214" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="dTc-YI-UwT"/>
                                                 </constraints>
@@ -292,7 +295,7 @@
                                                         <real key="value" value="10"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCorners" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCornersOnLeft" value="YES"/>
@@ -310,8 +313,8 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="UjR-Pr-unn" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                                <rect key="frame" x="233.33333333333331" y="0.0" width="158.33333333333331" height="40"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <rect key="frame" x="214" y="0.0" width="138.66666666666663" height="40"/>
+                                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -327,7 +330,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCornersOnRight" value="YES"/>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
@@ -348,7 +351,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qh1-Co-rf3">
-                                <rect key="frame" x="63" y="328" width="288" height="35"/>
+                                <rect key="frame" x="63" y="372" width="249" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vC-IS-BPl" customClass="ButtonCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="45" height="35"/>
@@ -382,8 +385,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изменить температуру" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="NsF-Ik-Fgz" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                        <rect key="frame" x="45" y="0.0" width="198" height="35"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изменить температуру" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="NsF-Ik-Fgz" customClass="LabelCustomClass" customModule="hseProject_1" customModuleProvider="target">
+                                        <rect key="frame" x="45" y="0.0" width="159" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="h0i-D8-W2Z"/>
                                         </constraints>
@@ -417,7 +420,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbS-AD-2XF" customClass="ButtonCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                        <rect key="frame" x="243" y="0.0" width="45" height="35"/>
+                                        <rect key="frame" x="204" y="0.0" width="45" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="45" id="Td6-KM-4tW"/>
                                         </constraints>
@@ -444,8 +447,8 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sf-N1-HoF" customClass="ButtonCustomClass" customModule="hseProject_1" customModuleProvider="target">
-                                <rect key="frame" x="87" y="389" width="248" height="35"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="87" y="433" width="209" height="35"/>
+                                <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="k31-YT-iol"/>
                                 </constraints>
@@ -454,13 +457,7 @@
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="10"/>
@@ -469,27 +466,53 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                        <color key="value" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                        <color key="value" red="0.78137030861734591" green="0.95158933119885325" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6l-Oo-hdH">
-                                <rect key="frame" x="158" y="686" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i5-ZL-2NQ">
-                                <rect key="frame" x="203" y="686" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bvH-3o-z26">
+                                <rect key="frame" x="173.66666666666666" y="730" width="28" height="22"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6l-Oo-hdH">
+                                        <rect key="frame" x="0.0" y="0.0" width="15" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="zhF-jv-dbz"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="chevron.left" catalog="system"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i5-ZL-2NQ">
+                                        <rect key="frame" x="15" y="0.0" width="13" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="13" id="WO5-Bu-B9P"/>
+                                        </constraints>
+                                        <state key="normal" title="Button" image="chevron.right" catalog="system"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jm0-ZM-H0i">
+                                <rect key="frame" x="175.66666666666666" y="755" width="24" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="LZD-hF-q8a"/>
+                                    <constraint firstAttribute="width" constant="24" id="LxR-nI-Gcw"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="icons8-minus-24"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.26074640103602958" green="0.62833914821307257" blue="0.64974623485733063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6sf-N1-HoF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="0Yn-nS-vJI"/>
                             <constraint firstItem="Qh1-Co-rf3" firstAttribute="top" secondItem="3I6-Y3-qSo" secondAttribute="bottom" constant="31" id="9y0-to-h5E"/>
+                            <constraint firstItem="Jm0-ZM-H0i" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="B5x-8f-nJp"/>
                             <constraint firstItem="3I6-Y3-qSo" firstAttribute="top" secondItem="5eg-wn-qJm" secondAttribute="bottom" constant="33.000000000000014" id="E0X-bi-L2o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bvH-3o-z26" secondAttribute="bottom" constant="26" id="GQX-JJ-dsh"/>
                             <constraint firstItem="5eg-wn-qJm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HEo-sj-yK3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Jm0-ZM-H0i" secondAttribute="bottom" constant="5" id="PGM-zN-xGg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zPa-OA-bLw" secondAttribute="trailing" constant="20" id="RGq-WT-t3R"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qh1-Co-rf3" secondAttribute="trailing" constant="63" id="Ryw-ia-pMe"/>
                             <constraint firstItem="Qh1-Co-rf3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63" id="apj-mx-CVC"/>
@@ -499,33 +522,55 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3I6-Y3-qSo" secondAttribute="trailing" constant="10.333333333333314" id="mfW-P8-Lxi"/>
                             <constraint firstItem="3I6-Y3-qSo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="neg-jd-YTh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6sf-N1-HoF" secondAttribute="trailing" constant="79" id="pIB-hO-psK"/>
+                            <constraint firstItem="bvH-3o-z26" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="tjB-NH-flg"/>
                             <constraint firstItem="6sf-N1-HoF" firstAttribute="top" secondItem="NsF-Ik-Fgz" secondAttribute="bottom" constant="26" id="vhb-6g-BVh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                <color key="value" red="0.21379791140000001" green="0.83178059599999998" blue="0.37540323850000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="horizontalMode" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="startColor">
+                                <color key="value" red="0.42669227685211264" green="0.83517750190845064" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="endColor">
+                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="gasAim" destination="Krh-cO-9bt" id="bHH-bz-sxl"/>
+                        <outlet property="gasCurrent" destination="ER1-BO-EiW" id="T2U-hq-daP"/>
+                        <outlet property="gasImage" destination="nTf-MB-eYt" id="7gd-tG-hFj"/>
+                        <outlet property="gasText" destination="66d-ki-k1E" id="9MU-mZ-O30"/>
+                        <outlet property="peopleNumber" destination="UjR-Pr-unn" id="y6f-32-3rU"/>
+                        <outlet property="peopleText" destination="KLm-S5-BN1" id="moH-a9-rqI"/>
+                        <outlet property="roomNumber" destination="5eg-wn-qJm" id="L54-x6-aKx"/>
+                        <outlet property="temperatureAim" destination="pNS-i3-CPQ" id="VMf-Nm-qMC"/>
+                        <outlet property="temperatureCurrent" destination="iSG-41-5bu" id="29o-kz-cot"/>
+                        <outlet property="temperatureImage" destination="rOi-7U-Zc7" id="okD-iF-PjQ"/>
+                        <outlet property="temperatureText" destination="OUI-ZH-Zz2" id="HSc-cd-LQB"/>
+                        <outlet property="ventilateRoom" destination="6sf-N1-HoF" id="oKd-T5-Kmd"/>
+                        <outlet property="wetAim" destination="knY-tJ-mid" id="Rco-Jn-Y8a"/>
+                        <outlet property="wetCurrent" destination="lbE-kO-XJC" id="rjD-FN-dRO"/>
+                        <outlet property="wetImage" destination="1tw-TV-y1P" id="a7Y-SQ-11j"/>
+                        <outlet property="wetText" destination="YuE-Nx-ljn" id="UAc-tS-qyw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.23188405797103" y="126.5625"/>
+            <point key="canvasLocation" x="136.23188405797103" y="126.35869565217392"/>
         </scene>
     </scenes>
     <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="icons8-co2-50" width="50" height="50"/>
+        <image name="icons8-minus-24" width="24" height="24"/>
+        <image name="icons8-settings-50" width="50" height="50"/>
         <image name="icons8-вода-50" width="50" height="50"/>
         <image name="icons8-вычитание-50" width="50" height="50"/>
-        <image name="icons8-настройки-50" width="50" height="50"/>
         <image name="icons8-сложение-50" width="50" height="50"/>
         <image name="termo" width="32" height="32"/>
     </resources>

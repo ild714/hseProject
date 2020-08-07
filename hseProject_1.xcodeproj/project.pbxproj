@@ -16,6 +16,7 @@
 		216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216D2B7724D5C30900CFFF02 /* ButtonCustomClass.swift */; };
 		21D0833924D448F8003D0DA8 /* LabelCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0833824D448F8003D0DA8 /* LabelCustomClass.swift */; };
 		21D0833B24D44D52003D0DA8 /* ImageViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D0833A24D44D52003D0DA8 /* ImageViewCustomClass.swift */; };
+		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		216D2B7724D5C30900CFFF02 /* ButtonCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCustomClass.swift; sourceTree = "<group>"; };
 		21D0833824D448F8003D0DA8 /* LabelCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCustomClass.swift; sourceTree = "<group>"; };
 		21D0833A24D44D52003D0DA8 /* ImageViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewCustomClass.swift; sourceTree = "<group>"; };
+		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				21D0833824D448F8003D0DA8 /* LabelCustomClass.swift */,
 				21D0833A24D44D52003D0DA8 /* ImageViewCustomClass.swift */,
 				216D2B7724D5C30900CFFF02 /* ButtonCustomClass.swift */,
+				7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */,
 				2137EEBF24D054FF009B19FD /* ViewController.swift in Sources */,
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
 				2137EEBB24D054FF009B19FD /* AppDelegate.swift in Sources */,
