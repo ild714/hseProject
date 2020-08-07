@@ -31,6 +31,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var peopleText: LabelCustomClass!
     @IBOutlet weak var peopleNumber: LabelCustomClass!
     
+    
+    @IBOutlet weak var minusTemperature: ButtonCustomClass!
+    @IBOutlet weak var plusTemperature: ButtonCustomClass!
+    
+    
     @IBOutlet weak var ventilateRoom: ButtonCustomClass!
     
     override func viewDidLoad() {
