@@ -1,15 +1,15 @@
 //
-//  labelCustomClass.swift
+//  LabelGradientCustomClass.swift
 //  hseProject_1
 //
-//  Created by Ильдар Нигметзянов on 31.07.2020.
+//  Created by Ildar on 8/10/20.
 //  Copyright © 2020 Ildar Nigmetzyanov. All rights reserved.
 //
 
 import UIKit
 
-@IBDesignable class LabelCustomClass: UILabel {
-    
+class LabelGradientCustomClass: UILabel {
+
     @IBInspectable var startColor:   UIColor = .black { didSet { updateColors() }}
     @IBInspectable var endColor:     UIColor = .white { didSet { updateColors() }}
     @IBInspectable var startLocation: Double =   0.05 { didSet { updateLocations() }}
@@ -37,50 +37,5 @@ import UIKit
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
     }
     
-    @IBInspectable var borderWidth: CGFloat = 1 {
-        didSet {
-            layer.borderWidth = self.borderWidth
-        }
-    }
-    @IBInspectable var borderColor: UIColor = UIColor.black {
-        didSet {
-            layer.borderColor = self.borderColor.cgColor
-        }
-    }
-    
-    @IBInspectable var color: UIColor = .systemBlue {
-            didSet {
-                self.backgroundColor = color
-            }
-        }
-    
-    @IBInspectable
-    var cornerRadius: CGFloat = 10 {
-        didSet {
-            self.layer.masksToBounds = true
-            self.layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    @IBInspectable
-    var roundedCornersOnRight: Bool = false {
-        didSet {
-            self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
-        }
-    }
-    
-    @IBInspectable
-    var roundedCornersOnLeft: Bool = false {
-        didSet {
-            self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        }
-    }
-    
-    @IBInspectable
-    var roundedCornersOnLeftAndRight: Bool = false {
-        didSet {
-            self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner,.layerMaxXMinYCorner]
-        }
-    }
-    
+
 }

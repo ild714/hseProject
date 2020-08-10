@@ -54,12 +54,6 @@ import UIKit
         }
     }
     
-    @IBInspectable var color: UIColor = .systemBlue {
-            didSet {
-                self.backgroundColor = color
-            }
-        }
-    
     @IBInspectable
     var cornerRadius: CGFloat = 10 {
         didSet {
