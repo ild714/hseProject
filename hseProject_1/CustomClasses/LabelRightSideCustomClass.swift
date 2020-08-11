@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LabelRightSideCustomClass: UILabel {
+@IBDesignable class LabelRightSideCustomClass: UILabel {
 
     @IBInspectable
     var roundedCornersOnRight: Bool = false {

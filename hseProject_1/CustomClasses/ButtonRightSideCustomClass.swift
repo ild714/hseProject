@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonRightSideCustomClass: UIButton {
+@IBDesignable class ButtonRightSideCustomClass: UIButton {
 
     @IBInspectable
     var roundedCornersOnRight: Bool = false {

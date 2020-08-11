@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ImageViewLeftSideCustomClass: UIImageView {
+@IBDesignable class ImageViewLeftSideCustomClass: UIImageView {
 
     @IBInspectable
     var roundedCornersOnLeft: Bool = false {

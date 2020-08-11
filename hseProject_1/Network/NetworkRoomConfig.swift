@@ -12,27 +12,24 @@ import Foundation
 enum NetworkError: Error {
     case badData
     case badEncoding
-    case erroForRequest
+    case errorForRequest
+    case badUrl
 }
 
 class NetworkRoomConfig {
     
-    static func urlRequest(string: String) -> URLRequest? {
+    static func urlSession<T:Codable>(with string: String,completion: @escaping (Result<T, NetworkError>) -> Void) -> Void {
+
         guard let url = URL(string: string) else {
-            print("badURL")
-            return nil
+            completion(.failure(.badUrl))
+            return
         }
         let request = URLRequest(url: url)
         
-        return request
-    }
-    
-    static func urlSession<T:Codable>(with request: URLRequest,completion: @escaping (Result<T, NetworkError>) -> Void) -> Void {
-
         URLSession.shared.dataTask(with: request){data, response, error in
             
             guard error == nil else {
-                completion(.failure(.erroForRequest))
+                completion(.failure(.errorForRequest))
                 return
             }
             

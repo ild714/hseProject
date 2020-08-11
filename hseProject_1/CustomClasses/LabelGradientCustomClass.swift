@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LabelGradientCustomClass: UILabel {
+@IBDesignable class LabelGradientCustomClass: UILabel {
 
     @IBInspectable var startColor:   UIColor = .black { didSet { updateColors() }}
     @IBInspectable var endColor:     UIColor = .white { didSet { updateColors() }}
