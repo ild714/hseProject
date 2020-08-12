@@ -16,7 +16,6 @@ class ActivityIndicator {
     static func animateActivity(view: UIView) {
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        print(view.center.x)
         activityIndicator.center.x = view.bounds.size.width / 2
         activityIndicator.center.y = view.center.y
         activityIndicator.startAnimating()
