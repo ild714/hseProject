@@ -25,6 +25,16 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var peopleInRoom: LabelRightSideCustomClass!
     
+    
+    @IBAction func minusTemperature(_ sender: Any) {
+        
+        self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "50℃"
+    }
+
+    @IBAction func plusTemperature(_ sender: Any) {
+        self.aimTemperature.text = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "0℃"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ActivityIndicator.animateActivity(view: self.currentTemperature)

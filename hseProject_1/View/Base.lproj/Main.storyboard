@@ -243,6 +243,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCornersOnLeft" value="YES"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="minusTemperature:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oHe-g1-fcK"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Изменить температуру" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="NsF-Ik-Fgz" customClass="LabelGradientCustomClass" customModule="hseProject_1" customModuleProvider="target">
                                         <rect key="frame" x="55" y="0.0" width="178" height="35"/>
@@ -283,6 +286,9 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="plusTemperature:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aLL-zP-Zn8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
