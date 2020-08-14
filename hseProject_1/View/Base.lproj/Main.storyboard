@@ -298,10 +298,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6l-Oo-hdH">
                                         <rect key="frame" x="0.0" y="0.0" width="12.5" height="22"/>
                                         <state key="normal" image="chevron.left" catalog="system"/>
+                                        <connections>
+                                            <action selector="previousRoom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IDM-12-bOK"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7i5-ZL-2NQ">
                                         <rect key="frame" x="12.5" y="0.0" width="12.5" height="22"/>
                                         <state key="normal" image="chevron.right" catalog="system"/>
+                                        <connections>
+                                            <action selector="nextRoom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xV4-tf-uGo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -338,6 +344,9 @@
                                         <color key="value" red="0.78137030861734591" green="0.95158933119885325" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="ventilateRoom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ans-da-GdU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.26074640103602958" green="0.62833914821307257" blue="0.64974623485733063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

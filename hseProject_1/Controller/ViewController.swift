@@ -11,6 +11,9 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
         
+//    var countRoom = 0
+    var roomNumber = 1
+    var switchRoom = false
     
     @IBOutlet weak var roomName: UILabel!
     
@@ -35,13 +38,27 @@ class ViewController: UIViewController {
         self.aimTemperature.text = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "0℃"
     }
     
+    
+    @IBAction func ventilateRoom(_ sender: Any) {
+        
+        NetworkTemperatureResponse.getResponse(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=1"){  (result: Result<String,NetworkTemperatureError>) in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ActivityIndicator.animateActivity(view: self.currentTemperature)
         ActivityIndicator.animateActivity(view: self.currentWet)
         ActivityIndicator.animateActivity(view: self.currentGas)
         ActivityIndicator.animateActivity(view: self.peopleInRoom)
-        ActivityIndicator.animateActivity(view: self.roomName)
+//        ActivityIndicator.animateActivity(view: self.roomName)
         ActivityIndicator.animateActivity(view: self.aimGas)
         ActivityIndicator.animateActivity(view: self.aimTemperature)
         ActivityIndicator.animateActivity(view: self.aimWet)
@@ -50,7 +67,11 @@ class ViewController: UIViewController {
             switch result {
             case .success(let result):
                 ActivityIndicator.stopAnimating(view: self.roomName)
-                self.roomName.text = result.r_0.r_name
+                if self.roomNumber == 1 {
+                    self.roomName.text = result.r_0.r_name
+                } else if self.roomNumber == 2 {
+                    self.roomName.text = result.r_1.r_name
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -62,7 +83,10 @@ class ViewController: UIViewController {
                 
             switch result {
             case .success(let result):
-                for data in result["1"]! {
+//                self.countRoom = result.count
+//                print(self.countRoom)
+                for data in result["\(self.roomNumber)"]! {
+                        
                         if data.0 == "1"{
                             ActivityIndicator.stopAnimating(view: self.currentTemperature)
                             self.currentTemperature.text = "\(data.1)℃"
@@ -82,7 +106,7 @@ class ViewController: UIViewController {
             }
         }
         
-        NetworkSensorData.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=1",type: .aim){
+        NetworkSensorData.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=\(self.roomNumber)",type: .aim){
             (result: Result<[JSON],NetworkSensorError>) in
                 
             switch result {
@@ -109,6 +133,33 @@ class ViewController: UIViewController {
             }
         }
         
+        
     }
+    @IBAction func nextRoom(_ sender: Any) {
+        self.roomNumber = switchRoom == true ? 1 : 2
+        self.switchRoom = switchRoom == false ? true : false
+        self.aimTemperature.text = ""
+        self.currentTemperature.text = ""
+        self.aimWet.text = ""
+        self.currentWet.text = ""
+        self.aimGas.text = ""
+        self.currentGas.text = ""
+        self.peopleInRoom.text = ""
+        self.viewDidLoad()
+    }
+    
+    @IBAction func previousRoom(_ sender: Any) {
+        self.roomNumber = switchRoom == true ? 1 : 2
+        self.switchRoom = switchRoom == false ? true : false
+        self.aimTemperature.text = ""
+        self.currentTemperature.text = ""
+        self.aimWet.text = ""
+        self.currentWet.text = ""
+        self.aimGas.text = ""
+        self.currentGas.text = ""
+        self.peopleInRoom.text = ""
+        self.viewDidLoad()
+    }
+    
 }
 
