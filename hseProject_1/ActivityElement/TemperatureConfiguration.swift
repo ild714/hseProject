@@ -7,42 +7,68 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class TemperatureConfig {
     static func minus(string: String) -> String? {
         
-        if let aimTmperatureInt = Int(String(string.prefix(2))) {
+        var aimTmperatureIntResult = 0
+        
+        if let aimTemperatureInt = Int(String(string.prefix(2))) {
             
-            if aimTmperatureInt <= 0 {
+            if aimTemperatureInt <= 0 {
                 return nil
             }
-
-            return String(aimTmperatureInt - 1) + "℃"
+            
+            aimTmperatureIntResult = aimTemperatureInt
         } else {
-            if let aimTmperatureInt = Int(String(string.prefix(1))) {
+            if let aimTemperatureInt = Int(String(string.prefix(1))) {
                 
-                if aimTmperatureInt <= 0 {
+                if aimTemperatureInt <= 0 {
                     return nil
                 }
-                return String(aimTmperatureInt - 1) + "℃"
+                aimTmperatureIntResult = aimTemperatureInt
             }
         }
-        return nil
+        
+        NetworkTemperatureResponse.getResponse(with: "https://vc-srvr.ru/app/ch_temp?did=40RRTM304FCdd5M80ods&rid=1&ch_temp=\(aimTmperatureIntResult)"){  (result: Result<String,NetworkTemperatureError>) in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        return String(aimTmperatureIntResult - 1) + "℃"
     }
     
     static func plus(string: String) -> String? {
+        var aimTmperatureIntResult = 0
         
-        if let aimTmperatureInt = Int(String(string.prefix(2))) {
+        if let aimTemperatureInt = Int(String(string.prefix(2))) {
             
-            if aimTmperatureInt >= 50 {
+            if aimTemperatureInt >= 50 {
                 return nil
             }
-            return String(aimTmperatureInt + 1) + "℃"
+            
+            aimTmperatureIntResult = aimTemperatureInt
         } else {
-            if let aimTmperatureInt = Int(String(string.prefix(1))) {
-                return String(aimTmperatureInt + 1) + "℃"
+            if let aimTemperatureInt = Int(String(string.prefix(1))) {
+                
+                aimTmperatureIntResult = aimTemperatureInt
             }
         }
-        return nil
+        
+        NetworkTemperatureResponse.getResponse(with: "https://vc-srvr.ru/app/ch_temp?did=40RRTM304FCdd5M80ods&rid=1&ch_temp=\(aimTmperatureIntResult)"){  (result: Result<String,NetworkTemperatureError>) in
+            switch result {
+            case .success(let result):
+                print(result)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        return String(aimTmperatureIntResult + 1) + "℃"
     }
 }

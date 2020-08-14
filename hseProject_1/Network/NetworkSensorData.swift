@@ -6,8 +6,6 @@
 //  Copyright © 2020 Ildar Nigmetzyanov. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 import SwiftyJSON
 
