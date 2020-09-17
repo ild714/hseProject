@@ -11,7 +11,6 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
         
-//    var countRoom = 0
     var roomNumber = 1
     var switchRoom = false
     
@@ -51,14 +50,12 @@ class ViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         ActivityIndicator.animateActivity(view: self.currentTemperature)
         ActivityIndicator.animateActivity(view: self.currentWet)
         ActivityIndicator.animateActivity(view: self.currentGas)
         ActivityIndicator.animateActivity(view: self.peopleInRoom)
-//        ActivityIndicator.animateActivity(view: self.roomName)
         ActivityIndicator.animateActivity(view: self.aimGas)
         ActivityIndicator.animateActivity(view: self.aimTemperature)
         ActivityIndicator.animateActivity(view: self.aimWet)
@@ -76,7 +73,6 @@ class ViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-        
         
         NetworkSensorData.getData(with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",type: .current){
             (result: Result<[String:JSON],NetworkSensorError>) in
@@ -115,15 +111,27 @@ class ViewController: UIViewController {
                 for data in result {
                     if step == 1 {
                         ActivityIndicator.stopAnimating(view: self.aimTemperature)
-                        self.aimTemperature.text = "\(data)℃"
+                        if data.rawString() == "null"{
+                           self.aimTemperature.text = "24℃"
+                        } else {
+                            self.aimTemperature.text = "\(data)℃"
+                        }
                         step += 1
                     } else if step == 2 {
                         ActivityIndicator.stopAnimating(view: self.aimWet)
-                         self.aimWet.text = "\(data)%"
+                         if data.rawString() == "null"{
+                            self.aimWet.text = "45%"
+                         } else {
+                            self.aimWet.text = "\(data)%"
+                        }
                         step += 1
                     } else if step == 3 {
                         ActivityIndicator.stopAnimating(view: self.aimGas)
-                        self.aimGas.text = "\(data)ppm"
+                        if data.rawString() == "null"{
+                           self.aimGas.text = "700ppm"
+                        } else {
+                            self.aimGas.text = "\(data)ppm"
+                        }
                         step += 1
                     }
                 }
@@ -132,8 +140,6 @@ class ViewController: UIViewController {
                 print(error.localizedDescription)
             }
         }
-        
-        
     }
     @IBAction func nextRoom(_ sender: Any) {
         self.roomNumber = switchRoom == true ? 1 : 2
@@ -160,6 +166,5 @@ class ViewController: UIViewController {
         self.peopleInRoom.text = ""
         self.viewDidLoad()
     }
-    
 }
 
