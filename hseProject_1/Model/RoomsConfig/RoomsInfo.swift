@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Room:Codable {
+struct Room {
     let rid: Int
     let r_name: String
 }

@@ -8,8 +8,7 @@
 
 import Foundation
 
-struct Rooms: Codable {
+struct Rooms {
     let did: String
-    let r_0: Room
-    let r_1: Room
+    var rooms: [String: Room]
 }

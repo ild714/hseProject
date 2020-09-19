@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import SwiftyJSON
 
 enum NetworkError: Error {
     case badData
@@ -18,7 +18,9 @@ enum NetworkError: Error {
 
 class NetworkRoomConfig {
     
-    static func urlSession<T:Codable>(with string: String,completion: @escaping (Result<T, NetworkError>) -> Void) -> Void {
+    private static var typeOfRooms : [String: JSON] = [:]
+    
+    static func urlSession<T>(with string: String,completion: @escaping (Result<T, NetworkError>) -> Void) -> Void {
 
         guard let url = URL(string: string) else {
             completion(.failure(.badUrl))
@@ -35,8 +37,14 @@ class NetworkRoomConfig {
             
             if let data = data, let _ = response {
                 DispatchQueue.main.async{
-                    if let decodedRoom: T = parse(data) {
-                        completion(.success(decodedRoom))
+                    if let decodedRoom = JSON(data).dictionary {
+                        for (key,data) in decodedRoom{
+                            if key == "did"{
+                                continue
+                            }
+                            typeOfRooms[key] = data
+                        }
+                        completion(.success(typeOfRooms as! T))
                     } else {
                         completion(.failure(.badEncoding))
                         return
@@ -50,12 +58,5 @@ class NetworkRoomConfig {
         
     }
     
-    static func parse<T:Codable>(_ data: Data) -> T? {
-        if let decodedData = try? JSONDecoder().decode(T.self, from: data){
-            return decodedData
-        } else {
-            return nil
-        }
-    }
 }
 

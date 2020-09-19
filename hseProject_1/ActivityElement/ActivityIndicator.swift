@@ -17,7 +17,7 @@ class ActivityIndicator {
         
         let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         activityIndicator.center.x = view.bounds.size.width / 2
-        activityIndicator.center.y = view.center.y
+        activityIndicator.center.y = view.bounds.size.height / 2
         activityIndicator.startAnimating()
         view.addSubview(activityIndicator)
     }

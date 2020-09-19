@@ -11,8 +11,14 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
         
-    var roomNumber = 1
+    
+    
+    var curentRoom: Int = 1
+    var roomNumbersAndNames: [Int:String] = [:]
     var switchRoom = false
+    
+    @IBOutlet weak var previousVC: UIButton!
+    @IBOutlet weak var nextVC: UIButton!
     
     @IBOutlet weak var roomName: UILabel!
     
@@ -29,7 +35,6 @@ class ViewController: UIViewController {
     
     
     @IBAction func minusTemperature(_ sender: Any) {
-        
         self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "50℃"
     }
 
@@ -39,7 +44,6 @@ class ViewController: UIViewController {
     
     
     @IBAction func ventilateRoom(_ sender: Any) {
-        
         NetworkTemperatureResponse.getResponse(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=1"){  (result: Result<String,NetworkTemperatureError>) in
             switch result {
             case .success(let result):
@@ -52,6 +56,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.isNavigationBarHidden = true
+        if self.curentRoom == 1 {
+            self.previousVC.isHidden = true
+        } 
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
+        ActivityIndicator.animateActivity(view: self.roomName)
         ActivityIndicator.animateActivity(view: self.currentTemperature)
         ActivityIndicator.animateActivity(view: self.currentWet)
         ActivityIndicator.animateActivity(view: self.currentGas)
@@ -60,15 +73,22 @@ class ViewController: UIViewController {
         ActivityIndicator.animateActivity(view: self.aimTemperature)
         ActivityIndicator.animateActivity(view: self.aimWet)
         
-        NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"){(result: Result<Rooms,NetworkError>) in
+        NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"){(result: Result<[String:JSON],NetworkError>) in
             switch result {
             case .success(let result):
                 ActivityIndicator.stopAnimating(view: self.roomName)
-                if self.roomNumber == 1 {
-                    self.roomName.text = result.r_0.r_name
-                } else if self.roomNumber == 2 {
-                    self.roomName.text = result.r_1.r_name
+                
+                for (_,value) in result {
+                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
                 }
+
+                if self.curentRoom == self.roomNumbersAndNames.count {
+                    self.nextVC.isHidden = true
+                }
+                
+                self.roomName.text = self.roomNumbersAndNames[self.curentRoom]
+                
+
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -79,9 +99,8 @@ class ViewController: UIViewController {
                 
             switch result {
             case .success(let result):
-//                self.countRoom = result.count
-//                print(self.countRoom)
-                for data in result["\(self.roomNumber)"]! {
+
+                for data in result["\(self.curentRoom)"]! {
                         
                         if data.0 == "1"{
                             ActivityIndicator.stopAnimating(view: self.currentTemperature)
@@ -102,7 +121,7 @@ class ViewController: UIViewController {
             }
         }
         
-        NetworkSensorData.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=\(self.roomNumber)",type: .aim){
+        NetworkSensorData.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=\(self.curentRoom)",type: .aim){
             (result: Result<[JSON],NetworkSensorError>) in
                 
             switch result {
@@ -141,30 +160,54 @@ class ViewController: UIViewController {
             }
         }
     }
-    @IBAction func nextRoom(_ sender: Any) {
-        self.roomNumber = switchRoom == true ? 1 : 2
-        self.switchRoom = switchRoom == false ? true : false
-        self.aimTemperature.text = ""
-        self.currentTemperature.text = ""
-        self.aimWet.text = ""
-        self.currentWet.text = ""
-        self.aimGas.text = ""
-        self.currentGas.text = ""
-        self.peopleInRoom.text = ""
-        self.viewDidLoad()
-    }
     
     @IBAction func previousRoom(_ sender: Any) {
-        self.roomNumber = switchRoom == true ? 1 : 2
-        self.switchRoom = switchRoom == false ? true : false
-        self.aimTemperature.text = ""
-        self.currentTemperature.text = ""
-        self.aimWet.text = ""
-        self.currentWet.text = ""
-        self.aimGas.text = ""
-        self.currentGas.text = ""
-        self.peopleInRoom.text = ""
-        self.viewDidLoad()
+        performSegue(withIdentifier: "previous", sender: self)
     }
+    @IBAction func previous(_ seg: UIStoryboardSegue) {
+        if seg.identifier == "previous" {
+            guard let vc = seg.destination as? ViewController else {return}
+                self.curentRoom -= 1
+                vc.curentRoom = self.curentRoom
+            
+            
+//            self.roomNumber = switchRoom == true ? 1 : 2
+//            vc.roomNumber = self.roomNumber
+//            self.roomName.text = ""
+//            self.roomNumber = switchRoom == true ? 1 : 2
+//            self.switchRoom = switchRoom == false ? true : false
+//            self.aimTemperature.text = ""
+//            self.currentTemperature.text = ""
+//            self.aimWet.text = ""
+//            self.currentWet.text = ""
+//            self.aimGas.text = ""
+//            self.currentGas.text = ""
+//            self.peopleInRoom.text = ""
+//            self.viewDidLoad()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "next" {
+//            self.roomName.text = ""
+            guard let vc = segue.destination as? ViewController else {return}
+//                self.roomNumber = switchRoom == true ? 1 : 2
+                self.curentRoom += 1
+                vc.curentRoom = self.curentRoom
+            
+              
+//            self.switchRoom = switchRoom == false ? true : false
+//            self.aimTemperature.text = ""
+//            self.currentTemperature.text = ""
+//            self.aimWet.text = ""
+//            self.currentWet.text = ""
+//            self.aimGas.text = ""
+//            self.currentGas.text = ""
+//            self.peopleInRoom.text = ""
+//            self.viewDidLoad()
+        }
+    }
+    
+    
 }
 
