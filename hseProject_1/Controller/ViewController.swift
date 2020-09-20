@@ -11,11 +11,11 @@ import SwiftyJSON
 
 class ViewController: UIViewController {
         
-    
-    
     var curentRoom: Int = 1
     var roomNumbersAndNames: [Int:String] = [:]
     var switchRoom = false
+    
+    @IBOutlet weak var stackView: UIStackView!
     
     @IBOutlet weak var previousVC: UIButton!
     @IBOutlet weak var nextVC: UIButton!
@@ -23,6 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var roomName: UILabel!
     
     @IBOutlet weak var currentTemperature: UILabel!
+    @IBOutlet weak var modOfCurrentTemperature: UILabel!
     @IBOutlet weak var aimTemperature: LabelRightSideCustomClass!
     
     @IBOutlet weak var currentWet: UILabel!
@@ -54,18 +55,21 @@ class ViewController: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.isNavigationBarHidden = true
+        stackView.backColor(stackView: stackView)
+        
+        self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
+        
         if self.curentRoom == 1 {
             self.previousVC.isHidden = true
         } 
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        ActivityIndicator.animateActivity(view: self.roomName)
-        ActivityIndicator.animateActivity(view: self.currentTemperature)
+        ActivityIndicator.animateActivity(view: self.currentTemperature,typeOfActivity: .special)
         ActivityIndicator.animateActivity(view: self.currentWet)
         ActivityIndicator.animateActivity(view: self.currentGas)
         ActivityIndicator.animateActivity(view: self.peopleInRoom)
@@ -76,7 +80,6 @@ class ViewController: UIViewController {
         NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"){(result: Result<[String:JSON],NetworkError>) in
             switch result {
             case .success(let result):
-                ActivityIndicator.stopAnimating(view: self.roomName)
                 
                 for (_,value) in result {
                     self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
@@ -86,7 +89,7 @@ class ViewController: UIViewController {
                     self.nextVC.isHidden = true
                 }
                 
-                self.roomName.text = self.roomNumbersAndNames[self.curentRoom]
+                self.title = self.roomNumbersAndNames[self.curentRoom]
                 
 
             case .failure(let error):
@@ -104,7 +107,9 @@ class ViewController: UIViewController {
                         
                         if data.0 == "1"{
                             ActivityIndicator.stopAnimating(view: self.currentTemperature)
-                            self.currentTemperature.text = "\(data.1)℃"
+                            
+                            self.currentTemperature.text = "\(Int(floor(data.1.doubleValue)))."
+                            self.modOfCurrentTemperature.text = "\(String(String(data.1.doubleValue)[3...4]))℃"
                         } else if data.0 == "3"{
                             ActivityIndicator.stopAnimating(view: self.currentWet)
                             self.currentWet.text = "\(data.1)%"
@@ -161,53 +166,25 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func previousRoom(_ sender: Any) {
-        performSegue(withIdentifier: "previous", sender: self)
-    }
+    
+    
     @IBAction func previous(_ seg: UIStoryboardSegue) {
         if seg.identifier == "previous" {
             guard let vc = seg.destination as? ViewController else {return}
                 self.curentRoom -= 1
                 vc.curentRoom = self.curentRoom
             
-            
-//            self.roomNumber = switchRoom == true ? 1 : 2
-//            vc.roomNumber = self.roomNumber
-//            self.roomName.text = ""
-//            self.roomNumber = switchRoom == true ? 1 : 2
-//            self.switchRoom = switchRoom == false ? true : false
-//            self.aimTemperature.text = ""
-//            self.currentTemperature.text = ""
-//            self.aimWet.text = ""
-//            self.currentWet.text = ""
-//            self.aimGas.text = ""
-//            self.currentGas.text = ""
-//            self.peopleInRoom.text = ""
-//            self.viewDidLoad()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
-//            self.roomName.text = ""
             guard let vc = segue.destination as? ViewController else {return}
-//                self.roomNumber = switchRoom == true ? 1 : 2
+
                 self.curentRoom += 1
                 vc.curentRoom = self.curentRoom
-            
-              
-//            self.switchRoom = switchRoom == false ? true : false
-//            self.aimTemperature.text = ""
-//            self.currentTemperature.text = ""
-//            self.aimWet.text = ""
-//            self.currentWet.text = ""
-//            self.aimGas.text = ""
-//            self.currentGas.text = ""
-//            self.peopleInRoom.text = ""
-//            self.viewDidLoad()
         }
     }
     
     
 }
-

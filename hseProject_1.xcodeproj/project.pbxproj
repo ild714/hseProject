@@ -29,6 +29,9 @@
 		7480039C24E1406A006DEBDE /* LabelLeftSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039B24E1406A006DEBDE /* LabelLeftSideCustomClass.swift */; };
 		7480039E24E14203006DEBDE /* LabelGradientCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039D24E14203006DEBDE /* LabelGradientCustomClass.swift */; };
 		748003A224E14457006DEBDE /* ButtonRightSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748003A124E14457006DEBDE /* ButtonRightSideCustomClass.swift */; };
+		748426EB25169446006A09F7 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748426EA25169446006A09F7 /* NavigationBar.swift */; };
+		748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748426EE25174CB1006A09F7 /* StringExtension.swift */; };
+		748426F125175B0A006A09F7 /* StackExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748426F025175B0A006A09F7 /* StackExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,9 @@
 		7480039B24E1406A006DEBDE /* LabelLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelLeftSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039D24E14203006DEBDE /* LabelGradientCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelGradientCustomClass.swift; sourceTree = "<group>"; };
 		748003A124E14457006DEBDE /* ButtonRightSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonRightSideCustomClass.swift; sourceTree = "<group>"; };
+		748426EA25169446006A09F7 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		748426EE25174CB1006A09F7 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		748426F025175B0A006A09F7 /* StackExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackExtension.swift; sourceTree = "<group>"; };
 		8BCF395DEDF0840DC0E85C22 /* Pods-hseProject_1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hseProject_1.release.xcconfig"; path = "Target Support Files/Pods-hseProject_1/Pods-hseProject_1.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -137,6 +143,8 @@
 		2137EEB924D054FF009B19FD /* hseProject_1 */ = {
 			isa = PBXGroup;
 			children = (
+				748426ED25174C92006A09F7 /* ActiveButtons */,
+				748426EC25174C76006A09F7 /* Extension */,
 				743B8FC424E2EE30009A929A /* ActivityElement */,
 				7457B97B24DF0A3C00C16A0E /* Network */,
 				21D0833C24D5A895003D0DA8 /* CustomClasses */,
@@ -160,6 +168,7 @@
 				7480039B24E1406A006DEBDE /* LabelLeftSideCustomClass.swift */,
 				7480039D24E14203006DEBDE /* LabelGradientCustomClass.swift */,
 				748003A124E14457006DEBDE /* ButtonRightSideCustomClass.swift */,
+				748426EA25169446006A09F7 /* NavigationBar.swift */,
 			);
 			path = CustomClasses;
 			sourceTree = "<group>";
@@ -168,7 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */,
-				743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */,
 			);
 			path = ActivityElement;
 			sourceTree = "<group>";
@@ -181,6 +189,23 @@
 				743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		748426EC25174C76006A09F7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				748426EE25174CB1006A09F7 /* StringExtension.swift */,
+				748426F025175B0A006A09F7 /* StackExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		748426ED25174C92006A09F7 /* ActiveButtons */ = {
+			isa = PBXGroup;
+			children = (
+				743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */,
+			);
+			path = ActiveButtons;
 			sourceTree = "<group>";
 		};
 		74F6862824DFE51400C34765 /* RoomsConfig */ = {
@@ -317,6 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74754F5A24E296CE008F07A3 /* NetworkSensorData.swift in Sources */,
+				748426F125175B0A006A09F7 /* StackExtension.swift in Sources */,
 				7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */,
 				7457B97D24DF26F100C16A0E /* NetworkRoomConfig.swift in Sources */,
 				7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */,
@@ -328,12 +354,14 @@
 				2137EEBB24D054FF009B19FD /* AppDelegate.swift in Sources */,
 				7480039E24E14203006DEBDE /* LabelGradientCustomClass.swift in Sources */,
 				747CE29F24DFE689002FEB50 /* RoomsInfo.swift in Sources */,
+				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,
 				747CE29D24DFE65E002FEB50 /* Room.swift in Sources */,
 				743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */,
 				7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */,
 				743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */,
+				748426EB25169446006A09F7 /* NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
