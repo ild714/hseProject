@@ -8,10 +8,10 @@
 
 import UIKit
 
-
 extension UIStackView {
     func backColor(stackView: UIStackView){
         let backgroundView = UIView()
+        
         backgroundView.backgroundColor = UIColor.white
         
         backgroundView.translatesAutoresizingMaskIntoConstraints = false

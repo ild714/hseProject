@@ -16,11 +16,12 @@ class ViewController: UIViewController {
     var switchRoom = false
     
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackViewCO2: UIStackView!
+    @IBOutlet weak var stackViewWet: UIStackView!
+    @IBOutlet weak var stackViewTemperature: UIStackView!
     
     @IBOutlet weak var previousVC: UIButton!
     @IBOutlet weak var nextVC: UIButton!
-    
-    @IBOutlet weak var roomName: UILabel!
     
     @IBOutlet weak var currentTemperature: UILabel!
     @IBOutlet weak var modOfCurrentTemperature: UILabel!
@@ -28,9 +29,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var currentWet: UILabel!
     @IBOutlet weak var aimWet: LabelRightSideCustomClass!
+    @IBOutlet weak var modOfTheCurrentWet: UILabel!
     
     @IBOutlet weak var currentGas: UILabel!
     @IBOutlet weak var aimGas: LabelRightSideCustomClass!
+    @IBOutlet weak var ppmLabel: UILabel!
     
     @IBOutlet weak var peopleInRoom: LabelRightSideCustomClass!
     
@@ -60,6 +63,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         stackView.backColor(stackView: stackView)
+        stackViewCO2.backColor(stackView: stackViewCO2)
+        stackViewWet.backColor(stackView: stackViewWet)
+        stackViewTemperature.backColor(stackView: stackViewTemperature)
         
         self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
         
@@ -70,8 +76,8 @@ class ViewController: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         
         ActivityIndicator.animateActivity(view: self.currentTemperature,typeOfActivity: .special)
-        ActivityIndicator.animateActivity(view: self.currentWet)
         ActivityIndicator.animateActivity(view: self.currentGas)
+        ActivityIndicator.animateActivity(view: self.currentWet)
         ActivityIndicator.animateActivity(view: self.peopleInRoom)
         ActivityIndicator.animateActivity(view: self.aimGas)
         ActivityIndicator.animateActivity(view: self.aimTemperature)
@@ -107,15 +113,18 @@ class ViewController: UIViewController {
                         
                         if data.0 == "1"{
                             ActivityIndicator.stopAnimating(view: self.currentTemperature)
-                            
                             self.currentTemperature.text = "\(Int(floor(data.1.doubleValue)))."
                             self.modOfCurrentTemperature.text = "\(String(String(data.1.doubleValue)[3...4]))℃"
                         } else if data.0 == "3"{
                             ActivityIndicator.stopAnimating(view: self.currentWet)
-                            self.currentWet.text = "\(data.1)%"
+                            self.currentWet.text = "\(Int(floor(data.1.doubleValue)))."
+                            print(data.1)
+                            self.modOfTheCurrentWet.text = "\(String(String(data.1.doubleValue)[3...4]))%"
                         } else if data.0 == "4"{
                             ActivityIndicator.stopAnimating(view: self.currentGas)
-                            self.currentGas.text = "\(data.1)ppm"
+                            self.currentGas.text = "\(data.1)"
+                            self.ppmLabel.text = "ppm"
+                            
                         } else if data.0 == "5" {
                             ActivityIndicator.stopAnimating(view: self.peopleInRoom)
                             self.peopleInRoom.text = "\(data.1)"

@@ -19,7 +19,7 @@ class ActivityIndicator {
     
     static func animateActivity(view: UIView,typeOfActivity: SpecialActivity = .general) {
         
-        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         activityIndicator.center.x = view.bounds.size.width / 2
         if typeOfActivity == .special {
             activityIndicator.center.y = view.bounds.size.height / 2 - 5
