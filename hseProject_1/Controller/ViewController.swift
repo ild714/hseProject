@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         
         ActivityIndicator.animateActivity(view: self.currentTemperature,typeOfActivity: .special)
         ActivityIndicator.animateActivity(view: self.currentGas)
-        ActivityIndicator.animateActivity(view: self.currentWet)
+        ActivityIndicator.animateActivity(view: self.currentWet,typeOfActivity: .special)
         ActivityIndicator.animateActivity(view: self.peopleInRoom)
         ActivityIndicator.animateActivity(view: self.aimGas)
         ActivityIndicator.animateActivity(view: self.aimTemperature)
