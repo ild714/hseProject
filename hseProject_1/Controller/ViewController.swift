@@ -20,8 +20,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackViewWet: UIStackView!
     @IBOutlet weak var stackViewTemperature: UIStackView!
     
-    @IBOutlet weak var previousVC: UIButton!
-    @IBOutlet weak var nextVC: UIButton!
     
     @IBOutlet weak var currentTemperature: UILabel!
     @IBOutlet weak var modOfCurrentTemperature: UILabel!
@@ -58,6 +56,32 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc func handleSwipe(sender: UISwipeGestureRecognizer){
+        if sender.state == .ended{
+            switch sender.direction {
+            case .right:
+                navigationController?.popViewController(animated: true)
+            case .left:
+                if let vc = ViewController.storyboardInstance(){
+                    vc.curentRoom += 1
+                    navigationController?.pushViewController(vc, animated: true)
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    @objc func handleSwipeLast(sender: UISwipeGestureRecognizer){
+           if sender.state == .ended{
+               switch sender.direction {
+               case .right:
+                   navigationController?.popViewController(animated: true)
+               default:
+                   break
+               }
+           }
+       }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,8 +94,15 @@ class ViewController: UIViewController {
         self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
         
         if self.curentRoom == 1 {
-            self.previousVC.isHidden = true
-        } 
+           let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+            leftSwipe.direction = .left
+            
+            view.addGestureRecognizer(leftSwipe)
+            view.addGestureRecognizer(rightSwipe)
+        }
+        
+        
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
@@ -92,7 +123,8 @@ class ViewController: UIViewController {
                 }
 
                 if self.curentRoom == self.roomNumbersAndNames.count {
-                    self.nextVC.isHidden = true
+                    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+                    self.view.addGestureRecognizer(rightSwipe)
                 }
                 
                 self.title = self.roomNumbersAndNames[self.curentRoom]
@@ -175,6 +207,10 @@ class ViewController: UIViewController {
         }
     }
     
+    static func storyboardInstance() -> ViewController? {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ViewController
+    }
     
     
     @IBAction func previous(_ seg: UIStoryboardSegue) {
