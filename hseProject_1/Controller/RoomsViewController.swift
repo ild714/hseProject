@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ViewController: UIViewController {
+class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
         
     var curentRoom: Int = 1
     var roomNumbersAndNames: [Int:String] = [:]
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
             case .right:
                 navigationController?.popViewController(animated: true)
             case .left:
-                if let vc = ViewController.storyboardInstance(){
+                if let vc = RoomsViewController.storyboardInstance(){
                     vc.curentRoom += 1
                     navigationController?.pushViewController(vc, animated: true)
                 }
@@ -86,6 +86,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        setCurrentPage(number: curentRoom)
+//        setPageControl(viewController: self)
+        
+        createPageControl(viewController: self, number: curentRoom)
         stackView.backColor(stackView: stackView)
         stackViewCO2.backColor(stackView: stackViewCO2)
         stackViewWet.backColor(stackView: stackViewWet)
@@ -101,8 +105,6 @@ class ViewController: UIViewController {
             view.addGestureRecognizer(leftSwipe)
             view.addGestureRecognizer(rightSwipe)
         }
-        
-        
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         
@@ -207,15 +209,15 @@ class ViewController: UIViewController {
         }
     }
     
-    static func storyboardInstance() -> ViewController? {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ViewController
+    static func storyboardInstance() -> RoomsViewController? {
+        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? RoomsViewController
     }
     
     
     @IBAction func previous(_ seg: UIStoryboardSegue) {
         if seg.identifier == "previous" {
-            guard let vc = seg.destination as? ViewController else {return}
+            guard let vc = seg.destination as? RoomsViewController else {return}
                 self.curentRoom -= 1
                 vc.curentRoom = self.curentRoom
             
@@ -224,7 +226,7 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "next" {
-            guard let vc = segue.destination as? ViewController else {return}
+            guard let vc = segue.destination as? RoomsViewController else {return}
 
                 self.curentRoom += 1
                 vc.curentRoom = self.curentRoom

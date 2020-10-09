@@ -22,16 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
 
                 let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-
+                        
                 navigationController.viewControllers = [collectionViewController]
-                self.window?.rootViewController = navigationController
+                
+                self.window?.rootViewController =  navigationController
                 self.window?.makeKeyAndVisible()
 
             }
 //            let layout = UICollectionViewFlowLayout()
+//            layout.scrollDirection = .horizontal
 //            let swipingController = SwipingController(collectionViewLayout: layout)
-//            
+//
 //            window?.rootViewController = swipingController
+//            window?.makeKeyAndVisible()
         }
         guard let _ = (scene as? UIWindowScene) else { return }
     }

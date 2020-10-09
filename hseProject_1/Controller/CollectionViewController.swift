@@ -8,8 +8,9 @@
 
 import UIKit
 
-class CollectionViewController: UIViewController, UICollectionViewDelegate {
 
+class CollectionViewController: UIViewController, UICollectionViewDelegate,ToolBarWithPageControllProtocol {
+    
     var safeArea: UILayoutGuide!
     var roomsNames = ["Кухня","Гостиная","Спальня"]
     
@@ -29,10 +30,14 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createPageControl(viewController: self, number: 0)
+//        setPageControl(viewController: self,number:0)
+        
         title = "Все комнаты"
         self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
         
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+        
         collectionView.addGestureRecognizer(leftSwipe)
         leftSwipe.direction = .left
         
@@ -42,7 +47,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
         if sender.state == .ended{
             switch sender.direction {
             case .left:
-                if let vc = ViewController.storyboardInstance(){
+                if let vc = RoomsViewController.storyboardInstance(){
                     navigationController?.pushViewController(vc, animated: true)
                 }
             default:
@@ -58,6 +63,7 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
         setupTableView()
         
     }
+    
     func setupTableView(){
         view.addSubview(collectionView)
         
@@ -65,13 +71,13 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate {
         button.setTitle("Test", for: .normal)
         collectionView.addSubview(button)
         
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = UIColor.init(red: 247, green: 245, blue: 240)
+        collectionView.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
         
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 5
-        layout.minimumLineSpacing = 10
-        collectionView.collectionViewLayout = layout
+//        let layout = UICollectionViewFlowLayout()
+//        layout.minimumInteritemSpacing = 5
+//        layout.minimumLineSpacing = 10
+//        collectionView.collectionViewLayout = layout
+        
         collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
@@ -108,7 +114,13 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 50
         let collectionViewSize = collectionView.frame.size.width - padding
+        
+//        let cell = CustomCollectionViewCell()
+//        let viewCell = cell.loadViewFromNib()
+        
+//        return CGSize(width: viewCell.frame.width, height: viewCell.frame.height)
         return CGSize(width: collectionViewSize / 2 , height: collectionViewSize / 2)
+//        return CGSize(width: UIScreen.main.bounds.width - 20 , height: 180)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
