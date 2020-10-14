@@ -11,12 +11,31 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var navigationController: UINavigationController = UINavigationController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        if let windowScene = scene as? UIWindowScene {
+            self.window = UIWindow(windowScene: windowScene)
+            
+            if let collectionViewController = CollectionViewController.storyboardInstance(){
+
+                let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
+
+                let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
+                        
+                navigationController.viewControllers = [collectionViewController]
+                
+                self.window?.rootViewController =  navigationController
+                self.window?.makeKeyAndVisible()
+
+            }
+//            let layout = UICollectionViewFlowLayout()
+//            layout.scrollDirection = .horizontal
+//            let swipingController = SwipingController(collectionViewLayout: layout)
+//
+//            window?.rootViewController = swipingController
+//            window?.makeKeyAndVisible()
+        }
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 
