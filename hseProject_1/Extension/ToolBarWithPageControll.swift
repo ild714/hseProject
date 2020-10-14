@@ -28,7 +28,7 @@ extension ToolBarWithPageControllProtocol{
             pc.pageIndicatorTintColor = UIColor(redS: 249, greenS: 207, blueS: 224)
             
         viewController.navigationController?.setToolbarHidden(false, animated: false)
-        viewController.navigationController?.toolbar.clipsToBounds = true
+//        viewController.navigationController?.toolbar.clipsToBounds = true
         
         viewController.navigationController?.toolbar.barTintColor = UIColor(redS: 235, greenS: 235, blueS: 235, a: 1)
          let pageControlBarButtonItem = UIBarButtonItem(customView: pc)
