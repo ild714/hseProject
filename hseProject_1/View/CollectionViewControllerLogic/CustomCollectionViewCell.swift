@@ -20,7 +20,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.layer.cornerRadius = 10
-        
+        self.backgroundColor = .white
     }
     
     func loadViewFromNib() -> UIView {
