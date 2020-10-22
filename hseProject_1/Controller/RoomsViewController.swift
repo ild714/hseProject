@@ -86,35 +86,16 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        setCurrentPage(number: curentRoom)
-//        setPageControl(viewController: self)
-        
-        createPageControl(viewController: self, number: curentRoom)
+        // Addition for white background color
         stackView.backColor(stackView: stackView)
         stackViewCO2.backColor(stackView: stackViewCO2)
         stackViewWet.backColor(stackView: stackViewWet)
         stackViewTemperature.backColor(stackView: stackViewTemperature)
         
+        // Code for gradient color of navigationController
         self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
         
-        if self.curentRoom == 1 {
-           let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
-            leftSwipe.direction = .left
-            
-            view.addGestureRecognizer(leftSwipe)
-            view.addGestureRecognizer(rightSwipe)
-        }
-        
         self.navigationItem.setHidesBackButton(true, animated: true)
-        
-        ActivityIndicator.animateActivity(view: self.currentTemperature,typeOfActivity: .special)
-        ActivityIndicator.animateActivity(view: self.currentGas)
-        ActivityIndicator.animateActivity(view: self.currentWet,typeOfActivity: .special)
-        ActivityIndicator.animateActivity(view: self.peopleInRoom)
-        ActivityIndicator.animateActivity(view: self.aimGas)
-        ActivityIndicator.animateActivity(view: self.aimTemperature)
-        ActivityIndicator.animateActivity(view: self.aimWet)
         
         NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"){(result: Result<[String:JSON],NetworkError>) in
             switch result {
@@ -123,47 +104,47 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
                 for (_,value) in result {
                     self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
                 }
-
+                
                 if self.curentRoom == self.roomNumbersAndNames.count {
                     let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
                     self.view.addGestureRecognizer(rightSwipe)
+                } else if self.curentRoom < self.roomNumbersAndNames.count{
+                    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                    leftSwipe.direction = .left
+                    
+                    self.view.addGestureRecognizer(leftSwipe)
+                    self.view.addGestureRecognizer(rightSwipe)
                 }
+                self.createPageControl(viewController: self, number: self.curentRoom,allAmountOfPages: self.roomNumbersAndNames.count + 1)
                 
                 self.title = self.roomNumbersAndNames[self.curentRoom]
                 
-
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
+        
+        ActivityIndicator.animateActivity(views: [ViewSpecialAndGeneral(view:self.aimWet, type: .special),ViewSpecialAndGeneral(view: self.currentGas),ViewSpecialAndGeneral(view: self.currentWet,type: .special),ViewSpecialAndGeneral(view: self.peopleInRoom),ViewSpecialAndGeneral(view: self.aimGas),ViewSpecialAndGeneral(view: self.aimTemperature)])
         
         NetworkSensorData.getData(with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",type: .current){
             (result: Result<[String:JSON],NetworkSensorError>) in
                 
             switch result {
             case .success(let result):
-
-                for data in result["\(self.curentRoom)"]! {
-                        
-                        if data.0 == "1"{
-                            ActivityIndicator.stopAnimating(view: self.currentTemperature)
-                            self.currentTemperature.text = "\(Int(floor(data.1.doubleValue)))."
-                            self.modOfCurrentTemperature.text = "\(String(String(data.1.doubleValue)[3...4]))℃"
-                        } else if data.0 == "3"{
-                            ActivityIndicator.stopAnimating(view: self.currentWet)
-                            self.currentWet.text = "\(Int(floor(data.1.doubleValue)))."
-                            print(data.1)
-                            self.modOfTheCurrentWet.text = "\(String(String(data.1.doubleValue)[3...4]))%"
-                        } else if data.0 == "4"{
-                            ActivityIndicator.stopAnimating(view: self.currentGas)
-                            self.currentGas.text = "\(data.1)"
-                            self.ppmLabel.text = "ppm"
-                            
-                        } else if data.0 == "5" {
-                            ActivityIndicator.stopAnimating(view: self.peopleInRoom)
-                            self.peopleInRoom.text = "\(data.1)"
-                    }
-                }
+                
+                let currentRoomData = CurrentRoomData(result: result, curentRoom: self.curentRoom)
+                
+                self.currentTemperature.text = currentRoomData.currentTemperature
+                self.modOfCurrentTemperature.text = currentRoomData.modOfCurrentTemperature
+                self.currentWet.text = currentRoomData.currentWet
+                self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
+                self.currentGas.text = currentRoomData.currentGas
+                self.ppmLabel.text = currentRoomData.ppm
+                self.peopleInRoom.text = currentRoomData.peopleInRoom
+                
+                ActivityIndicator.stopAnimating(views: [self.currentTemperature,self.currentWet,self.currentGas,self.peopleInRoom])
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -171,40 +152,24 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
         
         NetworkSensorData.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=\(self.curentRoom)",type: .aim){
             (result: Result<[JSON],NetworkSensorError>) in
-                
+
             switch result {
             case .success(let result):
-                var step = 1
-                for data in result {
-                    if step == 1 {
-                        ActivityIndicator.stopAnimating(view: self.aimTemperature)
-                        if data.rawString() == "null"{
-                           self.aimTemperature.text = "24℃"
-                        } else {
-                            self.aimTemperature.text = "\(data)℃"
-                        }
-                        step += 1
-                    } else if step == 2 {
-                        ActivityIndicator.stopAnimating(view: self.aimWet)
-                         if data.rawString() == "null"{
-                            self.aimWet.text = "45%"
-                         } else {
-                            self.aimWet.text = "\(data)%"
-                        }
-                        step += 1
-                    } else if step == 3 {
-                        ActivityIndicator.stopAnimating(view: self.aimGas)
-                        if data.rawString() == "null"{
-                           self.aimGas.text = "700ppm"
-                        } else {
-                            self.aimGas.text = "\(data)ppm"
-                        }
-                        step += 1
-                    }
-                }
-                print(result)
+                
+                let aimRoomData = AimRoomData(result: result)
+                
+                self.aimTemperature.text = aimRoomData.aimTemperature
+                self.aimWet.text = aimRoomData.aimWet
+                self.aimGas.text = aimRoomData.aimGas
+                
+                ActivityIndicator.stopAnimating(views: [self.aimTemperature,self.aimWet,self.aimGas])
+                
             case .failure(let error):
                 print(error.localizedDescription)
+                self.aimTemperature.text = "-"
+                self.aimWet.text = "-"
+                self.aimGas.text = "-"
+                ActivityIndicator.stopAnimating(views: [self.aimTemperature,self.aimWet,self.aimGas])
             }
         }
     }
@@ -213,25 +178,5 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? RoomsViewController
     }
-    
-    
-    @IBAction func previous(_ seg: UIStoryboardSegue) {
-        if seg.identifier == "previous" {
-            guard let vc = seg.destination as? RoomsViewController else {return}
-                self.curentRoom -= 1
-                vc.curentRoom = self.curentRoom
-            
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "next" {
-            guard let vc = segue.destination as? RoomsViewController else {return}
-
-                self.curentRoom += 1
-                vc.curentRoom = self.curentRoom
-        }
-    }
-    
     
 }

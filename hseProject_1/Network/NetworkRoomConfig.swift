@@ -51,7 +51,9 @@ class NetworkRoomConfig {
                     }
                 }
             } else {
-                completion(.failure(.badData))
+                DispatchQueue.main.async{
+                    completion(.failure(.badData))
+                }
                 return
             }
         }.resume()

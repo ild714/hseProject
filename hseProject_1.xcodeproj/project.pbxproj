@@ -19,10 +19,10 @@
 		740D1E04252F41A0000253FA /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740D1E02252F41A0000253FA /* CustomCollectionViewCell.xib */; };
 		740D1E06252F46BF000253FA /* CollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 740D1E05252F46BF000253FA /* CollectionViewController.storyboard */; };
 		740D1E08252FA1DD000253FA /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D1E07252FA1DD000253FA /* ColorExtensions.swift */; };
-		740D1E0A252FAFC4000253FA /* SwipingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D1E09252FAFC4000253FA /* SwipingController.swift */; };
 		740D1E0B25304872000253FA /* RoomsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2137EEC024D054FF009B19FD /* RoomsViewController.storyboard */; };
-		740D1E0D25304CC7000253FA /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D1E0C25304CC7000253FA /* PageCell.swift */; };
 		740D1E1025307EDC000253FA /* ToolBarWithPageControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D1E0F25307EDB000253FA /* ToolBarWithPageControll.swift */; };
+		74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74171F1D2541B2B400746E9E /* CurrentRoomData.swift */; };
+		74171F212541BBD000746E9E /* AimRoomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74171F202541BBD000746E9E /* AimRoomData.swift */; };
 		743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */; };
 		743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */; };
 		743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */; };
@@ -59,9 +59,9 @@
 		740D1E02252F41A0000253FA /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
 		740D1E05252F46BF000253FA /* CollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CollectionViewController.storyboard; sourceTree = "<group>"; };
 		740D1E07252FA1DD000253FA /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
-		740D1E09252FAFC4000253FA /* SwipingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingController.swift; sourceTree = "<group>"; };
-		740D1E0C25304CC7000253FA /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		740D1E0F25307EDB000253FA /* ToolBarWithPageControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarWithPageControll.swift; sourceTree = "<group>"; };
+		74171F1D2541B2B400746E9E /* CurrentRoomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRoomData.swift; sourceTree = "<group>"; };
+		74171F202541BBD000746E9E /* AimRoomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimRoomData.swift; sourceTree = "<group>"; };
 		743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConfiguration.swift; sourceTree = "<group>"; };
 		743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTemperatureResponse.swift; sourceTree = "<group>"; };
@@ -106,10 +106,8 @@
 		2108898A24D19575000F6B4B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				74171F192540EA2100746E9E /* RoomsViewController */,
 				740D1E0E25304E3E000253FA /* CollectionViewControllerLogic */,
-				2137EEC024D054FF009B19FD /* RoomsViewController.storyboard */,
-				740D1E0C25304CC7000253FA /* PageCell.swift */,
-				2137EEC524D05504009B19FD /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,7 +117,6 @@
 			children = (
 				2137EEBE24D054FF009B19FD /* RoomsViewController.swift */,
 				740D1DFF252F4097000253FA /* CollectionViewController.swift */,
-				740D1E09252FAFC4000253FA /* SwipingController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -127,6 +124,8 @@
 		2108898C24D195B0000F6B4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				74171F1F2541BBB100746E9E /* AimData */,
+				74171F1C2541B29900746E9E /* CurrentData */,
 				74F6862824DFE51400C34765 /* RoomsConfig */,
 			);
 			path = Model;
@@ -138,6 +137,7 @@
 				2137EEBA24D054FF009B19FD /* AppDelegate.swift */,
 				2137EEBC24D054FF009B19FD /* SceneDelegate.swift */,
 				2137EEC824D05504009B19FD /* Info.plist */,
+				2137EEC524D05504009B19FD /* LaunchScreen.storyboard */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -201,6 +201,30 @@
 				740D1E01252F41A0000253FA /* CustomCollectionViewCell.swift */,
 			);
 			path = CollectionViewControllerLogic;
+			sourceTree = "<group>";
+		};
+		74171F192540EA2100746E9E /* RoomsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2137EEC024D054FF009B19FD /* RoomsViewController.storyboard */,
+			);
+			path = RoomsViewController;
+			sourceTree = "<group>";
+		};
+		74171F1C2541B29900746E9E /* CurrentData */ = {
+			isa = PBXGroup;
+			children = (
+				74171F1D2541B2B400746E9E /* CurrentRoomData.swift */,
+			);
+			path = CurrentData;
+			sourceTree = "<group>";
+		};
+		74171F1F2541BBB100746E9E /* AimData */ = {
+			isa = PBXGroup;
+			children = (
+				74171F202541BBD000746E9E /* AimRoomData.swift */,
+			);
+			path = AimData;
 			sourceTree = "<group>";
 		};
 		743B8FC424E2EE30009A929A /* ActivityElement */ = {
@@ -379,22 +403,22 @@
 				748426F125175B0A006A09F7 /* StackExtension.swift in Sources */,
 				7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */,
 				7457B97D24DF26F100C16A0E /* NetworkRoomConfig.swift in Sources */,
+				74171F212541BBD000746E9E /* AimRoomData.swift in Sources */,
 				7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */,
 				2137EEBF24D054FF009B19FD /* RoomsViewController.swift in Sources */,
 				748003A224E14457006DEBDE /* ButtonRightSideCustomClass.swift in Sources */,
 				7480039C24E1406A006DEBDE /* LabelLeftSideCustomClass.swift in Sources */,
-				740D1E0D25304CC7000253FA /* PageCell.swift in Sources */,
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
 				743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */,
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,
 				2137EEBB24D054FF009B19FD /* AppDelegate.swift in Sources */,
 				7480039E24E14203006DEBDE /* LabelGradientCustomClass.swift in Sources */,
+				74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */,
 				747CE29F24DFE689002FEB50 /* RoomsInfo.swift in Sources */,
 				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,
 				740D1E03252F41A0000253FA /* CustomCollectionViewCell.swift in Sources */,
-				740D1E0A252FAFC4000253FA /* SwipingController.swift in Sources */,
 				747CE29D24DFE65E002FEB50 /* Room.swift in Sources */,
 				743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */,
 				7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */,

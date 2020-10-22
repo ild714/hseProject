@@ -9,21 +9,22 @@
 import UIKit
 
 protocol ToolBarWithPageControllProtocol{
-    func createPageControl<T:UIViewController>(viewController:T,number:Int)
+    func createPageControl<T:UIViewController>(viewController:T,number:Int,allAmountOfPages: Int)
 }
 
 extension ToolBarWithPageControllProtocol{
 
-    func createPageControl<T:UIViewController>(viewController:T,number:Int){
-        setCurrentPage(viewController: viewController,number:number)
+    func createPageControl<T:UIViewController>(viewController:T,number:Int,allAmountOfPages: Int){
+        setCurrentPage(viewController: viewController,number:number,allAmountOfPages: allAmountOfPages)
     }
-    func setCurrentPage<T:UIViewController>(viewController: T,number:Int) {
+    func setCurrentPage<T:UIViewController>(viewController: T,number:Int,allAmountOfPages: Int) {
         
             let pc = UIPageControl()
             
-            pc.numberOfPages = 3
+            pc.numberOfPages = allAmountOfPages
             pc.currentPage = number
             
+            pc.isUserInteractionEnabled = false
             pc.currentPageIndicatorTintColor = .blue
             pc.pageIndicatorTintColor = UIColor(redS: 249, greenS: 207, blueS: 224)
             

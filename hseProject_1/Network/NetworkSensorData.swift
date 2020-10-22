@@ -44,7 +44,9 @@ class NetworkSensorData{
                             }
                         }
                         else {
-                            completion(.failure(.badEncodingJSON))
+                            DispatchQueue.main.async{
+                                completion(.failure(.badEncodingJSON))
+                            }
                             return
                         }
                     } else if sensorType == .aim {
@@ -54,7 +56,9 @@ class NetworkSensorData{
                             }
                         }
                         else {
-                            completion(.failure(.badEncodingJSON))
+                            DispatchQueue.main.async{
+                                completion(.failure(.badEncodingJSON))
+                            }
                             return
                         }
                     }

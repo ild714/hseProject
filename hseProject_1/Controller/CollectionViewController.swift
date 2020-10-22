@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-
-class CollectionViewController: UIViewController, UICollectionViewDelegate,ToolBarWithPageControllProtocol {
+class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var curentRoom: Int = 0
+    var roomNumbersAndNames: [Int:String] = [:]
     var safeArea: UILayoutGuide!
-    var roomsNames = ["Кухня","Гостиная","Спальня"]
+//    var roomsNames = []
     
     let cellIdentifier = String(describing: CustomCollectionViewCell.self)
     
@@ -30,20 +33,43 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate,ToolB
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        createPageControl(viewController: self, number: 0)
-//        setPageControl(viewController: self,number:0)
-        
+//        activityIndicator.center.x = self.view.center.x
+//        activityIndicator.center.y = self.view.center.y
+//        collectionView.addSubview(self.activityIndicator)
+//        activityIndicator.isHidden = false
+//        activityIndicator.startAnimating()
         title = "Все комнаты"
         self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
         
-        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+        NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"){(result: Result<[String:JSON],NetworkError>) in
+            switch result {
+            case .success(let result):
+                
+                for (_,value) in result {
+                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
+                }
+                
+                if self.curentRoom == 0 {
+                    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeFirst(sender:)))
+                    leftSwipe.direction = .left
+                    
+                    self.view.addGestureRecognizer(leftSwipe)
+                }
+                self.createPageControl(viewController: self, number: self.curentRoom,allAmountOfPages: self.roomNumbersAndNames.count + 1)
+                
+                self.collectionView.reloadData()
+//                self.activityIndicator.stopAnimating()
+//                self.activityIndicator.isHidden = true
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         
-        collectionView.addGestureRecognizer(leftSwipe)
-        leftSwipe.direction = .left
         
     }
     
-    @objc func handleSwipe(sender: UISwipeGestureRecognizer){
+    @objc func handleSwipeFirst(sender: UISwipeGestureRecognizer){
         if sender.state == .ended{
             switch sender.direction {
             case .left:
@@ -91,25 +117,45 @@ class CollectionViewController: UIViewController, UICollectionViewDelegate,ToolB
     
 }
 
+//MARK:- UICollectionViewDataSource
 extension CollectionViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return roomNumbersAndNames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CustomCollectionViewCell
 
-        
-        
-        cell.configure(nameRoom: roomsNames[indexPath.row])
+        NetworkSensorData.getData(with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",type: .current){
+            (result: Result<[String:JSON],NetworkSensorError>) in
+                
+            switch result {
+            case .success(let result):
+                
+                let currentRoomData = CurrentRoomData(result: result, curentRoom: indexPath.row + 1)
+                
+                cell.configure(currentRoomText: self.roomNumbersAndNames[indexPath.row + 1] ?? "", currentRoom: currentRoomData)
+                
+//                ActivityIndicator.stopAnimating(views: [self.currentTemperature,self.currentWet,self.currentGas,self.peopleInRoom])
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let vc = RoomsViewController.storyboardInstance(){
+            vc.curentRoom = indexPath.row + 1
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }
 
+//MARK:- UICollectionViewDelegateFlowLayout
 extension CollectionViewController: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 50
@@ -128,3 +174,4 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout{
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
 }
+

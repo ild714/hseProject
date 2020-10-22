@@ -31,11 +31,9 @@ class NetworkTemperatureResponse{
                 }
                 if let data = data, let _ = response {
                     if let data = String(bytes: data, encoding: .utf8){
-                        if data == "200"{
                         completion(.success(data as! T))
-                        } else {
-                            completion(.failure(.deviceIdError))
-                        }
+                    }else {
+                        completion(.failure(.deviceIdError))
                     }
                 } else {
                     completion(.failure(.badData))
