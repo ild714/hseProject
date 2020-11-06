@@ -15,6 +15,7 @@ class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol
     var curentRoom: Int = 0
     var roomNumbersAndNames: [Int:String] = [:]
     var safeArea: UILayoutGuide!
+    
 //    var roomsNames = []
     let cellIdentifier = String(describing: CustomCollectionViewCell.self)
     
