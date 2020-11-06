@@ -20,7 +20,6 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
     @IBOutlet weak var stackViewWet: UIStackView!
     @IBOutlet weak var stackViewTemperature: UIStackView!
     
-    
     @IBOutlet weak var currentTemperature: UILabel!
     @IBOutlet weak var modOfCurrentTemperature: UILabel!
     @IBOutlet weak var aimTemperature: LabelRightSideCustomClass!
@@ -34,7 +33,6 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
     @IBOutlet weak var ppmLabel: UILabel!
     
     @IBOutlet weak var peopleInRoom: LabelRightSideCustomClass!
-    
     
     @IBAction func minusTemperature(_ sender: Any) {
         self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "50℃"

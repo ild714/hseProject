@@ -16,7 +16,6 @@ class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol
     var roomNumbersAndNames: [Int:String] = [:]
     var safeArea: UILayoutGuide!
 //    var roomsNames = []
-    
     let cellIdentifier = String(describing: CustomCollectionViewCell.self)
     
     private lazy var collectionView: UICollectionView = {
@@ -65,8 +64,6 @@ class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol
                 self.present(vc,animated: true)
             }
         }
-        
-        
     }
     
     @objc func handleSwipeFirst(sender: UISwipeGestureRecognizer){
