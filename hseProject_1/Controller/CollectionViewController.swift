@@ -58,11 +58,11 @@ class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol
                 self.createPageControl(viewController: self, number: self.curentRoom,allAmountOfPages: self.roomNumbersAndNames.count + 1)
                 
                 self.collectionView.reloadData()
-//                self.activityIndicator.stopAnimating()
-//                self.activityIndicator.isHidden = true
-                
             case .failure(let error):
                 print(error.localizedDescription)
+                let vc = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+                vc.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+                self.present(vc,animated: true)
             }
         }
         

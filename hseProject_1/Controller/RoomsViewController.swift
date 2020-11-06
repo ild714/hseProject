@@ -125,7 +125,7 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
             }
         }
         
-        ActivityIndicator.animateActivity(views: [ViewSpecialAndGeneral(view:self.aimWet, type: .special),ViewSpecialAndGeneral(view: self.currentGas),ViewSpecialAndGeneral(view: self.currentWet,type: .special),ViewSpecialAndGeneral(view: self.peopleInRoom),ViewSpecialAndGeneral(view: self.aimGas),ViewSpecialAndGeneral(view: self.aimTemperature)])
+        ActivityIndicator.animateActivity(views: [ViewSpecialAndGeneral(view:self.aimWet, type: .special),ViewSpecialAndGeneral(view: self.currentGas),ViewSpecialAndGeneral(view: self.currentWet,type: .special),ViewSpecialAndGeneral(view: self.peopleInRoom),ViewSpecialAndGeneral(view: self.aimGas),ViewSpecialAndGeneral(view: self.aimTemperature),ViewSpecialAndGeneral(view: currentTemperature,type: .special)])
         
         NetworkSensorData.getData(with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",type: .current){
             (result: Result<[String:JSON],NetworkSensorError>) in

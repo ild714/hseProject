@@ -30,7 +30,9 @@ class NetworkSensorData{
             let request = URLRequest(url: url)
             URLSession.shared.dataTask(with: request){data, response, error in
                 guard error == nil else {
-                    completion(.failure(.errorForRequest))
+                    DispatchQueue.main.async{
+                        completion(.failure(.errorForRequest))
+                    }
                     return
                 }
                 if let data = data, let _ = response {
