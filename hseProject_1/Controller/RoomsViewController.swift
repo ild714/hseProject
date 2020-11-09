@@ -64,6 +64,10 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
                     vc.curentRoom += 1
                     navigationController?.pushViewController(vc, animated: true)
                 }
+            case .up:
+                if let vc = ScriptsViewController.storyboardInstance(){
+                    navigationController?.pushViewController(vc, animated: true)
+                }
             default:
                 break
             }
@@ -75,6 +79,11 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
                switch sender.direction {
                case .right:
                    navigationController?.popViewController(animated: true)
+               case .up:
+                    print("up")
+                if let vc = ScriptsViewController.storyboardInstance(){
+                    navigationController?.pushViewController(vc, animated: true)
+                }
                default:
                    break
                }
@@ -105,14 +114,20 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
                 
                 if self.curentRoom == self.roomNumbersAndNames.count {
                     let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+                    upSwipe.direction = .up
                     self.view.addGestureRecognizer(rightSwipe)
+                    self.view.addGestureRecognizer(upSwipe)
                 } else if self.curentRoom < self.roomNumbersAndNames.count{
                     let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
                     let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+                    upSwipe.direction = .up
                     leftSwipe.direction = .left
                     
                     self.view.addGestureRecognizer(leftSwipe)
                     self.view.addGestureRecognizer(rightSwipe)
+                    self.view.addGestureRecognizer(upSwipe)
                 }
                 self.createPageControl(viewController: self, number: self.curentRoom,allAmountOfPages: self.roomNumbersAndNames.count + 1)
                 
@@ -170,6 +185,11 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
                 ActivityIndicator.stopAnimating(views: [self.aimTemperature,self.aimWet,self.aimGas])
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.toolbar.isHidden = false
     }
     
     static func storyboardInstance() -> RoomsViewController? {

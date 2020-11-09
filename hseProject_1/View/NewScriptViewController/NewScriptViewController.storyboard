@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Script View Controller-->
+        <scene sceneID="TMS-Wa-slP">
+            <objects>
+                <viewController storyboardIdentifier="NewScriptViewController" id="NPi-e3-dLI" customClass="NewScriptViewController" customModule="IndoorClimateControlSystems" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fSM-Bw-qrv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="GSK-bu-eXf">
+                                <rect key="frame" x="57" y="244" width="300" height="167"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Давайте создадим новый сценарий " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yl-wx-VdD">
+                                        <rect key="frame" x="43.5" y="0.0" width="213.5" height="55"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="55" id="Lqv-Lb-gwC"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="Wia-V5-K6U"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для начала введите название нового сценария" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Een-Y0-4Hz">
+                                        <rect key="frame" x="4" y="67" width="292.5" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="fPH-u2-keI"/>
+                                            <constraint firstAttribute="height" constant="48" id="tnI-be-dwN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b6N-NA-1N4">
+                                        <rect key="frame" x="0.0" y="127" width="300" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="H1B-r4-pK3"/>
+                                            <constraint firstAttribute="height" constant="40" id="gyI-xW-Ar7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="iz0-jv-sHb">
+                                <rect key="frame" x="139" y="812" width="136" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-nc-FpT">
+                                        <rect key="frame" x="0.0" y="2" width="50" height="46.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="wO4-8i-9dr"/>
+                                            <constraint firstAttribute="width" constant="50" id="whw-Tv-FT7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" backgroundImage="chevron.left" catalog="system"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5P-Tm-LhA">
+                                        <rect key="frame" x="86" y="2" width="50" height="46.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="eXy-UL-ZsJ"/>
+                                            <constraint firstAttribute="height" constant="50" id="t11-zh-yWi"/>
+                                        </constraints>
+                                        <state key="normal" backgroundImage="chevron.right" catalog="system"/>
+                                        <connections>
+                                            <action selector="nextStep:" destination="NPi-e3-dLI" eventType="touchUpInside" id="3iZ-Fx-4co"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="NR7-Dl-6P4"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2il-Jz-0Ys" firstAttribute="bottom" secondItem="iz0-jv-sHb" secondAttribute="bottom" id="A7F-hi-0KJ"/>
+                            <constraint firstItem="2il-Jz-0Ys" firstAttribute="trailing" secondItem="GSK-bu-eXf" secondAttribute="trailing" constant="57" id="HKj-lD-ah1"/>
+                            <constraint firstItem="GSK-bu-eXf" firstAttribute="leading" secondItem="2il-Jz-0Ys" secondAttribute="leading" constant="57" id="SpS-Cx-L61"/>
+                            <constraint firstItem="iz0-jv-sHb" firstAttribute="centerX" secondItem="fSM-Bw-qrv" secondAttribute="centerX" id="g1l-Ji-LpP"/>
+                            <constraint firstItem="GSK-bu-eXf" firstAttribute="top" secondItem="2il-Jz-0Ys" secondAttribute="top" constant="200" id="q2i-cG-AWv"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2il-Jz-0Ys"/>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="b6N-NA-1N4" id="NjN-Iv-Z9Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Jv-J5-BIS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="86.956521739130437" y="142.63392857142856"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+    </resources>
+</document>

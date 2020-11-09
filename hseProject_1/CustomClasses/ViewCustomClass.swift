@@ -36,4 +36,12 @@ import UIKit
     func updateColors() {
         gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
     }
+    
+    @IBInspectable
+    var cornerRadius: CGFloat = 10 {
+        didSet {
+            self.layer.masksToBounds = true
+            self.layer.cornerRadius = cornerRadius
+        }
+    }
 }
