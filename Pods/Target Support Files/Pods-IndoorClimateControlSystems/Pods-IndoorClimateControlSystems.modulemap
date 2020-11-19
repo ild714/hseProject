@@ -1,0 +1,6 @@
+framework module Pods_IndoorClimateControlSystems {
+  umbrella header "Pods-IndoorClimateControlSystems-umbrella.h"
+
+  export *
+  module * { export * }
+}

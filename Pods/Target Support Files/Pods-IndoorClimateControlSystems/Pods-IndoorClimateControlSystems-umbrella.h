@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_hseProject_1VersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_hseProject_1VersionString[];
+FOUNDATION_EXPORT double Pods_IndoorClimateControlSystemsVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_IndoorClimateControlSystemsVersionString[];
 
