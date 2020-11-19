@@ -24,8 +24,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
         super.init(coder: coder)
         self.layer.cornerRadius = 10
         self.backgroundColor = .white
-        
-        
     }
     
     override func awakeFromNib() {
@@ -47,7 +45,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         wet.text = currentRoom.cellWet
         gas.text = currentRoom.cellGas
         
-         ActivityIndicator.stopAnimating(views: [wet,gas,temperature,roomNameLabel])
+        ActivityIndicator.stopAnimating(views: [wet,gas,temperature,roomNameLabel])
     }
     
 }

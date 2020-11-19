@@ -11,7 +11,6 @@ import SwiftyJSON
 
 class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol {
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var curentRoom: Int = 0
     var roomNumbersAndNames: [Int:String] = [:]
     var safeArea: UILayoutGuide!
@@ -33,11 +32,6 @@ class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        activityIndicator.center.x = self.view.center.x
-//        activityIndicator.center.y = self.view.center.y
-//        collectionView.addSubview(self.activityIndicator)
-//        activityIndicator.isHidden = false
-//        activityIndicator.startAnimating()
         title = "Все комнаты"
         self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
         
@@ -85,7 +79,6 @@ class CollectionViewController: UIViewController,ToolBarWithPageControllProtocol
         
         safeArea = view.layoutMarginsGuide
         setupTableView()
-        
     }
     
     func setupTableView(){
@@ -134,8 +127,6 @@ extension CollectionViewController: UICollectionViewDataSource{
                 let currentRoomData = CurrentRoomData(result: result, curentRoom: indexPath.row + 1)
                 
                 cell.configure(currentRoomText: self.roomNumbersAndNames[indexPath.row + 1] ?? "", currentRoom: currentRoomData)
-                
-//                ActivityIndicator.stopAnimating(views: [self.currentTemperature,self.currentWet,self.currentGas,self.peopleInRoom])
                 
             case .failure(let error):
                 print(error.localizedDescription)

@@ -40,9 +40,7 @@ class ActivityIndicator {
         for label in labels{
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             activityIndicator.center.x = 20
-           
             activityIndicator.center.y = 15
-            
             activityIndicator.startAnimating()
             label.label.addSubview(activityIndicator)
         }
