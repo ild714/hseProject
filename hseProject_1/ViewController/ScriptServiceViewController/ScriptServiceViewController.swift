@@ -15,9 +15,12 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var settingCreator: ViewCustomClass!
     @IBOutlet weak var timePicker: UIDatePicker!
     
+    private let pickerView: UIPickerView = UIPickerView(frame: CGRect(x: 0.0, y: 300.0, width: 100.0, height: 300.0))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.setHidesBackButton(true, animated: true)
         setupTableView()
     }
     

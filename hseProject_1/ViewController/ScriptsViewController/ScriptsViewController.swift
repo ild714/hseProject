@@ -12,7 +12,7 @@ class ScriptsViewController: UIViewController {
 
     var safeArea: UILayoutGuide!
     var scripts = ["На работе","На улице жарко","Отпуск","Карантин"]
-    var marks = [false,false,true,false]
+    var marks = [false,true,false,false]
     
     static func storyboardInstance() -> ScriptsViewController? {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
@@ -57,6 +57,7 @@ class ScriptsViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
+    
 }
 
 
@@ -73,7 +74,7 @@ extension ScriptsViewController: UITableViewDataSource {
         }
         
         cell.selectionStyle = .none
-        cell.configure(scriptText: scripts[indexPath.row],markBool: marks[indexPath.row])
+        cell.configure(scriptText: scripts[indexPath.row],mark: marks[indexPath.row])
         
         return cell
     }
@@ -83,6 +84,7 @@ extension ScriptsViewController: UITableViewDataSource {
 extension ScriptsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.marks = []
+        
         for i in 0...scripts.count{
             if i == indexPath.row{
                 marks.append(true)

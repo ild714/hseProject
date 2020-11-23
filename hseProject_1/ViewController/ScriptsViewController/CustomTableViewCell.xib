@@ -61,6 +61,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="backgroundCustomView" destination="DqV-2n-srY" id="kUd-U1-rqE"/>
                 <outlet property="markImage" destination="u7F-GD-0PE" id="0Hq-cx-oHK"/>
                 <outlet property="scriptLabel" destination="Aa9-xF-3Ea" id="u5l-Ko-qL8"/>
             </connections>
