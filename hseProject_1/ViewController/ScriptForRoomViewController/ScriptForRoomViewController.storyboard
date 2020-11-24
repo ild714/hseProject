@@ -85,6 +85,7 @@
                     <connections>
                         <outlet property="stackDescription" destination="WQv-va-gH3" id="B0I-K5-nQM"/>
                         <outlet property="stackSwitcher" destination="txa-h1-FFN" id="ugB-pb-o4t"/>
+                        <outlet property="titleCurrentRoom" destination="FEf-f4-5tE" id="THR-gh-07x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN4-vg-ajw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

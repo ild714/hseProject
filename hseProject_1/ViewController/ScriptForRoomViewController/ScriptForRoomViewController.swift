@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ScriptForRoomViewController: UIViewController {
 
+    @IBOutlet weak var titleCurrentRoom: UILabel!
     @IBOutlet weak var stackDescription: UIStackView!
     @IBOutlet weak var stackSwitcher: UIStackView!
     
-    var scripts = ["Гостиная"]
-    var marks = [false]
+    var roomNumbersAndNames: [Int:String] = [:]
+//    var scripts = ["Гостиная"]
+    var marks: [Bool] = []
     
     private let cellIdentifier = String(describing: ScriptForRoomTableViewCell.self)
     
@@ -34,7 +37,34 @@ class ScriptForRoomViewController: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.view.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
         setupTableView()
+        
+        
+        NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"){(result: Result<[String:JSON],NetworkError>) in
+            switch result {
+            case .success(let result):
+                
+                for (_,value) in result {
+                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
+                }
+                
+                if let title = self.roomNumbersAndNames[1] {
+                    self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(title)"
+                }
+                
+                for _ in 0..<self.roomNumbersAndNames.count - 1 {
+                    self.marks.append(false)
+                }
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                let vc = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+                vc.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+                self.present(vc,animated: true)
+            }
+        }
     }
+    
     
     func setupTableView() {
         view.addSubview(tableView)
@@ -66,7 +96,7 @@ class ScriptForRoomViewController: UIViewController {
 extension ScriptForRoomViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scripts.count
+        return roomNumbersAndNames.count - 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,7 +105,7 @@ extension ScriptForRoomViewController: UITableViewDataSource {
         }
         
         cell.selectionStyle = .none
-        cell.configure(room: scripts[indexPath.row],markBool: marks[indexPath.row])
+        cell.configure(room: roomNumbersAndNames[indexPath.row + 2] ?? "No other rooms",markBool: marks[indexPath.row])
         
         return cell
     }
@@ -84,14 +114,17 @@ extension ScriptForRoomViewController: UITableViewDataSource {
 // MARK: - ScriptsViewController delegate
 extension ScriptForRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.marks = []
-        for i in 0...scripts.count{
-            if i == indexPath.row{
-                marks.append(true)
-            }else {
-                marks.append(false)
+        
+        for i in marks {
+            if i == true {
+                
+                self.marks.remove(at: indexPath.row)
+                self.marks.insert(false, at: indexPath.row)
+            } else {
+                self.marks.remove(at: indexPath.row)
+                self.marks.insert(true, at: indexPath.row)
             }
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
 }
