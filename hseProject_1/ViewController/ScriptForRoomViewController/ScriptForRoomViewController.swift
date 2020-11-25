@@ -16,7 +16,6 @@ class ScriptForRoomViewController: UIViewController {
     @IBOutlet weak var stackSwitcher: UIStackView!
     
     var roomNumbersAndNames: [Int:String] = [:]
-//    var scripts = ["Гостиная"]
     var marks: [Bool] = []
     
     private let cellIdentifier = String(describing: ScriptForRoomTableViewCell.self)
@@ -115,16 +114,13 @@ extension ScriptForRoomViewController: UITableViewDataSource {
 extension ScriptForRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        for i in marks {
-            if i == true {
-                
+        if self.marks[indexPath.row] == true {
                 self.marks.remove(at: indexPath.row)
                 self.marks.insert(false, at: indexPath.row)
-            } else {
-                self.marks.remove(at: indexPath.row)
-                self.marks.insert(true, at: indexPath.row)
-            }
-            tableView.reloadData()
+        } else {
+            self.marks.remove(at: indexPath.row)
+            self.marks.insert(true, at: indexPath.row)
         }
+        tableView.reloadData()
     }
 }

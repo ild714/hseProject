@@ -14,7 +14,7 @@ class ScriptForDaysViewController: UIViewController {
     @IBOutlet weak var switcherStack: UIStackView!
     
     var scripts = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"]
-    var marks = [false,false,false,false,false,false,false]
+    var marks: [Bool] = []
     
     private let cellIdentifier = String(describing: ScriptForDaysTableViewCell.self)
     
@@ -31,6 +31,9 @@ class ScriptForDaysViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        for _ in 0..<8 {
+            self.marks.append(false)
+        }
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.view.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
         setupTableView()
@@ -77,6 +80,9 @@ extension ScriptForDaysViewController: UITableViewDataSource {
         }
         
         cell.selectionStyle = .none
+        print("!")
+        print(marks)
+        print("!")
         cell.configure(day: scripts[indexPath.row],markBool: marks[indexPath.row])
         
         return cell
@@ -86,14 +92,34 @@ extension ScriptForDaysViewController: UITableViewDataSource {
 // MARK: - ScriptsViewController delegate
 extension ScriptForDaysViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.marks = []
-        for i in 0...scripts.count{
-            if i == indexPath.row{
-                marks.append(true)
-            }else {
-                marks.append(false)
-            }
+//        var position = 0
+//        var localMarks = marks
+        
+//        for i in marks {
+//            if i == true {
+//                print("?")
+        if self.marks[indexPath.row] == true {
+                self.marks.remove(at: indexPath.row)
+                self.marks.insert(false, at: indexPath.row)
+        } else {
+            self.marks.remove(at: indexPath.row)
+            self.marks.insert(true, at: indexPath.row)
         }
-        tableView.reloadData()
+//                print(marks)
+//                print("?")
+//                position+=1
+//            } else {
+//                self.marks.remove(at: position)
+//                self.marks.insert(true, at: position)
+//                position+=1
+//            }
+            tableView.reloadData()
+//            print("?")
+//            print(marks)
+//            print("?")
+//        }
+//        print("???")
+//        print(marks)
+//        print("???")
     }
 }
