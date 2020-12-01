@@ -24,7 +24,7 @@ class ScriptForDaysViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
+        tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         return tableView
     }()
     
@@ -35,7 +35,7 @@ class ScriptForDaysViewController: UIViewController {
             self.marks.append(false)
         }
         self.navigationItem.setHidesBackButton(true, animated: true)
-        self.view.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
+        self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
     }
     
@@ -92,34 +92,14 @@ extension ScriptForDaysViewController: UITableViewDataSource {
 // MARK: - ScriptsViewController delegate
 extension ScriptForDaysViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        var position = 0
-//        var localMarks = marks
-        
-//        for i in marks {
-//            if i == true {
-//                print("?")
+
         if self.marks[indexPath.row] == true {
-                self.marks.remove(at: indexPath.row)
-                self.marks.insert(false, at: indexPath.row)
+            self.marks.remove(at: indexPath.row)
+            self.marks.insert(false, at: indexPath.row)
         } else {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(true, at: indexPath.row)
         }
-//                print(marks)
-//                print("?")
-//                position+=1
-//            } else {
-//                self.marks.remove(at: position)
-//                self.marks.insert(true, at: position)
-//                position+=1
-//            }
-            tableView.reloadData()
-//            print("?")
-//            print(marks)
-//            print("?")
-//        }
-//        print("???")
-//        print(marks)
-//        print("???")
+        tableView.reloadData()
     }
 }

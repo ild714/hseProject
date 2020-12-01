@@ -20,21 +20,21 @@ struct AimRoomData{
         for data in result {
             if step == 1 {
                 if data.rawString() == "null"{
-                   self.aimTemperature = "24℃"
+                   self.aimTemperature = "--"
                 } else {
                     self.aimTemperature = "\(data)℃"
                 }
                 step += 1
             } else if step == 2 {
                  if data.rawString() == "null"{
-                    self.aimWet = "45%"
+                    self.aimWet = "--"
                  } else {
                     self.aimWet = "\(data)%"
                 }
                 step += 1
             } else if step == 3 {
                 if data.rawString() == "null"{
-                   self.aimGas = "700ppm"
+                   self.aimGas = "--"
                 } else {
                     self.aimGas = "\(data)ppm"
                 }

@@ -26,7 +26,7 @@ class ScriptForRoomViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
+        tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         return tableView
     }()
     
@@ -34,7 +34,7 @@ class ScriptForRoomViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationItem.setHidesBackButton(true, animated: true)
-        self.view.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
+        self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
         
         

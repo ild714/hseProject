@@ -19,12 +19,12 @@
                                 <rect key="frame" x="58" y="67" width="298" height="55"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите дни, для которых хотите задать настройки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GCp-0B-F4f">
-                                        <rect key="frame" x="1.5" y="0.0" width="295.5" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="298" height="55"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="55" id="elP-ck-KAN"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="t9f-0b-UM1"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="21"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

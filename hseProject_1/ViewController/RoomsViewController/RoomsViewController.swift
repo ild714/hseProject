@@ -104,7 +104,7 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
         stackViewTemperature.backColor(stackView: stackViewTemperature)
         
         // Code for gradient color of navigationController
-        self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)], startPoint: .topLeft, endPoint: .bottomRight)
+        self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(rgb: 0x5b80ea),UIColor.init(rgb: 0x37b5dd)], startPoint: .topLeft, endPoint: .bottomRight)
         
         self.navigationItem.setHidesBackButton(true, animated: true)
         

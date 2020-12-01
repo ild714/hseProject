@@ -25,7 +25,9 @@ class ScriptsViewController: UIViewController {
         setupTableView()
         
         title = "Сценарии"
-        self.view.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Arial", size: 20)!]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
+        self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         self.navigationController?.toolbar.isHidden = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newScripts))
     }
@@ -36,7 +38,7 @@ class ScriptsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
+        tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         return tableView
     }()
     

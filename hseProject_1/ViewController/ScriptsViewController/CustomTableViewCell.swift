@@ -27,9 +27,11 @@ class CustomTableViewCell: UITableViewCell {
             
             gradient.colors = [UIColor.init(rgb: 0x5b80ea).cgColor, UIColor.init(rgb: 0x37b5dd).cgColor]
             self.backgroundCustomView.layer.insertSublayer(gradient, at: 0)
+            self.scriptLabel.textColor = .white
         } else {
             self.markImage.image = UIImage(named: "empty_radio")
             self.gradient.removeFromSuperlayer()
+            self.scriptLabel.textColor = .black
         }
     }
     override func layoutSubviews() {
