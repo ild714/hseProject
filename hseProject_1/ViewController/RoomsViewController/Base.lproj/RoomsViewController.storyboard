@@ -218,7 +218,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="со2_б" translatesAutoresizingMaskIntoConstraints="NO" id="1tw-TV-y1P" customClass="ImageViewLeftSideCustomClass" customModule="IndoorClimateControlSystems" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="со2_on" translatesAutoresizingMaskIntoConstraints="NO" id="1tw-TV-y1P" customClass="ImageViewLeftSideCustomClass" customModule="IndoorClimateControlSystems" customModuleProvider="target">
                                                 <rect key="frame" x="17" y="0.0" width="37.5" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -651,7 +651,7 @@
         <image name="icons8-вычитание-50" width="50" height="50"/>
         <image name="icons8-сложение-50" width="50" height="50"/>
         <image name="влажность_б" width="416" height="560"/>
-        <image name="со2_б" width="632" height="520"/>
+        <image name="со2_on" width="632" height="520"/>
         <image name="темп_б" width="933" height="1283"/>
         <image name="человек_б" width="224" height="240"/>
     </resources>

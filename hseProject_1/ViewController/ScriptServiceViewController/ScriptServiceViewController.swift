@@ -12,10 +12,15 @@ struct ServiceScript {
     var time: Date = Date()
     var temperature: Int = 0
     var humidity: Int = 0
+    var co2: Int = 0
     var radiatorOn = true
     var hotFloorOn = true
     var humidifierOn = true
     var conditionerOn = true
+    var co2OnOff = true
+    var soundOnOff = true
+    var houseOnOff = true
+    
 }
 
 class ScriptServiceViewController: UIViewController {
@@ -26,6 +31,8 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var humidityLabel: UITextField!
+    @IBOutlet weak var co2TextField: UITextField!
+    var showCloseBool = true
     
     private let pickerView: UIPickerView = UIPickerView(frame: CGRect(x: 0.0, y: 300.0, width: 100.0, height: 300.0))
     
@@ -43,6 +50,7 @@ class ScriptServiceViewController: UIViewController {
         tableView.delegate = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
@@ -139,6 +147,20 @@ class ScriptServiceViewController: UIViewController {
         }
     }
     
+    
+    @IBOutlet weak var co2Image: UIButton!
+    var co2TurnOn = true
+    @IBAction func co2(_ sender: Any) {
+        if co2TurnOn == true {
+          co2Image.setImage(UIImage(named: "со2_off"), for: .normal)
+            self.co2TextField.text = "--"
+            co2TurnOn.toggle()
+        } else {
+           co2Image.setImage(UIImage(named: "со2_on"), for: .normal)
+            co2TurnOn.toggle()
+        }
+    }
+    
     var serviceScripts: [ServiceScript] = []
     
     @IBAction func addScript(_ sender: Any) {
@@ -174,12 +196,34 @@ class ScriptServiceViewController: UIViewController {
             self.present(alert, animated: true)
             return
         }
+        if co2TurnOn == false {
+            serviceScript.co2 = 0
+        } else {
+            if let co2TextField = Int(co2TextField.text ?? "error") {
+                if co2TextField < 500 || co2TextField > 1000 {
+                    let alert = UIAlertController(title: "Некорректное значение для CO2", message: "Ввведите снова показание для СО2", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alert, animated: true)
+                    return
+                } else {
+                    serviceScript.co2 = co2TextField
+                }
+            } else {
+                let alert = UIAlertController(title: "Ошибка ввода СО2", message: "Ввведите снова СО2", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alert, animated: true)
+                return
+            }
+        }
         
         serviceScript.conditionerOn = conditionerTurnOn
         serviceScript.hotFloorOn = floorTurnOn
         serviceScript.humidifierOn = humidifierTurnOn
         serviceScript.radiatorOn = radiatorTurnOn
         serviceScript.time = timePicker.date
+        serviceScript.co2OnOff = co2TurnOn
+        serviceScript.houseOnOff = houseTurnOn
+        serviceScript.soundOnOff = soundTurnOn
         
         serviceScripts.append(serviceScript)
         tableView.reloadData()
@@ -208,13 +252,80 @@ extension ScriptServiceViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ScriptServiceTableViewCell else {
             return UITableViewCell()
         }
+        cell.delegate = self
+        cell.index = indexPath.row
         cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1)
+        cell.selectionStyle = .none
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let _ = tableView.cellForRow(at: indexPath) as? ScriptServiceTableViewCell {
+
+            if showCloseBool {
+                tableView.rowHeight = 180
+                UIView.animate(withDuration: 1) {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
+                showCloseBool.toggle()
+            } else {
+                tableView.rowHeight = 50
+                UIView.animate(withDuration: 1) {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
+                showCloseBool.toggle()
+            }
+        }
     }
 }
 
 // MARK: - ScriptServiceViewController delegate methods
 extension ScriptServiceViewController: UITableViewDelegate {
+    
+}
+
+extension ScriptServiceViewController: cellDelagate {
+    func updateCO2(number: Int, co2: Int, co2OnOff: Bool) {
+        self.serviceScripts[number].co2 = co2
+        self.serviceScripts[number].co2OnOff = co2OnOff
+        tableView.reloadData()
+    }
+    
+    func updateTime(number: Int, time: Date) {
+        self.serviceScripts[number].time = time
+        print(serviceScripts[number].time)
+        tableView.reloadData()
+    }
+    
+    func updateTemperature(number: Int, temperature: Int) {
+        self.serviceScripts[number].temperature = temperature
+        tableView.reloadData()
+    }
+    
+    func updateHumidity(number: Int, humidity: Int) {
+        self.serviceScripts[number].humidity = humidity
+        tableView.reloadData()
+    }
+    
+    func updateHouse(number: Int, houseOnOff: Bool) {
+        if self.serviceScripts[number].hotFloorOn {
+            self.serviceScripts[number].temperature = 24
+            self.serviceScripts[number].humidity = 40
+            self.serviceScripts[number].houseOnOff = houseOnOff
+            tableView.reloadData()
+        } else {
+            self.serviceScripts[number].houseOnOff = houseOnOff
+            tableView.reloadData()
+        }
+    }
+    
+    func updateSound(number: Int, soundOnOff: Bool) {
+        self.serviceScripts[number].soundOnOff = soundOnOff
+        tableView.reloadData()
+    }
+    
     
 }
