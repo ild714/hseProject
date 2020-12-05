@@ -26,7 +26,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="adU-v3-1ox">
-                                <rect key="frame" x="42" y="138" width="342" height="30"/>
+                                <rect key="frame" x="28" y="138" width="356" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="№" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26j-5O-xhG">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="30"/>
@@ -66,7 +66,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Устройства" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="pXf-sc-AM4">
-                                        <rect key="frame" x="250" y="0.0" width="92" height="30"/>
+                                        <rect key="frame" x="250" y="0.0" width="106" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="92" id="Ano-9b-KMI"/>
                                         </constraints>
@@ -97,6 +97,9 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addScript:" destination="eV2-qh-JBh" eventType="touchUpInside" id="czu-nw-vq5"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="GMT-ve-7iz">
                                 <rect key="frame" x="139" y="812" width="136" height="50"/>
@@ -150,6 +153,9 @@
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <state key="normal" title="Button" image="volume"/>
+                                                        <connections>
+                                                            <action selector="soundOnOff:" destination="eV2-qh-JBh" eventType="touchUpInside" id="gat-p8-Yc7"/>
+                                                        </connections>
                                                     </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDs-4k-yHo">
                                                         <rect key="frame" x="0.0" y="45" width="30" height="19"/>
@@ -164,7 +170,10 @@
                                                             <constraint firstAttribute="width" constant="30" id="0em-np-c6N"/>
                                                             <constraint firstAttribute="height" constant="30" id="4Fb-uh-zAl"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="not_home"/>
+                                                        <state key="normal" title="Button" image="home"/>
+                                                        <connections>
+                                                            <action selector="houseOnOff:" destination="eV2-qh-JBh" eventType="touchUpInside" id="0IS-CX-qll"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -186,7 +195,7 @@
                                                             <constraint firstAttribute="width" priority="999" constant="30" id="w4H-C3-TTG"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="темп_б_min" translatesAutoresizingMaskIntoConstraints="NO" id="a3V-7O-20c">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="темп_б" translatesAutoresizingMaskIntoConstraints="NO" id="a3V-7O-20c">
                                                         <rect key="frame" x="0.0" y="63" width="30" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="2Sf-4K-XYh"/>
@@ -205,7 +214,7 @@
                                                         </constraints>
                                                         <locale key="locale" localeIdentifier="ru_RU"/>
                                                     </datePicker>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24℃" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cyx-L6-HoQ">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cyx-L6-HoQ">
                                                         <rect key="frame" x="20" y="71" width="60" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="29g-Lv-vnE"/>
@@ -227,7 +236,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="bhZ-px-bct">
                                                 <rect key="frame" x="187" y="0.0" width="32" height="104"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="влажность_б_max" translatesAutoresizingMaskIntoConstraints="NO" id="tLQ-Vu-CCv">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="влажность_б" translatesAutoresizingMaskIntoConstraints="NO" id="tLQ-Vu-CCv">
                                                         <rect key="frame" x="0.0" y="0.0" width="32" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="1tg-CM-0ej"/>
@@ -246,7 +255,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="V6E-If-wrU">
                                                 <rect key="frame" x="224" y="0.0" width="49" height="107"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="24%" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NJw-DM-UHb">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="40" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NJw-DM-UHb">
                                                         <rect key="frame" x="0.0" y="0.0" width="49" height="50"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="49" id="PZv-3I-B7K"/>
@@ -278,7 +287,10 @@
                                                             <constraint firstAttribute="height" constant="30" id="GKf-ZJ-nV7"/>
                                                             <constraint firstAttribute="width" constant="30" id="qdk-ZY-KLK"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="not_hotfloor"/>
+                                                        <state key="normal" title="Button" image="radiator"/>
+                                                        <connections>
+                                                            <action selector="radiatorOnOff:" destination="eV2-qh-JBh" eventType="touchUpInside" id="MI4-Mq-2VK"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6Z-oY-coO">
                                                         <rect key="frame" x="0.0" y="38" width="30" height="30"/>
@@ -286,6 +298,9 @@
                                                             <constraint firstAttribute="height" constant="30" id="oB6-Dw-d7l"/>
                                                         </constraints>
                                                         <state key="normal" title="Button" image="hotfloor"/>
+                                                        <connections>
+                                                            <action selector="floorOnOff:" destination="eV2-qh-JBh" eventType="touchUpInside" id="dCc-fk-rSS"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -299,13 +314,19 @@
                                                             <constraint firstAttribute="height" constant="30" id="cMJ-9Q-VKY"/>
                                                         </constraints>
                                                         <state key="normal" title="Button" image="humidifier"/>
+                                                        <connections>
+                                                            <action selector="humidifierOnOff:" destination="eV2-qh-JBh" eventType="touchUpInside" id="fMg-oA-FRA"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7R9-hA-ssw">
                                                         <rect key="frame" x="0.0" y="38" width="30" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="Dvg-Ik-b4f"/>
                                                         </constraints>
-                                                        <state key="normal" title="Button" image="not_air-conditioner"/>
+                                                        <state key="normal" title="Button" image="air_conditioner"/>
+                                                        <connections>
+                                                            <action selector="conditionerOnOff:" destination="eV2-qh-JBh" eventType="touchUpInside" id="mGw-yY-GWE"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -315,13 +336,6 @@
                                             <constraint firstItem="NJw-DM-UHb" firstAttribute="centerY" secondItem="tLQ-Vu-CCv" secondAttribute="centerY" id="9It-ci-epy"/>
                                         </constraints>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSI-Px-Bv9">
-                                        <rect key="frame" x="132" y="20" width="5" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -348,16 +362,26 @@
                             <constraint firstItem="IPz-ye-xeh" firstAttribute="leading" secondItem="rBd-Vk-8TM" secondAttribute="leading" constant="20" id="ej4-Ac-B7r"/>
                             <constraint firstItem="rBd-Vk-8TM" firstAttribute="trailing" secondItem="IPz-ye-xeh" secondAttribute="trailing" constant="20" id="fJn-do-XKl"/>
                             <constraint firstItem="GMT-ve-7iz" firstAttribute="top" secondItem="H5O-BR-Ny5" secondAttribute="bottom" constant="25" id="h87-3z-PRq"/>
-                            <constraint firstItem="adU-v3-1ox" firstAttribute="leading" secondItem="rBd-Vk-8TM" secondAttribute="leading" constant="42" id="q9M-6s-gv2"/>
+                            <constraint firstItem="adU-v3-1ox" firstAttribute="leading" secondItem="rBd-Vk-8TM" secondAttribute="leading" constant="28" id="q9M-6s-gv2"/>
                             <constraint firstItem="GMT-ve-7iz" firstAttribute="centerX" secondItem="RNe-Sc-NAU" secondAttribute="centerX" id="tL6-3T-icd"/>
                             <constraint firstItem="H5O-BR-Ny5" firstAttribute="top" secondItem="IPz-ye-xeh" secondAttribute="bottom" constant="11" id="xFh-fk-Nwi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rBd-Vk-8TM"/>
                     </view>
                     <connections>
+                        <outlet property="conditionerImage" destination="7R9-hA-ssw" id="GXy-eV-5sC"/>
+                        <outlet property="floorImage" destination="C6Z-oY-coO" id="RYC-gd-fqQ"/>
+                        <outlet property="houseImage" destination="OBB-WV-SVe" id="DOR-wW-Alt"/>
+                        <outlet property="humidifierImage" destination="j6z-Xf-x1h" id="ENV-tM-qZQ"/>
+                        <outlet property="humidityImage" destination="tLQ-Vu-CCv" id="DFf-4n-9zd"/>
+                        <outlet property="humidityLabel" destination="NJw-DM-UHb" id="uHZ-UN-Ejn"/>
                         <outlet property="imageStack" destination="adU-v3-1ox" id="vGu-Zq-t6p"/>
+                        <outlet property="radiatorImage" destination="nzS-t2-Ly3" id="jKG-jm-H6z"/>
                         <outlet property="serviceLabel" destination="pdh-j0-6sU" id="KgD-ey-g0g"/>
                         <outlet property="settingCreator" destination="IPz-ye-xeh" id="91U-0R-wxy"/>
+                        <outlet property="soundImage" destination="jU8-A3-aB0" id="PbH-rM-x1o"/>
+                        <outlet property="temperatureImage" destination="a3V-7O-20c" id="wgV-3O-v0x"/>
+                        <outlet property="temperatureLabel" destination="Cyx-L6-HoQ" id="3g6-a7-fYK"/>
                         <outlet property="timePicker" destination="Z1b-e0-EmP" id="F47-Oh-3xs"/>
                     </connections>
                 </viewController>
@@ -367,20 +391,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="air_conditioner" width="512" height="512"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="clock" width="512" height="512"/>
+        <image name="home" width="512" height="512"/>
         <image name="hotfloor" width="293" height="293"/>
         <image name="humidifier" width="512" height="512"/>
-        <image name="not_air-conditioner" width="512" height="512"/>
-        <image name="not_home" width="512" height="512"/>
-        <image name="not_hotfloor" width="293" height="293"/>
+        <image name="radiator" width="512" height="512"/>
         <image name="volume" width="512" height="512"/>
         <image name="влажность_б" width="416" height="560"/>
-        <image name="влажность_б_max" width="416" height="560"/>
         <image name="со2_б" width="632" height="520"/>
         <image name="со2_б_чб" width="632" height="520"/>
         <image name="темп_б" width="933" height="1283"/>
-        <image name="темп_б_min" width="933" height="1283"/>
     </resources>
 </document>
