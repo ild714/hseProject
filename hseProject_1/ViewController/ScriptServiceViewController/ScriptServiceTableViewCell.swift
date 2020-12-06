@@ -38,10 +38,8 @@ class ScriptServiceTableViewCell: UITableViewCell {
         self.temperatureLabel.text = "\(serviveScript.temperature)"
         self.humidityLabel.text = "\(serviveScript.humidity)"
         if serviveScript.co2 == 0 {
-//             co2Image.setImage(UIImage(named: "со2_off"), for: .normal)
             self.co2Label.text = "--"
         } else {
-//            co2Image.setImage(UIImage(named: "со2_on"), for: .normal)
             self.co2Label.text = "\(serviveScript.co2)"
         }
         
@@ -80,12 +78,7 @@ class ScriptServiceTableViewCell: UITableViewCell {
         }
         self.houseTurnOn = serviveScript.houseOnOff
         if houseTurnOn == false {
-//            houseImage.setImage(UIImage(named: "not_home"), for: .normal)
-//            temperatureImage.image = UIImage(named: "темп_min")
-//            humidityImage.image = UIImage(named: "влажность_max")
             self.humidityLabel.text = "40"
-//            self.temperatureEdited.isUserInteractionEnabled = false
-//            self.humidityEdited.isUserInteractionEnabled = false
             self.temperatureLabel.text = "24"
         }
         self.time.date = serviveScript.time
@@ -113,7 +106,6 @@ class ScriptServiceTableViewCell: UITableViewCell {
             delegate?.updateSound(number: index,soundOnOff: soundTurnOn)
         }
     }
-    
     
     @IBOutlet weak var houseImage: UIButton!
     @IBOutlet weak var temperatureImage: UIImageView!
@@ -177,7 +169,6 @@ class ScriptServiceTableViewCell: UITableViewCell {
         self.co2Edited.text = co2Edited.text
         delegate?.updateCO2(number: index, co2: Int(co2Edited.text ?? "error") ?? 0, co2OnOff: co2TurnOn)
     }
-    
 }
 
 protocol cellDelagate {

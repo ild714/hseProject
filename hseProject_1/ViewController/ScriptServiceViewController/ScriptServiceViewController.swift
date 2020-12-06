@@ -20,7 +20,6 @@ struct ServiceScript {
     var co2OnOff = true
     var soundOnOff = true
     var houseOnOff = true
-    
 }
 
 class ScriptServiceViewController: UIViewController {
@@ -122,7 +121,6 @@ class ScriptServiceViewController: UIViewController {
         }
     }
     
-    
     @IBOutlet weak var humidifierImage: UIButton!
     var humidifierTurnOn = true
     @IBAction func humidifierOnOff(_ sender: Any) {
@@ -146,7 +144,6 @@ class ScriptServiceViewController: UIViewController {
             conditionerTurnOn.toggle()
         }
     }
-    
     
     @IBOutlet weak var co2Image: UIButton!
     var co2TurnOn = true
@@ -238,7 +235,6 @@ class ScriptServiceViewController: UIViewController {
     @IBAction func previousStep(_ sender: Any) {
          navigationController?.popViewController(animated: true)
     }
-    
 }
 
 // MARK: - ScriptServiceViewController dataSource methods
@@ -326,6 +322,4 @@ extension ScriptServiceViewController: cellDelagate {
         self.serviceScripts[number].soundOnOff = soundOnOff
         tableView.reloadData()
     }
-    
-    
 }
