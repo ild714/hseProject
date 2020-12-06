@@ -32,14 +32,23 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var humidityLabel: UITextField!
     @IBOutlet weak var co2TextField: UITextField!
     var showCloseBool = true
+    var scriptCreator: ScriptCreator?
+    var itemRight: UIBarButtonItem? = nil
     
     private let pickerView: UIPickerView = UIPickerView(frame: CGRect(x: 0.0, y: 300.0, width: 100.0, height: 300.0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        humidityLabel.delegate = self
+        co2TextField.delegate = self
+        temperatureLabel.delegate = self
         self.navigationItem.setHidesBackButton(true, animated: true)
         setupTableView()
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     lazy var tableView: UITableView = {
@@ -50,6 +59,10 @@ class ScriptServiceViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         tableView.rowHeight = UITableView.automaticDimension
+        
+        itemRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveAndClose))
+        navigationItem.rightBarButtonItem = itemRight
+        
         return tableView
     }()
     
@@ -160,7 +173,58 @@ class ScriptServiceViewController: UIViewController {
     
     var serviceScripts: [ServiceScript] = []
     
+    @objc func saveAndClose(){
+        if serviceScripts.count > 0 {
+        var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
+        
+        for i in 0..<serviceScripts.count {
+            if self.serviceScripts[i].soundOnOff == true {
+                setting.mute = 0
+            } else {
+                setting.mute = 1
+            }
+            
+            if self.serviceScripts[i].houseOnOff == true {
+                setting.at_home = 1
+            } else {
+                setting.at_home = 0
+            }
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            setting.time = "\(formatter.string(from: serviceScripts[i].time))"
+            
+            setting.must_use = []
+            setting.hum = serviceScripts[i].humidity
+            setting.temp = serviceScripts[i].temperature
+            setting.co2 = serviceScripts[i].co2
+            setting.dont_use = []
+            
+            self.scriptCreator?.roomGroup0?.dayGroup0?.setting0 = setting
+            self.scriptCreator?.roomGroup0?.dayGroup0?.setting1 = setting
+            
+            let network = NetworkScript()
+            if let script = scriptCreator {
+                network.sentDataScript(script: script)
+            }
+        }
+        self.navigationController?.dismiss(animated: true, completion: nil)
+        return
+        } else {
+            let al = UIAlertController(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки", preferredStyle: .alert)
+            al.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(al,animated: true)
+        }
+    }
+    
+    @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
     @IBAction func addScript(_ sender: Any) {
+        if let text = closeButtonOrEditButton.titleLabel?.text {
+            if text == "Сохранить и закончить"{
+                saveAndClose()
+            }
+        }
+        
         var serviceScript = ServiceScript()
         if let temperatureLabelInt = Int(temperatureLabel.text ?? "error") {
             if temperatureLabelInt > 50 || temperatureLabelInt < 15 {
@@ -265,6 +329,14 @@ extension ScriptServiceViewController: UITableViewDataSource {
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
+                serviceLabel.text = "Изменяйте желаемые настройки"
+                
+                closeButtonOrEditButton.setTitle("Сохранить и закончить", for: .normal)
+                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                    self.settingCreator.alpha = 0
+                })
+                
+                self.navigationItem.setRightBarButton(nil, animated: true)
                 showCloseBool.toggle()
             } else {
                 tableView.rowHeight = 50
@@ -272,6 +344,12 @@ extension ScriptServiceViewController: UITableViewDataSource {
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
+                serviceLabel.text = "Добавляйте желаемые настройки"
+                closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
+                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                    self.settingCreator.alpha = 1
+                })
+                self.navigationItem.setRightBarButton(itemRight, animated: true)
                 showCloseBool.toggle()
             }
         }
@@ -321,5 +399,12 @@ extension ScriptServiceViewController: cellDelagate {
     func updateSound(number: Int, soundOnOff: Bool) {
         self.serviceScripts[number].soundOnOff = soundOnOff
         tableView.reloadData()
+    }
+}
+
+extension ScriptServiceViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder() 
+        return true
     }
 }

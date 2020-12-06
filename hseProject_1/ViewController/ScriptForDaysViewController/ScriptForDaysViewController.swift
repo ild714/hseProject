@@ -12,6 +12,7 @@ class ScriptForDaysViewController: UIViewController {
 
     @IBOutlet weak var descriptionStack: UIStackView!
     @IBOutlet weak var switcherStack: UIStackView!
+    var scriptCreator: ScriptCreator?
     
     var scripts = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"]
     var marks: [Bool] = []
@@ -30,6 +31,10 @@ class ScriptForDaysViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let dayGroup = DayGroupCreator(days: [], setting0: nil, setting1: nil)
+        self.scriptCreator?.roomGroup0?.dayGroup0 = dayGroup
+        self.scriptCreator?.roomGroup0?.dayGroup1 = dayGroup
         
         for _ in 0..<8 {
             self.marks.append(false)
@@ -59,6 +64,7 @@ class ScriptForDaysViewController: UIViewController {
     @IBAction func nextStep(_ sender: Any) {
         if let vc = ScriptServiceViewController.storyboardInstance(){
             navigationController?.pushViewController(vc, animated: true)
+            vc.scriptCreator = self.scriptCreator
         }
     }
     
@@ -96,9 +102,27 @@ extension ScriptForDaysViewController: UITableViewDelegate {
         if self.marks[indexPath.row] == true {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(false, at: indexPath.row)
+            
+            self.scriptCreator?.roomGroup0?.dayGroup0?.days = []
+            var position = 1
+            for i in self.marks {
+                if i == true {
+                    self.scriptCreator?.roomGroup0?.dayGroup0?.days.append(position)
+                }
+                position += 1
+            }
         } else {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(true, at: indexPath.row)
+            
+            self.scriptCreator?.roomGroup0?.dayGroup0?.days = []
+            var position = 1
+            for i in self.marks {
+                if i == true {
+                    self.scriptCreator?.roomGroup0?.dayGroup0?.days.append(position)
+                }
+                position += 1
+            }
         }
         tableView.reloadData()
     }

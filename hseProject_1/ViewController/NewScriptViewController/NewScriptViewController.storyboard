@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NPi-e3-dLI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NPi-e3-dLI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +29,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для начала введите название нового сценария" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Een-Y0-4Hz">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Для начала введите название нового сценария" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Een-Y0-4Hz">
                                         <rect key="frame" x="10.5" y="67" width="279.5" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="fPH-u2-keI"/>
@@ -46,6 +47,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="nameForScriptCreater:" destination="NPi-e3-dLI" eventType="editingDidEnd" id="PXW-li-571"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -78,6 +82,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="2il-Jz-0Ys"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2il-Jz-0Ys" firstAttribute="bottom" secondItem="iz0-jv-sHb" secondAttribute="bottom" id="A7F-hi-0KJ"/>
@@ -86,10 +91,10 @@
                             <constraint firstItem="iz0-jv-sHb" firstAttribute="centerX" secondItem="fSM-Bw-qrv" secondAttribute="centerX" id="g1l-Ji-LpP"/>
                             <constraint firstItem="GSK-bu-eXf" firstAttribute="top" secondItem="2il-Jz-0Ys" secondAttribute="top" constant="200" id="q2i-cG-AWv"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="2il-Jz-0Ys"/>
                     </view>
                     <connections>
                         <outlet property="textField" destination="b6N-NA-1N4" id="NjN-Iv-Z9Z"/>
+                        <outlet property="textFieldForScript" destination="b6N-NA-1N4" id="1Mk-Kq-zzh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Jv-J5-BIS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

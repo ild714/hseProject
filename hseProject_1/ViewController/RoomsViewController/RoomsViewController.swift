@@ -200,5 +200,4 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? RoomsViewController
     }
-    
 }

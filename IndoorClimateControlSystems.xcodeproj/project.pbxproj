@@ -54,6 +54,9 @@
 		7497523C2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7497523A2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib */; };
 		7497523E2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */; };
 		74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A551AF256BF7F200A562FB /* GradientExtension.swift */; };
+		74B5E814257D312100483972 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E813257D312000483972 /* Script.swift */; };
+		74B5E816257D316F00483972 /* NetworkScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E815257D316F00483972 /* NetworkScript.swift */; };
+		74B5E818257D339600483972 /* ScriptCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E817257D339600483972 /* ScriptCreater.swift */; };
 		74BF502C256679FB00DE45D1 /* ScriptServiceViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74BF502B256679FB00DE45D1 /* ScriptServiceViewController.storyboard */; };
 		74BF502E25667A7B00DE45D1 /* ScriptServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF502D25667A7B00DE45D1 /* ScriptServiceViewController.swift */; };
 		74BF503125667AD200DE45D1 /* ScriptServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF502F25667AD200DE45D1 /* ScriptServiceTableViewCell.swift */; };
@@ -113,6 +116,9 @@
 		7497523A2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScriptForDaysTableViewCell.xib; sourceTree = "<group>"; };
 		7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScriptForDaysViewController.storyboard; sourceTree = "<group>"; };
 		74A551AF256BF7F200A562FB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
+		74B5E813257D312000483972 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
+		74B5E815257D316F00483972 /* NetworkScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScript.swift; sourceTree = "<group>"; };
+		74B5E817257D339600483972 /* ScriptCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCreater.swift; sourceTree = "<group>"; };
 		74BF502B256679FB00DE45D1 /* ScriptServiceViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScriptServiceViewController.storyboard; sourceTree = "<group>"; };
 		74BF502D25667A7B00DE45D1 /* ScriptServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptServiceViewController.swift; sourceTree = "<group>"; };
 		74BF502F25667AD200DE45D1 /* ScriptServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptServiceTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,6 +165,7 @@
 		2108898C24D195B0000F6B4B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				74B5E812257D30F700483972 /* Script */,
 				74171F1F2541BBB100746E9E /* AimData */,
 				74171F1C2541B29900746E9E /* CurrentData */,
 				74F6862824DFE51400C34765 /* RoomsConfig */,
@@ -278,6 +285,7 @@
 				7457B97C24DF26F100C16A0E /* NetworkRoomConfig.swift */,
 				74754F5924E296CE008F07A3 /* NetworkSensorData.swift */,
 				743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */,
+				74B5E815257D316F00483972 /* NetworkScript.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -342,6 +350,15 @@
 				7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */,
 			);
 			path = ScriptForDaysViewController;
+			sourceTree = "<group>";
+		};
+		74B5E812257D30F700483972 /* Script */ = {
+			isa = PBXGroup;
+			children = (
+				74B5E813257D312000483972 /* Script.swift */,
+				74B5E817257D339600483972 /* ScriptCreater.swift */,
+			);
+			path = Script;
 			sourceTree = "<group>";
 		};
 		74BF50282566798A00DE45D1 /* ScriptServiceViewController */ = {
@@ -516,14 +533,17 @@
 				743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */,
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,
 				7497522725597D6100B88A21 /* ScriptsViewController.swift in Sources */,
+				74B5E818257D339600483972 /* ScriptCreater.swift in Sources */,
 				7497523425599B6F00B88A21 /* ScriptForRoomTableViewCell.swift in Sources */,
 				74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */,
 				2137EEBB24D054FF009B19FD /* AppDelegate.swift in Sources */,
 				74BF502E25667A7B00DE45D1 /* ScriptServiceViewController.swift in Sources */,
 				7480039E24E14203006DEBDE /* LabelGradientCustomClass.swift in Sources */,
+				74B5E814257D312100483972 /* Script.swift in Sources */,
 				74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */,
 				747CE29F24DFE689002FEB50 /* RoomsInfo.swift in Sources */,
 				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
+				74B5E816257D316F00483972 /* NetworkScript.swift in Sources */,
 				74975229255990F700B88A21 /* NewScriptViewController.swift in Sources */,
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,
@@ -682,14 +702,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IndoorClimateControlSystems.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2NR48U86L7;
 				INFOPLIST_FILE = hseProject_1/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;
@@ -704,14 +724,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = IndoorClimateControlSystems.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 2NR48U86L7;
 				INFOPLIST_FILE = hseProject_1/Configuration/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;

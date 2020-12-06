@@ -23,6 +23,9 @@ class ScriptServiceTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        temperatureEdited.delegate = self
+        humidityEdited.delegate = self
+        co2Edited.delegate = self
     }
     
     func congigure(serviveScript: ServiceScript, number: Int){
@@ -178,4 +181,11 @@ protocol cellDelagate {
     func updateTemperature(number: Int, temperature: Int)
     func updateHumidity(number: Int,humidity: Int)
     func updateCO2(number: Int, co2: Int, co2OnOff: Bool)
+}
+
+extension ScriptServiceTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
