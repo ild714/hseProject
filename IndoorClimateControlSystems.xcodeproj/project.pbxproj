@@ -61,6 +61,7 @@
 		74BF502E25667A7B00DE45D1 /* ScriptServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF502D25667A7B00DE45D1 /* ScriptServiceViewController.swift */; };
 		74BF503125667AD200DE45D1 /* ScriptServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF502F25667AD200DE45D1 /* ScriptServiceTableViewCell.swift */; };
 		74BF503225667AD200DE45D1 /* ScriptServiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74BF503025667AD200DE45D1 /* ScriptServiceTableViewCell.xib */; };
+		74D65C9325840EC2007588F7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D65C9225840EC2007588F7 /* SignInViewController.swift */; };
 		B9D138C36E79696786777963 /* Pods_IndoorClimateControlSystems.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B2F9E4F819DE1EBBADD153 /* Pods_IndoorClimateControlSystems.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		74BF502D25667A7B00DE45D1 /* ScriptServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptServiceViewController.swift; sourceTree = "<group>"; };
 		74BF502F25667AD200DE45D1 /* ScriptServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptServiceTableViewCell.swift; sourceTree = "<group>"; };
 		74BF503025667AD200DE45D1 /* ScriptServiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScriptServiceTableViewCell.xib; sourceTree = "<group>"; };
+		74D65C9225840EC2007588F7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		9D7F6723EEE14063E574AF51 /* Pods-IndoorClimateControlSystems.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.debug.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.debug.xcconfig"; sourceTree = "<group>"; };
 		A13E96CB6CCEDE3D42E9FF22 /* Pods-IndoorClimateControlSystems.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.release.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +153,7 @@
 		2108898A24D19575000F6B4B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74D65C9125840E9D007588F7 /* SignIn */,
 				74BF50282566798A00DE45D1 /* ScriptServiceViewController */,
 				749752382559A1B400B88A21 /* ScriptForDaysViewController */,
 				7497523125599B2B00B88A21 /* ScriptForRoomViewController */,
@@ -372,6 +375,14 @@
 			path = ScriptServiceViewController;
 			sourceTree = "<group>";
 		};
+		74D65C9125840E9D007588F7 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				74D65C9225840EC2007588F7 /* SignInViewController.swift */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
 		74F6862824DFE51400C34765 /* RoomsConfig */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +413,7 @@
 				2137EEB424D054FF009B19FD /* Frameworks */,
 				2137EEB524D054FF009B19FD /* Resources */,
 				7E192BE34BE2C6284CB6E789 /* [CP] Embed Pods Frameworks */,
+				9E06B768B3925CD2A2233BD6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -509,6 +521,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9E06B768B3925CD2A2233BD6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -524,6 +553,7 @@
 				7457B97D24DF26F100C16A0E /* NetworkRoomConfig.swift in Sources */,
 				74171F212541BBD000746E9E /* AimRoomData.swift in Sources */,
 				7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */,
+				74D65C9325840EC2007588F7 /* SignInViewController.swift in Sources */,
 				2137EEBF24D054FF009B19FD /* RoomsViewController.swift in Sources */,
 				749752372559A18500B88A21 /* ScriptForDaysViewController.swift in Sources */,
 				748003A224E14457006DEBDE /* ButtonRightSideCustomClass.swift in Sources */,

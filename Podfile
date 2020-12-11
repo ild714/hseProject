@@ -5,7 +5,7 @@ target 'IndoorClimateControlSystems' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 	pod 'SwiftyJSON', '~> 4.0'
-
+	pod 'GoogleSignIn'
   # Pods for IndoorClimateControlSystems
 
 end

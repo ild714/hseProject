@@ -17,18 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             
-            if let collectionViewController = CollectionViewController.storyboardInstance(){
-
-                let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
-
-                let navigationController = storyboard.instantiateInitialViewController() as! UINavigationController
-                        
-                navigationController.viewControllers = [collectionViewController]
-                
-                self.window?.rootViewController =  navigationController
-                self.window?.makeKeyAndVisible()
-
-            }
+            
+            let vc = SignInViewController()
+            
+            self.window?.rootViewController = vc
+            self.window?.makeKeyAndVisible()
+            
 //            let layout = UICollectionViewFlowLayout()
 //            layout.scrollDirection = .horizontal
 //            let swipingController = SwipingController(collectionViewLayout: layout)
