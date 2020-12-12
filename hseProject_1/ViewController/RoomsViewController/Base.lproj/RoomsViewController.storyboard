@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -67,7 +69,7 @@
                                             <constraint firstAttribute="width" constant="55" id="36D-aF-0VD"/>
                                         </constraints>
                                         <state key="normal" image="icons8-сложение-50">
-                                            <color key="titleColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" systemColor="systemTealColor"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="roundedCornersOnRight" value="YES"/>
@@ -565,7 +567,7 @@
                                     <constraint firstItem="w7j-8J-alI" firstAttribute="centerX" secondItem="Krh-cO-9bt" secondAttribute="centerX" id="XJd-wm-ZYB"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sf-N1-HoF" customClass="ButtonCustomClass" customModule="IndoorClimateControlSystems" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sf-N1-HoF" customClass="ButtonCustomClass" customModule="IndoorClimateControlSystems" customModuleProvider="target">
                                 <rect key="frame" x="83" y="393" width="154" height="35"/>
                                 <color key="backgroundColor" red="0.34468853570000002" green="0.83517750189999995" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -583,7 +585,7 @@
                                         <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemTealColor"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="startColor">
                                         <color key="value" red="0.35686274509803922" green="0.50196078431372548" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -598,6 +600,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.26074640103602958" green="0.62833914821307257" blue="0.64974623485733063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6sf-N1-HoF" firstAttribute="top" secondItem="NsF-Ik-Fgz" secondAttribute="bottom" constant="10" id="1Db-ke-2Fa"/>
@@ -610,7 +613,6 @@
                             <constraint firstItem="Qh1-Co-rf3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="63" id="apj-mx-CVC"/>
                             <constraint firstItem="6sf-N1-HoF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="83" id="ddA-4s-Ihz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="endLocation">
                                 <real key="value" value="1"/>
@@ -647,6 +649,72 @@
             <point key="canvasLocation" x="1956.521739130435" y="125.89285714285714"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="0vC-IS-BPl">
+            <size key="intrinsicContentSize" width="50" height="50"/>
+        </designable>
+        <designable name="1tw-TV-y1P">
+            <size key="intrinsicContentSize" width="632" height="520"/>
+        </designable>
+        <designable name="6sf-N1-HoF">
+            <size key="intrinsicContentSize" width="152" height="30"/>
+        </designable>
+        <designable name="DNP-g7-8yh">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="FPy-GR-IRx">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="GcB-wo-8u8">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="HCh-ea-crF">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="Ihk-8S-c88">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="K5w-Kc-izd">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="Krh-cO-9bt">
+            <size key="intrinsicContentSize" width="8" height="31.5"/>
+        </designable>
+        <designable name="NsF-Ik-Fgz">
+            <size key="intrinsicContentSize" width="174" height="19"/>
+        </designable>
+        <designable name="UjR-Pr-unn">
+            <size key="intrinsicContentSize" width="6.5" height="25"/>
+        </designable>
+        <designable name="dw7-fF-N0j"/>
+        <designable name="fBI-mf-J3b">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="knY-tJ-mid">
+            <size key="intrinsicContentSize" width="8" height="31.5"/>
+        </designable>
+        <designable name="nTf-MB-eYt">
+            <size key="intrinsicContentSize" width="416" height="560"/>
+        </designable>
+        <designable name="oNl-aR-yK3">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="pNS-i3-CPQ">
+            <size key="intrinsicContentSize" width="8" height="31.5"/>
+        </designable>
+        <designable name="rOi-7U-Zc7">
+            <size key="intrinsicContentSize" width="933" height="1283"/>
+        </designable>
+        <designable name="tbS-AD-2XF">
+            <size key="intrinsicContentSize" width="50" height="50"/>
+        </designable>
+        <designable name="w7j-8J-alI">
+            <size key="intrinsicContentSize" width="4.5" height="20.5"/>
+        </designable>
+        <designable name="xCt-Z5-cgh">
+            <size key="intrinsicContentSize" width="224" height="240"/>
+        </designable>
+    </designables>
     <resources>
         <image name="icons8-вычитание-50" width="50" height="50"/>
         <image name="icons8-сложение-50" width="50" height="50"/>
@@ -654,5 +722,8 @@
         <image name="со2_on" width="632" height="520"/>
         <image name="темп_б" width="933" height="1283"/>
         <image name="человек_б" width="224" height="240"/>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

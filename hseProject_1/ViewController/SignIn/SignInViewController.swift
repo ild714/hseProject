@@ -35,6 +35,8 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         
         let signInButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         signInButton.center = view.center
+//        signInButton.layer.cornerRadius = 5
+//        signInButton.layer.borderWidth = 1
         
         GIDSignIn.sharedInstance()?.presentingViewController = self
         
