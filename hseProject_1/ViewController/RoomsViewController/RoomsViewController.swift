@@ -8,15 +8,13 @@
 
 import UIKit
 import SwiftyJSON
-import SideMenu
 
 class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
         
     var curentRoom: Int = 1
     var roomNumbersAndNames: [Int:String] = [:]
     var switchRoom = false
-    var menu: SideMenuNavigationController?
-    
+
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewCO2: UIStackView!
     @IBOutlet weak var stackViewWet: UIStackView!
@@ -95,17 +93,9 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
            }
        }
     
-    @objc func didTapMenu() {
-        present(menu!,animated: true)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let button = UIBarButtonItem(image: UIImage(named: "menu4"), style: .plain, target: self, action: #selector(didTapMenu))
-        button.tintColor = .white
-        navigationItem.leftBarButtonItem = button
-        menu = SideMenuNavigationController(rootViewController: MenuListController())
-        menu?.leftSide = true
+        
 //        menu?.setNavigationBarHidden(true, animated: false)
         
 //        SideMenuManager.default.leftMenuNavigationController = menu
@@ -213,38 +203,5 @@ class RoomsViewController: UIViewController,ToolBarWithPageControllProtocol {
     static func storyboardInstance() -> RoomsViewController? {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? RoomsViewController
-    }
-}
-
-class MenuListController: UITableViewController {
-    var items = ["Мое устройство","Сценарии","Поддержка"]
-    var customColor = UIColor(rgb: 0x353343)
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.backgroundColor = customColor
-        navigationController?.navigationBar.backgroundColor = customColor
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.textColor = UIColor(rgb: 0xa4a4a4)
-        cell.backgroundColor = customColor
-        cell.textLabel?.text = items[indexPath.row]
-        cell.textLabel?.font = UIFont(name: "Arial", size: 20)
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
