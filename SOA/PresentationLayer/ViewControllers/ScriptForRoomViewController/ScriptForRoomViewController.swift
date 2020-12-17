@@ -40,30 +40,30 @@ class ScriptForRoomViewController: UIViewController {
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
 
-        NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods") {(result: Result<[String: JSON], NetworkError>) in
-            switch result {
-            case .success(let result):
-
-                for (_, value) in result {
-                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
-                }
-
-                if let title = self.roomNumbersAndNames[1] {
-                    self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(title)"
-                }
-
-                for _ in 0..<self.roomNumbersAndNames.count - 1 {
-                    self.marks.append(false)
-                }
-                self.tableView.reloadData()
-
-            case .failure(let error):
-                print(error.localizedDescription)
-                let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
-                self.present(alertVC, animated: true)
-            }
-        }
+//        RequestRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods") {(result: Result<[String: JSON], NetworkError>) in
+//            switch result {
+//            case .success(let result):
+//
+//                for (_, value) in result {
+//                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
+//                }
+//
+//                if let title = self.roomNumbersAndNames[1] {
+//                    self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(title)"
+//                }
+//
+//                for _ in 0..<self.roomNumbersAndNames.count - 1 {
+//                    self.marks.append(false)
+//                }
+//                self.tableView.reloadData()
+//
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+//                alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+//                self.present(alertVC, animated: true)
+//            }
+//        }
     }
 
     func setupTableView() {

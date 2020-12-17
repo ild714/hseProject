@@ -16,9 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
-
+            var rootAssembly = RootAssembly()
+            
             if UserDefaults.standard.bool(forKey: "Log_in") {
-                if let collectionViewController = CollectionViewController.storyboardInstance() {
+                if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
 
                     if let userId = UserDefaults.standard.object(forKey: "UserId") as? String {
                         collectionViewController.userId = userId

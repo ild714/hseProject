@@ -18,16 +18,8 @@ class NetworkScript {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-//        let setting = Setting(mute: 0, at_home: 1, time: "21:20", temp: 21, hum: 55, co2: 700, must_use: [], dont_use: [])
-//        let dayGroup1 = DayGroup(days: [1,2,3], setting0: setting, setting1: setting)
-//        let dayGroup2 = DayGroup(days: [1,2], setting0: setting, setting1: setting)
-//        let roomGroup = RoomGroop(rIDs: [47,48], dayGroup0: dayGroup1, dayGroup1: dayGroup2)
-//        let script = Script(did: "10153", name: "test", roomGroup0: roomGroup)
-
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(script) {
-
-//            print(String(bytes: data, encoding: .utf8))
 
             request.httpBody = data
             URLSession.shared.dataTask(with: request) {data, _, error in

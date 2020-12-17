@@ -112,39 +112,39 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 
         self.navigationItem.setHidesBackButton(true, animated: true)
 
-        NetworkRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods") {(result: Result<[String: JSON], NetworkError>) in
-            switch result {
-            case .success(let result):
-
-                for (_, value) in result {
-                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
-                }
-
-                if self.curentRoom == self.roomNumbersAndNames.count {
-                    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
-                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
-                    upSwipe.direction = .up
-                    self.view.addGestureRecognizer(rightSwipe)
-                    self.view.addGestureRecognizer(upSwipe)
-                } else if self.curentRoom < self.roomNumbersAndNames.count {
-                    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-                    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-                    upSwipe.direction = .up
-                    leftSwipe.direction = .left
-
-                    self.view.addGestureRecognizer(leftSwipe)
-                    self.view.addGestureRecognizer(rightSwipe)
-                    self.view.addGestureRecognizer(upSwipe)
-                }
-                self.createPageControl(viewController: self, number: self.curentRoom, allAmountOfPages: self.roomNumbersAndNames.count + 1)
-
-                self.title = self.roomNumbersAndNames[self.curentRoom]
-
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+//        RequestRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods") {(result: Result<[String: JSON], NetworkError>) in
+//            switch result {
+//            case .success(let result):
+//
+//                for (_, value) in result {
+//                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
+//                }
+//
+//                if self.curentRoom == self.roomNumbersAndNames.count {
+//                    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+//                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+//                    upSwipe.direction = .up
+//                    self.view.addGestureRecognizer(rightSwipe)
+//                    self.view.addGestureRecognizer(upSwipe)
+//                } else if self.curentRoom < self.roomNumbersAndNames.count {
+//                    let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+//                    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+//                    let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+//                    upSwipe.direction = .up
+//                    leftSwipe.direction = .left
+//
+//                    self.view.addGestureRecognizer(leftSwipe)
+//                    self.view.addGestureRecognizer(rightSwipe)
+//                    self.view.addGestureRecognizer(upSwipe)
+//                }
+//                self.createPageControl(viewController: self, number: self.curentRoom, allAmountOfPages: self.roomNumbersAndNames.count + 1)
+//
+//                self.title = self.roomNumbersAndNames[self.curentRoom]
+//
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
 
         ActivityIndicator.animateActivity(
             views: [ViewSpecialAndGeneral(view: self.aimWet, type: .special),

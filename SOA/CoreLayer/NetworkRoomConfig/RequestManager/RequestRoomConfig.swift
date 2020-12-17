@@ -16,19 +16,24 @@ enum NetworkError: Error {
     case badUrl
 }
 
-class NetworkRoomConfig {
+class RequestRoomConfig: RequestRoomConfigProtocol {
 
-    private static var typeOfRooms: [String: JSON] = [:]
+    private var typeOfRooms: [String: JSON] = [:]
 
-    static func urlSession<T>(with string: String, completion: @escaping (Result<T, NetworkError>) -> Void) {
-
-        guard let url = URL(string: string) else {
+    let session: URLSession?
+    
+    init(session: URLSession) {
+        self.session = session
+    }
+    
+    func load<Parser,T>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<T, NetworkError>) -> Void) {
+        
+        guard let urlRequest = requestConfig.request.urlRequest else {
             completion(.failure(.badUrl))
             return
         }
-        let request = URLRequest(url: url)
 
-        URLSession.shared.dataTask(with: request) {data, _, error in
+        let task = session?.dataTask(with: urlRequest) { data, _, error in
 
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -39,14 +44,14 @@ class NetworkRoomConfig {
 
             if let data = data {
                 DispatchQueue.main.async {
-                    if let decodedRoom = JSON(data).dictionary {
+                    if let decodedRoom = requestConfig.parser.parseForRooms(data: data) {
                         for (key, data) in decodedRoom {
                             if key == "did"{
                                 continue
                             }
-                            typeOfRooms[key] = data
+                            self.typeOfRooms[key] = data
                         }
-                        if let typeOfRooms = typeOfRooms as? T {
+                        if let typeOfRooms = self.typeOfRooms as? T {
                             completion(.success(typeOfRooms))
                         }
                     } else {
@@ -60,8 +65,12 @@ class NetworkRoomConfig {
                 }
                 return
             }
-        }.resume()
-
+        }
+        
+        if let task = task {
+            task.resume()
+        } else {
+            print("error with task")
+        }
     }
-
 }
