@@ -9,13 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-struct AimRoomData{
-    
+struct AimRoomData {
+
     var aimTemperature: String = ""
     var aimWet: String = ""
     var aimGas: String = ""
-    
-    init(result:[JSON]){
+
+    init(result: [JSON]) {
         var step = 1
         for data in result {
             if step == 1 {

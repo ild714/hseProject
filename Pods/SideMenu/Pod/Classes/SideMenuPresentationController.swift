@@ -71,7 +71,7 @@ internal final class SideMenuPresentationController {
         dismissalTransition()
         dismissalTransitionDidEnd(true)
     }
-    
+
     func containerViewWillLayoutSubviews() {
         guard let containerView = containerView,
             let presentedViewController = presentedViewController,
@@ -92,7 +92,7 @@ internal final class SideMenuPresentationController {
         statusBarFrame.size.height -= containerView.frame.minY
         statusBarView.frame = statusBarFrame
     }
-    
+
     func presentationTransitionWillBegin() {
         guard let containerView = containerView,
             let presentedViewController = presentedViewController,
@@ -105,13 +105,13 @@ internal final class SideMenuPresentationController {
 
         presentingViewController.view.isUserInteractionEnabled = config.presentingViewControllerUserInteractionEnabled
         containerView.backgroundColor = config.presentationStyle.backgroundColor
-        
+
         layerViews()
 
         if let statusBarView = statusBarView {
             containerView.addSubview(statusBarView)
         }
-        
+
         dismissalTransition()
         config.presentationStyle.presentationTransitionWillBegin(to: presentedViewController, from: presentingViewController)
     }
@@ -132,7 +132,7 @@ internal final class SideMenuPresentationController {
 
         config.presentationStyle.presentationTransition(to: presentedViewController, from: presentingViewController)
     }
-    
+
     func presentationTransitionDidEnd(_ completed: Bool) {
         guard completed else {
             snapshotView?.removeFromSuperview()
@@ -145,7 +145,7 @@ internal final class SideMenuPresentationController {
             else { return }
 
         addParallax(to: presentingViewController.view)
-        
+
         if let topNavigationController = presentingViewController as? UINavigationController {
             interactivePopGestureRecognizerEnabled = interactivePopGestureRecognizerEnabled ?? topNavigationController.interactivePopGestureRecognizer?.isEnabled
             topNavigationController.interactivePopGestureRecognizer?.isEnabled = false
@@ -198,7 +198,7 @@ internal final class SideMenuPresentationController {
 
         statusBarView?.removeFromSuperview()
         removeStyles(from: presentingViewController.containerViewController.view)
-        
+
         if let interactivePopGestureRecognizerEnabled = interactivePopGestureRecognizerEnabled,
             let topNavigationController = presentingViewController as? UINavigationController {
             topNavigationController.interactivePopGestureRecognizer?.isEnabled = interactivePopGestureRecognizerEnabled
@@ -240,7 +240,7 @@ private extension SideMenuPresentationController {
 
     func transition(to: UIViewController, from: UIViewController, alpha: CGFloat, statusBarAlpha: CGFloat, scale: CGFloat, translate: CGFloat) {
         containerViewWillLayoutSubviews()
-        
+
         to.view.transform = .identity
         to.view.alpha = 1
 

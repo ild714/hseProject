@@ -7,6 +7,7 @@ target 'IndoorClimateControlSystems' do
 	pod 'SwiftyJSON', '~> 4.0'
 	pod 'GoogleSignIn'
 	pod 'SideMenu'
+	pod 'SwiftLint'
   # Pods for IndoorClimateControlSystems
 
 end

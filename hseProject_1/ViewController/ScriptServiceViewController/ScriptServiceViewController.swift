@@ -33,24 +33,24 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var co2TextField: UITextField!
     var showCloseBool = true
     var scriptCreator: ScriptCreator?
-    var itemRight: UIBarButtonItem? = nil
-    
+    var itemRight: UIBarButtonItem?
+
     private let pickerView: UIPickerView = UIPickerView(frame: CGRect(x: 0.0, y: 300.0, width: 100.0, height: 300.0))
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         humidityLabel.delegate = self
         co2TextField.delegate = self
         temperatureLabel.delegate = self
         self.navigationItem.setHidesBackButton(true, animated: true)
         setupTableView()
     }
-    
+
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .plain)
         tableView.register(UINib(nibName: String(describing: ScriptServiceTableViewCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -59,24 +59,24 @@ class ScriptServiceViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         tableView.rowHeight = UITableView.automaticDimension
-        
+
         itemRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveAndClose))
         navigationItem.rightBarButtonItem = itemRight
-        
+
         return tableView
     }()
-    
+
     func setupTableView() {
         view.addSubview(tableView)
-        
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
         tableView.topAnchor.constraint(equalTo: imageStack.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor,constant: -15).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15).isActive = true
     }
-    
+
     // Sound changer
     @IBOutlet weak var soundImage: UIButton!
     var soundTurnOn = true
@@ -89,7 +89,7 @@ class ScriptServiceViewController: UIViewController {
             soundTurnOn.toggle()
         }
     }
-    
+
     @IBOutlet weak var houseImage: UIButton!
     @IBOutlet weak var temperatureImage: UIImageView!
     @IBOutlet weak var humidityImage: UIImageView!
@@ -109,7 +109,7 @@ class ScriptServiceViewController: UIViewController {
             houseTurnOn.toggle()
         }
     }
-    
+
     @IBOutlet weak var radiatorImage: UIButton!
     var radiatorTurnOn = true
     @IBAction func radiatorOnOff(_ sender: Any) {
@@ -121,7 +121,7 @@ class ScriptServiceViewController: UIViewController {
             radiatorTurnOn.toggle()
         }
     }
-    
+
     @IBOutlet weak var floorImage: UIButton!
     var floorTurnOn = true
     @IBAction func floorOnOff(_ sender: Any) {
@@ -133,7 +133,7 @@ class ScriptServiceViewController: UIViewController {
             floorTurnOn.toggle()
         }
     }
-    
+
     @IBOutlet weak var humidifierImage: UIButton!
     var humidifierTurnOn = true
     @IBAction func humidifierOnOff(_ sender: Any) {
@@ -145,7 +145,7 @@ class ScriptServiceViewController: UIViewController {
             humidifierTurnOn.toggle()
         }
     }
-    
+
     @IBOutlet weak var conditionerImage: UIButton!
     var conditionerTurnOn = true
     @IBAction func conditionerOnOff(_ sender: Any) {
@@ -157,7 +157,7 @@ class ScriptServiceViewController: UIViewController {
             conditionerTurnOn.toggle()
         }
     }
-    
+
     @IBOutlet weak var co2Image: UIButton!
     var co2TurnOn = true
     @IBAction func co2(_ sender: Any) {
@@ -170,39 +170,39 @@ class ScriptServiceViewController: UIViewController {
             co2TurnOn.toggle()
         }
     }
-    
+
     var serviceScripts: [ServiceScript] = []
-    
-    @objc func saveAndClose(){
+
+    @objc func saveAndClose() {
         if serviceScripts.count > 0 {
         var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
-        
-        for i in 0..<serviceScripts.count {
-            if self.serviceScripts[i].soundOnOff == true {
+
+        for serviceScriptNumber in 0..<serviceScripts.count {
+            if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
                 setting.mute = 0
             } else {
                 setting.mute = 1
             }
-            
-            if self.serviceScripts[i].houseOnOff == true {
+
+            if self.serviceScripts[serviceScriptNumber].houseOnOff == true {
                 setting.at_home = 1
             } else {
                 setting.at_home = 0
             }
-            
+
             let formatter = DateFormatter()
             formatter.dateFormat = "HH:mm"
-            setting.time = "\(formatter.string(from: serviceScripts[i].time))"
-            
+            setting.time = "\(formatter.string(from: serviceScripts[serviceScriptNumber].time))"
+
             setting.must_use = []
-            setting.hum = serviceScripts[i].humidity
-            setting.temp = serviceScripts[i].temperature
-            setting.co2 = serviceScripts[i].co2
+            setting.hum = serviceScripts[serviceScriptNumber].humidity
+            setting.temp = serviceScripts[serviceScriptNumber].temperature
+            setting.co2 = serviceScripts[serviceScriptNumber].co2
             setting.dont_use = []
-            
+
             self.scriptCreator?.roomGroup0?.dayGroup0?.setting0 = setting
             self.scriptCreator?.roomGroup0?.dayGroup0?.setting1 = setting
-            
+
             let network = NetworkScript()
             if let script = scriptCreator {
                 network.sentDataScript(script: script)
@@ -211,12 +211,12 @@ class ScriptServiceViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
         return
         } else {
-            let al = UIAlertController(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки", preferredStyle: .alert)
-            al.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(al,animated: true)
+            let vcAlert = UIAlertController(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки", preferredStyle: .alert)
+            vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            self.present(vcAlert, animated: true)
         }
     }
-    
+
     @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
     @IBAction func addScript(_ sender: Any) {
         if let text = closeButtonOrEditButton.titleLabel?.text {
@@ -224,7 +224,7 @@ class ScriptServiceViewController: UIViewController {
                 saveAndClose()
             }
         }
-        
+
         var serviceScript = ServiceScript()
         if let temperatureLabelInt = Int(temperatureLabel.text ?? "error") {
             if temperatureLabelInt > 50 || temperatureLabelInt < 15 {
@@ -241,7 +241,7 @@ class ScriptServiceViewController: UIViewController {
             self.present(alert, animated: true)
             return
         }
-        
+
         if let humidityLabelInt = Int(humidityLabel.text ?? "error") {
             if humidityLabelInt < 30 || humidityLabelInt > 80 {
                 let alert = UIAlertController(title: "Некорректное значение для влажности", message: "Ввведите снова показание влжаности", preferredStyle: .alert)
@@ -276,7 +276,7 @@ class ScriptServiceViewController: UIViewController {
                 return
             }
         }
-        
+
         serviceScript.conditionerOn = conditionerTurnOn
         serviceScript.hotFloorOn = floorTurnOn
         serviceScript.humidifierOn = humidifierTurnOn
@@ -285,13 +285,13 @@ class ScriptServiceViewController: UIViewController {
         serviceScript.co2OnOff = co2TurnOn
         serviceScript.houseOnOff = houseTurnOn
         serviceScript.soundOnOff = soundTurnOn
-        
+
         serviceScripts.append(serviceScript)
         tableView.reloadData()
     }
-    
+
     let cellIdentifier = String(describing: ScriptServiceTableViewCell.self)
-    
+
     static func storyboardInstance() -> ScriptServiceViewController? {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ScriptServiceViewController
@@ -303,11 +303,11 @@ class ScriptServiceViewController: UIViewController {
 
 // MARK: - ScriptServiceViewController dataSource methods
 extension ScriptServiceViewController: UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return serviceScripts.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? ScriptServiceTableViewCell else {
             return UITableViewCell()
@@ -316,12 +316,12 @@ extension ScriptServiceViewController: UITableViewDataSource {
         cell.index = indexPath.row
         cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1)
         cell.selectionStyle = .none
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let _ = tableView.cellForRow(at: indexPath) as? ScriptServiceTableViewCell {
+        if tableView.cellForRow(at: indexPath) as? ScriptServiceTableViewCell != nil {
 
             if showCloseBool {
                 tableView.rowHeight = 180
@@ -330,12 +330,12 @@ extension ScriptServiceViewController: UITableViewDataSource {
                     self.tableView.endUpdates()
                 }
                 serviceLabel.text = "Изменяйте желаемые настройки"
-                
+
                 closeButtonOrEditButton.setTitle("Сохранить и закончить", for: .normal)
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                     self.settingCreator.alpha = 0
                 })
-                
+
                 self.navigationItem.setRightBarButton(nil, animated: true)
                 showCloseBool.toggle()
             } else {
@@ -358,7 +358,7 @@ extension ScriptServiceViewController: UITableViewDataSource {
 
 // MARK: - ScriptServiceViewController delegate methods
 extension ScriptServiceViewController: UITableViewDelegate {
-    
+
 }
 
 extension ScriptServiceViewController: cellDelagate {
@@ -367,23 +367,23 @@ extension ScriptServiceViewController: cellDelagate {
         self.serviceScripts[number].co2OnOff = co2OnOff
         tableView.reloadData()
     }
-    
+
     func updateTime(number: Int, time: Date) {
         self.serviceScripts[number].time = time
         print(serviceScripts[number].time)
         tableView.reloadData()
     }
-    
+
     func updateTemperature(number: Int, temperature: Int) {
         self.serviceScripts[number].temperature = temperature
         tableView.reloadData()
     }
-    
+
     func updateHumidity(number: Int, humidity: Int) {
         self.serviceScripts[number].humidity = humidity
         tableView.reloadData()
     }
-    
+
     func updateHouse(number: Int, houseOnOff: Bool) {
         if self.serviceScripts[number].hotFloorOn {
             self.serviceScripts[number].temperature = 24
@@ -395,7 +395,7 @@ extension ScriptServiceViewController: cellDelagate {
             tableView.reloadData()
         }
     }
-    
+
     func updateSound(number: Int, soundOnOff: Bool) {
         self.serviceScripts[number].soundOnOff = soundOnOff
         tableView.reloadData()
@@ -404,7 +404,7 @@ extension ScriptServiceViewController: cellDelagate {
 
 extension ScriptServiceViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder() 
+        textField.resignFirstResponder()
         return true
     }
 }

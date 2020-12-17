@@ -14,17 +14,17 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var markImage: UIImageView!
     @IBOutlet weak var backgroundCustomView: ViewCustomClass!
     let gradient: CAGradientLayer = CAGradientLayer()
-    
-    func configure(scriptText:String,mark: Bool){
-        
+
+    func configure(scriptText: String, mark: Bool) {
+
         self.scriptLabel.text = scriptText
-        
+
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-        
+
         if mark {
             self.markImage.image = UIImage(named: "full_radio")
-            
+
             gradient.colors = [UIColor.init(rgb: 0x5b80ea).cgColor, UIColor.init(rgb: 0x37b5dd).cgColor]
             self.backgroundCustomView.layer.insertSublayer(gradient, at: 0)
             self.scriptLabel.textColor = .white
@@ -40,5 +40,3 @@ class CustomTableViewCell: UITableViewCell {
         gradient.frame = contentView.frame
     }
 }
-
-

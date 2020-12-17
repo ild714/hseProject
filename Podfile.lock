@@ -17,11 +17,13 @@ PODS:
   - GTMSessionFetcher/Full (1.5.0):
     - GTMSessionFetcher/Core (= 1.5.0)
   - SideMenu (6.5.0)
+  - SwiftLint (0.42.0)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - GoogleSignIn
   - SideMenu
+  - SwiftLint
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -31,6 +33,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - SideMenu
+    - SwiftLint
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -39,8 +42,9 @@ SPEC CHECKSUMS:
   GTMAppAuth: 197a8dabfea5d665224aa00d17f164fc2248dab9
   GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SwiftLint: 4fa9579c63416865179bc416f0a92d55f009600d
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 1136cca5afb1b7686abb8db971252770f3e381ef
+PODFILE CHECKSUM: 551b8ad5623e53ef42b071bec5bfdeb5febbd67b
 
 COCOAPODS: 1.10.0

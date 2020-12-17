@@ -14,7 +14,7 @@ struct ScriptCreator: Codable {
     var roomGroup0: RoomGroopCreator?
 }
 
-struct RoomGroopCreator: Codable{
+struct RoomGroopCreator: Codable {
     var rIDs: [Int]
     var dayGroup0: DayGroupCreator?
     var dayGroup1: DayGroupCreator?

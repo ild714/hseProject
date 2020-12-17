@@ -9,15 +9,15 @@
 import UIKit
 
 extension UIStackView {
-    func backColor(stackView: UIStackView){
+    func backColor(stackView: UIStackView) {
         let backgroundView = UIView()
-        
+
         backgroundView.backgroundColor = UIColor.white
-        
+
         backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         stackView.insertSubview(backgroundView, at: 0)
-        
+
         NSLayoutConstraint.activate([
             backgroundView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),

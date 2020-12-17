@@ -10,16 +10,16 @@ import UIKit
 
 @IBDesignable class ButtonCustomClass: UIButton {
 
-    @IBInspectable var startColor:   UIColor = .black { didSet { updateColors() }}
-    @IBInspectable var endColor:     UIColor = .white { didSet { updateColors() }}
+    @IBInspectable var startColor: UIColor = .black { didSet { updateColors() }}
+    @IBInspectable var endColor: UIColor = .white { didSet { updateColors() }}
     @IBInspectable var startLocation: Double =   0.05 { didSet { updateLocations() }}
-    @IBInspectable var endLocation:   Double =   0.95 { didSet { updateLocations() }}
-    @IBInspectable var horizontalMode:  Bool =  false { didSet { updatePoints() }}
-    @IBInspectable var diagonalMode:    Bool =  false { didSet { updatePoints() }}
+    @IBInspectable var endLocation: Double =   0.95 { didSet { updateLocations() }}
+    @IBInspectable var horizontalMode: Bool =  false { didSet { updatePoints() }}
+    @IBInspectable var diagonalMode: Bool =  false { didSet { updatePoints() }}
 
     override public class var layerClass: AnyClass { CAGradientLayer.self }
 
-    var gradientLayer: CAGradientLayer { layer as! CAGradientLayer }
+    var gradientLayer: CAGradientLayer { layer as? CAGradientLayer ?? CAGradientLayer() }
 
     func updatePoints() {
         if horizontalMode {
@@ -42,7 +42,7 @@ import UIKit
         updateLocations()
         updateColors()
     }
-    
+
     @IBInspectable var borderWidth: CGFloat = 1 {
         didSet {
             layer.borderWidth = self.borderWidth
@@ -53,7 +53,7 @@ import UIKit
             layer.borderColor = self.borderColor.cgColor
         }
     }
-    
+
     @IBInspectable
     var cornerRadius: CGFloat = 10 {
         didSet {
@@ -61,19 +61,19 @@ import UIKit
             self.layer.cornerRadius = cornerRadius
         }
     }
-    
+
     @IBInspectable
        var roundedCornersOnRight: Bool = false {
            didSet {
                self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
            }
        }
-       
+
        @IBInspectable
        var roundedCornersOnLeft: Bool = false {
            didSet {
                self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
            }
        }
-    
+
 }

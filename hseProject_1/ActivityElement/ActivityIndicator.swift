@@ -14,30 +14,30 @@ enum SpecialActivity {
     case general
 }
 
-struct ViewSpecialAndGeneral{
+struct ViewSpecialAndGeneral {
     var typeOfActivity: SpecialActivity = .general
     var view: UIView = UIView()
-    
-    init(view: UIView,type: SpecialActivity = .general){
+
+    init(view: UIView, type: SpecialActivity = .general) {
         self.view = view
         self.typeOfActivity = type
     }
 }
 
-struct LabelActivity{
+struct LabelActivity {
     var label: UILabel = UILabel()
-    
-    init(label: UILabel){
+
+    init(label: UILabel) {
         self.label = label
     }
 }
 
 class ActivityIndicator {
     private init() {}
-    
+
     static func animateActivityLabel(labels: [LabelActivity]) {
-        
-        for label in labels{
+
+        for label in labels {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             activityIndicator.center.x = 20
             activityIndicator.center.y = 15
@@ -45,10 +45,10 @@ class ActivityIndicator {
             label.label.addSubview(activityIndicator)
         }
     }
-    
+
     static func animateActivity(views: [ViewSpecialAndGeneral]) {
-        
-        for view in views{
+
+        for view in views {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             activityIndicator.center.x = view.view.bounds.size.width / 2
             if view.typeOfActivity == .special {
@@ -60,10 +60,10 @@ class ActivityIndicator {
             view.view.addSubview(activityIndicator)
         }
     }
-    
+
     static func stopAnimating(views: [UIView]) {
-        for view in views{
-            view.subviews.forEach{$0.removeFromSuperview()}
+        for view in views {
+            view.subviews.forEach {$0.removeFromSuperview()}
         }
     }
 }

@@ -12,11 +12,11 @@ class ScriptForDaysTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelDay: UILabel!
     @IBOutlet weak var markImage: UIImageView!
-    
-    func configure(day:String,markBool: Bool){
-        
+
+    func configure(day: String, markBool: Bool) {
+
         self.labelDay.text = day
-        if markBool{
+        if markBool {
             self.markImage.image = UIImage(named: "check")
         } else {
             self.markImage.image = UIImage(named: "uncheck")

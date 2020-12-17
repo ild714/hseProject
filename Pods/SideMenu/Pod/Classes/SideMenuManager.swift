@@ -59,7 +59,7 @@ public class SideMenuManager: NSObject {
         }
         set(menu) { _leftMenu.value = menu }
     }
-    
+
     /// The right menu.
     open var rightMenuNavigationController: SideMenuNavigationController? {
         get {
@@ -101,7 +101,7 @@ public class SideMenuManager: NSObject {
         }
         return self.addScreenEdgeGesture(to: view, edge: side.edge)
     }
-    
+
     /**
      Adds a pan edge gesture to a view to present menus.
      
@@ -113,7 +113,7 @@ public class SideMenuManager: NSObject {
         if leftMenuNavigationController ?? rightMenuNavigationController == nil {
             Print.warning(.panGestureAdded, arguments: #function, PresentDirection.left.name, PresentDirection.right.name, required: true)
         }
-        
+
         return addPresentPanGesture(to: view)
     }
 }
@@ -150,7 +150,7 @@ private extension SideMenuManager {
         if let activeMenu = activeMenu {
             let width = activeMenu.menuWidth
             let distance = gesture.xTranslation / width
-            switch (gesture.state) {
+            switch gesture.state {
             case .changed:
                 if gesture.canSwitch {
                     switching = (distance > 0 && !activeMenu.leftSide) || (distance < 0 && activeMenu.leftSide)

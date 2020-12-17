@@ -16,7 +16,7 @@ import UIKit
             self.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMaxXMinYCorner]
         }
     }
-    
+
     @IBInspectable
     var cornerRadius: CGFloat = 10 {
         didSet {

@@ -14,22 +14,22 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var temperature: UILabel!
     @IBOutlet weak var wet: UILabel!
     @IBOutlet weak var gas: UILabel!
-    
+
     override init(frame: CGRect) {
-        super.init(frame:frame)
-        
+        super.init(frame: frame)
+
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.layer.cornerRadius = 10
         self.backgroundColor = .white
     }
-    
+
     override func awakeFromNib() {
-        ActivityIndicator.animateActivityLabel(labels: [LabelActivity(label: roomNameLabel),LabelActivity(label: wet),LabelActivity(label: gas),LabelActivity(label: temperature)])
+        ActivityIndicator.animateActivityLabel(labels: [LabelActivity(label: roomNameLabel), LabelActivity(label: wet), LabelActivity(label: gas), LabelActivity(label: temperature)])
     }
-    
+
 //    func loadViewFromNib() -> UIView {
 //        let bundle = Bundle(for: type(of: self))
 //        let nib = UINib(nibName: "CustomCollectionViewCell", bundle: bundle)
@@ -37,15 +37,14 @@ class CustomCollectionViewCell: UICollectionViewCell {
 //        return view
 //    }
 
-    func configure(currentRoomText:String,currentRoom:CurrentRoomData){
-        
-        
+    func configure(currentRoomText: String, currentRoom: CurrentRoomData) {
+
         roomNameLabel.text = currentRoomText
         temperature.text = currentRoom.cellTemperature
         wet.text = currentRoom.cellWet
         gas.text = currentRoom.cellGas
-        
-        ActivityIndicator.stopAnimating(views: [wet,gas,temperature,roomNameLabel])
+
+        ActivityIndicator.stopAnimating(views: [wet, gas, temperature, roomNameLabel])
     }
-    
+
 }

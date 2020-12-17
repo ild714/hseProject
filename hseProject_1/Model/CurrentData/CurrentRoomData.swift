@@ -9,23 +9,23 @@
 import Foundation
 import SwiftyJSON
 
-struct CurrentRoomData{
-    
+struct CurrentRoomData {
+
     var currentTemperature: String = ""
     var modOfCurrentTemperature: String = ""
     var currentWet: String = ""
     var modOfCurrentWet: String = ""
     var currentGas: String = ""
     var ppm: String = ""
-    var peopleInRoom: String = "" 
-    
+    var peopleInRoom: String = ""
+
     var cellTemperature: String = ""
     var cellWet: String = ""
     var cellGas: String = ""
-    
-    init(result: [String : JSON],curentRoom: Int){
+
+    init(result: [String: JSON], curentRoom: Int) {
         for data in result["\(curentRoom)"]! {
-            
+
             if data.0 == "1"{
                 self.currentTemperature = "\(Int(floor(data.1.doubleValue)))."
                 self.cellTemperature = "\(data.1.doubleValue)℃"

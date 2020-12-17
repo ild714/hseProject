@@ -191,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				749752162555667B00B88A21 /* IndoorClimateControlSystems.entitlements */,
+				742822A1258B8269008F6524 /* SOA */,
 				2137EEB924D054FF009B19FD /* hseProject_1 */,
 				2137EEB824D054FF009B19FD /* Products */,
 				01AF687FE6375F45425D2EB3 /* Pods */,
@@ -212,7 +213,6 @@
 				748426ED25174C92006A09F7 /* ActiveButtons */,
 				748426EC25174C76006A09F7 /* Extension */,
 				743B8FC424E2EE30009A929A /* ActivityElement */,
-				7457B97B24DF0A3C00C16A0E /* Network */,
 				21D0833C24D5A895003D0DA8 /* CustomClasses */,
 				2108898D24D195B6000F6B4B /* Configuration */,
 				2108898C24D195B0000F6B4B /* Model */,
@@ -272,6 +272,62 @@
 				74171F202541BBD000746E9E /* AimRoomData.swift */,
 			);
 			path = AimData;
+			sourceTree = "<group>";
+		};
+		742822A1258B8269008F6524 /* SOA */ = {
+			isa = PBXGroup;
+			children = (
+				742822A2258B828C008F6524 /* PresentationLayer */,
+				742822A3258B829D008F6524 /* ServiceLayer */,
+				742822A4258B82A9008F6524 /* CoreLayer */,
+			);
+			path = SOA;
+			sourceTree = "<group>";
+		};
+		742822A2258B828C008F6524 /* PresentationLayer */ = {
+			isa = PBXGroup;
+			children = (
+				742822A5258B8343008F6524 /* Assembly */,
+			);
+			path = PresentationLayer;
+			sourceTree = "<group>";
+		};
+		742822A3258B829D008F6524 /* ServiceLayer */ = {
+			isa = PBXGroup;
+			children = (
+				742822A6258B835F008F6524 /* Assembly */,
+			);
+			path = ServiceLayer;
+			sourceTree = "<group>";
+		};
+		742822A4258B82A9008F6524 /* CoreLayer */ = {
+			isa = PBXGroup;
+			children = (
+				7457B97B24DF0A3C00C16A0E /* Network */,
+				742822A8258B8379008F6524 /* Assembly */,
+			);
+			path = CoreLayer;
+			sourceTree = "<group>";
+		};
+		742822A5258B8343008F6524 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		742822A6258B835F008F6524 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
+			sourceTree = "<group>";
+		};
+		742822A8258B8379008F6524 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Assembly;
 			sourceTree = "<group>";
 		};
 		743B8FC424E2EE30009A929A /* ActivityElement */ = {
@@ -414,6 +470,7 @@
 				2137EEB524D054FF009B19FD /* Resources */,
 				7E192BE34BE2C6284CB6E789 /* [CP] Embed Pods Frameworks */,
 				9E06B768B3925CD2A2233BD6 /* [CP] Copy Pods Resources */,
+				742822B2258B8503008F6524 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -503,6 +560,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		742822B2258B8503008F6524 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"error: SwiftLint does not exist, download it from https://github.com/realm/SwiftLint\"\n  exit 1\nfi\n";
 		};
 		7E192BE34BE2C6284CB6E789 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

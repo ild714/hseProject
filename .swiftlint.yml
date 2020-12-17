@@ -1,0 +1,6 @@
+excluded:
+- Pods
+line_length: 200
+
+identifier_name:
+  allowed_symbols: "_"

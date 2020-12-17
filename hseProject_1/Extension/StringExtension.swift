@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension String {
     subscript (bounds: CountableClosedRange<Int>) -> String {
         let start = index(startIndex, offsetBy: bounds.lowerBound)
