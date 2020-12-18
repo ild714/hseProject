@@ -35,14 +35,13 @@
 		742822E9258BDA6F008F6524 /* PresentationAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822E8258BDA6F008F6524 /* PresentationAssembly.swift */; };
 		742822ED258BDF44008F6524 /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822EC258BDF44008F6524 /* MenuListController.swift */; };
 		742822F0258BF7B5008F6524 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822EF258BF7B5008F6524 /* RootAssembly.swift */; };
+		742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */; };
 		743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */; };
 		743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */; };
 		743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */; };
 		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 		7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */; };
 		74754F5A24E296CE008F07A3 /* NetworkSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74754F5924E296CE008F07A3 /* NetworkSensorData.swift */; };
-		747CE29D24DFE65E002FEB50 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747CE29C24DFE65E002FEB50 /* Room.swift */; };
-		747CE29F24DFE689002FEB50 /* RoomsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 747CE29E24DFE689002FEB50 /* RoomsInfo.swift */; };
 		7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */; };
 		7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */; };
 		7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039724E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift */; };
@@ -110,14 +109,13 @@
 		742822E8258BDA6F008F6524 /* PresentationAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationAssembly.swift; sourceTree = "<group>"; };
 		742822EC258BDF44008F6524 /* MenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListController.swift; sourceTree = "<group>"; };
 		742822EF258BF7B5008F6524 /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
+		742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRoomsConfig.swift; sourceTree = "<group>"; };
 		743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConfiguration.swift; sourceTree = "<group>"; };
 		743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTemperatureResponse.swift; sourceTree = "<group>"; };
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
 		74754F5924E296CE008F07A3 /* NetworkSensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSensorData.swift; sourceTree = "<group>"; };
-		747CE29C24DFE65E002FEB50 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
-		747CE29E24DFE689002FEB50 /* RoomsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsInfo.swift; sourceTree = "<group>"; };
 		7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRightSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLeftSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039724E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewLeftSideCustomClass.swift; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 				74B5E812257D30F700483972 /* Script */,
 				74171F1F2541BBB100746E9E /* AimData */,
 				74171F1C2541B29900746E9E /* CurrentData */,
-				74F6862824DFE51400C34765 /* RoomsConfig */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,8 +263,7 @@
 		740D1E0E25304E3E000253FA /* CollectionViewControllerLogic */ = {
 			isa = PBXGroup;
 			children = (
-				740D1DFF252F4097000253FA /* CollectionViewController.swift */,
-				740D1E05252F46BF000253FA /* CollectionViewController.storyboard */,
+				742822F4258C9F03008F6524 /* CollectionViewController */,
 				740D1E02252F41A0000253FA /* CustomCollectionViewCell.xib */,
 				740D1E01252F41A0000253FA /* CustomCollectionViewCell.swift */,
 				742822EC258BDF44008F6524 /* MenuListController.swift */,
@@ -426,6 +422,16 @@
 			path = RoomConfigs;
 			sourceTree = "<group>";
 		};
+		742822F4258C9F03008F6524 /* CollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				740D1DFF252F4097000253FA /* CollectionViewController.swift */,
+				742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */,
+				740D1E05252F46BF000253FA /* CollectionViewController.storyboard */,
+			);
+			path = CollectionViewController;
+			sourceTree = "<group>";
+		};
 		743B8FC424E2EE30009A929A /* ActivityElement */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,16 +539,6 @@
 			);
 			path = SignIn;
 			sourceTree = "<group>";
-		};
-		74F6862824DFE51400C34765 /* RoomsConfig */ = {
-			isa = PBXGroup;
-			children = (
-				747CE29C24DFE65E002FEB50 /* Room.swift */,
-				747CE29E24DFE689002FEB50 /* RoomsInfo.swift */,
-			);
-			path = RoomsConfig;
-			sourceTree = "<group>";
-			tabWidth = 1;
 		};
 		9FA5C525A8C153817D17C3F4 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -747,7 +743,6 @@
 				7480039E24E14203006DEBDE /* LabelGradientCustomClass.swift in Sources */,
 				74B5E814257D312100483972 /* Script.swift in Sources */,
 				74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */,
-				747CE29F24DFE689002FEB50 /* RoomsInfo.swift in Sources */,
 				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
 				74B5E816257D316F00483972 /* NetworkScript.swift in Sources */,
 				742822E3258BCF81008F6524 /* RoomConfigsService.swift in Sources */,
@@ -755,8 +750,8 @@
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,
 				740D1E03252F41A0000253FA /* CustomCollectionViewCell.swift in Sources */,
-				747CE29D24DFE65E002FEB50 /* Room.swift in Sources */,
 				742822D3258B9FB5008F6524 /* RoomsRequest.swift in Sources */,
+				742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */,
 				743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */,
 				742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */,
 				742822B9258B95A5008F6524 /* ParserProtocol.swift in Sources */,

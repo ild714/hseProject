@@ -14,10 +14,10 @@ protocol ServiceAssemblyProtocol {
 
 class ServiceAssembly: ServiceAssemblyProtocol {
     private let coreAssembly: CoreAssemblyProtocol
-    
+
     init(coreAssembly: CoreAssemblyProtocol) {
         self.coreAssembly = coreAssembly
     }
-    
+
     lazy var roomsConfigService: RoomConfigsServiceProtocol = RoomConfigsService(requstRoomConfig: self.coreAssembly.requestRoomsConfigs )
 }

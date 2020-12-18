@@ -25,7 +25,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
             print("___________")
             if let collectionViewController = CollectionViewController.storyboardInstance() {
 
-                collectionViewController.userId = user.userID
+//                collectionViewController.userId = user.userID
                 let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
 
                 let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController

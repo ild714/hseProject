@@ -13,4 +13,3 @@ class RootAssembly {
     private lazy var serviceAssembly: ServiceAssemblyProtocol = ServiceAssembly(coreAssembly: self.coreAssembly)
     private lazy var coreAssembly: CoreAssemblyProtocol = CoreAssembly()
 }
-

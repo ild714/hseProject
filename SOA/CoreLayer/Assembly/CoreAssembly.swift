@@ -14,5 +14,5 @@ protocol CoreAssemblyProtocol {
 
 class CoreAssembly: CoreAssemblyProtocol {
     var requestRoomsConfigs: RequestRoomConfigProtocol = RequestRoomConfig(session: URLSession.shared)
-    
+
 }

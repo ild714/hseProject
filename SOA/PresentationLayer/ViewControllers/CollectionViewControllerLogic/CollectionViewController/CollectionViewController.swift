@@ -12,24 +12,25 @@ import SideMenu
 import GoogleSignIn
 
 class CollectionViewController: UIViewController, ToolBarWithPageControllProtocol {
-
-    init?(coder: NSCoder, roomConfigService: RoomConfigsServiceProtocol) {
-        self.roomConfigService = roomConfigService
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, model: ModelProtocol) {
+        self.presentationAssembly = presentationAssembly
+        self.userId = userId
+        self.model = model
         super.init(coder: coder)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    var roomConfigService: RoomConfigsServiceProtocol?
-    var curentRoom: Int = 0
-    var roomNumbersAndNames: [Int: String] = [:]
-    var safeArea: UILayoutGuide!
-    var menu: SideMenuNavigationController?
-    var userId = ""
 
-    let cellIdentifier = String(describing: CustomCollectionViewCell.self)
+    private var presentationAssembly: PresentationAssemblyProtocol?
+    private var curentVC: Int = 0
+    private var roomNumbersAndNames: [Int: String] = [:]
+    private var safeArea: UILayoutGuide!
+    private var menu: SideMenuNavigationController?
+    private var userId = ""
+    private let cellIdentifier = String(describing: CustomCollectionViewCell.self)
+    private var model: ModelProtocol?
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -43,52 +44,54 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }()
 
     @objc func didTapMenu() {
-        present(menu!, animated: true)
+        if let menu = menu {
+            present(menu, animated: true)
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Все комнаты"
 
+        self.createPageControll()
+        self.createGestureRecognizer()
+        self.createMenuForNavigationController()
+        self.createButtonForNavigationController()
+        self.setColorForNavigationController()
+        model?.fetchRoomConfig()
+    }
+    func showAlert() {
+        let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
+    }
+    func createPageControll() {
+        self.createPageControl(viewController: self, number: self.curentVC, allAmountOfPages: self.roomNumbersAndNames.count + 1)
+        self.collectionView.reloadData()
+    }
+    func createGestureRecognizer() {
+        if self.curentVC == 0 {
+            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeFirst(sender:)))
+            leftSwipe.direction = .left
+            self.view.addGestureRecognizer(leftSwipe)
+        }
+    }
+    func createMenuForNavigationController() {
+        menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId))
+        menu?.leftSide = true
+    }
+    func createButtonForNavigationController() {
         let button = UIBarButtonItem(image: UIImage(named: "menu4"), style: .plain, target: self, action: #selector(didTapMenu))
         button.tintColor = .white
         navigationItem.leftBarButtonItem = button
-        menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId))
-        menu?.leftSide = true
-
-        title = "Все комнаты"
+    }
+    func setColorForNavigationController() {
         self.navigationController?.navigationBar.setGradientBackground(
             colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),
                      UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)],
             startPoint: .topLeft,
             endPoint: .bottomRight)
-
-        self.roomConfigService?.loadRoomConfigs(completion: {(result: Result<[String: JSON], NetworkError>) in
-            switch result {
-            case .success(let result):
-
-                for (_, value) in result {
-                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
-                }
-
-                if self.curentRoom == 0 {
-                    let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeFirst(sender:)))
-                    leftSwipe.direction = .left
-
-                    self.view.addGestureRecognizer(leftSwipe)
-                }
-                self.createPageControl(viewController: self, number: self.curentRoom, allAmountOfPages: self.roomNumbersAndNames.count + 1)
-
-                self.collectionView.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
-                let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
-                self.present(alertVC, animated: true)
-            }
-        })
-        
     }
-
     @objc func handleSwipeFirst(sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             switch sender.direction {
@@ -112,9 +115,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     func setupTableView() {
         view.addSubview(collectionView)
 
-        let button = UIButton()
-        button.setTitle("Test", for: .normal)
-        collectionView.addSubview(button)
         collectionView.backgroundColor = UIColor.init(redS: 235, greenS: 235, blueS: 235)
         collectionView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
@@ -178,5 +178,17 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let inset: CGFloat = 20
         return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+    }
+}
+
+// MARK: - ModelDelegate
+extension CollectionViewController: ModelDelegate {
+    func setup(result: [Int: String]) {
+        self.roomNumbersAndNames = result
+        self.createPageControll()
+    }
+    func show(error message: String) {
+        print(message)
+        self.showAlert()
     }
 }

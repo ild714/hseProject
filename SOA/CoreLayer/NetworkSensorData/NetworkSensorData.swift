@@ -28,7 +28,7 @@ class NetworkSensorData {
     static func getData<T>(with string: String, type sensorType: TypeOfSensor, completion:@escaping (Result<T, NetworkSensorError>) -> Void) {
         if let url = URL(string: string) {
             let request = URLRequest(url: url)
-            URLSession.shared.dataTask(with: request) {data, _ , error in
+            URLSession.shared.dataTask(with: request) {data, _, error in
                 guard error == nil else {
                     DispatchQueue.main.async {
                         completion(.failure(.errorForRequest))

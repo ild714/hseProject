@@ -21,13 +21,13 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
     private var typeOfRooms: [String: JSON] = [:]
 
     let session: URLSession?
-    
+
     init(session: URLSession) {
         self.session = session
     }
-    
-    func load<Parser,T>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<T, NetworkError>) -> Void) {
-        
+
+    func load<Parser, T>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<T, NetworkError>) -> Void) {
+
         guard let urlRequest = requestConfig.request.urlRequest else {
             completion(.failure(.badUrl))
             return
@@ -66,7 +66,7 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
                 return
             }
         }
-        
+
         if let task = task {
             task.resume()
         } else {

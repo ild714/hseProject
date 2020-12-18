@@ -10,5 +10,5 @@ import Foundation
 import SwiftyJSON
 
 protocol SwiftyParserProtocol {
-    func parseForRooms(data: Data) -> [String : JSON]?
+    func parseForRooms(data: Data) -> [String: JSON]?
 }

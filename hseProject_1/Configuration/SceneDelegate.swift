@@ -16,23 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
-            var rootAssembly = RootAssembly()
-            
+            let rootAssembly = RootAssembly()
+
             if UserDefaults.standard.bool(forKey: "Log_in") {
                 if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
 
-                    if let userId = UserDefaults.standard.object(forKey: "UserId") as? String {
-                        collectionViewController.userId = userId
-                        let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
+                    let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
+                    let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+                    navigationController?.viewControllers = [collectionViewController]
 
-                        let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-
-                        navigationController?.viewControllers = [collectionViewController]
-
-                        navigationController?.modalPresentationStyle = .fullScreen
-                        self.window?.rootViewController = navigationController
-                        self.window?.makeKeyAndVisible()
-                    }
+                    navigationController?.modalPresentationStyle = .fullScreen
+                    self.window?.rootViewController = navigationController
+                    self.window?.makeKeyAndVisible()
                 }
             } else {
                 let signInVC = SignInViewController()

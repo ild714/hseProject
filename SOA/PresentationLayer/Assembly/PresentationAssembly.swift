@@ -16,18 +16,25 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController? {
         let storyboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "CollectionViewController", creator: { coder in
-            return CollectionViewController(coder: coder, roomConfigService: self.serviceAssembly.roomsConfigService)
+            let modelRoomsConfig = self.modelRoomsConfig()
+            if let userId = UserDefaults.standard.object(forKey: "UserId") as? String {
+                let collectionVC =  CollectionViewController(coder: coder, presentationAssembly: self, userId: userId, model: modelRoomsConfig)
+                modelRoomsConfig.delegate = collectionVC
+                return collectionVC
+            } else {
+                return nil
+            }
         })
-        return nil
-//        return collectionVC
-    
     }
-    
+
+    private func modelRoomsConfig() -> ModelProtocol {
+        return ModelRoomsConfig(roomConfigService: self.serviceAssembly.roomsConfigService)
+    }
+
     private let serviceAssembly: ServiceAssemblyProtocol
-    
+
     init(serviceAssembly: ServiceAssemblyProtocol) {
         self.serviceAssembly = serviceAssembly
     }
-    
-    
+
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol RequestRoomConfigProtocol {
-    func load<Parser,T>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<T, NetworkError>) -> Void)
+    func load<Parser, T>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<T, NetworkError>) -> Void)
 }
 
 struct RequestConfig<Parser> where Parser: SwiftyParserProtocol {

@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class SwiftyParser: SwiftyParserProtocol {
-    func parseForRooms(data: Data) -> [String : JSON]? {
+    func parseForRooms(data: Data) -> [String: JSON]? {
         return JSON(data).dictionary
     }
 }
