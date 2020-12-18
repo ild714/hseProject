@@ -26,7 +26,7 @@ class MenuListController: UITableViewController {
     @objc func exit() {
         GIDSignIn.sharedInstance()?.signOut()
 
-        let signInVC = SignInViewController()
+        let signInVC = SignInViewController(rootAssembly: RootAssembly())
         signInVC.modalPresentationStyle = .fullScreen
         UserDefaults.standard.set(false, forKey: "Log_in")
         self.present(signInVC, animated: true, completion: nil)

@@ -10,9 +10,10 @@ import Foundation
 
 protocol CoreAssemblyProtocol {
     var requestRoomsConfigs: RequestRoomConfigProtocol { get }
+    var requestAppDatchik: RequestAppDatchikProtocol { get }
 }
 
 class CoreAssembly: CoreAssemblyProtocol {
     var requestRoomsConfigs: RequestRoomConfigProtocol = RequestRoomConfig(session: URLSession.shared)
-
+    var requestAppDatchik: RequestAppDatchikProtocol = RequestAppDatchik(session: URLSession.shared)
 }

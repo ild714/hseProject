@@ -11,6 +11,17 @@ import GoogleSignIn
 
 class SignInViewController: UIViewController, GIDSignInDelegate {
 
+    let rootAssembly: RootAssembly?
+
+    init(rootAssembly: RootAssembly) {
+        self.rootAssembly = rootAssembly
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     @available(iOS 9.0, *)
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
       return GIDSignIn.sharedInstance().handle(url)
@@ -23,9 +34,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
             print("___________")
             print(user.authentication.idToken ?? "no token")
             print("___________")
-            if let collectionViewController = CollectionViewController.storyboardInstance() {
-
-//                collectionViewController.userId = user.userID
+            if let collectionViewController = rootAssembly?.presentationAssembly.collectionViewController() {
                 let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
 
                 let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
@@ -35,8 +44,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                 navigationController?.modalPresentationStyle = .fullScreen
 
                 UserDefaults.standard.set(true, forKey: "Log_in")
-                //print(user.userID)
-//                print(type(of: Int(user.userID)))
                 if let userId = user.userID, let token = user.authentication.idToken {
 
                     UserDefaults.standard.set(userId, forKey: "UserId")

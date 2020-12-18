@@ -12,10 +12,11 @@ import SideMenu
 import GoogleSignIn
 
 class CollectionViewController: UIViewController, ToolBarWithPageControllProtocol {
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, model: ModelProtocol) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, modelRoomsConfig: ModelRoomsConfigProtocol, modelRoomDatchik: ModelAppDatchikProtocol) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
-        self.model = model
+        self.modelRoomsConfig = modelRoomsConfig
+        self.modelRoomDatchik = modelRoomDatchik
         super.init(coder: coder)
     }
 
@@ -30,7 +31,8 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     private var menu: SideMenuNavigationController?
     private var userId = ""
     private let cellIdentifier = String(describing: CustomCollectionViewCell.self)
-    private var model: ModelProtocol?
+    private var modelRoomsConfig: ModelRoomsConfigProtocol?
+    private var modelRoomDatchik: ModelAppDatchikProtocol?
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -58,7 +60,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         self.createMenuForNavigationController()
         self.createButtonForNavigationController()
         self.setColorForNavigationController()
-        model?.fetchRoomConfig()
+        modelRoomsConfig?.fetchRoomConfig()
     }
     func showAlert() {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
@@ -139,20 +141,10 @@ extension CollectionViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
-        NetworkSensorData.getData(
-            with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",
-            type: .current) { (result: Result<[String: JSON], NetworkSensorError>) in
+        modelRoomDatchik?.fetchAppDatchik(type: .current) { (result) in
 
-            switch result {
-            case .success(let result):
-
-                let currentRoomData = CurrentRoomData(result: result, curentRoom: indexPath.row + 1)
-
-                cell.configure(currentRoomText: self.roomNumbersAndNames[indexPath.row + 1] ?? "", currentRoom: currentRoomData)
-
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
+            let currentRoomData = CurrentRoomData(result: result, curentRoom: indexPath.row + 1)
+            cell.configure(currentRoomText: self.roomNumbersAndNames[indexPath.row + 1] ?? "", currentRoom: currentRoomData)
         }
 
         return cell
@@ -181,13 +173,21 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: - ModelDelegate
-extension CollectionViewController: ModelDelegate {
+// MARK: - ModelRoomsConfigDelegate
+extension CollectionViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result
         self.createPageControll()
     }
-    func show(error message: String) {
+    func show1(error message: String) {
+        print(message)
+        self.showAlert()
+    }
+}
+
+// MARK: - ModelAppDatchikDelegate
+extension CollectionViewController: ModelAppDatchikDelegate {
+    func show2(error message: String) {
         print(message)
         self.showAlert()
     }

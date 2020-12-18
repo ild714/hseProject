@@ -155,51 +155,51 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
                     ViewSpecialAndGeneral(view: self.aimTemperature),
                     ViewSpecialAndGeneral(view: currentTemperature, type: .special)])
 
-        NetworkSensorData.getData(
-            with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",
-            type: .current) { (result: Result<[String: JSON], NetworkSensorError>) in
-
-            switch result {
-            case .success(let result):
-
-                let currentRoomData = CurrentRoomData(result: result, curentRoom: self.curentRoom)
-
-                self.currentTemperature.text = currentRoomData.currentTemperature
-                self.modOfCurrentTemperature.text = currentRoomData.modOfCurrentTemperature
-                self.currentWet.text = currentRoomData.currentWet
-                self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
-                self.currentGas.text = currentRoomData.currentGas
-                self.ppmLabel.text = currentRoomData.ppm
-                self.peopleInRoom.text = currentRoomData.peopleInRoom
-
-                ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
-
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-
-        NetworkSensorData.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=\(self.curentRoom)", type: .aim) {(result: Result<[JSON], NetworkSensorError>) in
-
-            switch result {
-            case .success(let result):
-
-                let aimRoomData = AimRoomData(result: result)
-
-                self.aimTemperature.text = aimRoomData.aimTemperature
-                self.aimWet.text = aimRoomData.aimWet
-                self.aimGas.text = aimRoomData.aimGas
-
-                ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
-
-            case .failure(let error):
-                print(error.localizedDescription)
-                self.aimTemperature.text = "-"
-                self.aimWet.text = "-"
-                self.aimGas.text = "-"
-                ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
-            }
-        }
+//        RequestAppDatchik.getData(
+//            with: "https://vc-srvr.ru/app/datchik?did=40RRTM304FCdd5M80ods",
+//            type: .current) { (result: Result<[String: JSON], NetworkSensorError>) in
+//
+//            switch result {
+//            case .success(let result):
+//
+//                let currentRoomData = CurrentRoomData(result: result, curentRoom: self.curentRoom)
+//
+//                self.currentTemperature.text = currentRoomData.currentTemperature
+//                self.modOfCurrentTemperature.text = currentRoomData.modOfCurrentTemperature
+//                self.currentWet.text = currentRoomData.currentWet
+//                self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
+//                self.currentGas.text = currentRoomData.currentGas
+//                self.ppmLabel.text = currentRoomData.ppm
+//                self.peopleInRoom.text = currentRoomData.peopleInRoom
+//
+//                ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+//
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//
+//        RequestAppDatchik.getData(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=\(self.curentRoom)", type: .aim) {(result: Result<[JSON], NetworkSensorError>) in
+//
+//            switch result {
+//            case .success(let result):
+//
+//                let aimRoomData = AimRoomData(result: result)
+//
+//                self.aimTemperature.text = aimRoomData.aimTemperature
+//                self.aimWet.text = aimRoomData.aimWet
+//                self.aimGas.text = aimRoomData.aimGas
+//
+//                ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
+//
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                self.aimTemperature.text = "-"
+//                self.aimWet.text = "-"
+//                self.aimGas.text = "-"
+//                ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
+//            }
+//        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

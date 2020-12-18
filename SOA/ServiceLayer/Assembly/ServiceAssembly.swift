@@ -10,6 +10,7 @@ import Foundation
 
 protocol ServiceAssemblyProtocol {
     var roomsConfigService: RoomConfigsServiceProtocol { get }
+    var appDatchikService: AppDatchikServiceProtocol { get }
 }
 
 class ServiceAssembly: ServiceAssemblyProtocol {
@@ -20,4 +21,5 @@ class ServiceAssembly: ServiceAssemblyProtocol {
     }
 
     lazy var roomsConfigService: RoomConfigsServiceProtocol = RoomConfigsService(requstRoomConfig: self.coreAssembly.requestRoomsConfigs )
+    lazy var appDatchikService: AppDatchikServiceProtocol = AppDatchikService(requstRoomConfig: self.coreAssembly.requestAppDatchik)
 }

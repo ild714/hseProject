@@ -9,18 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-protocol ModelProtocol: class {
-    func fetchRoomConfig()
-    var delegate: ModelDelegate? {get set}
-}
-
-protocol ModelDelegate: class {
-    func setup(result: [Int: String])
-    func show(error message: String)
-}
-
-class ModelRoomsConfig: ModelProtocol {
-    weak var delegate: ModelDelegate?
+class ModelRoomsConfig: ModelRoomsConfigProtocol {
+    weak var delegate: ModelRoomsConfigDelegate?
     private var roomNumbersAndNames: [Int: String] = [:]
     private let roomConfigService: RoomConfigsServiceProtocol
     init(roomConfigService: RoomConfigsServiceProtocol) {
@@ -36,7 +26,7 @@ class ModelRoomsConfig: ModelProtocol {
                 self.delegate?.setup(result: self.roomNumbersAndNames)
             case .failure(let error):
                 print(error.localizedDescription)
-                self.delegate?.show(error: error.localizedDescription)
+                self.delegate?.show1(error: error.localizedDescription)
             }
         }
     }

@@ -18,7 +18,7 @@ class RoomConfigsService: RoomConfigsServiceProtocol {
 
     func loadRoomConfigs<T>(completion: @escaping (Result<T, NetworkError>) -> Void) {
 
-        let requestConfig = RequestCreator.newRoomsConfig()
+        let requestConfig = RequestsFactory.newRoomsConfig()
         self.makeRequst(requestConfig: RequestConfig(request: requestConfig.request, parser: requestConfig.parser), completion: completion)
     }
 

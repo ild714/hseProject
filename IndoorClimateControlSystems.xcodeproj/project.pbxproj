@@ -25,9 +25,9 @@
 		742822B9258B95A5008F6524 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822B8258B95A5008F6524 /* ParserProtocol.swift */; };
 		742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822BD258B97A5008F6524 /* SwiftyParser.swift */; };
 		742822C7258B9B12008F6524 /* RequestRoomConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */; };
-		742822CF258B9F70008F6524 /* RoomsRequstProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822CE258B9F70008F6524 /* RoomsRequstProtocol.swift */; };
-		742822D3258B9FB5008F6524 /* RoomsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822D2258B9FB5008F6524 /* RoomsRequest.swift */; };
-		742822D6258BA41E008F6524 /* RequestCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822D5258BA41E008F6524 /* RequestCreator.swift */; };
+		742822CF258B9F70008F6524 /* RequstProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822CE258B9F70008F6524 /* RequstProtocol.swift */; };
+		742822D3258B9FB5008F6524 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822D2258B9FB5008F6524 /* Requests.swift */; };
+		742822D6258BA41E008F6524 /* RequestsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822D5258BA41E008F6524 /* RequestsFactory.swift */; };
 		742822DA258BCBA0008F6524 /* CoreAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822D9258BCBA0008F6524 /* CoreAssembly.swift */; };
 		742822DF258BCDF9008F6524 /* RoomConfigsServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822DE258BCDF9008F6524 /* RoomConfigsServiceProtocol.swift */; };
 		742822E3258BCF81008F6524 /* RoomConfigsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822E2258BCF81008F6524 /* RoomConfigsService.swift */; };
@@ -36,12 +36,17 @@
 		742822ED258BDF44008F6524 /* MenuListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822EC258BDF44008F6524 /* MenuListController.swift */; };
 		742822F0258BF7B5008F6524 /* RootAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822EF258BF7B5008F6524 /* RootAssembly.swift */; };
 		742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */; };
+		74282336258CDA35008F6524 /* RequestAppDatchikProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74282335258CDA35008F6524 /* RequestAppDatchikProtocol.swift */; };
+		7428233B258CE22E008F6524 /* AppDatchikServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7428233A258CE22E008F6524 /* AppDatchikServiceProtocol.swift */; };
+		7428233E258CE2C2008F6524 /* AppDatchikService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7428233D258CE2C2008F6524 /* AppDatchikService.swift */; };
+		74282341258CE981008F6524 /* ModelAppDatchik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74282340258CE981008F6524 /* ModelAppDatchik.swift */; };
+		74282347258CEA07008F6524 /* ModelsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74282346258CEA07008F6524 /* ModelsProtocol.swift */; };
 		743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */; };
 		743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */; };
 		743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */; };
 		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 		7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */; };
-		74754F5A24E296CE008F07A3 /* NetworkSensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74754F5924E296CE008F07A3 /* NetworkSensorData.swift */; };
+		74754F5A24E296CE008F07A3 /* RequestAppDatchik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */; };
 		7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */; };
 		7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */; };
 		7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039724E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift */; };
@@ -99,9 +104,9 @@
 		742822B8258B95A5008F6524 /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		742822BD258B97A5008F6524 /* SwiftyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyParser.swift; sourceTree = "<group>"; };
 		742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfigProtocol.swift; sourceTree = "<group>"; };
-		742822CE258B9F70008F6524 /* RoomsRequstProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequstProtocol.swift; sourceTree = "<group>"; };
-		742822D2258B9FB5008F6524 /* RoomsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequest.swift; sourceTree = "<group>"; };
-		742822D5258BA41E008F6524 /* RequestCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCreator.swift; sourceTree = "<group>"; };
+		742822CE258B9F70008F6524 /* RequstProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequstProtocol.swift; sourceTree = "<group>"; };
+		742822D2258B9FB5008F6524 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		742822D5258BA41E008F6524 /* RequestsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFactory.swift; sourceTree = "<group>"; };
 		742822D9258BCBA0008F6524 /* CoreAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAssembly.swift; sourceTree = "<group>"; };
 		742822DE258BCDF9008F6524 /* RoomConfigsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomConfigsServiceProtocol.swift; sourceTree = "<group>"; };
 		742822E2258BCF81008F6524 /* RoomConfigsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomConfigsService.swift; sourceTree = "<group>"; };
@@ -110,12 +115,17 @@
 		742822EC258BDF44008F6524 /* MenuListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListController.swift; sourceTree = "<group>"; };
 		742822EF258BF7B5008F6524 /* RootAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootAssembly.swift; sourceTree = "<group>"; };
 		742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRoomsConfig.swift; sourceTree = "<group>"; };
+		74282335258CDA35008F6524 /* RequestAppDatchikProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppDatchikProtocol.swift; sourceTree = "<group>"; };
+		7428233A258CE22E008F6524 /* AppDatchikServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatchikServiceProtocol.swift; sourceTree = "<group>"; };
+		7428233D258CE2C2008F6524 /* AppDatchikService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatchikService.swift; sourceTree = "<group>"; };
+		74282340258CE981008F6524 /* ModelAppDatchik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAppDatchik.swift; sourceTree = "<group>"; };
+		74282346258CEA07008F6524 /* ModelsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelsProtocol.swift; sourceTree = "<group>"; };
 		743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConfiguration.swift; sourceTree = "<group>"; };
 		743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTemperatureResponse.swift; sourceTree = "<group>"; };
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
-		74754F5924E296CE008F07A3 /* NetworkSensorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSensorData.swift; sourceTree = "<group>"; };
+		74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppDatchik.swift; sourceTree = "<group>"; };
 		7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRightSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLeftSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039724E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewLeftSideCustomClass.swift; sourceTree = "<group>"; };
@@ -263,9 +273,8 @@
 		740D1E0E25304E3E000253FA /* CollectionViewControllerLogic */ = {
 			isa = PBXGroup;
 			children = (
+				7428231A258CC5F0008F6524 /* CustomCollectionViewCell */,
 				742822F4258C9F03008F6524 /* CollectionViewController */,
-				740D1E02252F41A0000253FA /* CustomCollectionViewCell.xib */,
-				740D1E01252F41A0000253FA /* CustomCollectionViewCell.swift */,
 				742822EC258BDF44008F6524 /* MenuListController.swift */,
 			);
 			path = CollectionViewControllerLogic;
@@ -319,7 +328,8 @@
 		742822A3258B829D008F6524 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
-				742822DD258BCDD9008F6524 /* RoomConfigs */,
+				74282339258CE1E2008F6524 /* AppDatchikService */,
+				742822DD258BCDD9008F6524 /* RoomConfigsService */,
 				742822A6258B835F008F6524 /* Assembly */,
 			);
 			path = ServiceLayer;
@@ -328,10 +338,7 @@
 		742822A4258B82A9008F6524 /* CoreLayer */ = {
 			isa = PBXGroup;
 			children = (
-				742822B6258B9536008F6524 /* NetworkScript */,
-				742822B5258B9523008F6524 /* NetworkTemperatureResponse */,
-				742822B4258B9517008F6524 /* NetworkSensorData */,
-				7457B97B24DF0A3C00C16A0E /* NetworkRoomConfig */,
+				74282325258CC9A6008F6524 /* Networking */,
 				742822A8258B8379008F6524 /* Assembly */,
 			);
 			path = CoreLayer;
@@ -359,14 +366,6 @@
 				742822D9258BCBA0008F6524 /* CoreAssembly.swift */,
 			);
 			path = Assembly;
-			sourceTree = "<group>";
-		};
-		742822B4258B9517008F6524 /* NetworkSensorData */ = {
-			isa = PBXGroup;
-			children = (
-				74754F5924E296CE008F07A3 /* NetworkSensorData.swift */,
-			);
-			path = NetworkSensorData;
 			sourceTree = "<group>";
 		};
 		742822B5258B9523008F6524 /* NetworkTemperatureResponse */ = {
@@ -397,8 +396,8 @@
 		742822C0258B9895008F6524 /* RequestManager */ = {
 			isa = PBXGroup;
 			children = (
-				742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */,
-				7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */,
+				74282334258CD9E2008F6524 /* RequestAppDatchik */,
+				74282333258CD9C7008F6524 /* RequestRoomConfig */,
 			);
 			path = RequestManager;
 			sourceTree = "<group>";
@@ -406,30 +405,85 @@
 		742822CD258B9F42008F6524 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				742822CE258B9F70008F6524 /* RoomsRequstProtocol.swift */,
-				742822D2258B9FB5008F6524 /* RoomsRequest.swift */,
-				742822D5258BA41E008F6524 /* RequestCreator.swift */,
+				742822CE258B9F70008F6524 /* RequstProtocol.swift */,
+				742822D2258B9FB5008F6524 /* Requests.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
 		};
-		742822DD258BCDD9008F6524 /* RoomConfigs */ = {
+		742822DD258BCDD9008F6524 /* RoomConfigsService */ = {
 			isa = PBXGroup;
 			children = (
 				742822DE258BCDF9008F6524 /* RoomConfigsServiceProtocol.swift */,
 				742822E2258BCF81008F6524 /* RoomConfigsService.swift */,
 			);
-			path = RoomConfigs;
+			path = RoomConfigsService;
 			sourceTree = "<group>";
 		};
 		742822F4258C9F03008F6524 /* CollectionViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74282344258CE98B008F6524 /* Models */,
 				740D1DFF252F4097000253FA /* CollectionViewController.swift */,
-				742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */,
 				740D1E05252F46BF000253FA /* CollectionViewController.storyboard */,
 			);
 			path = CollectionViewController;
+			sourceTree = "<group>";
+		};
+		7428231A258CC5F0008F6524 /* CustomCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				740D1E01252F41A0000253FA /* CustomCollectionViewCell.swift */,
+				740D1E02252F41A0000253FA /* CustomCollectionViewCell.xib */,
+			);
+			path = CustomCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		74282325258CC9A6008F6524 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7457B97B24DF0A3C00C16A0E /* NetworkRoomConfig */,
+				742822B5258B9523008F6524 /* NetworkTemperatureResponse */,
+				742822B6258B9536008F6524 /* NetworkScript */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		74282333258CD9C7008F6524 /* RequestRoomConfig */ = {
+			isa = PBXGroup;
+			children = (
+				742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */,
+				7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */,
+			);
+			path = RequestRoomConfig;
+			sourceTree = "<group>";
+		};
+		74282334258CD9E2008F6524 /* RequestAppDatchik */ = {
+			isa = PBXGroup;
+			children = (
+				74282335258CDA35008F6524 /* RequestAppDatchikProtocol.swift */,
+				74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */,
+			);
+			path = RequestAppDatchik;
+			sourceTree = "<group>";
+		};
+		74282339258CE1E2008F6524 /* AppDatchikService */ = {
+			isa = PBXGroup;
+			children = (
+				7428233A258CE22E008F6524 /* AppDatchikServiceProtocol.swift */,
+				7428233D258CE2C2008F6524 /* AppDatchikService.swift */,
+			);
+			path = AppDatchikService;
+			sourceTree = "<group>";
+		};
+		74282344258CE98B008F6524 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				742822F5258CA0FA008F6524 /* ModelRoomsConfig.swift */,
+				74282340258CE981008F6524 /* ModelAppDatchik.swift */,
+				74282346258CEA07008F6524 /* ModelsProtocol.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		743B8FC424E2EE30009A929A /* ActivityElement */ = {
@@ -443,6 +497,7 @@
 		7457B97B24DF0A3C00C16A0E /* NetworkRoomConfig */ = {
 			isa = PBXGroup;
 			children = (
+				742822D5258BA41E008F6524 /* RequestsFactory.swift */,
 				742822CD258B9F42008F6524 /* Requests */,
 				742822C0258B9895008F6524 /* RequestManager */,
 				742822B7258B9569008F6524 /* Parsers */,
@@ -711,13 +766,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				74BF503125667AD200DE45D1 /* ScriptServiceTableViewCell.swift in Sources */,
-				74754F5A24E296CE008F07A3 /* NetworkSensorData.swift in Sources */,
-				742822D6258BA41E008F6524 /* RequestCreator.swift in Sources */,
+				74754F5A24E296CE008F07A3 /* RequestAppDatchik.swift in Sources */,
+				742822D6258BA41E008F6524 /* RequestsFactory.swift in Sources */,
 				748426F125175B0A006A09F7 /* StackExtension.swift in Sources */,
 				7497522E2559995200B88A21 /* ScriptForRoomViewController.swift in Sources */,
 				7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */,
 				742822DA258BCBA0008F6524 /* CoreAssembly.swift in Sources */,
-				742822CF258B9F70008F6524 /* RoomsRequstProtocol.swift in Sources */,
+				742822CF258B9F70008F6524 /* RequstProtocol.swift in Sources */,
 				7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */,
 				74171F212541BBD000746E9E /* AimRoomData.swift in Sources */,
 				7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */,
@@ -726,9 +781,11 @@
 				749752372559A18500B88A21 /* ScriptForDaysViewController.swift in Sources */,
 				748003A224E14457006DEBDE /* ButtonRightSideCustomClass.swift in Sources */,
 				7497523B2559A1E100B88A21 /* ScriptForDaysTableViewCell.swift in Sources */,
+				74282336258CDA35008F6524 /* RequestAppDatchikProtocol.swift in Sources */,
 				742822C7258B9B12008F6524 /* RequestRoomConfigProtocol.swift in Sources */,
 				742822DF258BCDF9008F6524 /* RoomConfigsServiceProtocol.swift in Sources */,
 				742822ED258BDF44008F6524 /* MenuListController.swift in Sources */,
+				7428233E258CE2C2008F6524 /* AppDatchikService.swift in Sources */,
 				7480039C24E1406A006DEBDE /* LabelLeftSideCustomClass.swift in Sources */,
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
 				743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */,
@@ -737,12 +794,15 @@
 				7497522725597D6100B88A21 /* ScriptsViewController.swift in Sources */,
 				74B5E818257D339600483972 /* ScriptCreater.swift in Sources */,
 				7497523425599B6F00B88A21 /* ScriptForRoomTableViewCell.swift in Sources */,
+				74282347258CEA07008F6524 /* ModelsProtocol.swift in Sources */,
 				74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */,
 				2137EEBB24D054FF009B19FD /* AppDelegate.swift in Sources */,
+				7428233B258CE22E008F6524 /* AppDatchikServiceProtocol.swift in Sources */,
 				74BF502E25667A7B00DE45D1 /* ScriptServiceViewController.swift in Sources */,
 				7480039E24E14203006DEBDE /* LabelGradientCustomClass.swift in Sources */,
 				74B5E814257D312100483972 /* Script.swift in Sources */,
 				74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */,
+				74282341258CE981008F6524 /* ModelAppDatchik.swift in Sources */,
 				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
 				74B5E816257D316F00483972 /* NetworkScript.swift in Sources */,
 				742822E3258BCF81008F6524 /* RoomConfigsService.swift in Sources */,
@@ -750,7 +810,7 @@
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,
 				740D1E03252F41A0000253FA /* CustomCollectionViewCell.swift in Sources */,
-				742822D3258B9FB5008F6524 /* RoomsRequest.swift in Sources */,
+				742822D3258B9FB5008F6524 /* Requests.swift in Sources */,
 				742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */,
 				743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */,
 				742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */,

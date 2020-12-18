@@ -13,6 +13,6 @@ protocol RequestRoomConfigProtocol {
 }
 
 struct RequestConfig<Parser> where Parser: SwiftyParserProtocol {
-    let request: RoomsRequestProtocol
+    let request: RequestProtocol
     let parser: Parser
 }

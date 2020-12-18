@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol RoomsRequestProtocol {
+protocol RequestProtocol {
     var urlRequest: URLRequest? { get }
 }
