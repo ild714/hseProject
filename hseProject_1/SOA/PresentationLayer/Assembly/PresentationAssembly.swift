@@ -10,9 +10,11 @@ import UIKit
 
 protocol PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController?
+    func roomsViewController(curentVC: Int) -> RoomsViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
+
     func collectionViewController() -> CollectionViewController? {
         let storyboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "CollectionViewController", creator: { coder in
@@ -29,6 +31,21 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         })
     }
 
+    func roomsViewController(curentVC: Int) -> RoomsViewController? {
+        let storyboard = UIStoryboard(name: "RoomsViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "RoomsViewController", creator: { coder in
+            let modelRoomsConfig = self.modelRoomsConfig()
+            var modelAppDatchik = self.modelAppDatchik()
+            if let userId = UserDefaults.standard.object(forKey: "UserId") as? String {
+                let roomsVC =  RoomsViewController(coder: coder, presentationAssembly: self, userId: userId, modelRoomsConfig: modelRoomsConfig, modelRoomDatchik: modelAppDatchik, curentVC: curentVC)
+                modelRoomsConfig.delegate = roomsVC
+                modelAppDatchik.delegate = roomsVC
+                return roomsVC
+            } else {
+                return nil
+            }
+        })
+    }
     private func modelRoomsConfig() -> ModelRoomsConfigProtocol {
         return ModelRoomsConfig(roomConfigService: self.serviceAssembly.roomsConfigService)
     }

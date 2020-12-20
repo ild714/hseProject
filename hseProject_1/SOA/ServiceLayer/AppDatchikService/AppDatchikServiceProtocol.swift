@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AppDatchikServiceProtocol {
-    func loadRoomConfigs<T>(type: TypeOfSensor, completion: @escaping (Result<T, NetworkSensorError>) -> Void)
+    func loadAppDatchik<T>(type: TypeOfSensor, completion: @escaping (Result<T, NetworkSensorError>) -> Void)
 }

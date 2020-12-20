@@ -187,6 +187,7 @@
 		2108898A24D19575000F6B4B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				742822EC258BDF44008F6524 /* MenuListController.swift */,
 				74D65C9125840E9D007588F7 /* SignIn */,
 				74BF50282566798A00DE45D1 /* ScriptServiceViewController */,
 				749752382559A1B400B88A21 /* ScriptForDaysViewController */,
@@ -203,8 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				74B5E812257D30F700483972 /* Script */,
-				74171F1F2541BBB100746E9E /* AimData */,
-				74171F1C2541B29900746E9E /* CurrentData */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -224,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				749752162555667B00B88A21 /* IndoorClimateControlSystems.entitlements */,
-				742822A1258B8269008F6524 /* SOA */,
 				2137EEB924D054FF009B19FD /* hseProject_1 */,
 				2137EEB824D054FF009B19FD /* Products */,
 				01AF687FE6375F45425D2EB3 /* Pods */,
@@ -243,11 +241,12 @@
 		2137EEB924D054FF009B19FD /* hseProject_1 */ = {
 			isa = PBXGroup;
 			children = (
+				2108898D24D195B6000F6B4B /* Configuration */,
+				742822A1258B8269008F6524 /* SOA */,
 				748426ED25174C92006A09F7 /* ActiveButtons */,
 				748426EC25174C76006A09F7 /* Extension */,
 				743B8FC424E2EE30009A929A /* ActivityElement */,
 				21D0833C24D5A895003D0DA8 /* CustomClasses */,
-				2108898D24D195B6000F6B4B /* Configuration */,
 				2108898C24D195B0000F6B4B /* Model */,
 				2137EECE24D0662C009B19FD /* Assets.xcassets */,
 			);
@@ -275,7 +274,6 @@
 			children = (
 				7428231A258CC5F0008F6524 /* CustomCollectionViewCell */,
 				742822F4258C9F03008F6524 /* CollectionViewController */,
-				742822EC258BDF44008F6524 /* MenuListController.swift */,
 			);
 			path = CollectionViewControllerLogic;
 			sourceTree = "<group>";
@@ -283,6 +281,7 @@
 		74171F192540EA2100746E9E /* RoomsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74D8C34D258FA22200C46F85 /* DataStructures */,
 				2137EEBE24D054FF009B19FD /* RoomsViewController.swift */,
 				2137EEC024D054FF009B19FD /* RoomsViewController.storyboard */,
 			);
@@ -593,6 +592,15 @@
 				74D65C9225840EC2007588F7 /* SignInViewController.swift */,
 			);
 			path = SignIn;
+			sourceTree = "<group>";
+		};
+		74D8C34D258FA22200C46F85 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				74171F1F2541BBB100746E9E /* AimData */,
+				74171F1C2541B29900746E9E /* CurrentData */,
+			);
+			path = DataStructures;
 			sourceTree = "<group>";
 		};
 		9FA5C525A8C153817D17C3F4 /* Frameworks */ = {

@@ -17,7 +17,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
     }
 
     required init?(coder: NSCoder) {
@@ -29,13 +28,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         ActivityIndicator.animateActivityLabel(labels: [LabelActivity(label: roomNameLabel), LabelActivity(label: wet), LabelActivity(label: gas), LabelActivity(label: temperature)])
     }
-
-//    func loadViewFromNib() -> UIView {
-//        let bundle = Bundle(for: type(of: self))
-//        let nib = UINib(nibName: "CustomCollectionViewCell", bundle: bundle)
-//        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-//        return view
-//    }
 
     func configure(currentRoomText: String, currentRoom: CurrentRoomData) {
 

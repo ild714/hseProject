@@ -15,8 +15,8 @@ class ModelAppDatchik: ModelAppDatchikProtocol {
     init(appDatchikService: AppDatchikServiceProtocol) {
         self.appDatchikService = appDatchikService
     }
-    func fetchAppDatchik(type: TypeOfSensor, completion: @escaping ([String: JSON]) -> Void) {
-        self.appDatchikService.loadRoomConfigs(type: type) { (result: Result<[String: JSON], NetworkSensorError>) in
+    func fetchAppDatchik<T>(type: TypeOfSensor, completion: @escaping (T) -> Void) {
+        self.appDatchikService.loadAppDatchik(type: type) { (result: Result<T, NetworkSensorError>) in
             switch result {
             case .success(let result):
                 completion(result)

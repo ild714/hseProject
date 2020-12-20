@@ -20,7 +20,7 @@ protocol ModelRoomsConfigDelegate: class {
 }
 
 protocol ModelAppDatchikProtocol {
-    func fetchAppDatchik(type: TypeOfSensor, completion: @escaping ([String: JSON]) -> Void)
+    func fetchAppDatchik<T>(type: TypeOfSensor, completion: @escaping (T) -> Void)
     var delegate: ModelAppDatchikDelegate? { get set }
 }
 

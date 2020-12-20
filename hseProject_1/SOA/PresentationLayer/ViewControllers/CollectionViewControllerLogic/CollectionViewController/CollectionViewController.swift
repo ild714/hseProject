@@ -98,7 +98,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if sender.state == .ended {
             switch sender.direction {
             case .left:
-                if let roomsVC = RoomsViewController.storyboardInstance() {
+                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             default:
@@ -124,10 +124,10 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
     }
 
-    static func storyboardInstance() -> CollectionViewController? {
-        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? CollectionViewController
-    }
+//    static func storyboardInstance() -> CollectionViewController? {
+//        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
+//        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? CollectionViewController
+//    }
 
 }
 
@@ -141,7 +141,7 @@ extension CollectionViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
-        modelRoomDatchik?.fetchAppDatchik(type: .current) { (result) in
+        modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
 
             let currentRoomData = CurrentRoomData(result: result, curentRoom: indexPath.row + 1)
             cell.configure(currentRoomText: self.roomNumbersAndNames[indexPath.row + 1] ?? "", currentRoom: currentRoomData)
@@ -151,8 +151,7 @@ extension CollectionViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let roomsVC = RoomsViewController.storyboardInstance() {
-            roomsVC.curentRoom = indexPath.row + 1
+        if let roomsVC = presentationAssembly?.roomsViewController(curentVC: indexPath.row + 1) {
             navigationController?.pushViewController(roomsVC, animated: true)
         }
     }

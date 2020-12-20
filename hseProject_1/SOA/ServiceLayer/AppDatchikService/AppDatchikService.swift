@@ -15,7 +15,7 @@ class AppDatchikService: AppDatchikServiceProtocol {
         self.requstAppDatchik = requstRoomConfig
     }
 
-    func loadRoomConfigs<T>(type: TypeOfSensor, completion: @escaping (Result<T, NetworkSensorError>) -> Void) {
+    func loadAppDatchik<T>(type: TypeOfSensor, completion: @escaping (Result<T, NetworkSensorError>) -> Void) {
         let requestConfig = RequestsFactory.appDatchik()
         self.makeRequst(type: type, requestConfig: RequestConfig(request: requestConfig.request, parser: requestConfig.parser), completion: completion)
     }
