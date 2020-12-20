@@ -63,7 +63,8 @@ class TemperatureConfig {
             }
         }
 
-        NetworkTemperatureResponse.getResponse(with: "https://vc-srvr.ru/app/ch_temp?did=40RRTM304FCdd5M80ods&rid=1&ch_temp=\(aimTmperatureIntResult)") {  (result: Result<String, NetworkTemperatureError>) in
+        NetworkTemperatureResponse.getResponse(
+            with: "https://vc-srvr.ru/app/ch_temp?did=40RRTM304FCdd5M80ods&rid=1&ch_temp=\(aimTmperatureIntResult)") { (result: Result<String, NetworkTemperatureError>) in
             switch result {
             case .success(let result):
                 print(result)

@@ -213,7 +213,7 @@ class ScriptServiceViewController: UIViewController {
             setting.dont_use = []
 
             self.scriptCreator?.roomGroup0?.dayGroup0?.setting0 = setting
-            self.scriptCreator?.roomGroup0?.dayGroup0?.setting1 = setting
+            self.scriptCreator?.roomGroup0?.dayGroup1?.setting1 = setting
 
             let network = NetworkScript()
             if let script = scriptCreator {
