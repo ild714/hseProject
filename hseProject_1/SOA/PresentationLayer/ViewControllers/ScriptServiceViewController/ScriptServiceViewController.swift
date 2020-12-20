@@ -24,25 +24,31 @@ struct ServiceScript {
 
 class ScriptServiceViewController: UIViewController {
 
+    init?(coder: NSCoder, scriptCreator: ScriptCreator) {
+        self.scriptCreator = scriptCreator
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    private var scriptCreator: ScriptCreator?
     @IBOutlet weak var serviceLabel: UILabel!
     @IBOutlet weak var imageStack: UIStackView!
     @IBOutlet weak var settingCreator: ViewCustomClass!
-    @IBOutlet weak var temperatureLabel: UITextField!
+    @IBOutlet weak var temperatureTextField: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
-    @IBOutlet weak var humidityLabel: UITextField!
+    @IBOutlet weak var humidityTextField: UITextField!
     @IBOutlet weak var co2TextField: UITextField!
     var showCloseBool = true
-    var scriptCreator: ScriptCreator?
     var itemRight: UIBarButtonItem?
-
-    private let pickerView: UIPickerView = UIPickerView(frame: CGRect(x: 0.0, y: 300.0, width: 100.0, height: 300.0))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        humidityLabel.delegate = self
+        humidityTextField.delegate = self
         co2TextField.delegate = self
-        temperatureLabel.delegate = self
+        temperatureTextField.delegate = self
         self.navigationItem.setHidesBackButton(true, animated: true)
         setupTableView()
     }
@@ -70,7 +76,6 @@ class ScriptServiceViewController: UIViewController {
         view.addSubview(tableView)
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
         tableView.topAnchor.constraint(equalTo: imageStack.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
@@ -99,13 +104,17 @@ class ScriptServiceViewController: UIViewController {
             houseImage.setImage(UIImage(named: "not_home"), for: .normal)
             temperatureImage.image = UIImage(named: "темп_min")
             humidityImage.image = UIImage(named: "влажность_max")
-            self.humidityLabel.text = "40"
-            self.temperatureLabel.text = "24"
+            self.humidityTextField.text = "40"
+            self.temperatureTextField.text = "24"
+            self.temperatureTextField.isEnabled = false
+            self.humidityTextField.isEnabled = false
             houseTurnOn.toggle()
         } else {
             houseImage.setImage(UIImage(named: "home"), for: .normal)
             temperatureImage.image = UIImage(named: "темп_б")
             humidityImage.image = UIImage(named: "влажность_б")
+            self.temperatureTextField.isEnabled = true
+            self.humidityTextField.isEnabled = true
             houseTurnOn.toggle()
         }
     }
@@ -164,9 +173,12 @@ class ScriptServiceViewController: UIViewController {
         if co2TurnOn == true {
           co2Image.setImage(UIImage(named: "со2_off"), for: .normal)
             self.co2TextField.text = "--"
+            self.co2TextField.isEnabled = false
             co2TurnOn.toggle()
         } else {
            co2Image.setImage(UIImage(named: "со2_on"), for: .normal)
+            self.co2TextField.isEnabled = true
+            self.co2TextField.text = "800"
             co2TurnOn.toggle()
         }
     }
@@ -211,9 +223,7 @@ class ScriptServiceViewController: UIViewController {
         self.navigationController?.dismiss(animated: true, completion: nil)
         return
         } else {
-            let vcAlert = UIAlertController(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки", preferredStyle: .alert)
-            vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(vcAlert, animated: true)
+            self.alerts(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки")
         }
     }
 
@@ -226,35 +236,27 @@ class ScriptServiceViewController: UIViewController {
         }
 
         var serviceScript = ServiceScript()
-        if let temperatureLabelInt = Int(temperatureLabel.text ?? "error") {
+        if let temperatureLabelInt = Int(temperatureTextField.text ?? "error") {
             if temperatureLabelInt > 50 || temperatureLabelInt < 15 {
-                let alert = UIAlertController(title: "Некорректное значение для температуры", message: "Ввведите снова показание температуры", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                self.alerts(title: "Некорректное значение для температуры", message: "Ввведите снова показание температуры")
                 return
             } else {
                 serviceScript.temperature = temperatureLabelInt
             }
         } else {
-            let alert = UIAlertController(title: "Ошибка ввода температуры", message: "Ввведите снова теипературу", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            self.alerts(title: "Ошибка ввода температуры", message: "Ввведите снова теипературу")
             return
         }
 
-        if let humidityLabelInt = Int(humidityLabel.text ?? "error") {
+        if let humidityLabelInt = Int(humidityTextField.text ?? "error") {
             if humidityLabelInt < 30 || humidityLabelInt > 80 {
-                let alert = UIAlertController(title: "Некорректное значение для влажности", message: "Ввведите снова показание влжаности", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                self.alerts(title: "Некорректное значение для влажности", message: "Ввведите снова показание влжаности")
                 return
             } else {
                 serviceScript.humidity = humidityLabelInt
             }
         } else {
-            let alert = UIAlertController(title: "Ошибка ввода влажности", message: "Ввведите снова влажность", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            self.alerts(title: "Ошибка ввода влажности", message: "Ввведите снова влажность")
             return
         }
         if co2TurnOn == false {
@@ -262,17 +264,13 @@ class ScriptServiceViewController: UIViewController {
         } else {
             if let co2TextField = Int(co2TextField.text ?? "error") {
                 if co2TextField < 500 || co2TextField > 1000 {
-                    let alert = UIAlertController(title: "Некорректное значение для CO2", message: "Ввведите снова показание для СО2", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                    self.present(alert, animated: true)
+                    self.alerts(title: "Некорректное значение для CO2", message: "Ввведите снова показание для СО2")
                     return
                 } else {
                     serviceScript.co2 = co2TextField
                 }
             } else {
-                let alert = UIAlertController(title: "Ошибка ввода СО2", message: "Ввведите снова СО2", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-                self.present(alert, animated: true)
+                self.alerts(title: "Ошибка ввода СО2", message: "Ввведите снова СО2")
                 return
             }
         }
@@ -290,6 +288,11 @@ class ScriptServiceViewController: UIViewController {
         tableView.reloadData()
     }
 
+    func alerts(title: String, message: String) {
+        let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(vcAlert, animated: true)
+    }
     let cellIdentifier = String(describing: ScriptServiceTableViewCell.self)
 
     static func storyboardInstance() -> ScriptServiceViewController? {
@@ -358,48 +361,6 @@ extension ScriptServiceViewController: UITableViewDataSource {
 
 // MARK: - ScriptServiceViewController delegate methods
 extension ScriptServiceViewController: UITableViewDelegate {
-
-}
-
-extension ScriptServiceViewController: cellDelagate {
-    func updateCO2(number: Int, co2: Int, co2OnOff: Bool) {
-        self.serviceScripts[number].co2 = co2
-        self.serviceScripts[number].co2OnOff = co2OnOff
-        tableView.reloadData()
-    }
-
-    func updateTime(number: Int, time: Date) {
-        self.serviceScripts[number].time = time
-        print(serviceScripts[number].time)
-        tableView.reloadData()
-    }
-
-    func updateTemperature(number: Int, temperature: Int) {
-        self.serviceScripts[number].temperature = temperature
-        tableView.reloadData()
-    }
-
-    func updateHumidity(number: Int, humidity: Int) {
-        self.serviceScripts[number].humidity = humidity
-        tableView.reloadData()
-    }
-
-    func updateHouse(number: Int, houseOnOff: Bool) {
-        if self.serviceScripts[number].hotFloorOn {
-            self.serviceScripts[number].temperature = 24
-            self.serviceScripts[number].humidity = 40
-            self.serviceScripts[number].houseOnOff = houseOnOff
-            tableView.reloadData()
-        } else {
-            self.serviceScripts[number].houseOnOff = houseOnOff
-            tableView.reloadData()
-        }
-    }
-
-    func updateSound(number: Int, soundOnOff: Bool) {
-        self.serviceScripts[number].soundOnOff = soundOnOff
-        tableView.reloadData()
-    }
 }
 
 extension ScriptServiceViewController: UITextFieldDelegate {

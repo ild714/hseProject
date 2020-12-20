@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class ScriptForRoomViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol,scriptCreator: ScriptCreator) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: ScriptCreator) {
         self.presentationAssembly = presentationAssembly
         self.modelRoomsConfig = modelRoomsConfig
         self.scriptCreator = scriptCreator
@@ -21,11 +21,11 @@ class ScriptForRoomViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var scriptCreator: ScriptCreator?
-    
+
     @IBOutlet weak var titleCurrentRoom: UILabel!
     @IBOutlet weak var stackDescription: UIStackView!
     @IBOutlet weak var stackSwitcher: UIStackView!

@@ -10,7 +10,7 @@ import UIKit
 
 class ScriptForDaysViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssembly,scriptCreator: ScriptCreator) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, scriptCreator: ScriptCreator) {
         self.presentationAssembly = presentationAssembly
         self.scriptCreator = scriptCreator
         super.init(coder: coder)
@@ -21,7 +21,6 @@ class ScriptForDaysViewController: UIViewController {
     }
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var scriptCreator: ScriptCreator?
-    
     @IBOutlet weak var descriptionStack: UIStackView!
     @IBOutlet weak var switcherStack: UIStackView!
 
@@ -72,9 +71,10 @@ class ScriptForDaysViewController: UIViewController {
     }
 
     @IBAction func nextStep(_ sender: Any) {
-        if let scriptServiceVC = ScriptServiceViewController.storyboardInstance() {
-            navigationController?.pushViewController(scriptServiceVC, animated: true)
-            scriptServiceVC.scriptCreator = self.scriptCreator
+        if let script = self.scriptCreator {
+            if let scriptServiceVC = presentationAssembly?.scriptServiceViewController(scriptCreator: script) {
+                navigationController?.pushViewController(scriptServiceVC, animated: true)
+            }
         }
     }
 

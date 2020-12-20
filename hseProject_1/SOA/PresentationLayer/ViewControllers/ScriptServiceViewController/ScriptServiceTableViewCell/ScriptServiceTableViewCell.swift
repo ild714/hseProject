@@ -94,7 +94,7 @@ class ScriptServiceTableViewCell: UITableViewCell {
         }
     }
 
-    weak var delegate: cellDelagate?
+    weak var delegate: CellDelagate?
 
     @IBOutlet weak var soundImage: UIButton!
     var soundTurnOn = true
@@ -143,12 +143,26 @@ class ScriptServiceTableViewCell: UITableViewCell {
 
     @IBOutlet weak var temperatureEdited: UITextField!
     @IBAction func changeTemperature(_ sender: Any) {
-        delegate?.updateTemperature(number: index, temperature: Int(temperatureEdited.text ?? "error") ?? 0)
+        if let temperatureEdited = Int(self.temperatureEdited.text ?? "error") {
+            if temperatureEdited < 15 || temperatureEdited > 30 {
+                delegate?.showAlert(title: "Ошибка ввода температуры", message: "Ввведите снова теипературу")
+                return
+            } else {
+                delegate?.updateTemperature(number: index, temperature: temperatureEdited)
+            }
+        }
     }
 
     @IBOutlet weak var humidityEdited: UITextField!
     @IBAction func changeHumidity(_ sender: Any) {
-        delegate?.updateHumidity(number: index, humidity: Int(humidityEdited.text ?? "error") ?? 0)
+        if let humidityEdited = Int(self.humidityEdited.text ?? "error") {
+            if humidityEdited < 30 || humidityEdited > 90 {
+                delegate?.showAlert(title: "Ошибка ввода влажности", message: "Ввведите снова влажность")
+                return
+            } else {
+                delegate?.updateHumidity(number: index, humidity: humidityEdited)
+            }
+        }
     }
 
     var co2TurnOn = true
@@ -169,18 +183,25 @@ class ScriptServiceTableViewCell: UITableViewCell {
         }
     }
     @IBAction func finsihCO2(_ sender: Any) {
-        self.co2Edited.text = co2Edited.text
-        delegate?.updateCO2(number: index, co2: Int(co2Edited.text ?? "error") ?? 0, co2OnOff: co2TurnOn)
+        if let co2Edited = Int(self.co2Edited.text ?? "error") {
+            if co2Edited < 500 || co2Edited > 1000 {
+                delegate?.showAlert(title: "Некорректное значение для CO2", message: "Ввведите снова показание для СО2")
+                return
+            } else {
+                delegate?.updateCO2(number: index, co2: co2Edited, co2OnOff: co2TurnOn)
+            }
+        }
     }
 }
 
-protocol cellDelagate: class {
+protocol CellDelagate: class {
     func updateSound(number: Int, soundOnOff: Bool)
     func updateHouse(number: Int, houseOnOff: Bool)
     func updateTime(number: Int, time: Date)
     func updateTemperature(number: Int, temperature: Int)
     func updateHumidity(number: Int, humidity: Int)
     func updateCO2(number: Int, co2: Int, co2OnOff: Bool)
+    func showAlert(title: String, message: String)
 }
 
 extension ScriptServiceTableViewCell: UITextFieldDelegate {

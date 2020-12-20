@@ -19,7 +19,7 @@ class NewScriptViewController: UIViewController {
         super.init(coder: coder)
     }
     private var presentationAssembly: PresentationAssemblyProtocol?
-    
+
     @IBOutlet weak var textField: UITextField!
     var scriptCreator = ScriptCreator(did: "", name: "", roomGroup0: nil)
 
