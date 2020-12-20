@@ -11,13 +11,27 @@ import SwiftyJSON
 
 class ScriptForRoomViewController: UIViewController {
 
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol,scriptCreator: ScriptCreator) {
+        self.presentationAssembly = presentationAssembly
+        self.modelRoomsConfig = modelRoomsConfig
+        self.scriptCreator = scriptCreator
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private var presentationAssembly: PresentationAssemblyProtocol?
+    private var modelRoomsConfig: ModelRoomsConfigProtocol?
+    private var scriptCreator: ScriptCreator?
+    
     @IBOutlet weak var titleCurrentRoom: UILabel!
     @IBOutlet weak var stackDescription: UIStackView!
     @IBOutlet weak var stackSwitcher: UIStackView!
 
-    var scriptCreator: ScriptCreator?
-    var roomNumbersAndNames: [Int: String] = [:]
-    var marks: [Bool] = []
+    private var roomNumbersAndNames: [Int: String] = [:]
+    private var marks: [Bool] = []
 
     private let cellIdentifier = String(describing: ScriptForRoomTableViewCell.self)
 
@@ -39,31 +53,7 @@ class ScriptForRoomViewController: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
-
-//        RequestRoomConfig.urlSession(with: "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods") {(result: Result<[String: JSON], NetworkError>) in
-//            switch result {
-//            case .success(let result):
-//
-//                for (_, value) in result {
-//                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
-//                }
-//
-//                if let title = self.roomNumbersAndNames[1] {
-//                    self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(title)"
-//                }
-//
-//                for _ in 0..<self.roomNumbersAndNames.count - 1 {
-//                    self.marks.append(false)
-//                }
-//                self.tableView.reloadData()
-//
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//                let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
-//                alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
-//                self.present(alertVC, animated: true)
-//            }
-//        }
+        modelRoomsConfig?.fetchRoomConfig()
     }
 
     func setupTableView() {
@@ -77,18 +67,20 @@ class ScriptForRoomViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: stackSwitcher.topAnchor).isActive = true
     }
 
-    static func storyboardInstance() -> ScriptForRoomViewController? {
-        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ScriptForRoomViewController
+    func showAlert() {
+        let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
     }
 
     @IBAction func previousStep(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func nextStep(_ sender: Any) {
-        if let scriptForDaysVC = ScriptForDaysViewController.storyboardInstance() {
-            navigationController?.pushViewController(scriptForDaysVC, animated: true)
-            scriptForDaysVC.scriptCreator = self.scriptCreator
+        if let script = self.scriptCreator {
+            if let scriptForDaysVC = presentationAssembly?.scriptForDaysViewController(scriptCreator: script) {
+                navigationController?.pushViewController(scriptForDaysVC, animated: true)
+            }
         }
     }
 }
@@ -143,5 +135,24 @@ extension ScriptForRoomViewController: UITableViewDelegate {
             }
         }
         tableView.reloadData()
+    }
+}
+
+// MARK: - ModelRoomsConfigDelegate
+extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
+    func setup(result: [Int: String]) {
+        self.roomNumbersAndNames = result
+        if let title = self.roomNumbersAndNames[1] {
+            self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(title)"
+        }
+
+        for _ in 0..<self.roomNumbersAndNames.count - 1 {
+            self.marks.append(false)
+        }
+        self.tableView.reloadData()
+    }
+    func show1(error message: String) {
+        print(message)
+        self.showAlert()
     }
 }

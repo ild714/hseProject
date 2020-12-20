@@ -10,9 +10,20 @@ import UIKit
 
 class ScriptForDaysViewController: UIViewController {
 
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly,scriptCreator: ScriptCreator) {
+        self.presentationAssembly = presentationAssembly
+        self.scriptCreator = scriptCreator
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    private var presentationAssembly: PresentationAssemblyProtocol?
+    private var scriptCreator: ScriptCreator?
+    
     @IBOutlet weak var descriptionStack: UIStackView!
     @IBOutlet weak var switcherStack: UIStackView!
-    var scriptCreator: ScriptCreator?
 
     var scripts = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
     var marks: [Bool] = []

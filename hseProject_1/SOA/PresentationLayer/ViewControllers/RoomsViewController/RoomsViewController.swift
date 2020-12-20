@@ -82,7 +82,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
-                if let scriptsVC = ScriptsViewController.storyboardInstance() {
+                if let scriptsVC = self.presentationAssembly?.scriptsViewController() {
                     let navigationController = UINavigationController()
                     navigationController.viewControllers = [scriptsVC]
                     present(navigationController, animated: true, completion: nil)
@@ -155,19 +155,16 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     func deleteBackButtonFromNavigation() {
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
-    
     func setTitleAndPageControll() {
         self.title = self.roomNumbersAndNames[self.curentVC]
         self.createPageControll()
     }
-    
     func setDefaultValuesForAimParamtrs() {
         self.aimTemperature.text = "-"
         self.aimWet.text = "-"
         self.aimGas.text = "-"
         ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
     }
-    
     func showAlert() {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
@@ -177,7 +174,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     func createPageControll() {
         self.createPageControl(viewController: self, number: self.curentVC, allAmountOfPages: self.roomNumbersAndNames.count + 1)
     }
-    
     func startAnimation() {
         ActivityIndicator.animateActivity(
             views: [ViewSpecialAndGeneral(view: self.aimWet, type: .special),

@@ -11,6 +11,10 @@ import UIKit
 protocol PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController?
     func roomsViewController(curentVC: Int) -> RoomsViewController?
+    func scriptsViewController() -> ScriptsViewController?
+    func newScriptViewController() -> NewScriptViewController? 
+    func scriptForRoomViewController(scriptCreator: ScriptCreator) -> ScriptForRoomViewController?
+    func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -44,6 +48,36 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             } else {
                 return nil
             }
+        })
+    }
+    func scriptsViewController() -> ScriptsViewController? {
+        let storyboard = UIStoryboard(name: "ScriptsViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "ScriptsViewController", creator: { coder in
+                let scriptsVC =  ScriptsViewController(coder: coder, presentationAssembly: self)
+                return scriptsVC
+        })
+    }
+    func newScriptViewController() -> NewScriptViewController? {
+        let storyboard = UIStoryboard(name: "NewScriptViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "NewScriptViewController", creator: { coder in
+                let newScriptVC =  NewScriptViewController(coder: coder, presentationAssembly: self)
+                return newScriptVC
+        })
+    }
+    func scriptForRoomViewController(scriptCreator: ScriptCreator) -> ScriptForRoomViewController? {
+        let storyboard = UIStoryboard(name: "ScriptForRoomViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "ScriptForRoomViewController", creator: { coder in
+            let modelRoomsConfig = self.modelRoomsConfig()
+            let scriptForRoomVC =  ScriptForRoomViewController(coder: coder, presentationAssembly: self, modelRoomsConfig: modelRoomsConfig, scriptCreator: scriptCreator)
+            modelRoomsConfig.delegate = scriptForRoomVC
+            return scriptForRoomVC
+        })
+    }
+    func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController? {
+        let storyboard = UIStoryboard(name: "ScriptForDaysViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "ScriptForDaysViewController", creator: { coder in
+            let scriptForDaysVC =  ScriptForDaysViewController(coder: coder, presentationAssembly: self, scriptCreator: scriptCreator)
+            return scriptForDaysVC
         })
     }
     private func modelRoomsConfig() -> ModelRoomsConfigProtocol {

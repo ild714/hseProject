@@ -10,6 +10,16 @@ import UIKit
 
 class NewScriptViewController: UIViewController {
 
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol) {
+        self.presentationAssembly = presentationAssembly
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    private var presentationAssembly: PresentationAssemblyProtocol?
+    
     @IBOutlet weak var textField: UITextField!
     var scriptCreator = ScriptCreator(did: "", name: "", roomGroup0: nil)
 
@@ -35,9 +45,8 @@ class NewScriptViewController: UIViewController {
     @IBAction func nextStep(_ sender: Any) {
         scriptCreator.name = textFieldForScript.text ?? "Test1"
         scriptCreator.did = "10153"
-        if let scriptForRoomVC = ScriptForRoomViewController.storyboardInstance() {
+        if let scriptForRoomVC = presentationAssembly?.scriptForRoomViewController(scriptCreator: self.scriptCreator) {
             navigationController?.pushViewController(scriptForRoomVC, animated: true)
-            scriptForRoomVC.scriptCreator = self.scriptCreator
         }
     }
 

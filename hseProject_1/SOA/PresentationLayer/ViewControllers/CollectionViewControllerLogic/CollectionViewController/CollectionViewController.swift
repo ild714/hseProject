@@ -123,12 +123,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
     }
-
-//    static func storyboardInstance() -> CollectionViewController? {
-//        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-//        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? CollectionViewController
-//    }
-
 }
 
 // MARK: - UICollectionViewDataSource

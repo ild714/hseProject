@@ -527,10 +527,9 @@
 		7497521D25596C6F00B88A21 /* ScriptsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74D8C373258FBBB600C46F85 /* ScriptsTableViewCell */,
 				7497522625597D6000B88A21 /* ScriptsViewController.swift */,
 				7497521E25596CDA00B88A21 /* ScriptsViewController.storyboard */,
-				749752222559707600B88A21 /* CustomTableViewCell.swift */,
-				749752232559707600B88A21 /* CustomTableViewCell.xib */,
 			);
 			path = ScriptsViewController;
 			sourceTree = "<group>";
@@ -547,10 +546,9 @@
 		7497523125599B2B00B88A21 /* ScriptForRoomViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74D8C387258FC38700C46F85 /* ScriptForRoomTableViewCell */,
 				7497522D2559995200B88A21 /* ScriptForRoomViewController.swift */,
 				7497522F2559997400B88A21 /* ScriptForRoomViewController.storyboard */,
-				7497523225599B6F00B88A21 /* ScriptForRoomTableViewCell.swift */,
-				7497523325599B6F00B88A21 /* ScriptForRoomTableViewCell.xib */,
 			);
 			path = ScriptForRoomViewController;
 			sourceTree = "<group>";
@@ -558,9 +556,8 @@
 		749752382559A1B400B88A21 /* ScriptForDaysViewController */ = {
 			isa = PBXGroup;
 			children = (
+				74D8C391258FCD0600C46F85 /* ScriptForDaysTableViewCell */,
 				749752362559A18400B88A21 /* ScriptForDaysViewController.swift */,
-				749752392559A1E100B88A21 /* ScriptForDaysTableViewCell.swift */,
-				7497523A2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib */,
 				7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */,
 			);
 			path = ScriptForDaysViewController;
@@ -601,6 +598,33 @@
 				74171F1C2541B29900746E9E /* CurrentData */,
 			);
 			path = DataStructures;
+			sourceTree = "<group>";
+		};
+		74D8C373258FBBB600C46F85 /* ScriptsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				749752222559707600B88A21 /* CustomTableViewCell.swift */,
+				749752232559707600B88A21 /* CustomTableViewCell.xib */,
+			);
+			path = ScriptsTableViewCell;
+			sourceTree = "<group>";
+		};
+		74D8C387258FC38700C46F85 /* ScriptForRoomTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				7497523225599B6F00B88A21 /* ScriptForRoomTableViewCell.swift */,
+				7497523325599B6F00B88A21 /* ScriptForRoomTableViewCell.xib */,
+			);
+			path = ScriptForRoomTableViewCell;
+			sourceTree = "<group>";
+		};
+		74D8C391258FCD0600C46F85 /* ScriptForDaysTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				749752392559A1E100B88A21 /* ScriptForDaysTableViewCell.swift */,
+				7497523A2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib */,
+			);
+			path = ScriptForDaysTableViewCell;
 			sourceTree = "<group>";
 		};
 		9FA5C525A8C153817D17C3F4 /* Frameworks */ = {

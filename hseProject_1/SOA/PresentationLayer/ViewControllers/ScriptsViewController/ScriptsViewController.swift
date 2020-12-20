@@ -10,6 +10,15 @@ import UIKit
 
 class ScriptsViewController: UIViewController {
 
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol) {
+        self.presentationAssembly = presentationAssembly
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    private var presentationAssembly: PresentationAssemblyProtocol?
     var safeArea: UILayoutGuide!
     var scripts = ["На работе", "На улице жарко", "Отпуск", "Карантин"]
     var marks = [false, true, false, false]
@@ -55,7 +64,7 @@ class ScriptsViewController: UIViewController {
     }
 
     @objc func newScripts() {
-        if let newScriptVC = NewScriptViewController.storyboardInstance() {
+        if let newScriptVC = presentationAssembly?.newScriptViewController() {
             navigationController?.pushViewController(newScriptVC, animated: true)
         }
     }
