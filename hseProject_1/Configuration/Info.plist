@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>yandexauth</string>
+			<string>yandexauth2</string>
+		</array>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleURLName</key>
+					<string>YandexLoginSDK</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>yx0110c0b1e51442cbbe672e4741a65964</string>
+				</array>
+			</dict>
+		</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>Russia</string>
 	<key>CFBundleExecutable</key>

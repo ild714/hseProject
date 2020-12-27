@@ -77,8 +77,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             case .right:
                 navigationController?.popViewController(animated: true)
             case .left:
-                curentVC += 1
-                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: self.curentVC) {
+                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: self.curentVC + 1) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
@@ -100,7 +99,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
                    navigationController?.popViewController(animated: true)
                case .up:
                     print("up")
-                if let scriptsVC = ScriptsViewController.storyboardInstance() {
+                if let scriptsVC = self.presentationAssembly?.scriptsViewController() {
                     let navigationController = UINavigationController()
                     navigationController.viewControllers = [scriptsVC]
                     present(navigationController, animated: true, completion: nil)
@@ -129,10 +128,11 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setupCurrentAppDatchik()
         self.setupCurrentAimAppDatchik()
     }
-
     func createMenuForNavigationController() {
-        menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId))
-        menu?.leftSide = true
+        if let presentationAssembly = self.presentationAssembly {
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
+            menu?.leftSide = true
+        }
     }
 
     func createButtonForNavigationController() {

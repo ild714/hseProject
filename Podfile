@@ -8,6 +8,7 @@ target 'IndoorClimateControlSystems' do
 	pod 'GoogleSignIn'
 	pod 'SideMenu'
 	pod 'SwiftLint'
+	pod 'YandexLoginSDK'
   # Pods for IndoorClimateControlSystems
 
 end

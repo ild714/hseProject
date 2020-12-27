@@ -20,7 +20,7 @@ class ScriptsViewController: UIViewController {
     }
     private var presentationAssembly: PresentationAssemblyProtocol?
     var safeArea: UILayoutGuide!
-    var scripts = ["На работе", "На улице жарко", "Отпуск", "Карантин"]
+    var scripts = ["На работе", "Отпуск", "Карантин"]
     var marks = [false, true, false, false]
 
     static func storyboardInstance() -> ScriptsViewController? {

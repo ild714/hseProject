@@ -88,9 +88,12 @@ class ScriptServiceViewController: UIViewController {
     @IBAction func soundOnOff(_ sender: Any) {
         if soundTurnOn == true {
             soundImage.setImage(UIImage(named: "mute"), for: .normal)
+            conditionerTurnOn.toggle()
+            conditionerImage.isEnabled = false
             soundTurnOn.toggle()
         } else {
             soundImage.setImage(UIImage(named: "volume"), for: .normal)
+            conditionerImage.isEnabled = true
             soundTurnOn.toggle()
         }
     }

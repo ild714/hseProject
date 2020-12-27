@@ -78,6 +78,7 @@ class ScriptServiceTableViewCell: UITableViewCell {
         self.soundTurnOn = serviveScript.soundOnOff
         if soundTurnOn == false {
             soundImage.setImage(UIImage(named: "mute"), for: .normal)
+            soundImage.isEnabled = false
         }
         self.houseTurnOn = serviveScript.houseOnOff
         if houseTurnOn == false {

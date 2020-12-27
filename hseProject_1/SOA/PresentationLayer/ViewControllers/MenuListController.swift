@@ -10,18 +10,19 @@ import UIKit
 import GoogleSignIn
 
 class MenuListController: UITableViewController {
-    var items = ["Мое устройство", "Сценарии", "Поддержка"]
+    var items = ["Сценарии"]
     var customColor = UIColor(rgb: 0x353343)
     var userId = ""
 
-    init(userId: String) {
+    init(userId: String, presentationAssembly: PresentationAssemblyProtocol) {
+        self.presentationAssembly = presentationAssembly
         self.userId = String("User Login: \(userId.prefix(5))")
         super.init(nibName: nil, bundle: nil)
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    private var presentationAssembly: PresentationAssemblyProtocol?
 
     @objc func exit() {
         GIDSignIn.sharedInstance()?.signOut()
@@ -62,5 +63,10 @@ class MenuListController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         tableView.deselectRow(at: indexPath, animated: true)
+        if let scriptsVC = presentationAssembly?.scriptsViewController() {
+            let navigationController = UINavigationController()
+            navigationController.viewControllers = [scriptsVC]
+            present(navigationController, animated: true, completion: nil)
+        }
     }
 }

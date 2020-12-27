@@ -79,8 +79,10 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         }
     }
     func createMenuForNavigationController() {
-        menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId))
-        menu?.leftSide = true
+        if let presentationAssembly = self.presentationAssembly {
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
+            menu?.leftSide = true
+        }
     }
     func createButtonForNavigationController() {
         let button = UIBarButtonItem(image: UIImage(named: "menu4"), style: .plain, target: self, action: #selector(didTapMenu))
