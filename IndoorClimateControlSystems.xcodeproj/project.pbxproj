@@ -126,6 +126,7 @@
 		743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTemperatureResponse.swift; sourceTree = "<group>"; };
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
+		7470603025A0AAE600C4CC93 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppDatchik.swift; sourceTree = "<group>"; };
 		7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRightSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLeftSideCustomClass.swift; sourceTree = "<group>"; };
@@ -242,6 +243,7 @@
 				743B8FC424E2EE30009A929A /* ActivityElement */,
 				21D0833C24D5A895003D0DA8 /* CustomClasses */,
 				2137EECE24D0662C009B19FD /* Assets.xcassets */,
+				7470603025A0AAE600C4CC93 /* Config.xcconfig */,
 			);
 			path = hseProject_1;
 			sourceTree = "<group>";
@@ -894,6 +896,7 @@
 /* Begin XCBuildConfiguration section */
 		2137EEC924D05504009B19FD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7470603025A0AAE600C4CC93 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -955,6 +958,7 @@
 		};
 		2137EECA24D05504009B19FD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7470603025A0AAE600C4CC93 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

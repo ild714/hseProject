@@ -17,7 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let rootAssembly = RootAssembly()
-
             if UserDefaults.standard.bool(forKey: "Log_in") {
                 if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
 

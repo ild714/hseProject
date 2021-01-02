@@ -37,7 +37,6 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
             completion(.failure(.badUrl))
             return
         }
-
         let task = session?.dataTask(with: urlRequest) {data, _, error in
             guard error == nil else {
                 DispatchQueue.main.async {

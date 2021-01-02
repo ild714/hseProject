@@ -66,7 +66,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
 
         GIDSignIn.sharedInstance()?.presentingViewController = self
 
-        GIDSignIn.sharedInstance()?.clientID = "930671898521-i7e7l2r541stcjqmnrdpg8e9q9t9no8j.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
         GIDSignIn.sharedInstance()?.delegate = self
 
         view.backgroundColor = .white

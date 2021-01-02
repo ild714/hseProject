@@ -9,7 +9,6 @@
 import Foundation
 
 class Requests: RequestProtocol {
-//    private var url: String = "https://vc-srvr.ru/site/rm_config?did=40RRTM304FCdd5M80ods"
 
     fileprivate var command: String {
         return ""
@@ -25,9 +24,9 @@ class Requests: RequestProtocol {
 }
 
 class RoomConfigRequest: Requests {
-    override var command: String { return "/site/rm_config?did=40RRTM304FCdd5M80ods"}
+    override var command: String { return Bundle.main.infoDictionary?["ROOM_CONFIG"] as? String ?? ""}
 }
 
 class AppDatchikRequest: Requests {
-    override var command: String { return "/app/datchik?did=40RRTM304FCdd5M80ods"}
+    override var command: String { return Bundle.main.infoDictionary?["DATCHIK"] as? String ?? ""}
 }

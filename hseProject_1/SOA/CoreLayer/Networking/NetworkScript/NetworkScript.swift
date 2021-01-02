@@ -11,7 +11,7 @@ import UIKit
 class NetworkScript {
 
     func sentDataScript(script: ScriptCreator) {
-        guard let url = URL(string: "https://back.vc-app.ru/test") else {
+        guard let url = URL(string: Bundle.main.infoDictionary?["SENT_DATA"] as? String ?? "") else {
             return
         }
         var request = URLRequest(url: url)
