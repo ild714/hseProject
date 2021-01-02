@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import YandexLoginSDK
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate, YXLObserver {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var navigationController: UINavigationController = UINavigationController()
@@ -18,20 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, YXLObserver {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let rootAssembly = RootAssembly()
-
-//            do {
-//                print("1")
-//                try YXLSdk.shared.activate(withAppId: "0110c0b1e51442cbbe672e4741a65964")
-//            } catch {
-//                print("2")
-//            }
-//            YXLSdk.shared.authorize()
-//            YXLSdk.shared.add(observer: self)
-//
-//            let yandexVC = YandexSignInViewController()
-//
-//            self.window?.rootViewController = yandexVC
-//            self.window?.makeKeyAndVisible()
 
             if UserDefaults.standard.bool(forKey: "Log_in") {
                 if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
@@ -51,32 +36,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, YXLObserver {
                 self.window?.makeKeyAndVisible()
             }
         }
-    }
-
-    func loginDidFinish(with result: YXLLoginResult) {
-        print(result)
-    }
-    func loginDidFinishWithError(_ error: Error) {
-        // process error
-    }
-
-    @available(iOS 8.0, *)
-    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
-        YXLSdk.shared.processUserActivity(userActivity)
-        print("2")
-        return true
-    }
-
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        print("3")
-        return YXLSdk.shared.handleOpen(url, sourceApplication: sourceApplication)
-
-    }
-
-    @available(iOS 9.0, *)
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        print("4")
-        return YXLSdk.shared.handleOpen(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

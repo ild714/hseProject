@@ -4,3 +4,12 @@ line_length: 200
 
 identifier_name:
   allowed_symbols: "_"
+
+function_body_length: 50
+
+type_body_length : 210
+
+cyclomatic_complexity:
+  warning: 11
+  
+  
