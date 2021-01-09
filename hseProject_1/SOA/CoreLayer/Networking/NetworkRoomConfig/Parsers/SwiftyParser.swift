@@ -11,6 +11,7 @@ import SwiftyJSON
 
 class SwiftyParser: SwiftyParserProtocol {
     func parseForRooms(data: Data) -> [String: JSON]? {
+//        print(JSON(data).dictionary)
         return JSON(data).dictionary
     }
 }

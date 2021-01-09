@@ -30,7 +30,7 @@ class ScriptForRoomViewController: UIViewController {
     @IBOutlet weak var stackDescription: UIStackView!
     @IBOutlet weak var stackSwitcher: UIStackView!
 
-    private var roomNumbersAndNames: [Int: String] = [:]
+    private var roomNumbersAndNames: Array<(key: Int, value: String)> = Array()
     private var marks: [Bool] = []
 
     private let cellIdentifier = String(describing: ScriptForRoomTableViewCell.self)
@@ -98,7 +98,7 @@ extension ScriptForRoomViewController: UITableViewDataSource {
         }
 
         cell.selectionStyle = .none
-        cell.configure(room: roomNumbersAndNames[indexPath.row + 2] ?? "No other rooms", markBool: marks[indexPath.row])
+        cell.configure(room: roomNumbersAndNames[indexPath.row + 1].value, markBool: marks[indexPath.row])
 
         return cell
     }
@@ -141,10 +141,16 @@ extension ScriptForRoomViewController: UITableViewDelegate {
 // MARK: - ModelRoomsConfigDelegate
 extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
-        self.roomNumbersAndNames = result
-        if let title = self.roomNumbersAndNames[1] {
-            self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(title)"
-        }
+        self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
+//        print(type(of:sortedDict))
+//        for sorted in sortedDict {
+//            self.roomNumbersAndNames[sorted.key] = sorted.value
+//        }
+//        print(sortedDict[0].key)
+//        print(roomNumbersAndNames)
+//        if let title = self.roomNumbersAndNames[0] {
+            self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(self.roomNumbersAndNames[0].value)"
+//        }
 
         for _ in 0..<self.roomNumbersAndNames.count - 1 {
             self.marks.append(false)

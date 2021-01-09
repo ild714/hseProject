@@ -139,8 +139,10 @@ extension CollectionViewController: UICollectionViewDataSource {
 
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
 
-            let currentRoomData = CurrentRoomData(result: result, curentRoom: indexPath.row + 1)
-            cell.configure(currentRoomText: self.roomNumbersAndNames[indexPath.row + 1] ?? "", currentRoom: currentRoomData)
+            let currentRoomData = CurrentRoomData(result: result, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
+            print(Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
+            cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData)
+            print(Array(self.roomNumbersAndNames.values.sorted())[indexPath.row])
         }
 
         return cell

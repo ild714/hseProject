@@ -17,6 +17,7 @@ class NetworkScript {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Authorization", forHTTPHeaderField: authorizationToken())
 
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(script) {
@@ -38,5 +39,11 @@ class NetworkScript {
                 }
             }.resume()
         }
+    }
+    func authorizationToken() -> String {
+        guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
+            return ""
+        }
+        return "Yandex" + " " + "AgAAAAAaGAgvAAa-ictSVhJT0UkruSzpJe4JCos"
     }
 }

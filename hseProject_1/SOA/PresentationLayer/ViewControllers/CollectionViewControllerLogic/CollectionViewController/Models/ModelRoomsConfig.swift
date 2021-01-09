@@ -25,7 +25,7 @@ class ModelRoomsConfig: ModelRoomsConfigProtocol {
                 }
                 self.delegate?.setup(result: self.roomNumbersAndNames)
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
                 self.delegate?.show1(error: error.localizedDescription)
             }
         }

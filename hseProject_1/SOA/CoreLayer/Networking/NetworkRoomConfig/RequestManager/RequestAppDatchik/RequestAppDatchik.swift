@@ -33,10 +33,14 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
 
     func load<Parser, T>(requestConfig: RequestConfig<Parser>, type sensorType: TypeOfSensor, completion: @escaping (Result<T, NetworkSensorError>) -> Void) where Parser: SwiftyParserProtocol {
 
-        guard let urlRequest = requestConfig.request.urlRequest else {
+        guard var urlRequest = requestConfig.request.urlRequest else {
             completion(.failure(.badUrl))
             return
         }
+        urlRequest.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "GET"
+
         let task = session?.dataTask(with: urlRequest) {data, _, error in
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -86,5 +90,11 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
         } else {
             print("error with task")
         }
+    }
+    func authorizationToken() -> String {
+        guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
+            return ""
+        }
+        return "Yandex" + " " + "AgAAAAAaGAgvAAa-ictSVhJT0UkruSzpJe4JCos"
     }
 }

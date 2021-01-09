@@ -28,10 +28,13 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
 
     func load<Parser, T>(requestConfig: RequestConfig<Parser>, completion: @escaping (Result<T, NetworkError>) -> Void) {
 
-        guard let urlRequest = requestConfig.request.urlRequest else {
+        guard var urlRequest = requestConfig.request.urlRequest else {
             completion(.failure(.badUrl))
             return
         }
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
+        urlRequest.httpMethod = "GET"
 
         let task = session?.dataTask(with: urlRequest) { data, _, error in
 
@@ -41,7 +44,6 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
                 }
                 return
             }
-
             if let data = data {
                 DispatchQueue.main.async {
                     if let decodedRoom = requestConfig.parser.parseForRooms(data: data) {
@@ -72,5 +74,11 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
         } else {
             print("error with task")
         }
+    }
+    func authorizationToken() -> String {
+        guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
+            return ""
+        }
+        return "Yandex" + " " + "AgAAAAAaGAgvAAa-ictSVhJT0UkruSzpJe4JCos"
     }
 }

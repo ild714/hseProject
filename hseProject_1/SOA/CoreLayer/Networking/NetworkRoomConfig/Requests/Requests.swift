@@ -13,7 +13,7 @@ class Requests: RequestProtocol {
     fileprivate var command: String {
         return ""
     }
-    private var baseUrl: String = "https://vc-srvr.ru"
+    private var baseUrl: String = "https://back.vc-app.ru"
     var urlRequest: URLRequest? {
         if let url = URL(string: baseUrl + command) {
             return URLRequest(url: url)

@@ -230,18 +230,23 @@ extension RoomsViewController: ModelAppDatchikDelegate {
     }
     func setupCurrentAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
-
-            let currentRoomData = CurrentRoomData(result: result, curentRoom: self.curentVC)
-
-            self.currentTemperature.text = currentRoomData.currentTemperature
-            self.modOfCurrentTemperature.text = currentRoomData.modOfCurrentTemperature
-            self.currentWet.text = currentRoomData.currentWet
-            self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
-            self.currentGas.text = currentRoomData.currentGas
-            self.ppmLabel.text = currentRoomData.ppm
-            self.peopleInRoom.text = currentRoomData.peopleInRoom
-
-            ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+            //            print(self.curentVC)
+            print(self.roomNumbersAndNames.keys.sorted())
+            if self.roomNumbersAndNames.count > 0 {
+                let currentRoomData = CurrentRoomData(result: result, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC - 1])
+                
+                self.currentTemperature.text = currentRoomData.currentTemperature
+                self.modOfCurrentTemperature.text = currentRoomData.modOfCurrentTemperature
+                self.currentWet.text = currentRoomData.currentWet
+                self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
+                self.currentGas.text = currentRoomData.currentGas
+                //            self.ppmLabel.text = currentRoomData.ppm
+                self.peopleInRoom.text = currentRoomData.peopleInRoom
+                
+                ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+            } else {
+                self.setupCurrentAppDatchik()
+            }
         }
     }
 
