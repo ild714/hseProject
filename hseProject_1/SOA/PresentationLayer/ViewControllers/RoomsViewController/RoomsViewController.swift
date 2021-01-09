@@ -156,7 +156,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.navigationItem.setHidesBackButton(true, animated: true)
     }
     func setTitleAndPageControll() {
-        self.title = self.roomNumbersAndNames[self.curentVC]
+        self.title = Array(self.roomNumbersAndNames.values.sorted())[self.curentVC - 1]
         self.createPageControll()
     }
     func setDefaultValuesForAimParamtrs() {

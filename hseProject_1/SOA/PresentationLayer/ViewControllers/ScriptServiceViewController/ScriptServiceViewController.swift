@@ -42,7 +42,9 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var co2TextField: UITextField!
     var showCloseBool = true
     var itemRight: UIBarButtonItem?
-
+    var selectedIndex: Int?
+    var selectedIndexChoosed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -82,6 +84,18 @@ class ScriptServiceViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15).isActive = true
     }
 
+    var hightConstraints: NSLayoutConstraint!
+    var lowConstraints: NSLayoutConstraint!
+    func changeConstraintsHigh() {
+        hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
+        lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
+        hightConstraints.isActive = false
+        lowConstraints.isActive = true
+    }
+    func changeConstraintsLow() {
+        hightConstraints.isActive = true
+        lowConstraints.isActive = false
+    }
     // Sound changer
     @IBOutlet weak var soundImage: UIButton!
     var soundTurnOn = true
@@ -232,6 +246,8 @@ class ScriptServiceViewController: UIViewController {
 
     @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
     @IBAction func addScript(_ sender: Any) {
+        self.selectedIndex = nil
+        
         if let text = closeButtonOrEditButton.titleLabel?.text {
             if text == "Сохранить и закончить"{
                 saveAndClose()
@@ -330,26 +346,31 @@ extension ScriptServiceViewController: UITableViewDataSource {
         if tableView.cellForRow(at: indexPath) as? ScriptServiceTableViewCell != nil {
 
             if showCloseBool {
-                tableView.rowHeight = 180
+                self.selectedIndex = indexPath.row
                 UIView.animate(withDuration: 1) {
+                    self.changeConstraintsHigh()
+                    self.view.layoutIfNeeded()
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
+                self.selectedIndexChoosed = true
                 serviceLabel.text = "Изменяйте желаемые настройки"
 
                 closeButtonOrEditButton.setTitle("Сохранить и закончить", for: .normal)
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                     self.settingCreator.alpha = 0
                 })
-
                 self.navigationItem.setRightBarButton(nil, animated: true)
                 showCloseBool.toggle()
             } else {
-                tableView.rowHeight = 50
+                self.selectedIndex = indexPath.row
                 UIView.animate(withDuration: 1) {
+                    self.changeConstraintsLow()
+                    self.view.layoutIfNeeded()
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
+                self.selectedIndexChoosed = false
                 serviceLabel.text = "Добавляйте желаемые настройки"
                 closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
@@ -364,6 +385,18 @@ extension ScriptServiceViewController: UITableViewDataSource {
 
 // MARK: - ScriptServiceViewController delegate methods
 extension ScriptServiceViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        if let selectedIndex = self.selectedIndex {
+            if indexPath.row == selectedIndex && !selectedIndexChoosed {
+                return 180
+            } else {
+                return 50
+            }
+        } else {
+            return 50
+        }
+    }
 }
 
 extension ScriptServiceViewController: UITextFieldDelegate {
