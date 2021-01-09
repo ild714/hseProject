@@ -347,13 +347,13 @@ extension ScriptServiceViewController: UITableViewDataSource {
 
             if showCloseBool {
                 self.selectedIndex = indexPath.row
+                self.selectedIndexChoosed = true
                 UIView.animate(withDuration: 1) {
                     self.changeConstraintsHigh()
                     self.view.layoutIfNeeded()
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
-                self.selectedIndexChoosed = true
                 serviceLabel.text = "Изменяйте желаемые настройки"
 
                 closeButtonOrEditButton.setTitle("Сохранить и закончить", for: .normal)
@@ -362,15 +362,16 @@ extension ScriptServiceViewController: UITableViewDataSource {
                 })
                 self.navigationItem.setRightBarButton(nil, animated: true)
                 showCloseBool.toggle()
+//                tableView.reloadData()
             } else {
                 self.selectedIndex = indexPath.row
+                self.selectedIndexChoosed = false
                 UIView.animate(withDuration: 1) {
                     self.changeConstraintsLow()
                     self.view.layoutIfNeeded()
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
-                self.selectedIndexChoosed = false
                 serviceLabel.text = "Добавляйте желаемые настройки"
                 closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
@@ -378,6 +379,8 @@ extension ScriptServiceViewController: UITableViewDataSource {
                 })
                 self.navigationItem.setRightBarButton(itemRight, animated: true)
                 showCloseBool.toggle()
+                
+//                tableView.reloadData()
             }
         }
     }
@@ -388,7 +391,7 @@ extension ScriptServiceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         if let selectedIndex = self.selectedIndex {
-            if indexPath.row == selectedIndex && !selectedIndexChoosed {
+            if indexPath.row == selectedIndex && selectedIndexChoosed {
                 return 180
             } else {
                 return 50
