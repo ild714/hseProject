@@ -17,7 +17,7 @@ class NetworkScript {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Authorization", forHTTPHeaderField: authorizationToken())
+        request.setValue(authorizationToken(), forHTTPHeaderField: "Authorization")
 
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(script) {

@@ -30,7 +30,7 @@ class ScriptForRoomViewController: UIViewController {
     @IBOutlet weak var stackDescription: UIStackView!
     @IBOutlet weak var stackSwitcher: UIStackView!
 
-    private var roomNumbersAndNames: Array<(key: Int, value: String)> = Array()
+    private var roomNumbersAndNames: [(key: Int, value: String)] = Array()
     private var marks: [Bool] = []
 
     private let cellIdentifier = String(describing: ScriptForRoomTableViewCell.self)

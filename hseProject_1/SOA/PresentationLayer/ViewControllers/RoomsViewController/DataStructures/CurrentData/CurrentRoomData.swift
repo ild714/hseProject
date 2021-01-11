@@ -26,7 +26,7 @@ struct CurrentRoomData {
     init(result: [String: JSON], curentRoom: Int) {
         if let currentRoomData = result["\(curentRoom)"] {
             for data in currentRoomData {
-                
+
                 if data.0 == "1"{
 //                    self.currentTemperature = "\(Int(floor(data.1.doubleValue)))."
                     self.currentTemperature = "\(data.1.doubleValue)℃"

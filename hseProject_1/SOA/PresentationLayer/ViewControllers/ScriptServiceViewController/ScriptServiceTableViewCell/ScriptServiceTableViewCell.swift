@@ -193,16 +193,6 @@ class ScriptServiceTableViewCell: UITableViewCell {
             }
         }
     }
-    
-    @IBOutlet weak var allView: UIView!
-    
-//    func changeSizeToHight() {
-//        self.allView.heightAnchor.constraint(equalToConstant: 180)
-//        self.reloadInputViews()
-//        UIView.animate(withDuration: 0.5) {
-//            self.allView.layoutIfNeeded()
-//        }
-//    }
 }
 
 protocol CellDelagate: class {

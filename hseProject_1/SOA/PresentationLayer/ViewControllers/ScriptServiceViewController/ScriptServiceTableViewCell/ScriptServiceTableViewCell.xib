@@ -301,7 +301,6 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="allView" destination="H2p-sc-9uM" id="cN9-x9-J56"/>
                 <outlet property="co2Edited" destination="Z3o-Ls-vPw" id="7pP-f5-bjO"/>
                 <outlet property="co2Image" destination="Sx2-p5-TUv" id="CUA-FB-7rY"/>
                 <outlet property="co2Label" destination="SnB-2l-EQU" id="s9K-kx-pjL"/>

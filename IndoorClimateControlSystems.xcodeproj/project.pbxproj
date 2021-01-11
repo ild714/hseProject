@@ -46,6 +46,7 @@
 		743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */; };
 		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 		7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */; };
+		7470603C25ABA27200C4CC93 /* NetworkScriptsLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470603B25ABA27100C4CC93 /* NetworkScriptsLoad.swift */; };
 		74754F5A24E296CE008F07A3 /* RequestAppDatchik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */; };
 		7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */; };
 		7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */; };
@@ -127,6 +128,7 @@
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
 		7470603025A0AAE600C4CC93 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		7470603B25ABA27100C4CC93 /* NetworkScriptsLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScriptsLoad.swift; sourceTree = "<group>"; };
 		74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppDatchik.swift; sourceTree = "<group>"; };
 		7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelRightSideCustomClass.swift; sourceTree = "<group>"; };
 		7480039524E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonLeftSideCustomClass.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				7470603A25AB95FB00C4CC93 /* NetworkScriptsLoad */,
 				7457B97B24DF0A3C00C16A0E /* NetworkRoomConfig */,
 				742822B5258B9523008F6524 /* NetworkTemperatureResponse */,
 				742822B6258B9536008F6524 /* NetworkScript */,
@@ -497,6 +500,14 @@
 				742822B7258B9569008F6524 /* Parsers */,
 			);
 			path = NetworkRoomConfig;
+			sourceTree = "<group>";
+		};
+		7470603A25AB95FB00C4CC93 /* NetworkScriptsLoad */ = {
+			isa = PBXGroup;
+			children = (
+				7470603B25ABA27100C4CC93 /* NetworkScriptsLoad.swift */,
+			);
+			path = NetworkScriptsLoad;
 			sourceTree = "<group>";
 		};
 		748426EC25174C76006A09F7 /* Extension */ = {
@@ -855,6 +866,7 @@
 				74975229255990F700B88A21 /* NewScriptViewController.swift in Sources */,
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,
+				7470603C25ABA27200C4CC93 /* NetworkScriptsLoad.swift in Sources */,
 				740D1E03252F41A0000253FA /* CustomCollectionViewCell.swift in Sources */,
 				742822D3258B9FB5008F6524 /* Requests.swift in Sources */,
 				742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */,

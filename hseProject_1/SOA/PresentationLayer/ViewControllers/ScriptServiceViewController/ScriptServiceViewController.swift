@@ -44,7 +44,6 @@ class ScriptServiceViewController: UIViewController {
     var itemRight: UIBarButtonItem?
     var selectedIndex: Int?
     var selectedIndexChoosed = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -247,7 +246,6 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
     @IBAction func addScript(_ sender: Any) {
         self.selectedIndex = nil
-        
         if let text = closeButtonOrEditButton.titleLabel?.text {
             if text == "Сохранить и закончить"{
                 saveAndClose()
@@ -362,7 +360,6 @@ extension ScriptServiceViewController: UITableViewDataSource {
                 })
                 self.navigationItem.setRightBarButton(nil, animated: true)
                 showCloseBool.toggle()
-//                tableView.reloadData()
             } else {
                 self.selectedIndex = indexPath.row
                 self.selectedIndexChoosed = false
@@ -379,8 +376,6 @@ extension ScriptServiceViewController: UITableViewDataSource {
                 })
                 self.navigationItem.setRightBarButton(itemRight, animated: true)
                 showCloseBool.toggle()
-                
-//                tableView.reloadData()
             }
         }
     }
@@ -388,8 +383,7 @@ extension ScriptServiceViewController: UITableViewDataSource {
 
 // MARK: - ScriptServiceViewController delegate methods
 extension ScriptServiceViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
-    {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selectedIndex = self.selectedIndex {
             if indexPath.row == selectedIndex && selectedIndexChoosed {
                 return 180
