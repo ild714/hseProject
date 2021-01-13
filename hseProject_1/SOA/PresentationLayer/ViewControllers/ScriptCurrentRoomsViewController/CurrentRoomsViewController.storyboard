@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Script Current Rooms View Controller-->
+        <scene sceneID="eWS-0v-Igy">
+            <objects>
+                <viewController storyboardIdentifier="CurrentRoomsViewController" id="pcL-pc-shu" customClass="ScriptCurrentRoomsViewController" customModule="IndoorClimateControlSystems" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LyI-Qk-am4">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Здесь можно изменить группировку и перейти к настройкам комнат" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Unm-ss-M1I">
+                                <rect key="frame" x="45" y="48" width="510" height="47"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="hsd-0U-85Q"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Unm-ss-M1I" firstAttribute="leading" secondItem="hsd-0U-85Q" secondAttribute="leading" constant="45" id="Al0-EG-xqs"/>
+                            <constraint firstItem="hsd-0U-85Q" firstAttribute="trailing" secondItem="Unm-ss-M1I" secondAttribute="trailing" constant="45" id="MMG-yV-5SO"/>
+                            <constraint firstItem="Unm-ss-M1I" firstAttribute="top" secondItem="hsd-0U-85Q" secondAttribute="top" constant="48" id="V20-sO-Boj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="labelDescription" destination="Unm-ss-M1I" id="mwE-pB-ZaA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ftN-iS-dtL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-359.4202898550725" y="40.848214285714285"/>
+        </scene>
+    </scenes>
+</document>

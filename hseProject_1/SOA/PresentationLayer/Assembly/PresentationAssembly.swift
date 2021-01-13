@@ -16,6 +16,7 @@ protocol PresentationAssemblyProtocol {
     func scriptForRoomViewController(scriptCreator: ScriptCreator) -> ScriptForRoomViewController?
     func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController?
     func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController?
+    func currentRoomsViewController() -> ScriptCurrentRoomsViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -86,6 +87,14 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         return storyboard.instantiateViewController(identifier: "ScriptServiceViewController", creator: { coder in
             let scriptServiceVC =  ScriptServiceViewController(coder: coder, scriptCreator: scriptCreator)
             return scriptServiceVC
+        })
+    }
+    func currentRoomsViewController() -> ScriptCurrentRoomsViewController? {
+        let storyboard = UIStoryboard(name: "CurrentRoomsViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "CurrentRoomsViewController", creator: {
+            coder in
+            let currentRoomsVC = ScriptCurrentRoomsViewController(coder: coder, presentationAssembly: self, scriptCreator: ScriptCreator(did: "10155", name: "Test", roomGroup0: nil))
+            return currentRoomsVC
         })
     }
     private func modelRoomsConfig() -> ModelRoomsConfigProtocol {

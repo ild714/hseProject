@@ -46,6 +46,10 @@
 		743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */; };
 		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 		7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */; };
+		746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */; };
+		746C354F25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746C354E25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard */; };
+		746C355B25ACC240006CDBCD /* CurrentRoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746C355925ACC240006CDBCD /* CurrentRoomsTableViewCell.swift */; };
+		746C355C25ACC240006CDBCD /* CurrentRoomsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 746C355A25ACC240006CDBCD /* CurrentRoomsTableViewCell.xib */; };
 		7470603C25ABA27200C4CC93 /* NetworkScriptsLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7470603B25ABA27100C4CC93 /* NetworkScriptsLoad.swift */; };
 		74754F5A24E296CE008F07A3 /* RequestAppDatchik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */; };
 		7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7480039124E13D24006DEBDE /* LabelRightSideCustomClass.swift */; };
@@ -127,6 +131,10 @@
 		743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTemperatureResponse.swift; sourceTree = "<group>"; };
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
+		746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCurrentRoomsViewController.swift; sourceTree = "<group>"; };
+		746C354E25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrentRoomsViewController.storyboard; sourceTree = "<group>"; };
+		746C355925ACC240006CDBCD /* CurrentRoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRoomsTableViewCell.swift; sourceTree = "<group>"; };
+		746C355A25ACC240006CDBCD /* CurrentRoomsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentRoomsTableViewCell.xib; sourceTree = "<group>"; };
 		7470603025A0AAE600C4CC93 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		7470603B25ABA27100C4CC93 /* NetworkScriptsLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScriptsLoad.swift; sourceTree = "<group>"; };
 		74754F5924E296CE008F07A3 /* RequestAppDatchik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppDatchik.swift; sourceTree = "<group>"; };
@@ -193,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				742822EC258BDF44008F6524 /* MenuListController.swift */,
+				746C354825ACAA9F006CDBCD /* ScriptCurrentRoomsViewController */,
 				74D65C9125840E9D007588F7 /* SignIn */,
 				74BF50282566798A00DE45D1 /* ScriptServiceViewController */,
 				749752382559A1B400B88A21 /* ScriptForDaysViewController */,
@@ -502,6 +511,25 @@
 			path = NetworkRoomConfig;
 			sourceTree = "<group>";
 		};
+		746C354825ACAA9F006CDBCD /* ScriptCurrentRoomsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				746C355125ACC18D006CDBCD /* CurrentRoomsTableViewCell */,
+				746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */,
+				746C354E25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard */,
+			);
+			path = ScriptCurrentRoomsViewController;
+			sourceTree = "<group>";
+		};
+		746C355125ACC18D006CDBCD /* CurrentRoomsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				746C355925ACC240006CDBCD /* CurrentRoomsTableViewCell.swift */,
+				746C355A25ACC240006CDBCD /* CurrentRoomsTableViewCell.xib */,
+			);
+			path = CurrentRoomsTableViewCell;
+			sourceTree = "<group>";
+		};
 		7470603A25AB95FB00C4CC93 /* NetworkScriptsLoad */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,12 +753,14 @@
 				740D1E06252F46BF000253FA /* CollectionViewController.storyboard in Resources */,
 				74BF503225667AD200DE45D1 /* ScriptServiceTableViewCell.xib in Resources */,
 				749752252559707600B88A21 /* CustomTableViewCell.xib in Resources */,
+				746C355C25ACC240006CDBCD /* CurrentRoomsTableViewCell.xib in Resources */,
 				2137EEC724D05504009B19FD /* LaunchScreen.storyboard in Resources */,
 				7497522C2559913400B88A21 /* NewScriptViewController.storyboard in Resources */,
 				7497523E2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard in Resources */,
 				74BF502C256679FB00DE45D1 /* ScriptServiceViewController.storyboard in Resources */,
 				749752302559997400B88A21 /* ScriptForRoomViewController.storyboard in Resources */,
 				740D1E0B25304872000253FA /* RoomsViewController.storyboard in Resources */,
+				746C354F25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard in Resources */,
 				2137EECF24D0662C009B19FD /* Assets.xcassets in Resources */,
 				7497521F25596CDA00B88A21 /* ScriptsViewController.storyboard in Resources */,
 				740D1E04252F41A0000253FA /* CustomCollectionViewCell.xib in Resources */,
@@ -823,6 +853,7 @@
 			files = (
 				74BF503125667AD200DE45D1 /* ScriptServiceTableViewCell.swift in Sources */,
 				74754F5A24E296CE008F07A3 /* RequestAppDatchik.swift in Sources */,
+				746C355B25ACC240006CDBCD /* CurrentRoomsTableViewCell.swift in Sources */,
 				74D8C3BC258FD93300C46F85 /* CellDelegate.swift in Sources */,
 				742822D6258BA41E008F6524 /* RequestsFactory.swift in Sources */,
 				748426F125175B0A006A09F7 /* StackExtension.swift in Sources */,
@@ -846,6 +877,7 @@
 				7480039C24E1406A006DEBDE /* LabelLeftSideCustomClass.swift in Sources */,
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
 				743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */,
+				746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */,
 				742822E9258BDA6F008F6524 /* PresentationAssembly.swift in Sources */,
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,
 				7497522725597D6100B88A21 /* ScriptsViewController.swift in Sources */,

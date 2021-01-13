@@ -22,7 +22,7 @@ class ScriptForDaysViewController: UIViewController {
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var scriptCreator: ScriptCreator?
     @IBOutlet weak var descriptionStack: UIStackView!
-    @IBOutlet weak var switcherStack: UIStackView!
+    @IBOutlet weak var backNextStack: UIStackView!
 
     var scripts = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
     var marks: [Bool] = []
@@ -62,7 +62,7 @@ class ScriptForDaysViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: descriptionStack.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: switcherStack.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: backNextStack.topAnchor).isActive = true
     }
 
     static func storyboardInstance() -> ScriptForDaysViewController? {

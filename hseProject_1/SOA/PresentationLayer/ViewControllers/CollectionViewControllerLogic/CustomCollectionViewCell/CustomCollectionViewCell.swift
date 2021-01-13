@@ -35,7 +35,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         temperature.text = currentRoom.cellTemperature
         wet.text = currentRoom.cellWet
         gas.text = currentRoom.cellGas
-
+        
         ActivityIndicator.stopAnimating(views: [wet, gas, temperature, roomNameLabel])
     }
 

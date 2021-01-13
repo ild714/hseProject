@@ -38,7 +38,7 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
             return
         }
         urlRequest.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = "GET"
 
         let task = session?.dataTask(with: urlRequest) {data, _, error in

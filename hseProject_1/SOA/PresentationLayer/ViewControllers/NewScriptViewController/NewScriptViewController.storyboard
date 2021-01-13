@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NPi-e3-dLI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NPi-e3-dLI">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,42 +52,43 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="iz0-jv-sHb">
-                                <rect key="frame" x="139" y="812" width="136" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Uee-DR-WAh">
+                                <rect key="frame" x="145.5" y="812" width="123" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-nc-FpT">
-                                        <rect key="frame" x="0.0" y="2" width="50" height="46.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="wO4-8i-9dr"/>
-                                            <constraint firstAttribute="width" constant="50" id="whw-Tv-FT7"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" backgroundImage="chevron.left" catalog="system"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O5P-Tm-LhA">
-                                        <rect key="frame" x="86" y="2" width="50" height="46.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="eXy-UL-ZsJ"/>
-                                            <constraint firstAttribute="height" constant="50" id="t11-zh-yWi"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="chevron.right" catalog="system"/>
-                                        <connections>
-                                            <action selector="nextStep:" destination="NPi-e3-dLI" eventType="touchUpInside" id="3iZ-Fx-4co"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b8b-y6-CR3">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0b-ti-M1U">
+                                                <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                <state key="normal" title="Далее"/>
+                                                <connections>
+                                                    <action selector="nextStep:" destination="NPi-e3-dLI" eventType="touchUpInside" id="eok-Hn-jHc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esj-Wh-NCA">
+                                                <rect key="frame" x="73" y="2" width="50" height="46.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="2ul-NA-Wb6"/>
+                                                    <constraint firstAttribute="width" constant="50" id="uLi-5U-pKh"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="chevron.right" catalog="system"/>
+                                                <connections>
+                                                    <action selector="nextStep:" destination="NPi-e3-dLI" eventType="touchUpInside" id="yt0-wn-0cq"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="NR7-Dl-6P4"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2il-Jz-0Ys"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2il-Jz-0Ys" firstAttribute="bottom" secondItem="iz0-jv-sHb" secondAttribute="bottom" id="A7F-hi-0KJ"/>
+                            <constraint firstItem="2il-Jz-0Ys" firstAttribute="bottom" secondItem="Uee-DR-WAh" secondAttribute="bottom" id="EYF-az-q21"/>
                             <constraint firstItem="2il-Jz-0Ys" firstAttribute="trailing" secondItem="GSK-bu-eXf" secondAttribute="trailing" constant="57" id="HKj-lD-ah1"/>
+                            <constraint firstItem="Uee-DR-WAh" firstAttribute="centerX" secondItem="fSM-Bw-qrv" secondAttribute="centerX" id="O55-JN-HZo"/>
                             <constraint firstItem="GSK-bu-eXf" firstAttribute="leading" secondItem="2il-Jz-0Ys" secondAttribute="leading" constant="57" id="SpS-Cx-L61"/>
-                            <constraint firstItem="iz0-jv-sHb" firstAttribute="centerX" secondItem="fSM-Bw-qrv" secondAttribute="centerX" id="g1l-Ji-LpP"/>
                             <constraint firstItem="GSK-bu-eXf" firstAttribute="top" secondItem="2il-Jz-0Ys" secondAttribute="top" constant="200" id="q2i-cG-AWv"/>
                         </constraints>
                     </view>
@@ -103,7 +103,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
     </resources>
 </document>

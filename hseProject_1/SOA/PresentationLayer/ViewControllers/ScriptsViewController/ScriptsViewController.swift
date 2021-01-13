@@ -22,8 +22,8 @@ class ScriptsViewController: UIViewController {
     private var presentationAssembly: PresentationAssemblyProtocol?
     var safeArea: UILayoutGuide!
 //    var scripts = ["На работе", "Отпуск", "Карантин"]
-    var marks : [Bool] = []
-    var scriptsDict: [Int:String] = [:]
+    var marks: [Bool] = []
+    var scriptsDict: [Int: String] = [:]
     var sortedDictValues: [String] = []
     var currentScript = 0
     static func storyboardInstance() -> ScriptsViewController? {
@@ -45,7 +45,6 @@ class ScriptsViewController: UIViewController {
             self.sortDict()
             self.setupTableView()
         }
-        
         title = "Сценарии"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Arial", size: 20)!]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
@@ -77,7 +76,6 @@ class ScriptsViewController: UIViewController {
             }
         }
     }
-    
     func createCheckList() {
         print(Array(self.scriptsDict.keys.sorted()))
         for scriptKey in Array(self.scriptsDict.keys.sorted()) {
@@ -88,11 +86,9 @@ class ScriptsViewController: UIViewController {
             }
         }
     }
-    
     func sortDict() {
         sortedDictValues = Array(self.scriptsDict.values.sorted())
     }
-    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .grouped)
         tableView.register(UINib(nibName: String(describing: CustomTableViewCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)

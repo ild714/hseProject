@@ -28,7 +28,7 @@ class ScriptForRoomViewController: UIViewController {
 
     @IBOutlet weak var titleCurrentRoom: UILabel!
     @IBOutlet weak var stackDescription: UIStackView!
-    @IBOutlet weak var stackSwitcher: UIStackView!
+    @IBOutlet weak var backNextStack: UIStackView!
 
     private var roomNumbersAndNames: [(key: Int, value: String)] = Array()
     private var marks: [Bool] = []
@@ -64,7 +64,7 @@ class ScriptForRoomViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: stackDescription.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: stackSwitcher.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: backNextStack.topAnchor).isActive = true
     }
 
     func showAlert() {
@@ -97,6 +97,7 @@ extension ScriptForRoomViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
+        cell.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         cell.selectionStyle = .none
         cell.configure(room: roomNumbersAndNames[indexPath.row + 1].value, markBool: marks[indexPath.row])
 
@@ -111,7 +112,6 @@ extension ScriptForRoomViewController: UITableViewDelegate {
         if self.marks[indexPath.row] == true {
                 self.marks.remove(at: indexPath.row)
                 self.marks.insert(false, at: indexPath.row)
-//            self.scriptCreator?.roomGroup0?.rIDs = [47,48]
             self.scriptCreator?.roomGroup0?.rIDs = [0]
             var position = 1
             for mark in self.marks {
@@ -142,15 +142,7 @@ extension ScriptForRoomViewController: UITableViewDelegate {
 extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
-//        print(type(of:sortedDict))
-//        for sorted in sortedDict {
-//            self.roomNumbersAndNames[sorted.key] = sorted.value
-//        }
-//        print(sortedDict[0].key)
-//        print(roomNumbersAndNames)
-//        if let title = self.roomNumbersAndNames[0] {
             self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(self.roomNumbersAndNames[0].value)"
-//        }
 
         for _ in 0..<self.roomNumbersAndNames.count - 1 {
             self.marks.append(false)

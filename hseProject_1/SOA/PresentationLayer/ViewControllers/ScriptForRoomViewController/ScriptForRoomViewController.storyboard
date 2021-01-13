@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vrm-c0-XV1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vrm-c0-XV1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,20 +17,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="WQv-va-gH3">
-                                <rect key="frame" x="57" y="164" width="300" height="115"/>
+                                <rect key="frame" x="57" y="164" width="300" height="105"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зададим сценарий для комнаты &quot;Кухня&quot;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEf-f4-5tE">
-                                        <rect key="frame" x="32" y="0.0" width="236" height="55"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зададим сценарий для комнаты" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEf-f4-5tE">
+                                        <rect key="frame" x="53.5" y="0.0" width="193" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="BTH-uR-QVT"/>
-                                            <constraint firstAttribute="height" constant="55" id="Xc9-Gt-K3h"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Применить эти же настройки для других комнат?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mzx-6s-846">
-                                        <rect key="frame" x="10" y="67" width="280" height="48"/>
+                                        <rect key="frame" x="10" y="57" width="280" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="PQz-nc-AbJ"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="jDh-sx-t1s"/>
@@ -40,51 +40,74 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="txa-h1-FFN">
-                                <rect key="frame" x="139" y="812" width="136" height="50"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-w1-KaU">
+                                <rect key="frame" x="54" y="812" width="306" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mfp-Ud-g8b">
-                                        <rect key="frame" x="0.0" y="2" width="50" height="46.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="NGp-PK-5kz"/>
-                                            <constraint firstAttribute="height" constant="50" id="TW5-yE-kzj"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" backgroundImage="chevron.left" catalog="system"/>
-                                        <connections>
-                                            <action selector="previousStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="X1S-dj-ewq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edy-zb-eVM">
-                                        <rect key="frame" x="86" y="2" width="50" height="46.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="2Cb-Sz-3nh"/>
-                                            <constraint firstAttribute="width" constant="50" id="fMl-Wf-fYh"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="chevron.right" catalog="system"/>
-                                        <connections>
-                                            <action selector="nextStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="ct3-YY-sfG"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-Zh-A0B">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlo-xV-0th">
+                                                <rect key="frame" x="0.0" y="2" width="50" height="46.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="50" id="1ec-yk-y9A"/>
+                                                    <constraint firstAttribute="height" constant="50" id="JZ1-Ct-1ff"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" backgroundImage="chevron.left" catalog="system"/>
+                                                <connections>
+                                                    <action selector="previousStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="CDG-tq-qE4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0w-xC-zti">
+                                                <rect key="frame" x="58" y="0.0" width="65" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                <state key="normal" title="Назад"/>
+                                                <connections>
+                                                    <action selector="previousStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="v9U-lu-4ZA"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sta-65-jAA">
+                                        <rect key="frame" x="183" y="0.0" width="123" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-w2-Jvy">
+                                                <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                <state key="normal" title="Далее"/>
+                                                <connections>
+                                                    <action selector="nextStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="ZDK-7v-Jx4"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RuC-fU-mHX">
+                                                <rect key="frame" x="73" y="2" width="50" height="46.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="2te-9j-cX3"/>
+                                                    <constraint firstAttribute="width" constant="50" id="fM4-ce-ncf"/>
+                                                </constraints>
+                                                <state key="normal" backgroundImage="chevron.right" catalog="system"/>
+                                                <connections>
+                                                    <action selector="nextStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="wfx-er-znh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Z4C-SD-184"/>
-                                </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="3fj-6s-Yru"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3fj-6s-Yru" firstAttribute="trailing" secondItem="WQv-va-gH3" secondAttribute="trailing" constant="57" id="Lun-JL-ae1"/>
-                            <constraint firstItem="txa-h1-FFN" firstAttribute="centerX" secondItem="VEn-xQ-o2P" secondAttribute="centerX" id="MwV-9g-sza"/>
-                            <constraint firstItem="3fj-6s-Yru" firstAttribute="bottom" secondItem="txa-h1-FFN" secondAttribute="bottom" id="TZc-ma-gby"/>
                             <constraint firstItem="WQv-va-gH3" firstAttribute="top" secondItem="3fj-6s-Yru" secondAttribute="top" constant="120" id="aEG-VE-9Tx"/>
+                            <constraint firstItem="3fj-6s-Yru" firstAttribute="bottom" secondItem="dsb-w1-KaU" secondAttribute="bottom" id="iNy-l1-RIg"/>
+                            <constraint firstItem="dsb-w1-KaU" firstAttribute="centerX" secondItem="VEn-xQ-o2P" secondAttribute="centerX" id="rR1-rR-6vU"/>
                             <constraint firstItem="WQv-va-gH3" firstAttribute="leading" secondItem="3fj-6s-Yru" secondAttribute="leading" constant="57" id="saQ-DE-nFo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3fj-6s-Yru"/>
                     </view>
                     <connections>
+                        <outlet property="backNextStack" destination="dsb-w1-KaU" id="8aa-Rc-eX7"/>
                         <outlet property="stackDescription" destination="WQv-va-gH3" id="B0I-K5-nQM"/>
-                        <outlet property="stackSwitcher" destination="txa-h1-FFN" id="ugB-pb-o4t"/>
                         <outlet property="titleCurrentRoom" destination="FEf-f4-5tE" id="THR-gh-07x"/>
                     </connections>
                 </viewController>
@@ -96,5 +119,8 @@
     <resources>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -100,34 +100,6 @@
                                     <action selector="addScript:" destination="eV2-qh-JBh" eventType="touchUpInside" id="czu-nw-vq5"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="GMT-ve-7iz">
-                                <rect key="frame" x="119.66666666666669" y="728" width="136" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCz-75-TLv">
-                                        <rect key="frame" x="0.0" y="2" width="50" height="46.333333333333329"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="AWg-qI-MWh"/>
-                                            <constraint firstAttribute="width" constant="50" id="YLU-qD-gOt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" backgroundImage="chevron.left" catalog="system"/>
-                                        <connections>
-                                            <action selector="previousStep:" destination="eV2-qh-JBh" eventType="touchUpInside" id="fgo-Wz-dZO"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FtY-j8-els">
-                                        <rect key="frame" x="85.999999999999986" y="2" width="50.000000000000014" height="46.333333333333329"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="6i2-jp-xSy"/>
-                                            <constraint firstAttribute="width" constant="50" id="jcm-P5-Wfb"/>
-                                        </constraints>
-                                        <state key="normal" backgroundImage="chevron.right" catalog="system"/>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="BJ7-nd-3fl"/>
-                                </constraints>
-                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IPz-ye-xeh" customClass="ViewCustomClass" customModule="IndoorClimateControlSystems" customModuleProvider="target">
                                 <rect key="frame" x="6" y="535" width="364" height="130"/>
                                 <subviews>
@@ -356,21 +328,51 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="vbn-ID-ab3">
+                                <rect key="frame" x="126" y="728" width="123" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GIa-0z-JgJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngg-FX-o2h">
+                                                <rect key="frame" x="0.0" y="2" width="50" height="46.333333333333329"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="JaV-b7-Sm9"/>
+                                                    <constraint firstAttribute="width" constant="50" id="XoF-fm-xcd"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <state key="normal" backgroundImage="chevron.left" catalog="system"/>
+                                                <connections>
+                                                    <action selector="previousStep:" destination="eV2-qh-JBh" eventType="touchUpInside" id="83R-D1-JIH"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RTr-oL-Gee">
+                                                <rect key="frame" x="58" y="0.0" width="65" height="50"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                <state key="normal" title="Назад"/>
+                                                <connections>
+                                                    <action selector="previousStep:" destination="eV2-qh-JBh" eventType="touchUpInside" id="OEb-TD-Lhr"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rBd-Vk-8TM"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="rBd-Vk-8TM" firstAttribute="bottom" secondItem="vbn-ID-ab3" secondAttribute="bottom" id="3d5-oI-W42"/>
                             <constraint firstAttribute="trailing" secondItem="IPz-ye-xeh" secondAttribute="trailing" constant="5" id="5ft-Rw-ba5"/>
                             <constraint firstItem="H5O-BR-Ny5" firstAttribute="top" secondItem="IPz-ye-xeh" secondAttribute="bottom" constant="8" id="IQz-dJ-lky"/>
+                            <constraint firstItem="vbn-ID-ab3" firstAttribute="centerX" secondItem="RNe-Sc-NAU" secondAttribute="centerX" id="IcM-Wi-QkE"/>
                             <constraint firstItem="H5O-BR-Ny5" firstAttribute="centerX" secondItem="RNe-Sc-NAU" secondAttribute="centerX" id="PLj-Xo-OD0"/>
                             <constraint firstItem="pdh-j0-6sU" firstAttribute="centerX" secondItem="RNe-Sc-NAU" secondAttribute="centerX" id="RCU-ba-xQ5"/>
                             <constraint firstItem="pdh-j0-6sU" firstAttribute="top" secondItem="rBd-Vk-8TM" secondAttribute="top" constant="19" id="U8F-ay-Jrz"/>
+                            <constraint firstItem="GIa-0z-JgJ" firstAttribute="top" secondItem="H5O-BR-Ny5" secondAttribute="bottom" constant="25" id="XlP-p4-QTH"/>
                             <constraint firstItem="adU-v3-1ox" firstAttribute="top" secondItem="pdh-j0-6sU" secondAttribute="bottom" constant="20" id="Yhv-pe-oDG"/>
-                            <constraint firstItem="rBd-Vk-8TM" firstAttribute="bottom" secondItem="GMT-ve-7iz" secondAttribute="bottom" id="dlu-KO-XlW"/>
                             <constraint firstItem="adU-v3-1ox" firstAttribute="leading" secondItem="rBd-Vk-8TM" secondAttribute="leading" constant="28" id="fkx-CI-Tbz"/>
-                            <constraint firstItem="GMT-ve-7iz" firstAttribute="top" secondItem="H5O-BR-Ny5" secondAttribute="bottom" constant="25" id="h87-3z-PRq"/>
                             <constraint firstItem="rBd-Vk-8TM" firstAttribute="trailing" secondItem="adU-v3-1ox" secondAttribute="trailing" constant="32" id="jph-lc-rsG"/>
-                            <constraint firstItem="GMT-ve-7iz" firstAttribute="centerX" secondItem="RNe-Sc-NAU" secondAttribute="centerX" id="tL6-3T-icd"/>
                             <constraint firstItem="IPz-ye-xeh" firstAttribute="leading" secondItem="rBd-Vk-8TM" secondAttribute="leading" constant="6" id="uMK-bi-cgI"/>
                         </constraints>
                     </view>
@@ -408,7 +410,6 @@
     <resources>
         <image name="air_conditioner" width="512" height="512"/>
         <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <image name="clock" width="512" height="512"/>
         <image name="home" width="512" height="512"/>
         <image name="hotfloor" width="293" height="293"/>

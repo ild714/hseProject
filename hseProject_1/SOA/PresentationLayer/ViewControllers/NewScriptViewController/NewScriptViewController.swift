@@ -44,7 +44,7 @@ class NewScriptViewController: UIViewController {
     }
     @IBAction func nextStep(_ sender: Any) {
         scriptCreator.name = textFieldForScript.text ?? "Test1"
-        scriptCreator.did = "10153"
+        scriptCreator.did = "10155"
         if let scriptForRoomVC = presentationAssembly?.scriptForRoomViewController(scriptCreator: self.scriptCreator) {
             navigationController?.pushViewController(scriptForRoomVC, animated: true)
         }
