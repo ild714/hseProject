@@ -88,7 +88,7 @@ extension ScriptCurrentRoomsViewController: UITableViewDelegate {
 extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
     func save(rooms: [Int]) {
         print(rooms)
-        let json: JSON = JSON(arrayLiteral: rooms)
+        let json: JSON = JSON(rooms)
         scriptCreator["roomGroup0"] = JSON()
         scriptCreator["roomGroup0"]["rIDs"] = json
         print(self.scriptCreator)
