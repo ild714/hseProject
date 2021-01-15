@@ -7,16 +7,17 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 protocol PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController?
     func roomsViewController(curentVC: Int) -> RoomsViewController?
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController() -> NewScriptViewController?
-    func scriptForRoomViewController(scriptCreator: ScriptCreator) -> ScriptForRoomViewController?
+    func scriptForRoomViewController(scriptCreator: JSON) -> ScriptForRoomViewController?
     func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController?
     func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController?
-    func currentRoomsViewController() -> ScriptCurrentRoomsViewController?
+    func currentRoomsViewController(name: String,rooms: [Int]) -> ScriptCurrentRoomsViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -66,7 +67,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                 return newScriptVC
         })
     }
-    func scriptForRoomViewController(scriptCreator: ScriptCreator) -> ScriptForRoomViewController? {
+    func scriptForRoomViewController(scriptCreator: JSON) -> ScriptForRoomViewController? {
         let storyboard = UIStoryboard(name: "ScriptForRoomViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptForRoomViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
@@ -89,11 +90,11 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             return scriptServiceVC
         })
     }
-    func currentRoomsViewController() -> ScriptCurrentRoomsViewController? {
+    func currentRoomsViewController(name: String = "", rooms: [Int] = []) -> ScriptCurrentRoomsViewController? {
         let storyboard = UIStoryboard(name: "CurrentRoomsViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "CurrentRoomsViewController", creator: {
             coder in
-            let currentRoomsVC = ScriptCurrentRoomsViewController(coder: coder, presentationAssembly: self, scriptCreator: ScriptCreator(did: "10155", name: "Test", roomGroup0: nil))
+            let currentRoomsVC = ScriptCurrentRoomsViewController(coder: coder, presentationAssembly: self, scriptCreator: ["did": "10153", "name": name ])
             return currentRoomsVC
         })
     }

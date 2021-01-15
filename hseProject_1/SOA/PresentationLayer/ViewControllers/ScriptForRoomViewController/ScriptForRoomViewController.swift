@@ -9,9 +9,13 @@
 import UIKit
 import SwiftyJSON
 
+protocol ScriptForRoomProtocol: class {
+    func save(rooms:[Int])
+}
+
 class ScriptForRoomViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: ScriptCreator) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: JSON) {
         self.presentationAssembly = presentationAssembly
         self.modelRoomsConfig = modelRoomsConfig
         self.scriptCreator = scriptCreator
@@ -21,14 +25,12 @@ class ScriptForRoomViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    weak var delegate: ScriptForRoomProtocol?
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
-    private var scriptCreator: ScriptCreator?
+    private var scriptCreator: JSON?
 
-    @IBOutlet weak var titleCurrentRoom: UILabel!
     @IBOutlet weak var stackDescription: UIStackView!
-    @IBOutlet weak var backNextStack: UIStackView!
 
     private var roomNumbersAndNames: [(key: Int, value: String)] = Array()
     private var marks: [Bool] = []
@@ -48,14 +50,27 @@ class ScriptForRoomViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let roomGroup = RoomGroopCreator(rIDs: [0], dayGroup0: nil, dayGroup1: nil)
-        self.scriptCreator?.roomGroup0 = roomGroup
-        self.navigationItem.setHidesBackButton(true, animated: true)
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
         modelRoomsConfig?.fetchRoomConfig()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveRoomsGroup))
     }
 
+    @objc func saveRoomsGroup() {
+        
+        var rooms: [Int] = []
+        var position = 0
+        for mark in self.marks {
+            
+            if mark == true {
+                rooms.append(self.roomNumbersAndNames[position].key)
+            }
+            position += 1
+        }
+        self.delegate?.save(rooms: rooms)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func setupTableView() {
         view.addSubview(tableView)
 
@@ -64,7 +79,7 @@ class ScriptForRoomViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: stackDescription.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: backNextStack.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
     func showAlert() {
@@ -73,23 +88,13 @@ class ScriptForRoomViewController: UIViewController {
         self.present(alertVC, animated: true)
     }
 
-    @IBAction func previousStep(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
-    @IBAction func nextStep(_ sender: Any) {
-        if let script = self.scriptCreator {
-            if let scriptForDaysVC = presentationAssembly?.scriptForDaysViewController(scriptCreator: script) {
-                navigationController?.pushViewController(scriptForDaysVC, animated: true)
-            }
-        }
-    }
 }
 
 // MARK: - ScriptsViewController datasource
 extension ScriptForRoomViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return roomNumbersAndNames.count - 1
+        return roomNumbersAndNames.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,7 +104,7 @@ extension ScriptForRoomViewController: UITableViewDataSource {
 
         cell.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         cell.selectionStyle = .none
-        cell.configure(room: roomNumbersAndNames[indexPath.row + 1].value, markBool: marks[indexPath.row])
+        cell.configure(room: roomNumbersAndNames[indexPath.row].value, markBool: marks[indexPath.row])
 
         return cell
     }
@@ -112,27 +117,9 @@ extension ScriptForRoomViewController: UITableViewDelegate {
         if self.marks[indexPath.row] == true {
                 self.marks.remove(at: indexPath.row)
                 self.marks.insert(false, at: indexPath.row)
-            self.scriptCreator?.roomGroup0?.rIDs = [0]
-            var position = 1
-            for mark in self.marks {
-                if mark == true {
-                    self.scriptCreator?.roomGroup0?.rIDs.append(position)
-                }
-                position += 1
-            }
-
         } else {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(true, at: indexPath.row)
-
-            self.scriptCreator?.roomGroup0?.rIDs = [0]
-            var position = 1
-            for mark in self.marks {
-                if mark == true {
-                    self.scriptCreator?.roomGroup0?.rIDs.append(position)
-                }
-                position += 1
-            }
         }
         tableView.reloadData()
     }
@@ -142,9 +129,8 @@ extension ScriptForRoomViewController: UITableViewDelegate {
 extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
-            self.titleCurrentRoom.text = "Зададим сценарий для комнаты \(self.roomNumbersAndNames[0].value)"
 
-        for _ in 0..<self.roomNumbersAndNames.count - 1 {
+        for _ in 0..<self.roomNumbersAndNames.count {
             self.marks.append(false)
         }
         self.tableView.reloadData()

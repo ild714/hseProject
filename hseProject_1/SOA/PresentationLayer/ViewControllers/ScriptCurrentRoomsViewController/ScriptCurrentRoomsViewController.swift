@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ScriptCurrentRoomsViewController: UIViewController {
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: ScriptCreator) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: JSON) {
         self.presentationAssembly = presentationAssembly
         self.scriptCreator = scriptCreator
         super.init(coder: coder)
@@ -18,7 +19,8 @@ class ScriptCurrentRoomsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    private var scriptCreator: ScriptCreator?
+    
+    var scriptCreator: JSON = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private let cellIdentifier = String(describing: CurrentRoomsTableViewCell.self)
     lazy var tableView: UITableView = {
@@ -37,7 +39,13 @@ class ScriptCurrentRoomsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newRoomsGroup))
     }
     @objc func newRoomsGroup() {
-        
+        if let scriptForRoomVC = presentationAssembly?.scriptForRoomViewController(scriptCreator: self.scriptCreator) {
+            scriptForRoomVC.delegate = self
+            let navigation = UINavigationController()
+            navigation.viewControllers = [scriptForRoomVC]
+//            navigationController?.pushViewController(scriptForRoomVC, animated: true)
+            present(navigation, animated: true)
+        }
     }
     func setupTableView() {
         view.addSubview(tableView)
@@ -74,5 +82,15 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 extension ScriptCurrentRoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+// MARK: - ScriptForRoomProtocol delegate
+extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
+    func save(rooms: [Int]) {
+        print(rooms)
+        let json: JSON = JSON(arrayLiteral: rooms)
+        scriptCreator["roomGroup0"] = JSON()
+        scriptCreator["roomGroup0"]["rIDs"] = json
+        print(self.scriptCreator)
     }
 }

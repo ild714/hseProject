@@ -17,19 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="WQv-va-gH3">
-                                <rect key="frame" x="57" y="164" width="300" height="105"/>
+                                <rect key="frame" x="57" y="72" width="300" height="48"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зададим сценарий для комнаты" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEf-f4-5tE">
-                                        <rect key="frame" x="53.5" y="0.0" width="193" height="45"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="BTH-uR-QVT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Применить эти же настройки для других комнат?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mzx-6s-846">
-                                        <rect key="frame" x="10" y="57" width="280" height="48"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберете комнаты для задания настроек" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mzx-6s-846">
+                                        <rect key="frame" x="36.5" y="0.0" width="227.5" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="PQz-nc-AbJ"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="jDh-sx-t1s"/>
@@ -40,75 +31,17 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="dsb-w1-KaU">
-                                <rect key="frame" x="54" y="812" width="306" height="50"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-Zh-A0B">
-                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hlo-xV-0th">
-                                                <rect key="frame" x="0.0" y="2" width="50" height="46.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="1ec-yk-y9A"/>
-                                                    <constraint firstAttribute="height" constant="50" id="JZ1-Ct-1ff"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" backgroundImage="chevron.left" catalog="system"/>
-                                                <connections>
-                                                    <action selector="previousStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="CDG-tq-qE4"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G0w-xC-zti">
-                                                <rect key="frame" x="58" y="0.0" width="65" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                                <state key="normal" title="Назад"/>
-                                                <connections>
-                                                    <action selector="previousStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="v9U-lu-4ZA"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sta-65-jAA">
-                                        <rect key="frame" x="183" y="0.0" width="123" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sab-w2-Jvy">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                                <state key="normal" title="Далее"/>
-                                                <connections>
-                                                    <action selector="nextStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="ZDK-7v-Jx4"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RuC-fU-mHX">
-                                                <rect key="frame" x="73" y="2" width="50" height="46.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="2te-9j-cX3"/>
-                                                    <constraint firstAttribute="width" constant="50" id="fM4-ce-ncf"/>
-                                                </constraints>
-                                                <state key="normal" backgroundImage="chevron.right" catalog="system"/>
-                                                <connections>
-                                                    <action selector="nextStep:" destination="Vrm-c0-XV1" eventType="touchUpInside" id="wfx-er-znh"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3fj-6s-Yru"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3fj-6s-Yru" firstAttribute="trailing" secondItem="WQv-va-gH3" secondAttribute="trailing" constant="57" id="Lun-JL-ae1"/>
-                            <constraint firstItem="WQv-va-gH3" firstAttribute="top" secondItem="3fj-6s-Yru" secondAttribute="top" constant="120" id="aEG-VE-9Tx"/>
-                            <constraint firstItem="3fj-6s-Yru" firstAttribute="bottom" secondItem="dsb-w1-KaU" secondAttribute="bottom" id="iNy-l1-RIg"/>
-                            <constraint firstItem="dsb-w1-KaU" firstAttribute="centerX" secondItem="VEn-xQ-o2P" secondAttribute="centerX" id="rR1-rR-6vU"/>
+                            <constraint firstItem="WQv-va-gH3" firstAttribute="top" secondItem="3fj-6s-Yru" secondAttribute="top" constant="28" id="aEG-VE-9Tx"/>
                             <constraint firstItem="WQv-va-gH3" firstAttribute="leading" secondItem="3fj-6s-Yru" secondAttribute="leading" constant="57" id="saQ-DE-nFo"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backNextStack" destination="dsb-w1-KaU" id="8aa-Rc-eX7"/>
                         <outlet property="stackDescription" destination="WQv-va-gH3" id="B0I-K5-nQM"/>
-                        <outlet property="titleCurrentRoom" destination="FEf-f4-5tE" id="THR-gh-07x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN4-vg-ajw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -117,8 +50,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
