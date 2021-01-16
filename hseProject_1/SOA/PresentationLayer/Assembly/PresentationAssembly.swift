@@ -14,7 +14,7 @@ protocol PresentationAssemblyProtocol {
     func roomsViewController(curentVC: Int) -> RoomsViewController?
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController() -> NewScriptViewController?
-    func scriptForRoomViewController(scriptCreator: JSON) -> ScriptForRoomViewController?
+    func scriptForRoomViewController(scriptCreator: JSON,roomNumbers: [Int]) -> ScriptForRoomViewController?
     func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController?
     func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController?
     func currentRoomsViewController(name: String,rooms: [Int]) -> ScriptCurrentRoomsViewController?
@@ -67,11 +67,11 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                 return newScriptVC
         })
     }
-    func scriptForRoomViewController(scriptCreator: JSON) -> ScriptForRoomViewController? {
+    func scriptForRoomViewController(scriptCreator: JSON,roomNumbers: [Int]) -> ScriptForRoomViewController? {
         let storyboard = UIStoryboard(name: "ScriptForRoomViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptForRoomViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
-            let scriptForRoomVC =  ScriptForRoomViewController(coder: coder, presentationAssembly: self, modelRoomsConfig: modelRoomsConfig, scriptCreator: scriptCreator)
+            let scriptForRoomVC =  ScriptForRoomViewController(coder: coder, presentationAssembly: self, modelRoomsConfig: modelRoomsConfig, scriptCreator: scriptCreator, roomNumbers: roomNumbers )
             modelRoomsConfig.delegate = scriptForRoomVC
             return scriptForRoomVC
         })

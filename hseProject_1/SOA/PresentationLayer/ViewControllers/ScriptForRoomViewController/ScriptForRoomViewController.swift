@@ -15,10 +15,11 @@ protocol ScriptForRoomProtocol: class {
 
 class ScriptForRoomViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: JSON) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: JSON, roomNumbers: [Int]) {
         self.presentationAssembly = presentationAssembly
         self.modelRoomsConfig = modelRoomsConfig
         self.scriptCreator = scriptCreator
+        self.roomNumbers = roomNumbers
         super.init(coder: coder)
     }
 
@@ -26,6 +27,7 @@ class ScriptForRoomViewController: UIViewController {
         super.init(coder: coder)
     }
     weak var delegate: ScriptForRoomProtocol?
+    private var roomNumbers: [Int] = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var scriptCreator: JSON?
@@ -128,8 +130,18 @@ extension ScriptForRoomViewController: UITableViewDelegate {
 // MARK: - ModelRoomsConfigDelegate
 extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
+        
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
 
+        var dicFiltered: [Int:String] = [:]
+        for element in self.roomNumbersAndNames {
+            if self.roomNumbers.contains(element.key) {
+            } else {
+                dicFiltered[element.key] = element.value
+            }
+        }
+        
+        self.roomNumbersAndNames = dicFiltered.sorted{$0.0 < $1.0}
         for _ in 0..<self.roomNumbersAndNames.count {
             self.marks.append(false)
         }

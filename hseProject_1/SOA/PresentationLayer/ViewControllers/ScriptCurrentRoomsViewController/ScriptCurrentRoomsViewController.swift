@@ -20,6 +20,11 @@ class ScriptCurrentRoomsViewController: UIViewController {
         super.init(coder: coder)
     }
     
+    var allRoomsForVC: [Int] = []
+    var roomNumbers: [Int:[Int]] = [:]
+    var dynamicInt = 0
+    var dynamicString = ""
+    
     var scriptCreator: JSON = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private let cellIdentifier = String(describing: CurrentRoomsTableViewCell.self)
@@ -39,7 +44,26 @@ class ScriptCurrentRoomsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newRoomsGroup))
     }
     @objc func newRoomsGroup() {
-        if let scriptForRoomVC = presentationAssembly?.scriptForRoomViewController(scriptCreator: self.scriptCreator) {
+        for index in 0..<dynamicInt {
+            print(scriptCreator["roomGroup\(index)"]["rIDs"].arrayValue)
+            
+            let json = scriptCreator["roomGroup\(index)"]["rIDs"].arrayValue
+            for number in json {
+                var ints : [Int] = []
+                if let number = number.int {
+                    ints.append(number)
+                }
+                roomNumbers[index] = ints
+                ints.removeAll()
+            }
+            
+        }
+        for value in roomNumbers {
+            for ints in value.value {
+                self.allRoomsForVC.append(ints)
+            }
+        }
+        if let scriptForRoomVC = presentationAssembly?.scriptForRoomViewController(scriptCreator: self.scriptCreator, roomNumbers: self.allRoomsForVC) {
             scriptForRoomVC.delegate = self
             let navigation = UINavigationController()
             navigation.viewControllers = [scriptForRoomVC]
@@ -62,15 +86,13 @@ class ScriptCurrentRoomsViewController: UIViewController {
 extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return roomNumbers.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CurrentRoomsTableViewCell else {
             return UITableViewCell()
         }
-        
-        
         cell.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         cell.configure(rooms: "test")
 
@@ -82,15 +104,19 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 extension ScriptCurrentRoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        print("!!!")
+        print(self.scriptCreator)
     }
 }
 // MARK: - ScriptForRoomProtocol delegate
 extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
     func save(rooms: [Int]) {
-        print(rooms)
+//        print(rooms)
         let json: JSON = JSON(rooms)
-        scriptCreator["roomGroup0"] = JSON()
-        scriptCreator["roomGroup0"]["rIDs"] = json
-        print(self.scriptCreator)
+        scriptCreator["roomGroup\(dynamicInt)"] = JSON()
+        scriptCreator["roomGroup\(dynamicInt)"]["rIDs"] = json
+        dynamicInt += 1
+        
+//        print(self.scriptCreator)
     }
 }

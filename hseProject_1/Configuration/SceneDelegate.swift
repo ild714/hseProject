@@ -17,10 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let rootAssembly = RootAssembly()
-            if UserDefaults.standard.bool(forKey: "Log_in") {
-                if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
+//            if UserDefaults.standard.bool(forKey: "Log_in") {
+            if let collectionViewController = rootAssembly.presentationAssembly.newScriptViewController() {
 
-                    let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
+                    let storyboard: UIStoryboard = UIStoryboard(name: "NewScriptViewController", bundle: nil)
                     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
                     navigationController?.viewControllers = [collectionViewController]
 
@@ -28,12 +28,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.window?.rootViewController = navigationController
                     self.window?.makeKeyAndVisible()
                 }
-            } else {
-                let signInVC = SignInViewController(rootAssembly: rootAssembly)
-
-                self.window?.rootViewController = signInVC
-                self.window?.makeKeyAndVisible()
-            }
+//            } else {
+//                let signInVC = SignInViewController(rootAssembly: rootAssembly)
+//
+//                self.window?.rootViewController = signInVC
+//                self.window?.makeKeyAndVisible()
+//            }
         }
     }
 
