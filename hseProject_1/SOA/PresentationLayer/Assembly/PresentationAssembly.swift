@@ -14,10 +14,10 @@ protocol PresentationAssemblyProtocol {
     func roomsViewController(curentVC: Int) -> RoomsViewController?
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController() -> NewScriptViewController?
-    func scriptForRoomViewController(scriptCreator: JSON,roomNumbers: [Int]) -> ScriptForRoomViewController?
+    func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
     func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController?
     func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController?
-    func currentRoomsViewController(name: String,rooms: [Int]) -> ScriptCurrentRoomsViewController?
+    func currentRoomsViewController(name: String, rooms: [Int]) -> ScriptCurrentRoomsViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -67,7 +67,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                 return newScriptVC
         })
     }
-    func scriptForRoomViewController(scriptCreator: JSON,roomNumbers: [Int]) -> ScriptForRoomViewController? {
+    func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController? {
         let storyboard = UIStoryboard(name: "ScriptForRoomViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptForRoomViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
@@ -92,9 +92,11 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     }
     func currentRoomsViewController(name: String = "", rooms: [Int] = []) -> ScriptCurrentRoomsViewController? {
         let storyboard = UIStoryboard(name: "CurrentRoomsViewController", bundle: nil)
+        let modelRoomsConfig = self.modelRoomsConfig()
         return storyboard.instantiateViewController(identifier: "CurrentRoomsViewController", creator: {
             coder in
-            let currentRoomsVC = ScriptCurrentRoomsViewController(coder: coder, presentationAssembly: self, scriptCreator: ["did": "10153", "name": name ])
+            let currentRoomsVC = ScriptCurrentRoomsViewController(coder: coder, presentationAssembly: self, modelRoomsConfig: modelRoomsConfig, scriptCreator: ["did": "10153", "name": name ])
+            modelRoomsConfig.delegate = currentRoomsVC
             return currentRoomsVC
         })
     }
@@ -111,5 +113,4 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     init(serviceAssembly: ServiceAssemblyProtocol) {
         self.serviceAssembly = serviceAssembly
     }
-
 }

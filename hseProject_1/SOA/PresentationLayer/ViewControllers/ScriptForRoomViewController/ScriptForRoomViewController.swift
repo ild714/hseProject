@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 protocol ScriptForRoomProtocol: class {
-    func save(rooms:[Int])
+    func save(rooms: [Int])
 }
 
 class ScriptForRoomViewController: UIViewController {
@@ -26,6 +26,7 @@ class ScriptForRoomViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    private var emtyVC = false
     weak var delegate: ScriptForRoomProtocol?
     private var roomNumbers: [Int] = []
     private var presentationAssembly: PresentationAssemblyProtocol?
@@ -54,25 +55,28 @@ class ScriptForRoomViewController: UIViewController {
 
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
+
         modelRoomsConfig?.fetchRoomConfig()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveRoomsGroup))
     }
-
     @objc func saveRoomsGroup() {
-        
-        var rooms: [Int] = []
-        var position = 0
-        for mark in self.marks {
-            
-            if mark == true {
-                rooms.append(self.roomNumbersAndNames[position].key)
+
+        if emtyVC {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            var rooms: [Int] = []
+            var position = 0
+            for mark in self.marks {
+                if mark == true {
+                    rooms.append(self.roomNumbersAndNames[position].key)
+                }
+                position += 1
             }
-            position += 1
+            self.delegate?.save(rooms: rooms)
+            self.dismiss(animated: true, completion: nil)
         }
-        self.delegate?.save(rooms: rooms)
-        self.dismiss(animated: true, completion: nil)
     }
-    
+
     func setupTableView() {
         view.addSubview(tableView)
 
@@ -117,8 +121,8 @@ extension ScriptForRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if self.marks[indexPath.row] == true {
-                self.marks.remove(at: indexPath.row)
-                self.marks.insert(false, at: indexPath.row)
+            self.marks.remove(at: indexPath.row)
+            self.marks.insert(false, at: indexPath.row)
         } else {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(true, at: indexPath.row)
@@ -130,18 +134,23 @@ extension ScriptForRoomViewController: UITableViewDelegate {
 // MARK: - ModelRoomsConfigDelegate
 extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
-        
+
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
 
-        var dicFiltered: [Int:String] = [:]
+        var dicFiltered: [Int: String] = [:]
         for element in self.roomNumbersAndNames {
             if self.roomNumbers.contains(element.key) {
             } else {
                 dicFiltered[element.key] = element.value
             }
         }
-        
-        self.roomNumbersAndNames = dicFiltered.sorted{$0.0 < $1.0}
+
+        self.roomNumbersAndNames = dicFiltered.sorted {$0.0 < $1.0}
+
+        if dicFiltered.count == 0 {
+            emtyVC = true
+        }
+
         for _ in 0..<self.roomNumbersAndNames.count {
             self.marks.append(false)
         }

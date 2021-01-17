@@ -55,7 +55,7 @@ class ScriptsViewController: UIViewController {
 
     func loadScripts(group: DispatchGroup) {
         let loadScripts = NetworkScriptLoad()
-        loadScripts.getDataScripts() { (result: Result<[String: JSON], NetworkSensorError>) in
+        loadScripts.getDataScripts { (result: Result<[String: JSON], NetworkSensorError>) in
             switch result {
             case .success(let result):
                 for data in result {

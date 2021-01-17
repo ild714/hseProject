@@ -10,7 +10,8 @@ import UIKit
 import SwiftyJSON
 
 class ScriptCurrentRoomsViewController: UIViewController {
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: JSON) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: JSON) {
+        self.modelRoomsConfig = modelRoomsConfig
         self.presentationAssembly = presentationAssembly
         self.scriptCreator = scriptCreator
         super.init(coder: coder)
@@ -19,12 +20,15 @@ class ScriptCurrentRoomsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
+    private var modelRoomsConfig: ModelRoomsConfigProtocol?
+    var indexForSections = 0
+    private var roomNumbersAndNames: [(key: Int, value: String)] = Array()
+    var roomCurrentNumbersAndNames: [Int: [String]] = [:]
     var allRoomsForVC: [Int] = []
-    var roomNumbers: [Int:[Int]] = [:]
+    var roomNumbers: [Int: [Int]] = [:]
     var dynamicInt = 0
     var dynamicString = ""
-    
     var scriptCreator: JSON = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private let cellIdentifier = String(describing: CurrentRoomsTableViewCell.self)
@@ -40,23 +44,22 @@ class ScriptCurrentRoomsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
-        setupTableView()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newRoomsGroup))
+        modelRoomsConfig?.fetchRoomConfig()
+        setupTableView()
     }
     @objc func newRoomsGroup() {
         for index in 0..<dynamicInt {
-            print(scriptCreator["roomGroup\(index)"]["rIDs"].arrayValue)
-            
             let json = scriptCreator["roomGroup\(index)"]["rIDs"].arrayValue
+            var ints: [Int] = []
             for number in json {
-                var ints : [Int] = []
                 if let number = number.int {
                     ints.append(number)
                 }
                 roomNumbers[index] = ints
-                ints.removeAll()
+
             }
-            
+            ints.removeAll()
         }
         for value in roomNumbers {
             for ints in value.value {
@@ -67,7 +70,6 @@ class ScriptCurrentRoomsViewController: UIViewController {
             scriptForRoomVC.delegate = self
             let navigation = UINavigationController()
             navigation.viewControllers = [scriptForRoomVC]
-//            navigationController?.pushViewController(scriptForRoomVC, animated: true)
             present(navigation, animated: true)
         }
     }
@@ -80,13 +82,19 @@ class ScriptCurrentRoomsViewController: UIViewController {
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
+
+    func showAlert() {
+        let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
+    }
 }
 
 // MARK: - CurrentRoomsViewController datasource
 extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return roomNumbers.count
+        return self.roomCurrentNumbersAndNames.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,7 +102,20 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
-        cell.configure(rooms: "test")
+        var labelArrayString = ""
+
+
+        for sections in self.roomCurrentNumbersAndNames {
+            if sections.key == indexPath.row {
+                for section in sections.value {
+                    labelArrayString += section
+                    labelArrayString += "\n"
+                }
+                print(labelArrayString)
+                cell.configure(rooms: labelArrayString)
+            } else {
+            }
+        }
 
         return cell
     }
@@ -106,17 +127,62 @@ extension ScriptCurrentRoomsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         print("!!!")
         print(self.scriptCreator)
+        self.tableView.reloadData()
     }
 }
 // MARK: - ScriptForRoomProtocol delegate
 extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
     func save(rooms: [Int]) {
-//        print(rooms)
+
+        self.jsonForRoomSection(rooms: rooms)
+
+        self.numbersDictForRoomSection()
+        self.indexAndNamesForRoomSection()
+        dynamicInt += 1
+        self.tableView.reloadData()
+    }
+
+    func jsonForRoomSection(rooms: [Int]) {
         let json: JSON = JSON(rooms)
         scriptCreator["roomGroup\(dynamicInt)"] = JSON()
         scriptCreator["roomGroup\(dynamicInt)"]["rIDs"] = json
-        dynamicInt += 1
-        
-//        print(self.scriptCreator)
+
+    }
+
+    func numbersDictForRoomSection() {
+        let json = scriptCreator["roomGroup\(dynamicInt)"]["rIDs"].arrayValue
+        var ints: [Int] = []
+        for number in json {
+            if let number = number.int {
+                ints.append(number)
+            }
+        }
+        roomNumbers[dynamicInt] = ints
+        ints.removeAll()
+    }
+
+    func indexAndNamesForRoomSection() {
+        var labels: [String] = []
+        for intElement in roomNumbers[dynamicInt]! {
+                for data in roomNumbersAndNames {
+                    if intElement == data.key {
+                        labels.append(data.value)
+                    }
+                }
+            self.roomCurrentNumbersAndNames[dynamicInt] = labels
+        }
+        roomNumbers.removeAll()
+        print(roomCurrentNumbersAndNames)
+    }
+}
+
+// MARK: - ModelRoomsConfigDelegate
+extension ScriptCurrentRoomsViewController: ModelRoomsConfigDelegate {
+    func setup(result: [Int: String]) {
+        self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
+    }
+    func show1(error message: String) {
+        print(message)
+        self.showAlert()
     }
 }
