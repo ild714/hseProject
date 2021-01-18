@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class NetworkScript {
 
-    func sentDataScript(script: ScriptCreator) {
+    func sentDataScript(script: JSON) {
         guard let url = URL(string: "https://\(Bundle.main.infoDictionary?["SENT_DATA"] as? String ?? "")") else {
             return
         }
@@ -31,7 +32,9 @@ class NetworkScript {
 
                 if let data = data {
                     if let data = String(bytes: data, encoding: .utf8) {
+                        print("!")
                         print(data)
+                        print("!")
                     }
                 } else {
                     print("badData for script")

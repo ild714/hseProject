@@ -35,14 +35,12 @@ class ScriptCurrentDaysViewController: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newDaysGroup))
         setupTableView()
     }
-    
     @objc func newDaysGroup() {
         var days: [String] = []
         for value in Array(roomCurrentNumbersAndDays.values) {
@@ -56,7 +54,6 @@ class ScriptCurrentDaysViewController: UIViewController {
             present(navigation, animated: true)
         }
     }
-    
     func setupTableView() {
         view.addSubview(tableView)
 
@@ -115,6 +112,12 @@ extension ScriptCurrentDaysViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         print("!!!")
         print(self.scriptCreator)
+        
+        if let scriptForDaysVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator) {
+            scriptForDaysVC.previousRoomId = self.previousNumber
+            scriptForDaysVC.previousDayId = indexPath.row
+            navigationController?.pushViewController(scriptForDaysVC, animated: true)
+        }
     }
 }
 
@@ -152,7 +155,6 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         }
         
         let json: JSON = JSON(stringToNumber)
-//        scriptCreator["roomGroup\(previousNumber)"] = JSON()
         scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(dynamicInt)"] = JSON()
         scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(dynamicInt)"]["days"] = json
         print(scriptCreator)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 struct ServiceScript {
     var time: Date = Date()
@@ -24,7 +25,7 @@ struct ServiceScript {
 
 class ScriptServiceViewController: UIViewController {
 
-    init?(coder: NSCoder, scriptCreator: ScriptCreator) {
+    init?(coder: NSCoder, scriptCreator: JSON) {
         self.scriptCreator = scriptCreator
         super.init(coder: coder)
     }
@@ -32,7 +33,10 @@ class ScriptServiceViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    private var scriptCreator: ScriptCreator?
+    var indexOfService = 0
+    var previousRoomId = 0
+    var previousDayId = 0
+    private var scriptCreator: JSON = []
     @IBOutlet weak var serviceLabel: UILabel!
     @IBOutlet weak var imageStack: UIStackView!
     @IBOutlet weak var settingCreator: ViewCustomClass!
@@ -203,41 +207,48 @@ class ScriptServiceViewController: UIViewController {
 
     @objc func saveAndClose() {
         if serviceScripts.count > 0 {
-        var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
-
-        for serviceScriptNumber in 0..<serviceScripts.count {
-            if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
-                setting.mute = 0
-            } else {
-                setting.mute = 1
+            var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
+            
+            for serviceScriptNumber in 0..<serviceScripts.count {
+                if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
+                    setting.mute = 0
+                } else {
+                    setting.mute = 1
+                }
+                
+                if self.serviceScripts[serviceScriptNumber].houseOnOff == true {
+                    setting.at_home = 1
+                } else {
+                    setting.at_home = 0
+                }
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH:mm"
+                setting.time = "\(formatter.string(from: serviceScripts[serviceScriptNumber].time))"
+                
+                setting.must_use = []
+                setting.hum = serviceScripts[serviceScriptNumber].humidity
+                setting.temp = serviceScripts[serviceScriptNumber].temperature
+                setting.co2 = serviceScripts[serviceScriptNumber].co2
+                setting.dont_use = []
+                
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"] = JSON()
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["mute"] = JSON(setting.mute)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["at_home"] = JSON(setting.at_home)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["time"] = JSON(setting.time)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["temp"] = JSON(setting.temp)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["hum"] = JSON(setting.hum)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["co2"] = JSON(setting.co2)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["must_use"] = JSON(setting.must_use)
+                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["dont_use"] = JSON(setting.dont_use)
             }
-
-            if self.serviceScripts[serviceScriptNumber].houseOnOff == true {
-                setting.at_home = 1
-            } else {
-                setting.at_home = 0
-            }
-
-            let formatter = DateFormatter()
-            formatter.dateFormat = "HH:mm"
-            setting.time = "\(formatter.string(from: serviceScripts[serviceScriptNumber].time))"
-
-            setting.must_use = []
-            setting.hum = serviceScripts[serviceScriptNumber].humidity
-            setting.temp = serviceScripts[serviceScriptNumber].temperature
-            setting.co2 = serviceScripts[serviceScriptNumber].co2
-            setting.dont_use = []
-
-            self.scriptCreator?.roomGroup0?.dayGroup0?.setting0 = setting
-            self.scriptCreator?.roomGroup0?.dayGroup1?.setting1 = setting
-
+            //print(scriptCreator)
             let network = NetworkScript()
-            if let script = scriptCreator {
-                network.sentDataScript(script: script)
-            }
-        }
-        self.navigationController?.dismiss(animated: true, completion: nil)
-        return
+//            if let script = scriptCreator {
+                network.sentDataScript(script: scriptCreator)
+//            }
+            self.navigationController?.dismiss(animated: true, completion: nil)
+            return
         } else {
             self.alerts(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки")
         }

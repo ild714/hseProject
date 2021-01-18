@@ -15,8 +15,8 @@ protocol PresentationAssemblyProtocol {
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController() -> NewScriptViewController?
     func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
-    func scriptForDaysViewController(scriptCreator: JSON,daysString: [String]) -> ScriptForDaysViewController?
-    func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController?
+    func scriptForDaysViewController(scriptCreator: JSON, daysString: [String]) -> ScriptForDaysViewController?
+    func scriptServiceViewController(scriptCreator: JSON) -> ScriptServiceViewController?
     func currentRoomsViewController(name: String, rooms: [Int]) -> ScriptCurrentRoomsViewController?
     func currentDaysViewController(scriptCreator: JSON) -> ScriptCurrentDaysViewController?
 }
@@ -84,7 +84,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             return scriptForDaysVC
         })
     }
-    func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController? {
+    func scriptServiceViewController(scriptCreator: JSON) -> ScriptServiceViewController? {
         let storyboard = UIStoryboard(name: "ScriptServiceViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptServiceViewController", creator: { coder in
             let scriptServiceVC =  ScriptServiceViewController(coder: coder, scriptCreator: scriptCreator)
