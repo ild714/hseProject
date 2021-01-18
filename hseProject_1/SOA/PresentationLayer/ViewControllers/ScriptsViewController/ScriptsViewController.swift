@@ -50,6 +50,7 @@ class ScriptsViewController: UIViewController {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         self.navigationController?.toolbar.isHidden = true
+//        self.navigationController?.navigationBar.backItem?.title = "Назад"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newScripts))
     }
 

@@ -159,11 +159,16 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.title = Array(self.roomNumbersAndNames.values.sorted())[self.curentVC - 1]
         self.createPageControll()
     }
+    
+    @IBOutlet weak var minusButton: ButtonLeftSideCustomClass!
+    @IBOutlet weak var plusButton: ButtonRightSideCustomClass!
     func setDefaultValuesForAimParamtrs() {
         self.aimTemperature.text = "-"
         self.aimWet.text = "-"
         self.aimGas.text = "-"
         ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
+        minusButton.isEnabled = false
+        plusButton.isEnabled = false
     }
     func showAlert() {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
@@ -176,9 +181,9 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     func startAnimation() {
         ActivityIndicator.animateActivity(
-            views: [ViewSpecialAndGeneral(view: self.aimWet, type: .special),
+            views: [ViewSpecialAndGeneral(view: self.aimWet),
                     ViewSpecialAndGeneral(view: self.currentGas),
-                    ViewSpecialAndGeneral(view: self.currentWet, type: .special),
+                    ViewSpecialAndGeneral(view: self.currentWet),
                     ViewSpecialAndGeneral(view: self.peopleInRoom),
                     ViewSpecialAndGeneral(view: self.aimGas),
                     ViewSpecialAndGeneral(view: self.aimTemperature),
@@ -230,7 +235,7 @@ extension RoomsViewController: ModelAppDatchikDelegate {
     }
     func setupCurrentAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
-            //            print(self.curentVC)
+            
             print(self.roomNumbersAndNames.keys.sorted())
             if self.roomNumbersAndNames.count > 0 {
                 let currentRoomData = CurrentRoomData(result: result, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC - 1])
@@ -240,7 +245,7 @@ extension RoomsViewController: ModelAppDatchikDelegate {
                 self.currentWet.text = currentRoomData.currentWet
                 self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
                 self.currentGas.text = currentRoomData.currentGas
-                //            self.ppmLabel.text = currentRoomData.ppm
+                //self.ppmLabel.text = currentRoomData.ppm
                 self.peopleInRoom.text = currentRoomData.peopleInRoom
 
                 ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])

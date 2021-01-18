@@ -15,7 +15,7 @@ protocol ScriptForDaysProtocol: class {
 
 class ScriptForDaysViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, scriptCreator: JSON,daysString: [String]) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, scriptCreator: JSON, daysString: [String]) {
         self.presentationAssembly = presentationAssembly
         self.scriptCreator = scriptCreator
         self.daysString = daysString
@@ -77,12 +77,12 @@ class ScriptForDaysViewController: UIViewController {
                 }
                 index += 1
             }
-            
-            self.delegate?.save(daysString:self.daysString )
+
+            self.delegate?.save(daysString: self.daysString )
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
+
     func setupTableView() {
         view.addSubview(tableView)
 

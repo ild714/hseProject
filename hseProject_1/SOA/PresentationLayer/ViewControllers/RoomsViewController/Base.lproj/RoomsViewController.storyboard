@@ -633,9 +633,11 @@
                         <outlet property="currentGas" destination="lbE-kO-XJC" id="tYh-Wc-Eu1"/>
                         <outlet property="currentTemperature" destination="iSG-41-5bu" id="S4u-fi-bWN"/>
                         <outlet property="currentWet" destination="ER1-BO-EiW" id="BK2-33-dri"/>
+                        <outlet property="minusButton" destination="0vC-IS-BPl" id="fUx-2y-zQS"/>
                         <outlet property="modOfCurrentTemperature" destination="Pjw-dr-PPl" id="s8R-bf-l0d"/>
                         <outlet property="modOfTheCurrentWet" destination="cmJ-vN-aVK" id="2zf-As-gZw"/>
                         <outlet property="peopleInRoom" destination="UjR-Pr-unn" id="RbJ-nN-OsM"/>
+                        <outlet property="plusButton" destination="tbS-AD-2XF" id="Inn-Yh-xem"/>
                         <outlet property="ppmLabel" destination="TCP-M5-jHX" id="uSI-wI-ZK2"/>
                         <outlet property="stackView" destination="Jyr-PG-SLT" id="AIb-UB-0oe"/>
                         <outlet property="stackViewCO2" destination="Eqt-rO-JzB" id="oS0-yn-fr8"/>

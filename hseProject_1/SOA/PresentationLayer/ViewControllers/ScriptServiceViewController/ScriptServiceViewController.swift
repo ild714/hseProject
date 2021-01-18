@@ -54,7 +54,9 @@ class ScriptServiceViewController: UIViewController {
         humidityTextField.delegate = self
         co2TextField.delegate = self
         temperatureTextField.delegate = self
-        self.navigationItem.setHidesBackButton(true, animated: true)
+//        self.navigationItem.setHidesBackButton(true, animated: true)
+//        self.navigationController?.navigationBar.backItem?.title = "Назад"
+//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         setupTableView()
     }
 
@@ -208,30 +210,30 @@ class ScriptServiceViewController: UIViewController {
     @objc func saveAndClose() {
         if serviceScripts.count > 0 {
             var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
-            
+
             for serviceScriptNumber in 0..<serviceScripts.count {
                 if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
                     setting.mute = 0
                 } else {
                     setting.mute = 1
                 }
-                
+
                 if self.serviceScripts[serviceScriptNumber].houseOnOff == true {
                     setting.at_home = 1
                 } else {
                     setting.at_home = 0
                 }
-                
+
                 let formatter = DateFormatter()
                 formatter.dateFormat = "HH:mm"
                 setting.time = "\(formatter.string(from: serviceScripts[serviceScriptNumber].time))"
-                
+
                 setting.must_use = []
                 setting.hum = serviceScripts[serviceScriptNumber].humidity
                 setting.temp = serviceScripts[serviceScriptNumber].temperature
                 setting.co2 = serviceScripts[serviceScriptNumber].co2
                 setting.dont_use = []
-                
+
                 scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"] = JSON()
                 scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["mute"] = JSON(setting.mute)
                 scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["at_home"] = JSON(setting.at_home)
@@ -244,9 +246,7 @@ class ScriptServiceViewController: UIViewController {
             }
             //print(scriptCreator)
             let network = NetworkScript()
-//            if let script = scriptCreator {
-                network.sentDataScript(script: scriptCreator)
-//            }
+            network.sentDataScript(script: scriptCreator)
             self.navigationController?.dismiss(animated: true, completion: nil)
             return
         } else {

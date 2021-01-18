@@ -20,7 +20,7 @@ class ScriptCurrentRoomsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     var indexForSections = 0
     private var roomNumbersAndNames: [(key: Int, value: String)] = Array()
@@ -45,6 +45,8 @@ class ScriptCurrentRoomsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newRoomsGroup))
+//        self.navigationController?.navigationBar.backItem?.title = "Назад"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         modelRoomsConfig?.fetchRoomConfig()
         setupTableView()
     }
@@ -96,7 +98,7 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.roomCurrentNumbersAndNames.count
     }
@@ -107,7 +109,6 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
         }
         cell.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         var labelArrayString = ""
-
 
         for sections in self.roomCurrentNumbersAndNames {
             if sections.key == indexPath.row {

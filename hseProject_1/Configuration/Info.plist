@@ -2,19 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>$(CLIENT_ID)</string>
-	<key>SENT_DATA</key>
-	<string>$(SENT_DATA)</string>
-	<key>DATCHIK</key>
-	<string>$(DATCHIK)</string>
-	<key>ROOM_CONFIG</key>
-	<string>$(ROOM_CONFIG)</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>yandexauth</string>
-		<string>yandexauth2</string>
-	</array>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>Russia</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -32,24 +33,23 @@
 			<array/>
 		</dict>
 	</array>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>Russia</string>
-	<key>CFBundleExecutable</key>
-	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
-	<key>CFBundlePackageType</key>
-	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
-	<key>CFBundleShortVersionString</key>
-	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>CLIENT_ID</key>
+	<string>$(CLIENT_ID)</string>
+	<key>DATCHIK</key>
+	<string>$(DATCHIK)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>yandexauth</string>
+		<string>yandexauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>ROOM_CONFIG</key>
+	<string>$(ROOM_CONFIG)</string>
+	<key>SENT_DATA</key>
+	<string>$(SENT_DATA)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

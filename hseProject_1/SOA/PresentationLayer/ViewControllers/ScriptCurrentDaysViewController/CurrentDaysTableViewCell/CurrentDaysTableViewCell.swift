@@ -11,12 +11,12 @@ import UIKit
 class CurrentDaysTableViewCell: UITableViewCell {
 
     @IBOutlet weak var labelDays: UILabel!
-    
+
     func configure(days: String) {
         self.labelDays.font = UIFont(name: "Arial", size: 21)
         self.labelDays.text = days
     }
-    
+
     lazy var width: NSLayoutConstraint = {
         let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
         width.isActive = true

@@ -21,7 +21,6 @@ class NewScriptViewController: UIViewController {
     private var presentationAssembly: PresentationAssemblyProtocol?
 
     @IBOutlet weak var textField: UITextField!
-//    var scriptCreator = ScriptCreator(did: "", name: "", roomGroup0: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +31,15 @@ class NewScriptViewController: UIViewController {
         textField.delegate = self
         textField.placeholder = "Новый сценарий"
         textField.layer.cornerRadius = 50
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title:"Дальше", style: .plain, target: self, action: #selector(roomsGroup))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        
+    }
+
+    @objc func roomsGroup() {
+        if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
+            navigationController?.pushViewController(currentRoomsVC, animated: true)
+        }
     }
 
     @objc func dismissKeyboard() {

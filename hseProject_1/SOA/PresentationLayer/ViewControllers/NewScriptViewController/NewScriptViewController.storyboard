@@ -52,42 +52,11 @@
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="Uee-DR-WAh">
-                                <rect key="frame" x="145.5" y="812" width="123" height="50"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b8b-y6-CR3">
-                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0b-ti-M1U">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                                <state key="normal" title="Далее"/>
-                                                <connections>
-                                                    <action selector="nextStep:" destination="NPi-e3-dLI" eventType="touchUpInside" id="eok-Hn-jHc"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="esj-Wh-NCA">
-                                                <rect key="frame" x="73" y="2" width="50" height="46.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="2ul-NA-Wb6"/>
-                                                    <constraint firstAttribute="width" constant="50" id="uLi-5U-pKh"/>
-                                                </constraints>
-                                                <state key="normal" backgroundImage="chevron.right" catalog="system"/>
-                                                <connections>
-                                                    <action selector="nextStep:" destination="NPi-e3-dLI" eventType="touchUpInside" id="yt0-wn-0cq"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2il-Jz-0Ys"/>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2il-Jz-0Ys" firstAttribute="bottom" secondItem="Uee-DR-WAh" secondAttribute="bottom" id="EYF-az-q21"/>
                             <constraint firstItem="2il-Jz-0Ys" firstAttribute="trailing" secondItem="GSK-bu-eXf" secondAttribute="trailing" constant="57" id="HKj-lD-ah1"/>
-                            <constraint firstItem="Uee-DR-WAh" firstAttribute="centerX" secondItem="fSM-Bw-qrv" secondAttribute="centerX" id="O55-JN-HZo"/>
                             <constraint firstItem="GSK-bu-eXf" firstAttribute="leading" secondItem="2il-Jz-0Ys" secondAttribute="leading" constant="57" id="SpS-Cx-L61"/>
                             <constraint firstItem="GSK-bu-eXf" firstAttribute="top" secondItem="2il-Jz-0Ys" secondAttribute="top" constant="200" id="q2i-cG-AWv"/>
                         </constraints>
@@ -121,7 +90,4 @@
             <point key="canvasLocation" x="86.956521739130437" y="142.63392857142856"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
-    </resources>
 </document>
