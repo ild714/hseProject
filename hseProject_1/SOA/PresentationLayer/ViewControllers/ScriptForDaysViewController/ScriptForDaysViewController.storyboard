@@ -31,73 +31,16 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="vGr-ID-lHu">
-                                <rect key="frame" x="54" y="812" width="306" height="50"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="hfd-mu-QnG">
-                                        <rect key="frame" x="0.0" y="0.0" width="123" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fP-4A-roJ">
-                                                <rect key="frame" x="0.0" y="2" width="50" height="46.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="emC-fE-apv"/>
-                                                    <constraint firstAttribute="height" constant="50" id="hV7-Ue-35j"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" backgroundImage="chevron.left" catalog="system"/>
-                                                <connections>
-                                                    <action selector="previousStep:" destination="bjs-Cr-qWq" eventType="touchUpInside" id="Euj-mw-kL1"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJ3-vq-DRl">
-                                                <rect key="frame" x="58" y="0.0" width="65" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                                <state key="normal" title="Назад"/>
-                                                <connections>
-                                                    <action selector="previousStep:" destination="bjs-Cr-qWq" eventType="touchUpInside" id="KZx-TS-HFe"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VCC-oJ-bJV">
-                                        <rect key="frame" x="183" y="0.0" width="123" height="50"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2E-fv-0yO">
-                                                <rect key="frame" x="0.0" y="0.0" width="65" height="50"/>
-                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                                <state key="normal" title="Далее"/>
-                                                <connections>
-                                                    <action selector="nextStep:" destination="bjs-Cr-qWq" eventType="touchUpInside" id="XQG-eu-nam"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xef-0R-B33">
-                                                <rect key="frame" x="73" y="2" width="50" height="46.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="1NP-A3-zbE"/>
-                                                    <constraint firstAttribute="width" constant="50" id="N3q-ss-jBS"/>
-                                                </constraints>
-                                                <state key="normal" backgroundImage="chevron.right" catalog="system"/>
-                                                <connections>
-                                                    <action selector="nextStep:" destination="bjs-Cr-qWq" eventType="touchUpInside" id="kBS-Ow-0ZG"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DFm-I2-lBn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vGr-ID-lHu" firstAttribute="centerX" secondItem="CG4-uc-7aj" secondAttribute="centerX" id="LlE-Ud-YMz"/>
                             <constraint firstItem="DFm-I2-lBn" firstAttribute="trailing" secondItem="gzS-2g-ZQM" secondAttribute="trailing" constant="58" id="Pv9-lZ-Hnu"/>
-                            <constraint firstItem="DFm-I2-lBn" firstAttribute="bottom" secondItem="vGr-ID-lHu" secondAttribute="bottom" id="bjO-pT-IIx"/>
                             <constraint firstItem="gzS-2g-ZQM" firstAttribute="top" secondItem="DFm-I2-lBn" secondAttribute="top" constant="23" id="ssC-GT-xAr"/>
                             <constraint firstItem="gzS-2g-ZQM" firstAttribute="leading" secondItem="DFm-I2-lBn" secondAttribute="leading" constant="58" id="wFX-Ip-DRQ"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backNextStack" destination="vGr-ID-lHu" id="2Bc-Vc-U99"/>
                         <outlet property="descriptionStack" destination="gzS-2g-ZQM" id="xiZ-xM-fUU"/>
                     </connections>
                 </viewController>
@@ -107,8 +50,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.left" catalog="system" width="96" height="128"/>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

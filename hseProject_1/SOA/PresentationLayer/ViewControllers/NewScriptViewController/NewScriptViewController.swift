@@ -43,11 +43,6 @@ class NewScriptViewController: UIViewController {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? NewScriptViewController
     }
     @IBAction func nextStep(_ sender: Any) {
-//        scriptCreator.name = textFieldForScript.text ?? "Test1"
-//        scriptCreator.did = "10155"
-//        if let scriptForRoomVC = presentationAssembly?.scriptForRoomViewController(scriptCreator: self.scriptCreator) {
-//            navigationController?.pushViewController(scriptForRoomVC, animated: true)
-//        }
         if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
             navigationController?.pushViewController(currentRoomsVC, animated: true)
         }

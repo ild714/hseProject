@@ -1,22 +1,22 @@
 //
-//  CurrentRoomsTableViewCell.swift
+//  CurrentDaysTableViewCell.swift
 //  IndoorClimateControlSystems
 //
-//  Created by Ildar on 1/11/21.
+//  Created by Ildar on 1/17/21.
 //  Copyright © 2021 Ildar Nigmetzyanov. All rights reserved.
 //
 
 import UIKit
 
-class CurrentRoomsTableViewCell: UITableViewCell {
+class CurrentDaysTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var labelRooms: UILabel!
-
-    func configure(rooms: String) {
-        self.labelRooms.font = UIFont(name: "Arial", size: 21)
-        self.labelRooms.text = rooms
+    @IBOutlet weak var labelDays: UILabel!
+    
+    func configure(days: String) {
+        self.labelDays.font = UIFont(name: "Arial", size: 21)
+        self.labelDays.text = days
     }
-
+    
     lazy var width: NSLayoutConstraint = {
         let width = contentView.widthAnchor.constraint(equalToConstant: bounds.size.width)
         width.isActive = true

@@ -93,6 +93,10 @@ class ScriptCurrentRoomsViewController: UIViewController {
 // MARK: - CurrentRoomsViewController datasource
 extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.roomCurrentNumbersAndNames.count
     }
@@ -125,9 +129,11 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 extension ScriptCurrentRoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("!!!")
         print(self.scriptCreator)
-        self.tableView.reloadData()
+        if let scriptForDaysVC = presentationAssembly?.currentDaysViewController(scriptCreator: self.scriptCreator) {
+            scriptForDaysVC.previousNumber = indexPath.row
+            navigationController?.pushViewController(scriptForDaysVC, animated: true)
+        }
     }
 }
 // MARK: - ScriptForRoomProtocol delegate
@@ -163,16 +169,18 @@ extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
 
     func indexAndNamesForRoomSection() {
         var labels: [String] = []
-        for intElement in roomNumbers[dynamicInt]! {
+        if let number = roomNumbers[dynamicInt] {
+            for intElement in number {
                 for data in roomNumbersAndNames {
                     if intElement == data.key {
                         labels.append(data.value)
                     }
                 }
-            self.roomCurrentNumbersAndNames[dynamicInt] = labels
+                self.roomCurrentNumbersAndNames[dynamicInt] = labels
+            }
+            roomNumbers.removeAll()
+            print(roomCurrentNumbersAndNames)
         }
-        roomNumbers.removeAll()
-        print(roomCurrentNumbersAndNames)
     }
 }
 

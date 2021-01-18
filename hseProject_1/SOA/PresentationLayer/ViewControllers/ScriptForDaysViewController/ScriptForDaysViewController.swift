@@ -7,22 +7,30 @@
 //
 
 import UIKit
+import SwiftyJSON
+
+protocol ScriptForDaysProtocol: class {
+    func save(daysString: [String])
+}
 
 class ScriptForDaysViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, scriptCreator: ScriptCreator) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssembly, scriptCreator: JSON,daysString: [String]) {
         self.presentationAssembly = presentationAssembly
         self.scriptCreator = scriptCreator
+        self.daysString = daysString
         super.init(coder: coder)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    var emptyVC = false
+    weak var delegate: ScriptForDaysProtocol?
+    private var daysString: [String] = []
     private var presentationAssembly: PresentationAssemblyProtocol?
-    private var scriptCreator: ScriptCreator?
+    private var scriptCreator: JSON?
     @IBOutlet weak var descriptionStack: UIStackView!
-    @IBOutlet weak var backNextStack: UIStackView!
 
     var scripts = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота", "Воскресенье"]
     var marks: [Bool] = []
@@ -41,19 +49,40 @@ class ScriptForDaysViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let dayGroup = DayGroupCreator(days: [], setting0: nil, setting1: nil)
-        self.scriptCreator?.roomGroup0?.dayGroup0 = dayGroup
-        self.scriptCreator?.roomGroup0?.dayGroup1 = dayGroup
-
-        for _ in 0..<8 {
+        for day in daysString {
+            if let index = scripts.firstIndex(of: day) {
+                scripts.remove(at: index)
+            }
+        }
+        if scripts.count == 0 {
+            self.emptyVC = true
+        }
+        daysString = []
+        for _ in 0..<scripts.count {
             self.marks.append(false)
         }
         self.navigationItem.setHidesBackButton(true, animated: true)
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupTableView()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveDaysGroup))
     }
-
+    @objc func saveDaysGroup() {
+        if emptyVC {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            var index = 0
+            for mark in marks {
+                if mark {
+                    self.daysString.append(scripts[index])
+                }
+                index += 1
+            }
+            
+            self.delegate?.save(daysString:self.daysString )
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
     func setupTableView() {
         view.addSubview(tableView)
 
@@ -62,7 +91,7 @@ class ScriptForDaysViewController: UIViewController {
         tableView.topAnchor.constraint(equalTo: descriptionStack.bottomAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: backNextStack.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
     static func storyboardInstance() -> ScriptForDaysViewController? {
@@ -70,17 +99,6 @@ class ScriptForDaysViewController: UIViewController {
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ScriptForDaysViewController
     }
 
-    @IBAction func nextStep(_ sender: Any) {
-        if let script = self.scriptCreator {
-            if let scriptServiceVC = presentationAssembly?.scriptServiceViewController(scriptCreator: script) {
-                navigationController?.pushViewController(scriptServiceVC, animated: true)
-            }
-        }
-    }
-
-    @IBAction func previousStep(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 // MARK: - ScriptsViewController datasource
@@ -112,27 +130,9 @@ extension ScriptForDaysViewController: UITableViewDelegate {
         if self.marks[indexPath.row] == true {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(false, at: indexPath.row)
-
-            self.scriptCreator?.roomGroup0?.dayGroup0?.days = []
-            var position = 1
-            for mark in self.marks {
-                if mark == true {
-                    self.scriptCreator?.roomGroup0?.dayGroup0?.days.append(position)
-                }
-                position += 1
-            }
         } else {
             self.marks.remove(at: indexPath.row)
             self.marks.insert(true, at: indexPath.row)
-
-            self.scriptCreator?.roomGroup0?.dayGroup0?.days = []
-            var position = 1
-            for mark in self.marks {
-                if mark == true {
-                    self.scriptCreator?.roomGroup0?.dayGroup0?.days.append(position)
-                }
-                position += 1
-            }
         }
         tableView.reloadData()
     }

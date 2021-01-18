@@ -15,9 +15,10 @@ protocol PresentationAssemblyProtocol {
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController() -> NewScriptViewController?
     func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
-    func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController?
+    func scriptForDaysViewController(scriptCreator: JSON,daysString: [String]) -> ScriptForDaysViewController?
     func scriptServiceViewController(scriptCreator: ScriptCreator) -> ScriptServiceViewController?
     func currentRoomsViewController(name: String, rooms: [Int]) -> ScriptCurrentRoomsViewController?
+    func currentDaysViewController(scriptCreator: JSON) -> ScriptCurrentDaysViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -76,10 +77,10 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             return scriptForRoomVC
         })
     }
-    func scriptForDaysViewController(scriptCreator: ScriptCreator) -> ScriptForDaysViewController? {
+    func scriptForDaysViewController(scriptCreator: JSON, daysString: [String]) -> ScriptForDaysViewController? {
         let storyboard = UIStoryboard(name: "ScriptForDaysViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptForDaysViewController", creator: { coder in
-            let scriptForDaysVC =  ScriptForDaysViewController(coder: coder, presentationAssembly: self, scriptCreator: scriptCreator)
+            let scriptForDaysVC =  ScriptForDaysViewController(coder: coder, presentationAssembly: self, scriptCreator: scriptCreator, daysString: daysString)
             return scriptForDaysVC
         })
     }
@@ -97,6 +98,14 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             coder in
             let currentRoomsVC = ScriptCurrentRoomsViewController(coder: coder, presentationAssembly: self, modelRoomsConfig: modelRoomsConfig, scriptCreator: ["did": "10153", "name": name ])
             modelRoomsConfig.delegate = currentRoomsVC
+            return currentRoomsVC
+        })
+    }
+    func currentDaysViewController(scriptCreator: JSON) -> ScriptCurrentDaysViewController? {
+        let storyboard = UIStoryboard(name: "ScriptCurrentDaysViewController", bundle: nil)
+        return storyboard.instantiateViewController(identifier: "ScriptCurrentDaysViewController", creator: {
+            coder in
+            let currentRoomsVC = ScriptCurrentDaysViewController(coder: coder, presentationAssembly: self, scriptCreator: scriptCreator)
             return currentRoomsVC
         })
     }
