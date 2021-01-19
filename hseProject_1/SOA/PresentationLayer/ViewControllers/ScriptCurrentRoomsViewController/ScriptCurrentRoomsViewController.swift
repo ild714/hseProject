@@ -20,7 +20,7 @@ class ScriptCurrentRoomsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     var indexForSections = 0
     private var roomNumbersAndNames: [(key: Int, value: String)] = Array()

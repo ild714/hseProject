@@ -159,7 +159,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.title = Array(self.roomNumbersAndNames.values.sorted())[self.curentVC - 1]
         self.createPageControll()
     }
-    
+
     @IBOutlet weak var minusButton: ButtonLeftSideCustomClass!
     @IBOutlet weak var plusButton: ButtonRightSideCustomClass!
     func setDefaultValuesForAimParamtrs() {
@@ -235,7 +235,7 @@ extension RoomsViewController: ModelAppDatchikDelegate {
     }
     func setupCurrentAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
-            
+
             print(self.roomNumbersAndNames.keys.sorted())
             if self.roomNumbersAndNames.count > 0 {
                 let currentRoomData = CurrentRoomData(result: result, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC - 1])
