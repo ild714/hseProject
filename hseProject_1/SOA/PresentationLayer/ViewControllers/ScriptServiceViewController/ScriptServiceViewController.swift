@@ -54,9 +54,6 @@ class ScriptServiceViewController: UIViewController {
         humidityTextField.delegate = self
         co2TextField.delegate = self
         temperatureTextField.delegate = self
-//        self.navigationItem.setHidesBackButton(true, animated: true)
-//        self.navigationController?.navigationBar.backItem?.title = "Назад"
-//        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         setupTableView()
     }
 
@@ -244,7 +241,6 @@ class ScriptServiceViewController: UIViewController {
                 scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["must_use"] = JSON(setting.must_use)
                 scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["dont_use"] = JSON(setting.dont_use)
             }
-            //print(scriptCreator)
             let network = NetworkScript()
             network.sentDataScript(script: scriptCreator)
             self.navigationController?.dismiss(animated: true, completion: nil)

@@ -60,7 +60,7 @@ class ScriptServiceTableViewCell: UITableViewCell {
             let imageHotFloor = UIImageView(image: UIImage(named: "hotfloor"))
             imageHotFloor.heightAnchor.constraint(equalToConstant: 25).isActive = true
             imageHotFloor.widthAnchor.constraint(equalToConstant: 25).isActive = true
-            stack.addArrangedSubview(UIImageView(image: UIImage(named: "hotfloor")))
+            stack.addArrangedSubview(imageHotFloor)
         }
         if serviveScript.humidifierOn {
             let imageHumidifier = UIImageView(image: UIImage(named: "humidifier"))

@@ -179,6 +179,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     func show1(error message: String) {
         print(message)
         self.showAlert()
+//        self.viewDidLoad()
     }
 }
 
@@ -187,5 +188,6 @@ extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message)
         self.showAlert()
+//        self.viewDidLoad()
     }
 }
