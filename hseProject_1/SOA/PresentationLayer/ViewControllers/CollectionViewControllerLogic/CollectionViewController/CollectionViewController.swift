@@ -81,6 +81,11 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if self.curentVC == 0 {
             let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeFirst(sender:)))
             leftSwipe.direction = .left
+            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeFirst(sender:)))
+            upSwipe.direction = .up
+            leftSwipe.direction = .left
+
+            self.view.addGestureRecognizer(upSwipe)
             self.view.addGestureRecognizer(leftSwipe)
         }
     }
@@ -88,8 +93,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if let presentationAssembly = self.presentationAssembly {
             menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
             menu?.leftSide = true
-//            SideMenuManager.default.leftMenuNavigationController = menu
-//            SideMenuManager.default.addPanGestureToPresent(toView: self.view)
+            menu?.enableSwipeToDismissGesture = false
         }
     }
     func createButtonForNavigationController() {
@@ -110,6 +114,12 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
             case .left:
                 if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1) {
                     navigationController?.pushViewController(roomsVC, animated: true)
+                }
+            case .up:
+                if let scriptsVC = self.presentationAssembly?.scriptsViewController() {
+                    let navigationController = UINavigationController()
+                    navigationController.viewControllers = [scriptsVC]
+                    present(navigationController, animated: true, completion: nil)
                 }
             default:
                 break

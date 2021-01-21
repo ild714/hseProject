@@ -124,7 +124,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setGradientForNavigation()
         self.deleteBackButtonFromNavigation()
         self.startAnimation()
-        modelRoomsConfig?.fetchRoomConfig()
+        self.modelRoomsConfig?.fetchRoomConfig()
         self.setupCurrentAppDatchik()
         self.setupCurrentAimAppDatchik()
     }
@@ -132,6 +132,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         if let presentationAssembly = self.presentationAssembly {
             menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
             menu?.leftSide = true
+            menu?.enableSwipeToDismissGesture = false
         }
     }
 
@@ -201,7 +202,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 extension RoomsViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result
-
         if self.curentVC == self.roomNumbersAndNames.count {
             let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
             let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))

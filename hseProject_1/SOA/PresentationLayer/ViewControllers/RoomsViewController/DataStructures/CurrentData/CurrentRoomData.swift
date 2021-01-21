@@ -32,12 +32,12 @@ struct CurrentRoomData {
                     self.currentTemperature = "\(data.1.doubleValue)℃"
                     self.cellTemperature = "\(data.1.doubleValue)℃"
 //                    self.modOfCurrentTemperature = "\(String(String(data.1.doubleValue)[3...4]))℃"
-                } else if data.0 == "3"{
+                } else if data.0 == "4"{
 //                    self.currentWet =  "\(Int(floor(data.1.doubleValue)))."
                     self.currentWet = "\(data.1.doubleValue)%"
                     self.cellWet = "\(data.1.doubleValue)%"
 //                    self.modOfCurrentWet = "\(String(String(data.1.doubleValue)[3...4]))%"
-                } else if data.0 == "4"{
+                } else if data.0 == "3"{
                     self.currentGas = "\(data.1)ppm"
                     self.cellGas = "\(data.1)ppm"
                     self.ppm = "ppm"

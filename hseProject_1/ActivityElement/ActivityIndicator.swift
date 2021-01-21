@@ -52,7 +52,7 @@ class ActivityIndicator {
             let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             activityIndicator.center.x = view.view.bounds.size.width / 2
             if view.typeOfActivity == .special {
-                activityIndicator.center.y = view.view.bounds.size.height / 2 - 5
+                activityIndicator.center.y = view.view.bounds.size.height / 2 - 8
             } else {
                 activityIndicator.center.y = view.view.bounds.size.height / 2
             }

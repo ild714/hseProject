@@ -44,7 +44,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         return storyboard.instantiateViewController(identifier: "RoomsViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
             var modelAppDatchik = self.modelAppDatchik()
-            if let userId = UserDefaults.standard.object(forKey: "UserId") as? String {
+            if let userId = UserDefaults.standard.object(forKey: "UserEmail") as? String {
                 let roomsVC =  RoomsViewController(coder: coder, presentationAssembly: self, userId: userId, modelRoomsConfig: modelRoomsConfig, modelRoomDatchik: modelAppDatchik, curentVC: curentVC)
                 modelRoomsConfig.delegate = roomsVC
                 modelAppDatchik.delegate = roomsVC

@@ -23,7 +23,6 @@ class ModelRoomsConfig: ModelRoomsConfigProtocol {
                 for (_, value) in result {
                     self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
                 }
-                print("test")
                 print(self.roomNumbersAndNames)
                 self.delegate?.setup(result: self.roomNumbersAndNames)
             case .failure(let error):
