@@ -116,7 +116,6 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
                     labelArrayString += section
                     labelArrayString += "\n"
                 }
-                print(labelArrayString)
                 cell.configure(rooms: labelArrayString)
             } else {
             }
@@ -130,7 +129,6 @@ extension ScriptCurrentRoomsViewController: UITableViewDataSource {
 extension ScriptCurrentRoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print(self.scriptCreator)
         if let scriptForDaysVC = presentationAssembly?.currentDaysViewController(scriptCreator: self.scriptCreator) {
             scriptForDaysVC.previousNumber = indexPath.row
             navigationController?.pushViewController(scriptForDaysVC, animated: true)

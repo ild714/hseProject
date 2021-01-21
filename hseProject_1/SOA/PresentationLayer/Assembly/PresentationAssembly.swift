@@ -28,8 +28,8 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         return storyboard.instantiateViewController(identifier: "CollectionViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
             var modelAppDatchik = self.modelAppDatchik()
-            if let userId = UserDefaults.standard.object(forKey: "UserId") as? String {
-                let collectionVC =  CollectionViewController(coder: coder, presentationAssembly: self, userId: userId, modelRoomsConfig: modelRoomsConfig, modelRoomDatchik: modelAppDatchik)
+            if let userEmail = UserDefaults.standard.object(forKey: "UserEmail") as? String {
+                let collectionVC =  CollectionViewController(coder: coder, presentationAssembly: self, userId: userEmail, modelRoomsConfig: modelRoomsConfig, modelRoomDatchik: modelAppDatchik)
                 modelRoomsConfig.delegate = collectionVC
                 modelAppDatchik.delegate = collectionVC
                 return collectionVC

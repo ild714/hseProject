@@ -33,6 +33,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     private let cellIdentifier = String(describing: CustomCollectionViewCell.self)
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var modelRoomDatchik: ModelAppDatchikProtocol?
+    private var resultDatchik: [String: JSON] = [:]
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -54,13 +55,19 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Все комнаты"
-
         self.createPageControll()
         self.createGestureRecognizer()
         self.createMenuForNavigationController()
         self.createButtonForNavigationController()
         self.setColorForNavigationController()
-        modelRoomsConfig?.fetchRoomConfig()
+        self.modelRoomsConfig?.fetchRoomConfig()
+        self.loadAppDatchik()
+    }
+    func loadAppDatchik() {
+        modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
+            self.resultDatchik = result
+            self.collectionView.reloadData()
+        }
     }
     func showAlert() {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
@@ -69,7 +76,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }
     func createPageControll() {
         self.createPageControl(viewController: self, number: self.curentVC, allAmountOfPages: self.roomNumbersAndNames.count + 1)
-        self.collectionView.reloadData()
     }
     func createGestureRecognizer() {
         if self.curentVC == 0 {
@@ -82,6 +88,8 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if let presentationAssembly = self.presentationAssembly {
             menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
             menu?.leftSide = true
+//            SideMenuManager.default.leftMenuNavigationController = menu
+//            SideMenuManager.default.addPanGestureToPresent(toView: self.view)
         }
     }
     func createButtonForNavigationController() {
@@ -137,13 +145,8 @@ extension CollectionViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
-        modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
-
-            let currentRoomData = CurrentRoomData(result: result, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
-            print(Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
+            let currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
             cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData)
-            print(Array(self.roomNumbersAndNames.values.sorted())[indexPath.row])
-        }
 
         return cell
     }

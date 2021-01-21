@@ -114,9 +114,6 @@ extension ScriptForDaysViewController: UITableViewDataSource {
         }
 
         cell.selectionStyle = .none
-        print("!")
-        print(marks)
-        print("!")
         cell.configure(day: scripts[indexPath.row], markBool: marks[indexPath.row])
 
         return cell

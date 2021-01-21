@@ -124,7 +124,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setGradientForNavigation()
         self.deleteBackButtonFromNavigation()
         self.startAnimation()
-        self.modelRoomsConfig?.fetchRoomConfig()
+        modelRoomsConfig?.fetchRoomConfig()
         self.setupCurrentAppDatchik()
         self.setupCurrentAimAppDatchik()
     }
@@ -224,6 +224,8 @@ extension RoomsViewController: ModelRoomsConfigDelegate {
     func show1(error message: String) {
         print(message)
         self.showAlert()
+//        self.viewDidLoad()
+        print("error with ViewController")
     }
 }
 

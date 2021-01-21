@@ -16,7 +16,7 @@ class MenuListController: UITableViewController {
 
     init(userId: String, presentationAssembly: PresentationAssemblyProtocol) {
         self.presentationAssembly = presentationAssembly
-        self.userId = String("User Login: \(userId.prefix(5))")
+        self.userId = String("User Login:\n \(userId)")
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -37,15 +37,31 @@ class MenuListController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = customColor
-        navigationController?.navigationBar.backgroundColor = customColor
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        self.title = self.userId
+        setColors()
+        multipleTitle()
+        setRightButton()
+    }
+
+    func setRightButton() {
         let button = UIBarButtonItem(image: UIImage(named: "exit"), style: .plain, target: self, action: #selector(exit))
         button.tintColor = .white
         navigationItem.rightBarButtonItem = button
     }
-
+    func setColors() {
+        tableView.backgroundColor = customColor
+        navigationController?.navigationBar.backgroundColor = customColor
+    }
+    func multipleTitle() {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.numberOfLines = 2
+        label.font = UIFont.boldSystemFont(ofSize: 11.0)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.text = self.userId
+        self.navigationItem.titleView = label
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }

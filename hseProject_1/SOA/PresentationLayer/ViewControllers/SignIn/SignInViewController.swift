@@ -29,24 +29,17 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
-            print("___________")
-            print(user.userID ?? "no id")
-            print("___________")
-            print(user.authentication.idToken ?? "no token")
-            print("___________")
             if let collectionViewController = rootAssembly?.presentationAssembly.collectionViewController() {
                 let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
-
                 let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
 
                 navigationController?.viewControllers = [collectionViewController]
-
                 navigationController?.modalPresentationStyle = .fullScreen
 
                 UserDefaults.standard.set(true, forKey: "Log_in")
-                if let userId = user.userID, let token = user.authentication.idToken {
+                if let token = user.authentication.idToken, let gmail = user.profile.email {
 
-                    UserDefaults.standard.set(userId, forKey: "UserId")
+                    UserDefaults.standard.set(gmail, forKey: "UserEmail")
                     UserDefaults.standard.set(token, forKey: "Token")
                 }
                 if let navigationVC = navigationController {

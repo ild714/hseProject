@@ -32,14 +32,9 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
             completion(.failure(.badUrl))
             return
         }
-//        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
         urlRequest.httpMethod = "GET"
-        print(urlRequest.allHTTPHeaderFields)
         let task = session?.dataTask(with: urlRequest) { data, _, error in
-            print("!!!")
-            print(String(decoding: data!, as: UTF8.self))
-            print(data)
             guard error == nil else {
                 DispatchQueue.main.async {
                     completion(.failure(.errorForRequest))

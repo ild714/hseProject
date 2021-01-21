@@ -48,7 +48,6 @@ class ScriptCurrentDaysViewController: UIViewController {
         for value in Array(roomCurrentNumbersAndDays.values) {
             days.append(contentsOf: value)
         }
-        print(days)
         if let scriptForDaysVC = presentationAssembly?.scriptForDaysViewController(scriptCreator: self.scriptCreator, daysString: days) {
             scriptForDaysVC.delegate = self
             let navigation = UINavigationController()
@@ -97,7 +96,6 @@ extension ScriptCurrentDaysViewController: UITableViewDataSource {
                     labelArrayString += section
                     labelArrayString += "\n"
                 }
-                print(labelArrayString)
                 cell.configure(days: labelArrayString)
             } else {
             }
@@ -111,8 +109,6 @@ extension ScriptCurrentDaysViewController: UITableViewDataSource {
 extension ScriptCurrentDaysViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("!!!")
-        print(self.scriptCreator)
 
         if let scriptForDaysVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator) {
             scriptForDaysVC.previousRoomId = self.previousNumber
@@ -158,7 +154,6 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         let json: JSON = JSON(stringToNumber)
         scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(dynamicInt)"] = JSON()
         scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(dynamicInt)"]["days"] = json
-        print(scriptCreator)
     }
 
     func daysDict(days: [String]) {

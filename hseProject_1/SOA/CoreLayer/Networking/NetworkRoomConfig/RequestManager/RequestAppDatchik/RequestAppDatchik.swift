@@ -38,7 +38,6 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
             return
         }
         urlRequest.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
-//        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = "GET"
 
         let task = session?.dataTask(with: urlRequest) {data, _, error in
@@ -49,10 +48,12 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
                 return
             }
             if let data = data {
+                print("?????????????")
                 if sensorType == .current {
                     if let decodedData1 = JSON(data).dictionary {
                         DispatchQueue.main.async {
                             for (key, data) in decodedData1 {
+                                print(data)
                                 self.sensorDataDict[key] = data
                             }
                             if let sensorDataDict = self.sensorDataDict as? T {
