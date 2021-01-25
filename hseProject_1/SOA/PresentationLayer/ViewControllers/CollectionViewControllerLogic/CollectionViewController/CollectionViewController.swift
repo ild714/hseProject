@@ -113,6 +113,9 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
             switch sender.direction {
             case .left:
                 if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1) {
+                    roomsVC.resultDatchik = self.resultDatchik
+                    roomsVC.roomNumbersAndNames = self.roomNumbersAndNames
+                    roomsVC.currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
@@ -163,6 +166,9 @@ extension CollectionViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let roomsVC = presentationAssembly?.roomsViewController(curentVC: indexPath.row + 1) {
+            roomsVC.resultDatchik = self.resultDatchik
+            roomsVC.roomNumbersAndNames = self.roomNumbersAndNames
+            roomsVC.currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
             navigationController?.pushViewController(roomsVC, animated: true)
         }
     }
@@ -191,8 +197,8 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
     }
 }
 
@@ -200,7 +206,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
     }
 }

@@ -37,8 +37,12 @@ class NewScriptViewController: UIViewController {
     }
 
     @objc func roomsGroup() {
-        if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
-            navigationController?.pushViewController(currentRoomsVC, animated: true)
+        if textFieldForScript.text?.isEmpty == true {
+            alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
+        } else {
+            if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
+                navigationController?.pushViewController(currentRoomsVC, animated: true)
+            }
         }
     }
 
@@ -50,9 +54,18 @@ class NewScriptViewController: UIViewController {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? NewScriptViewController
     }
+    func alert(title: String, message: String) {
+        let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(vcAlert, animated: true)
+    }
     @IBAction func nextStep(_ sender: Any) {
-        if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
-            navigationController?.pushViewController(currentRoomsVC, animated: true)
+        if textFieldForScript.text?.isEmpty == true {
+            alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
+        } else {
+            if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
+                navigationController?.pushViewController(currentRoomsVC, animated: true)
+            }
         }
     }
 

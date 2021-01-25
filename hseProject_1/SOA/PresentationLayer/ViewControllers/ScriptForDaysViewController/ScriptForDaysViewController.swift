@@ -78,8 +78,12 @@ class ScriptForDaysViewController: UIViewController {
                 index += 1
             }
 
-            self.delegate?.save(daysString: self.daysString )
-            self.dismiss(animated: true, completion: nil)
+            if self.daysString.count == 0 {
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                self.delegate?.save(daysString: self.daysString )
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 

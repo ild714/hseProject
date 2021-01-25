@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     let storyboard: UIStoryboard = UIStoryboard(name: "NewScriptViewController", bundle: nil)
                     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
                     navigationController?.viewControllers = [collectionViewController]
+                    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 
                     navigationController?.modalPresentationStyle = .fullScreen
                     self.window?.rootViewController = navigationController

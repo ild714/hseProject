@@ -30,7 +30,9 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var modelRoomDatchik: ModelAppDatchikProtocol?
     private var curentVC: Int = 1
-    private var roomNumbersAndNames: [Int: String] = [:]
+    var roomNumbersAndNames: [Int: String] = [:]
+    var resultDatchik: [String: JSON] = [:]
+    var currentRoomData: CurrentRoomData? = nil
     private var switchRoom = false
 
     @IBOutlet weak var stackView: UIStackView!
@@ -78,6 +80,9 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
                 navigationController?.popViewController(animated: true)
             case .left:
                 if let roomsVC = presentationAssembly?.roomsViewController(curentVC: self.curentVC + 1) {
+                    roomsVC.resultDatchik = self.resultDatchik
+                    roomsVC.roomNumbersAndNames = self.roomNumbersAndNames
+                    roomsVC.currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
@@ -124,9 +129,44 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setGradientForNavigation()
         self.deleteBackButtonFromNavigation()
         self.startAnimation()
-        self.modelRoomsConfig?.fetchRoomConfig()
-        self.setupCurrentAppDatchik()
+//        self.modelRoomsConfig?.fetchRoomConfig()
+        self.setupRoomNumbersAndNames()
+//        self.setupCurrentAppDatchik()
+        self.setipCurrentResultAppDatchik()
         self.setupCurrentAimAppDatchik()
+    }
+    func setupRoomNumbersAndNames() {
+        if self.curentVC == self.roomNumbersAndNames.count {
+            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+            upSwipe.direction = .up
+            self.view.addGestureRecognizer(rightSwipe)
+            self.view.addGestureRecognizer(upSwipe)
+        } else if self.curentVC < self.roomNumbersAndNames.count {
+            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+            upSwipe.direction = .up
+            leftSwipe.direction = .left
+
+            self.view.addGestureRecognizer(leftSwipe)
+            self.view.addGestureRecognizer(rightSwipe)
+            self.view.addGestureRecognizer(upSwipe)
+        }
+        self.setTitleAndPageControll()
+    }
+    func setipCurrentResultAppDatchik() {
+        if self.roomNumbersAndNames.count > 0 {
+            self.currentTemperature.text = currentRoomData?.currentTemperature
+            self.modOfCurrentTemperature.text = currentRoomData?.modOfCurrentTemperature
+            self.currentWet.text = currentRoomData?.currentWet
+            self.modOfTheCurrentWet.text = currentRoomData?.modOfCurrentWet
+            self.currentGas.text = currentRoomData?.currentGas
+            //self.ppmLabel.text = currentRoomData.ppm
+            self.peopleInRoom.text = currentRoomData?.peopleInRoom
+
+            ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+        }
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
@@ -223,8 +263,8 @@ extension RoomsViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
         print("error with ViewController")
     }
 }
