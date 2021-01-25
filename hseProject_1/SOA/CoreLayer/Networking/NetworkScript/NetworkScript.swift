@@ -10,7 +10,6 @@ import UIKit
 import SwiftyJSON
 
 class NetworkScript {
-
     func sentDataScript(script: JSON) {
         guard let url = URL(string: "https://\(Bundle.main.infoDictionary?["SENT_DATA"] as? String ?? "")") else {
             return
@@ -18,11 +17,10 @@ class NetworkScript {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(authorizationToken(), forHTTPHeaderField: "Authorization")
+//        request.setValue(authorizationToken(), forHTTPHeaderField: "Authorization")
 
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(script) {
-
             request.httpBody = data
             URLSession.shared.dataTask(with: request) {data, _, error in
                 guard error == nil else {

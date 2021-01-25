@@ -34,6 +34,7 @@ class ScriptsViewController: UIViewController {
     private let cellIdentifier = String(describing: CustomTableViewCell.self)
 
     override func viewDidLoad() {
+        userDefaultsCleaner()
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.main.async {
@@ -54,6 +55,16 @@ class ScriptsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newScripts))
     }
 
+    func userDefaultsCleaner() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            if key.contains("room") || key.contains("Scripts") {
+                print(key)
+                defaults.removeObject(forKey: key)
+            }
+        }
+    }
     func loadScripts(group: DispatchGroup) {
         let loadScripts = NetworkScriptLoad()
         loadScripts.getDataScripts { (result: Result<[String: JSON], NetworkSensorError>) in

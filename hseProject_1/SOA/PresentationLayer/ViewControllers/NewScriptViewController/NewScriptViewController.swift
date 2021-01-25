@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class NewScriptViewController: UIViewController {
 
@@ -19,7 +20,8 @@ class NewScriptViewController: UIViewController {
         super.init(coder: coder)
     }
     private var presentationAssembly: PresentationAssemblyProtocol?
-
+    var scriptCreator: JSON = JSON()
+    var dynamicInt = 0
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
@@ -40,8 +42,21 @@ class NewScriptViewController: UIViewController {
         if textFieldForScript.text?.isEmpty == true {
             alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
         } else {
-            if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
-                navigationController?.pushViewController(currentRoomsVC, animated: true)
+            if scriptCreator.isEmpty {
+                scriptCreator["did"] = JSON("10153")
+                scriptCreator["name"] = JSON(textFieldForScript.text ?? "Test1?")
+                print(scriptCreator)
+                if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: []) {
+                    currentRoomsVC.delegate = self
+                    navigationController?.pushViewController(currentRoomsVC, animated: true)
+                }
+            } else {
+                print(scriptCreator)
+                if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: []) {
+                    currentRoomsVC.delegate = self
+                    currentRoomsVC.dynamicInt = self.dynamicInt
+                    navigationController?.pushViewController(currentRoomsVC, animated: true)
+                }
             }
         }
     }
@@ -59,15 +74,6 @@ class NewScriptViewController: UIViewController {
         vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(vcAlert, animated: true)
     }
-    @IBAction func nextStep(_ sender: Any) {
-        if textFieldForScript.text?.isEmpty == true {
-            alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
-        } else {
-            if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(name: textFieldForScript.text ?? "Test1", rooms: []) {
-                navigationController?.pushViewController(currentRoomsVC, animated: true)
-            }
-        }
-    }
 
     @IBOutlet weak var textFieldForScript: UITextField!
     @IBAction func nameForScriptCreater(_ sender: Any) {
@@ -81,4 +87,12 @@ extension NewScriptViewController: UITextFieldDelegate {
         textField.resignFirstResponder() // dismiss keyboard
         return true
     }
+}
+
+extension NewScriptViewController: NewScriptUpdatedDataProtocol {
+    func updateScript(script: JSON, dynamicInt: Int) {
+        self.scriptCreator = script
+        self.dynamicInt = dynamicInt
+    }
+
 }

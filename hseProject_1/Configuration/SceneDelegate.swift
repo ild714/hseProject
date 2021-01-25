@@ -19,7 +19,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let rootAssembly = RootAssembly()
             if UserDefaults.standard.bool(forKey: "Log_in") {
                 if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
-
                     let storyboard: UIStoryboard = UIStoryboard(name: "NewScriptViewController", bundle: nil)
                     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
                     navigationController?.viewControllers = [collectionViewController]

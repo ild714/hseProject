@@ -32,7 +32,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     private var curentVC: Int = 1
     var roomNumbersAndNames: [Int: String] = [:]
     var resultDatchik: [String: JSON] = [:]
-    var currentRoomData: CurrentRoomData? = nil
+    var currentRoomData: CurrentRoomData?
     private var switchRoom = false
 
     @IBOutlet weak var stackView: UIStackView!

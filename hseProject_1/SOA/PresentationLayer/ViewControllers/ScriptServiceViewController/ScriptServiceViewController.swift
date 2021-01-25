@@ -9,7 +9,11 @@
 import UIKit
 import SwiftyJSON
 
-struct ServiceScript {
+protocol ServiceUpdatedDataProtocol: class {
+    func updateScript(script: JSON)
+}
+
+struct ServiceScript: Codable {
     var time: Date = Date()
     var temperature: Int = 0
     var humidity: Int = 0
@@ -33,6 +37,7 @@ class ScriptServiceViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    weak var delegate: ServiceUpdatedDataProtocol?
     var indexOfService = 0
     var previousRoomId = 0
     var previousDayId = 0
@@ -51,12 +56,23 @@ class ScriptServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let data = UserDefaults.standard.object(forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)") as? Data {
+            if let result = try? JSONDecoder().decode([ServiceScript].self, from: data) {
+                self.serviceScripts = result
+            }
+        }
+        print("service!!!")
+        print(serviceScripts)
         humidityTextField.delegate = self
         co2TextField.delegate = self
         temperatureTextField.delegate = self
         setupTableView()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        jsonScriptSaver()
+        self.delegate?.updateScript(script: self.scriptCreator)
+    }
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -203,50 +219,53 @@ class ScriptServiceViewController: UIViewController {
     }
 
     var serviceScripts: [ServiceScript] = []
-
     @objc func saveAndClose() {
         if serviceScripts.count > 0 {
-            var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
-
-            for serviceScriptNumber in 0..<serviceScripts.count {
-                if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
-                    setting.mute = 0
-                } else {
-                    setting.mute = 1
-                }
-
-                if self.serviceScripts[serviceScriptNumber].houseOnOff == true {
-                    setting.at_home = 1
-                } else {
-                    setting.at_home = 0
-                }
-
-                let formatter = DateFormatter()
-                formatter.dateFormat = "HH:mm"
-                setting.time = "\(formatter.string(from: serviceScripts[serviceScriptNumber].time))"
-
-                setting.must_use = []
-                setting.hum = serviceScripts[serviceScriptNumber].humidity
-                setting.temp = serviceScripts[serviceScriptNumber].temperature
-                setting.co2 = serviceScripts[serviceScriptNumber].co2
-                setting.dont_use = []
-
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"] = JSON()
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["mute"] = JSON(setting.mute)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["at_home"] = JSON(setting.at_home)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["time"] = JSON(setting.time)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["temp"] = JSON(setting.temp)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["hum"] = JSON(setting.hum)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["co2"] = JSON(setting.co2)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["must_use"] = JSON(setting.must_use)
-                scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["dont_use"] = JSON(setting.dont_use)
-            }
+            jsonScriptSaver()
             let network = NetworkScript()
             network.sentDataScript(script: scriptCreator)
             self.navigationController?.dismiss(animated: true, completion: nil)
             return
         } else {
             self.alerts(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки")
+        }
+    }
+
+    func jsonScriptSaver() {
+        var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
+
+        for serviceScriptNumber in 0..<serviceScripts.count {
+            if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
+                setting.mute = 0
+            } else {
+                setting.mute = 1
+            }
+
+            if self.serviceScripts[serviceScriptNumber].houseOnOff == true {
+                setting.at_home = 1
+            } else {
+                setting.at_home = 0
+            }
+
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            setting.time = "\(formatter.string(from: serviceScripts[serviceScriptNumber].time))"
+
+            setting.must_use = []
+            setting.hum = serviceScripts[serviceScriptNumber].humidity
+            setting.temp = serviceScripts[serviceScriptNumber].temperature
+            setting.co2 = serviceScripts[serviceScriptNumber].co2
+            setting.dont_use = []
+
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"] = JSON()
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["mute"] = JSON(setting.mute)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["at_home"] = JSON(setting.at_home)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["time"] = JSON(setting.time)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["temp"] = JSON(setting.temp)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["hum"] = JSON(setting.hum)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["co2"] = JSON(setting.co2)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["must_use"] = JSON(setting.must_use)
+            scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["dont_use"] = JSON(setting.dont_use)
         }
     }
 
@@ -309,6 +328,7 @@ class ScriptServiceViewController: UIViewController {
         serviceScript.soundOnOff = soundTurnOn
 
         serviceScripts.append(serviceScript)
+        self.saveScriptsInMemory()
         tableView.reloadData()
     }
 
@@ -407,5 +427,13 @@ extension ScriptServiceViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension ScriptServiceViewController {
+    func saveScriptsInMemory() {
+        if let encoded = try? JSONEncoder().encode(self.serviceScripts) {
+            UserDefaults.standard.set(encoded, forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)")
+        }
     }
 }

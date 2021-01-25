@@ -133,6 +133,15 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     override func loadView() {
         super.loadView()
 
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            if key.contains("room") || key.contains("Scripts") {
+                print(key)
+                defaults.removeObject(forKey: key)
+            }
+        }
+
         safeArea = view.layoutMarginsGuide
         setupTableView()
     }
@@ -194,6 +203,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result
         self.createPageControll()
+        self.collectionView.reloadData()
     }
     func show1(error message: String) {
         print(message)

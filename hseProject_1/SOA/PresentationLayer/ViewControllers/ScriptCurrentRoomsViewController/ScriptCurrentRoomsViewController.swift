@@ -9,6 +9,10 @@
 import UIKit
 import SwiftyJSON
 
+protocol NewScriptUpdatedDataProtocol: class {
+    func updateScript(script: JSON, dynamicInt: Int)
+}
+
 class ScriptCurrentRoomsViewController: UIViewController {
     init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, modelRoomsConfig: ModelRoomsConfigProtocol, scriptCreator: JSON) {
         self.modelRoomsConfig = modelRoomsConfig
@@ -21,6 +25,7 @@ class ScriptCurrentRoomsViewController: UIViewController {
         super.init(coder: coder)
     }
 
+    weak var delegate: NewScriptUpdatedDataProtocol?
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     var indexForSections = 0
     private var roomNumbersAndNames: [(key: Int, value: String)] = Array()
@@ -28,6 +33,7 @@ class ScriptCurrentRoomsViewController: UIViewController {
     var allRoomsForVC: [Int] = []
     var roomNumbers: [Int: [Int]] = [:]
     var dynamicInt = 0
+    var dynamicIntDays = 0
     var dynamicString = ""
     var scriptCreator: JSON = []
     private var presentationAssembly: PresentationAssemblyProtocol?
@@ -47,11 +53,18 @@ class ScriptCurrentRoomsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newRoomsGroup))
 //        self.navigationController?.navigationBar.backItem?.title = "Назад"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(showNewScriptVC))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .undo, target: self, action: #selector(showNewScriptVC))
         modelRoomsConfig?.fetchRoomConfig()
         setupTableView()
     }
+    @objc func showNewScriptVC() {
+        print(scriptCreator)
+        delegate?.updateScript(script: self.scriptCreator, dynamicInt: self.dynamicInt)
+        self.navigationController?.popViewController(animated: true)
+    }
     @objc func newRoomsGroup() {
-        for index in 0..<dynamicInt {
+        for index in 0..<scriptCreator.count - 2 {
             let json = scriptCreator["roomGroup\(index)"]["rIDs"].arrayValue
             var ints: [Int] = []
             for number in json {
@@ -59,7 +72,6 @@ class ScriptCurrentRoomsViewController: UIViewController {
                     ints.append(number)
                 }
                 roomNumbers[index] = ints
-
             }
             ints.removeAll()
         }
@@ -131,6 +143,8 @@ extension ScriptCurrentRoomsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         if let scriptForDaysVC = presentationAssembly?.currentDaysViewController(scriptCreator: self.scriptCreator) {
             scriptForDaysVC.previousNumber = indexPath.row
+//            scriptForDaysVC.dynamicInt = self.dynamicIntDays
+            scriptForDaysVC.delegate = self
             navigationController?.pushViewController(scriptForDaysVC, animated: true)
         }
     }
@@ -151,7 +165,6 @@ extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
         let json: JSON = JSON(rooms)
         scriptCreator["roomGroup\(dynamicInt)"] = JSON()
         scriptCreator["roomGroup\(dynamicInt)"]["rIDs"] = json
-
     }
 
     func numbersDictForRoomSection() {
@@ -183,13 +196,57 @@ extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
     }
 }
 
+extension ScriptCurrentRoomsViewController {
+    func roomSavedJsonDataLoader() {
+        print("Number of elements!!!")
+        print(scriptCreator.count)
+        let countElements = scriptCreator.count - 2
+        for num in 0..<countElements {
+            let json = scriptCreator["roomGroup\(num)"]["rIDs"].arrayValue
+            var ints: [Int] = []
+            for number in json {
+                if let number = number.int {
+                    ints.append(number)
+                }
+            }
+            roomNumbers[num] = ints
+            ints.removeAll()
+
+            var labels: [String] = []
+            if let number = roomNumbers[num] {
+                for intElement in number {
+                    for data in roomNumbersAndNames {
+                        if intElement == data.key {
+                            labels.append(data.value)
+                        }
+                    }
+                    self.roomCurrentNumbersAndNames[num] = labels
+                }
+                roomNumbers.removeAll()
+                print(roomCurrentNumbersAndNames)
+            }
+        }
+    }
+}
+
 // MARK: - ModelRoomsConfigDelegate
 extension ScriptCurrentRoomsViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
+//        numbersDictForRoomSection()
+//        indexAndNamesForRoomSection()
+        roomSavedJsonDataLoader()
+        self.tableView.reloadData()
     }
     func show1(error message: String) {
         print(message)
         self.showAlert()
+    }
+}
+
+extension ScriptCurrentRoomsViewController: DaysUpdatedDataProtocol {
+    func updateScript(script: JSON, dynamicInt: Int) {
+        self.dynamicIntDays = dynamicInt
+        self.scriptCreator = script
     }
 }

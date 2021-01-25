@@ -9,6 +9,10 @@
 import UIKit
 import SwiftyJSON
 
+protocol DaysUpdatedDataProtocol: class {
+    func updateScript(script: JSON, dynamicInt: Int)
+}
+
 class ScriptCurrentDaysViewController: UIViewController {
     init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: JSON) {
         self.presentationAssembly = presentationAssembly
@@ -20,6 +24,7 @@ class ScriptCurrentDaysViewController: UIViewController {
         super.init(coder: coder)
     }
 
+    weak var delegate: DaysUpdatedDataProtocol?
     var previousNumber = 0
     var dynamicInt = 0
     var scriptCreator: JSON = []
@@ -39,9 +44,18 @@ class ScriptCurrentDaysViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newDaysGroup))
+        self.dynamicInt = UserDefaults.standard.integer(forKey: "roomGroup\(previousNumber)")
+        daysSavedJsonDataLoader()
         setupTableView()
 //        self.navigationController?.navigationBar.backItem?.title = "Назад"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(showRoomsScriptVC))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .redo, target: self, action: #selector(showRoomsScriptVC))
+    }
+    @objc func showRoomsScriptVC() {
+        print(scriptCreator)
+        delegate?.updateScript(script: self.scriptCreator, dynamicInt: self.dynamicInt)
+        self.navigationController?.popViewController(animated: true)
     }
     @objc func newDaysGroup() {
         var days: [String] = []
@@ -110,10 +124,11 @@ extension ScriptCurrentDaysViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if let scriptForDaysVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator) {
-            scriptForDaysVC.previousRoomId = self.previousNumber
-            scriptForDaysVC.previousDayId = indexPath.row
-            navigationController?.pushViewController(scriptForDaysVC, animated: true)
+        if let scriptServiceVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator) {
+            scriptServiceVC.delegate = self
+            scriptServiceVC.previousRoomId = self.previousNumber
+            scriptServiceVC.previousDayId = indexPath.row
+            navigationController?.pushViewController(scriptServiceVC, animated: true)
         }
     }
 }
@@ -124,6 +139,7 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         jsonForDaysSection(days: daysString)
         daysDict(days: daysString)
         dynamicInt += 1
+        UserDefaults.standard.set(dynamicInt, forKey: "roomGroup\(previousNumber)")
         tableView.reloadData()
     }
 
@@ -158,5 +174,43 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
 
     func daysDict(days: [String]) {
         self.roomCurrentNumbersAndDays[dynamicInt] = days
+    }
+
+}
+
+extension ScriptCurrentDaysViewController {
+    func daysSavedJsonDataLoader() {
+        print(scriptCreator["roomGroup\(previousNumber)"].count)
+        for num in 0..<scriptCreator["roomGroup\(previousNumber)"].count - 1 {
+            var numberToString: [String] = []
+            let daysInts = scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(num)"]["days"]
+            for day in daysInts.arrayValue {
+                switch day {
+                case 0:
+                    numberToString.append("Понедельник")
+                case 1:
+                    numberToString.append("Вторник")
+                case 2:
+                    numberToString.append("Среда")
+                case 3:
+                    numberToString.append("Четверг")
+                case 4:
+                    numberToString.append("Пятница")
+                case 5:
+                    numberToString.append("Суббота")
+                case 6:
+                    numberToString.append("Воскресенье")
+                default:
+                    print("error with days")
+                }
+            }
+            self.roomCurrentNumbersAndDays[num] = numberToString
+        }
+    }
+}
+
+extension ScriptCurrentDaysViewController: ServiceUpdatedDataProtocol {
+    func updateScript(script: JSON) {
+        self.scriptCreator = script
     }
 }
