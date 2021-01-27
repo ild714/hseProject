@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let rootAssembly = RootAssembly()
             if UserDefaults.standard.bool(forKey: "Log_in") {
                 if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
-                    let storyboard: UIStoryboard = UIStoryboard(name: "NewScriptViewController", bundle: nil)
+                    let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
                     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
                     navigationController?.viewControllers = [collectionViewController]
                     navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]

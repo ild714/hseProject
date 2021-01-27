@@ -183,10 +183,8 @@ extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
         var labels: [String] = []
         if let number = roomNumbers[dynamicInt] {
             for intElement in number {
-                for data in roomNumbersAndNames {
-                    if intElement == data.key {
-                        labels.append(data.value)
-                    }
+                for data in roomNumbersAndNames where intElement == data.key {
+                    labels.append(data.value)
                 }
                 self.roomCurrentNumbersAndNames[dynamicInt] = labels
             }
@@ -215,10 +213,8 @@ extension ScriptCurrentRoomsViewController {
             var labels: [String] = []
             if let number = roomNumbers[num] {
                 for intElement in number {
-                    for data in roomNumbersAndNames {
-                        if intElement == data.key {
-                            labels.append(data.value)
-                        }
+                    for data in roomNumbersAndNames where intElement == data.key {
+                        labels.append(data.value)
                     }
                     self.roomCurrentNumbersAndNames[num] = labels
                 }

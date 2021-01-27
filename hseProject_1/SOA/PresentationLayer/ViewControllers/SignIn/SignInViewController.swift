@@ -29,6 +29,12 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
+            if let token = user.authentication.idToken, let gmail = user.profile.email {
+
+                UserDefaults.standard.set(gmail, forKey: "UserEmail")
+                UserDefaults.standard.set(token, forKey: "Token")
+            }
+            UserDefaults.standard.set(true, forKey: "Log_in")
             if let collectionViewController = rootAssembly?.presentationAssembly.collectionViewController() {
                 let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
                 let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
@@ -36,12 +42,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                 navigationController?.viewControllers = [collectionViewController]
                 navigationController?.modalPresentationStyle = .fullScreen
 
-                UserDefaults.standard.set(true, forKey: "Log_in")
-                if let token = user.authentication.idToken, let gmail = user.profile.email {
-
-                    UserDefaults.standard.set(gmail, forKey: "UserEmail")
-                    UserDefaults.standard.set(token, forKey: "Token")
-                }
                 if let navigationVC = navigationController {
                     self.present(navigationVC, animated: true, completion: nil)
                 }

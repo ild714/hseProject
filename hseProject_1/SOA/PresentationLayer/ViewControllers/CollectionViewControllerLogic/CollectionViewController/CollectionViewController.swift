@@ -66,6 +66,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     func loadAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
             self.resultDatchik = result
+            print("0")
             self.collectionView.reloadData()
         }
     }
@@ -207,8 +208,8 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message)
-//        self.showAlert()
-        self.viewDidLoad()
+        self.showAlert()
+//        self.viewDidLoad()
     }
 }
 
@@ -216,7 +217,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message)
-//        self.showAlert()
-        self.viewDidLoad()
+        self.showAlert()
+//        self.viewDidLoad()
     }
 }
