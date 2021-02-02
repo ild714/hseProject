@@ -163,7 +163,6 @@ extension ScriptsViewController: UITableViewDelegate {
         }
         let networkSetScript = NetworkSetScript()
         networkSetScript.sentDataScript(scId: Array(self.scriptsDict.keys.sorted())[indexPath.row])
-        
         tableView.reloadData()
     }
 }

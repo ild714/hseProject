@@ -27,14 +27,37 @@ class NewScriptViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureKeyboard()
+        configureTextField()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Дальше", style: .plain, target: self, action: #selector(roomsGroup))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
+    }
+    func configureKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height / 3
+            }
+        }
+    }
 
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    func configureTextField() {
         textField.delegate = self
         textField.placeholder = "Новый сценарий"
         textField.layer.cornerRadius = 50
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Дальше", style: .plain, target: self, action: #selector(roomsGroup))
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
     }
     override func viewWillDisappear(_ animated: Bool) {
         let defaults = UserDefaults.standard
@@ -47,12 +70,12 @@ class NewScriptViewController: UIViewController {
         }
     }
     @objc func roomsGroup() {
-        if textFieldForScript.text?.isEmpty == true {
+        if textField.text?.isEmpty == true {
             alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
         } else {
             if scriptCreator.isEmpty {
                 scriptCreator["did"] = JSON("10153")
-                scriptCreator["name"] = JSON(textFieldForScript.text ?? "Test1?")
+                scriptCreator["name"] = JSON(textField.text ?? "Test1?")
                 print(scriptCreator)
                 if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: []) {
                     currentRoomsVC.delegate = self
@@ -69,25 +92,11 @@ class NewScriptViewController: UIViewController {
         }
     }
 
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-
-    static func storyboardInstance() -> NewScriptViewController? {
-        let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
-        return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? NewScriptViewController
-    }
     func alert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         self.present(vcAlert, animated: true)
     }
-
-    @IBOutlet weak var textFieldForScript: UITextField!
-    @IBAction func nameForScriptCreater(_ sender: Any) {
-
-    }
-
 }
 
 extension NewScriptViewController: UITextFieldDelegate {
