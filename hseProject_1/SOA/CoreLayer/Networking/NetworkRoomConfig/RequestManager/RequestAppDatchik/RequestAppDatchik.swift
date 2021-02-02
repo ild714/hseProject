@@ -48,7 +48,7 @@ class RequestAppDatchik: RequestAppDatchikProtocol {
                 return
             }
             if let data = data {
-                print("?????????????")
+                print("2")
                 if sensorType == .current {
                     if let decodedData1 = JSON(data).dictionary {
                         DispatchQueue.main.async {

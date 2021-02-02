@@ -82,6 +82,7 @@ class MenuListController: UITableViewController {
         if let scriptsVC = presentationAssembly?.scriptsViewController() {
             let navigationController = UINavigationController()
             navigationController.viewControllers = [scriptsVC]
+            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             present(navigationController, animated: true, completion: nil)
         }
     }

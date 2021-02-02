@@ -25,15 +25,15 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }
 
     private var presentationAssembly: PresentationAssemblyProtocol?
-    private var curentVC: Int = 0
     private var roomNumbersAndNames: [Int: String] = [:]
-    private var safeArea: UILayoutGuide!
-    private var menu: SideMenuNavigationController?
-    private var userId = ""
-    private let cellIdentifier = String(describing: CustomCollectionViewCell.self)
+    private var resultDatchik: [String: JSON] = [:]
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var modelRoomDatchik: ModelAppDatchikProtocol?
-    private var resultDatchik: [String: JSON] = [:]
+    private var menu: SideMenuNavigationController?
+    private var userId = ""
+    private var curentVC: Int = 0
+    private var safeArea: UILayoutGuide!
+    private let cellIdentifier = String(describing: CustomCollectionViewCell.self)
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,12 +45,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         collectionView.dataSource = self
         return collectionView
     }()
-
-    @objc func didTapMenu() {
-        if let menu = menu {
-            present(menu, animated: true)
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +60,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     func loadAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
             self.resultDatchik = result
-            print("0")
             self.collectionView.reloadData()
         }
     }
@@ -84,7 +77,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
             leftSwipe.direction = .left
             let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeFirst(sender:)))
             upSwipe.direction = .up
-            leftSwipe.direction = .left
 
             self.view.addGestureRecognizer(upSwipe)
             self.view.addGestureRecognizer(leftSwipe)
@@ -102,6 +94,11 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         button.tintColor = .white
         navigationItem.leftBarButtonItem = button
     }
+    @objc func didTapMenu() {
+        if let menu = menu {
+            present(menu, animated: true)
+        }
+    }
     func setColorForNavigationController() {
         self.navigationController?.navigationBar.setGradientBackground(
             colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),
@@ -113,10 +110,11 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if sender.state == .ended {
             switch sender.direction {
             case .left:
-                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1) {
-                    roomsVC.resultDatchik = self.resultDatchik
-                    roomsVC.roomNumbersAndNames = self.roomNumbersAndNames
-                    roomsVC.currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])
+                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1,
+                                                                           roomNumbersAndNames: self.roomNumbersAndNames,
+                                                                           resultDatchik: self.resultDatchik,
+                                                                           currentRoomData:
+                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
@@ -133,15 +131,6 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
 
     override func loadView() {
         super.loadView()
-
-        let defaults = UserDefaults.standard
-        let dictionary = defaults.dictionaryRepresentation()
-        dictionary.keys.forEach { key in
-            if key.contains("room") || key.contains("Scripts") {
-                print(key)
-                defaults.removeObject(forKey: key)
-            }
-        }
 
         safeArea = view.layoutMarginsGuide
         setupTableView()
@@ -175,10 +164,10 @@ extension CollectionViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let roomsVC = presentationAssembly?.roomsViewController(curentVC: indexPath.row + 1) {
-            roomsVC.resultDatchik = self.resultDatchik
-            roomsVC.roomNumbersAndNames = self.roomNumbersAndNames
-            roomsVC.currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
+        if let roomsVC = presentationAssembly?.roomsViewController(curentVC: indexPath.row + 1,
+                                                                   roomNumbersAndNames: self.roomNumbersAndNames,
+                                                                   resultDatchik: self.resultDatchik,
+                                                                   currentRoomData: CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])) {
             navigationController?.pushViewController(roomsVC, animated: true)
         }
     }
@@ -207,7 +196,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
         self.collectionView.reloadData()
     }
     func show1(error message: String) {
-        print(message)
+        print(message.description)
         self.showAlert()
 //        self.viewDidLoad()
     }
@@ -216,7 +205,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 // MARK: - ModelAppDatchikDelegate
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
-        print(message)
+        print(message.description)
         self.showAlert()
 //        self.viewDidLoad()
     }

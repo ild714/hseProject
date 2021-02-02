@@ -12,12 +12,23 @@ import SideMenu
 
 class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, modelRoomsConfig: ModelRoomsConfigProtocol, modelRoomDatchik: ModelAppDatchikProtocol, curentVC: Int) {
+    init?(coder: NSCoder,
+          presentationAssembly: PresentationAssemblyProtocol,
+          userId: String,
+          modelRoomsConfig: ModelRoomsConfigProtocol,
+          modelRoomDatchik: ModelAppDatchikProtocol,
+          curentVC: Int,
+          roomNumbersAndNames: [Int: String],
+          resultDatchik: [String: JSON],
+          currentRoomData: CurrentRoomData?) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
         self.modelRoomsConfig = modelRoomsConfig
         self.modelRoomDatchik = modelRoomDatchik
         self.curentVC = curentVC
+        self.roomNumbersAndNames = roomNumbersAndNames
+        self.resultDatchik = resultDatchik
+        self.currentRoomData = currentRoomData
         super.init(coder: coder)
     }
 
@@ -30,9 +41,9 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var modelRoomDatchik: ModelAppDatchikProtocol?
     private var curentVC: Int = 1
-    var roomNumbersAndNames: [Int: String] = [:]
-    var resultDatchik: [String: JSON] = [:]
-    var currentRoomData: CurrentRoomData?
+    private var roomNumbersAndNames: [Int: String] = [:]
+    private var resultDatchik: [String: JSON] = [:]
+    private var currentRoomData: CurrentRoomData?
     private var switchRoom = false
 
     @IBOutlet weak var stackView: UIStackView!
@@ -79,10 +90,11 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             case .right:
                 navigationController?.popViewController(animated: true)
             case .left:
-                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: self.curentVC + 1) {
-                    roomsVC.resultDatchik = self.resultDatchik
-                    roomsVC.roomNumbersAndNames = self.roomNumbersAndNames
-                    roomsVC.currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])
+                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: self.curentVC + 1,
+                                                                           roomNumbersAndNames: self.roomNumbersAndNames,
+                                                                           resultDatchik: self.resultDatchik,
+                                                                           currentRoomData:
+                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:

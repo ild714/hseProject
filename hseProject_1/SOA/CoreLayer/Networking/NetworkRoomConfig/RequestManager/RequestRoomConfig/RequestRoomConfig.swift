@@ -44,6 +44,7 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
             if let data = data {
                 DispatchQueue.main.async {
                     if let decodedRoom = requestConfig.parser.parseForRooms(data: data) {
+                        print("1")
                         for (key, data) in decodedRoom {
                             if key == "did"{
                                 continue

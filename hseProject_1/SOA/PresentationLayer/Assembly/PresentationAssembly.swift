@@ -11,7 +11,7 @@ import SwiftyJSON
 
 protocol PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController?
-    func roomsViewController(curentVC: Int) -> RoomsViewController?
+    func roomsViewController(curentVC: Int,roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?) -> RoomsViewController?
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController() -> NewScriptViewController?
     func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
@@ -39,13 +39,21 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         })
     }
 
-    func roomsViewController(curentVC: Int) -> RoomsViewController? {
+    func roomsViewController(curentVC: Int, roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?) -> RoomsViewController? {
         let storyboard = UIStoryboard(name: "RoomsViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "RoomsViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
             var modelAppDatchik = self.modelAppDatchik()
             if let userId = UserDefaults.standard.object(forKey: "UserEmail") as? String {
-                let roomsVC =  RoomsViewController(coder: coder, presentationAssembly: self, userId: userId, modelRoomsConfig: modelRoomsConfig, modelRoomDatchik: modelAppDatchik, curentVC: curentVC)
+                let roomsVC =  RoomsViewController(coder: coder,
+                                                   presentationAssembly: self,
+                                                   userId: userId,
+                                                   modelRoomsConfig: modelRoomsConfig,
+                                                   modelRoomDatchik: modelAppDatchik,
+                                                   curentVC: curentVC,
+                                                   roomNumbersAndNames: roomNumbersAndNames,
+                                                   resultDatchik: resultDatchik,
+                                                   currentRoomData: currentRoomData)
                 modelRoomsConfig.delegate = roomsVC
                 modelAppDatchik.delegate = roomsVC
                 return roomsVC

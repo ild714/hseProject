@@ -9,6 +9,11 @@
 import Foundation
 import SwiftyJSON
 
+protocol ModelRoomsConfigDelegate: class {
+    func setup(result: [Int: String])
+    func show1(error message: String)
+}
+
 class ModelRoomsConfig: ModelRoomsConfigProtocol {
     weak var delegate: ModelRoomsConfigDelegate?
     private var roomNumbersAndNames: [Int: String] = [:]
@@ -21,12 +26,12 @@ class ModelRoomsConfig: ModelRoomsConfigProtocol {
             switch result {
             case .success(let result):
                 for (_, value) in result {
-                    self.roomNumbersAndNames[value["rid"].int ?? 0] = value["r_name"].description
+                    if let rid = value["rid"].int {
+                        self.roomNumbersAndNames[rid] = value["r_name"].description
+                    }
                 }
-                print(self.roomNumbersAndNames)
                 self.delegate?.setup(result: self.roomNumbersAndNames)
             case .failure(let error):
-                print(error)
                 self.delegate?.show1(error: error.localizedDescription)
             }
         }

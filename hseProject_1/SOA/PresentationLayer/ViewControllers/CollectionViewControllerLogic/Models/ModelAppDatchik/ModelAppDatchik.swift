@@ -9,6 +9,10 @@
 import UIKit
 import SwiftyJSON
 
+protocol ModelAppDatchikDelegate: class {
+    func show2(error message: String)
+}
+
 class ModelAppDatchik: ModelAppDatchikProtocol {
     weak var delegate: ModelAppDatchikDelegate?
     private let appDatchikService: AppDatchikServiceProtocol
