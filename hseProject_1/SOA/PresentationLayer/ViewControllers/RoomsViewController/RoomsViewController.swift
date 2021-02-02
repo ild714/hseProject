@@ -15,16 +15,12 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     init?(coder: NSCoder,
           presentationAssembly: PresentationAssemblyProtocol,
           userId: String,
-          modelRoomsConfig: ModelRoomsConfigProtocol,
-          modelRoomDatchik: ModelAppDatchikProtocol,
           curentVC: Int,
           roomNumbersAndNames: [Int: String],
           resultDatchik: [String: JSON],
           currentRoomData: CurrentRoomData?) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
-        self.modelRoomsConfig = modelRoomsConfig
-        self.modelRoomDatchik = modelRoomDatchik
         self.curentVC = curentVC
         self.roomNumbersAndNames = roomNumbersAndNames
         self.resultDatchik = resultDatchik
@@ -38,8 +34,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var menu: SideMenuNavigationController?
     private var userId = ""
-    private var modelRoomsConfig: ModelRoomsConfigProtocol?
-    private var modelRoomDatchik: ModelAppDatchikProtocol?
     private var curentVC: Int = 1
     private var roomNumbersAndNames: [Int: String] = [:]
     private var resultDatchik: [String: JSON] = [:]
@@ -52,36 +46,114 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     @IBOutlet weak var stackViewTemperature: UIStackView!
 
     @IBOutlet weak var currentTemperature: UILabel!
-    @IBOutlet weak var modOfCurrentTemperature: UILabel!
     @IBOutlet weak var aimTemperature: LabelRightSideCustomClass!
 
     @IBOutlet weak var currentWet: UILabel!
     @IBOutlet weak var aimWet: LabelRightSideCustomClass!
-    @IBOutlet weak var modOfTheCurrentWet: UILabel!
 
     @IBOutlet weak var currentGas: UILabel!
     @IBOutlet weak var aimGas: LabelRightSideCustomClass!
-    @IBOutlet weak var ppmLabel: UILabel!
 
     @IBOutlet weak var peopleInRoom: LabelRightSideCustomClass!
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.toolbar.isHidden = false
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.createMenuForNavigationController()
+        self.createButtonForNavigationController()
+        self.addWhiteColorForStackViews()
+        self.setGradientForNavigation()
+        self.deleteBackButtonFromNavigation()
+        self.startAnimation()
+        self.setupGesturesForRoomNumbersAndNames()
+        self.setupCurrentResultAppDatchik()
+        self.setDefaultValuesForAimParamtrs()
+    }
+    func createMenuForNavigationController() {
+        if let presentationAssembly = self.presentationAssembly {
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
+            menu?.leftSide = true
+            menu?.enableSwipeToDismissGesture = false
+        }
+    }
+    func createButtonForNavigationController() {
+        let button = UIBarButtonItem(image: UIImage(named: "menu4"), style: .plain, target: self, action: #selector(didTapMenu))
+        button.tintColor = .white
+        navigationItem.leftBarButtonItem = button
+    }
+    func addWhiteColorForStackViews() {
+        stackView.backColor(stackView: stackView)
+        stackViewCO2.backColor(stackView: stackViewCO2)
+        stackViewWet.backColor(stackView: stackViewWet)
+        stackViewTemperature.backColor(stackView: stackViewTemperature)
+    }
+    func setGradientForNavigation() {
+        self.navigationController?.navigationBar.setGradientBackground(
+            colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),
+                     UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)],
+            startPoint: .topLeft,
+            endPoint: .bottomRight)
+    }
+    func deleteBackButtonFromNavigation() {
+        self.navigationItem.setHidesBackButton(true, animated: true)
+    }
+    func startAnimation() {
+        ActivityIndicator.animateActivity(
+            views: [ViewSpecialAndGeneral(view: self.aimWet),
+                    ViewSpecialAndGeneral(view: self.currentGas),
+                    ViewSpecialAndGeneral(view: self.currentWet),
+                    ViewSpecialAndGeneral(view: self.peopleInRoom),
+                    ViewSpecialAndGeneral(view: self.aimGas),
+                    ViewSpecialAndGeneral(view: self.aimTemperature),
+                    ViewSpecialAndGeneral(view: currentTemperature, type: .special)])
+    }
+    func setupGesturesForRoomNumbersAndNames() {
+        if self.curentVC == self.roomNumbersAndNames.count {
+            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
+            upSwipe.direction = .up
+            self.view.addGestureRecognizer(rightSwipe)
+            self.view.addGestureRecognizer(upSwipe)
+        } else if self.curentVC < self.roomNumbersAndNames.count {
+            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
+            upSwipe.direction = .up
+            leftSwipe.direction = .left
+
+            self.view.addGestureRecognizer(leftSwipe)
+            self.view.addGestureRecognizer(rightSwipe)
+            self.view.addGestureRecognizer(upSwipe)
+        }
+        self.setTitleAndPageControll()
+    }
+    func setTitleAndPageControll() {
+        self.title = Array(self.roomNumbersAndNames.values.sorted())[self.curentVC - 1]
+        self.createPageControll()
+    }
+    func createPageControll() {
+        self.createPageControl(viewController: self, number: self.curentVC, allAmountOfPages: self.roomNumbersAndNames.count + 1)
+    }
+    func setupCurrentResultAppDatchik() {
+        if self.roomNumbersAndNames.count > 0 {
+            self.currentTemperature.text = currentRoomData?.currentTemperature
+            self.currentWet.text = currentRoomData?.currentWet
+            self.currentGas.text = currentRoomData?.currentGas
+            self.peopleInRoom.text = currentRoomData?.peopleInRoom
+
+            ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+        }
+    }
+
     @IBAction func minusTemperature(_ sender: Any) {
-        self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "50℃"
+        self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
     }
 
     @IBAction func plusTemperature(_ sender: Any) {
-        self.aimTemperature.text = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "0℃"
-    }
-
-    @IBAction func ventilateRoom(_ sender: Any) {
-        NetworkTemperatureResponse.getResponse(with: "https://vc-srvr.ru/app/scen/get_cur?did=40RRTM304FCdd5M80ods&rid=1") {  (result: Result<String, NetworkTemperatureError>) in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error):
-                print(error)
-            }
-        }
+        self.aimTemperature.text = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "15℃"
     }
 
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
@@ -132,92 +204,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             present(menu, animated: true)
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.createMenuForNavigationController()
-        self.createButtonForNavigationController()
-        self.addWhiteColorForStackViews()
-        self.setGradientForNavigation()
-        self.deleteBackButtonFromNavigation()
-        self.startAnimation()
-//        self.modelRoomsConfig?.fetchRoomConfig()
-        self.setupRoomNumbersAndNames()
-//        self.setupCurrentAppDatchik()
-        self.setipCurrentResultAppDatchik()
-        self.setupCurrentAimAppDatchik()
-    }
-    func setupRoomNumbersAndNames() {
-        if self.curentVC == self.roomNumbersAndNames.count {
-            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
-            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
-            upSwipe.direction = .up
-            self.view.addGestureRecognizer(rightSwipe)
-            self.view.addGestureRecognizer(upSwipe)
-        } else if self.curentVC < self.roomNumbersAndNames.count {
-            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-            upSwipe.direction = .up
-            leftSwipe.direction = .left
-
-            self.view.addGestureRecognizer(leftSwipe)
-            self.view.addGestureRecognizer(rightSwipe)
-            self.view.addGestureRecognizer(upSwipe)
-        }
-        self.setTitleAndPageControll()
-    }
-    func setipCurrentResultAppDatchik() {
-        if self.roomNumbersAndNames.count > 0 {
-            self.currentTemperature.text = currentRoomData?.currentTemperature
-            self.modOfCurrentTemperature.text = currentRoomData?.modOfCurrentTemperature
-            self.currentWet.text = currentRoomData?.currentWet
-            self.modOfTheCurrentWet.text = currentRoomData?.modOfCurrentWet
-            self.currentGas.text = currentRoomData?.currentGas
-            //self.ppmLabel.text = currentRoomData.ppm
-            self.peopleInRoom.text = currentRoomData?.peopleInRoom
-
-            ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
-        }
-    }
-    func createMenuForNavigationController() {
-        if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
-            menu?.leftSide = true
-            menu?.enableSwipeToDismissGesture = false
-        }
-    }
-
-    func createButtonForNavigationController() {
-        let button = UIBarButtonItem(image: UIImage(named: "menu4"), style: .plain, target: self, action: #selector(didTapMenu))
-        button.tintColor = .white
-        navigationItem.leftBarButtonItem = button
-    }
-
-    func addWhiteColorForStackViews() {
-        stackView.backColor(stackView: stackView)
-        stackViewCO2.backColor(stackView: stackViewCO2)
-        stackViewWet.backColor(stackView: stackViewWet)
-        stackViewTemperature.backColor(stackView: stackViewTemperature)
-    }
-
-    func setGradientForNavigation() {
-//        self.navigationController?.navigationBar.setGradientBackground(colors: [UIColor.init(rgb: 0x5b80ea), UIColor.init(rgb: 0x37b5dd)], startPoint: .topLeft, endPoint: .bottomRight)
-        self.navigationController?.navigationBar.setGradientBackground(
-            colors: [UIColor.init(red: 41/255.0, green: 114/255.0, blue: 237/255.0, alpha: 1),
-                     UIColor.init(red: 41/255.0, green: 252/255.0, blue: 237/255.0, alpha: 1)],
-            startPoint: .topLeft,
-            endPoint: .bottomRight)
-    }
-
-    func deleteBackButtonFromNavigation() {
-        self.navigationItem.setHidesBackButton(true, animated: true)
-    }
-    func setTitleAndPageControll() {
-        self.title = Array(self.roomNumbersAndNames.values.sorted())[self.curentVC - 1]
-        self.createPageControll()
-    }
-
     @IBOutlet weak var minusButton: ButtonLeftSideCustomClass!
     @IBOutlet weak var plusButton: ButtonRightSideCustomClass!
     func setDefaultValuesForAimParamtrs() {
@@ -232,97 +218,5 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         self.present(alertVC, animated: true)
-    }
-
-    func createPageControll() {
-        self.createPageControl(viewController: self, number: self.curentVC, allAmountOfPages: self.roomNumbersAndNames.count + 1)
-    }
-    func startAnimation() {
-        ActivityIndicator.animateActivity(
-            views: [ViewSpecialAndGeneral(view: self.aimWet),
-                    ViewSpecialAndGeneral(view: self.currentGas),
-                    ViewSpecialAndGeneral(view: self.currentWet),
-                    ViewSpecialAndGeneral(view: self.peopleInRoom),
-                    ViewSpecialAndGeneral(view: self.aimGas),
-                    ViewSpecialAndGeneral(view: self.aimTemperature),
-                    ViewSpecialAndGeneral(view: currentTemperature, type: .special)])
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.navigationController?.toolbar.isHidden = false
-    }
-
-}
-
-// MARK: - ModelRoomsConfigDelegate
-extension RoomsViewController: ModelRoomsConfigDelegate {
-    func setup(result: [Int: String]) {
-        self.roomNumbersAndNames = result
-        if self.curentVC == self.roomNumbersAndNames.count {
-            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
-            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeLast(sender:)))
-            upSwipe.direction = .up
-            self.view.addGestureRecognizer(rightSwipe)
-            self.view.addGestureRecognizer(upSwipe)
-        } else if self.curentVC < self.roomNumbersAndNames.count {
-            let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-            let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-            let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipe(sender:)))
-            upSwipe.direction = .up
-            leftSwipe.direction = .left
-
-            self.view.addGestureRecognizer(leftSwipe)
-            self.view.addGestureRecognizer(rightSwipe)
-            self.view.addGestureRecognizer(upSwipe)
-        }
-        self.setTitleAndPageControll()
-    }
-    func show1(error message: String) {
-        print(message)
-//        self.showAlert()
-        self.viewDidLoad()
-        print("error with ViewController")
-    }
-}
-
-// MARK: - ModelAppDatchikDelegate
-extension RoomsViewController: ModelAppDatchikDelegate {
-    func show2(error message: String) {
-        print(message)
-        self.setDefaultValuesForAimParamtrs()
-    }
-    func setupCurrentAppDatchik() {
-        modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
-
-            print(self.roomNumbersAndNames.keys.sorted())
-            if self.roomNumbersAndNames.count > 0 {
-                let currentRoomData = CurrentRoomData(result: result, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC - 1])
-
-                self.currentTemperature.text = currentRoomData.currentTemperature
-                self.modOfCurrentTemperature.text = currentRoomData.modOfCurrentTemperature
-                self.currentWet.text = currentRoomData.currentWet
-                self.modOfTheCurrentWet.text = currentRoomData.modOfCurrentWet
-                self.currentGas.text = currentRoomData.currentGas
-                //self.ppmLabel.text = currentRoomData.ppm
-                self.peopleInRoom.text = currentRoomData.peopleInRoom
-
-                ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
-            } else {
-                self.setupCurrentAppDatchik()
-            }
-        }
-    }
-
-    func setupCurrentAimAppDatchik() {
-        modelRoomDatchik?.fetchAppDatchik(type: .aim) { (result: [JSON]) in
-
-            let aimRoomData = AimRoomData(result: result)
-            self.aimTemperature.text = aimRoomData.aimTemperature
-            self.aimWet.text = aimRoomData.aimWet
-            self.aimGas.text = aimRoomData.aimGas
-
-            ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
-        }
     }
 }

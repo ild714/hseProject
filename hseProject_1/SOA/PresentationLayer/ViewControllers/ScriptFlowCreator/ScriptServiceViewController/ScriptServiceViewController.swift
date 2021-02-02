@@ -89,7 +89,6 @@ class ScriptServiceViewController: UIViewController {
         itemRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveAndClose))
         navigationItem.rightBarButtonItem = itemRight
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backVC))
-        
         return tableView
     }()
     @objc func backVC() {

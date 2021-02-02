@@ -140,24 +140,17 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="96.5" height="45"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iSG-41-5bu">
-                                                                <rect key="frame" x="0.0" y="22.5" width="80" height="22.5"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="80" id="WgS-oc-KxN"/>
-                                                                </constraints>
+                                                                <rect key="frame" x="0.0" y="22.5" width="96.5" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pjw-dr-PPl">
-                                                                <rect key="frame" x="80" y="25" width="16.5" height="0.0"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="iSG-41-5bu" firstAttribute="top" secondItem="Jyr-PG-SLT" secondAttribute="top" constant="22.5" id="Biw-wf-gw9"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="температура" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OUI-ZH-Zz2">
                                                         <rect key="frame" x="0.0" y="45" width="96.5" height="15"/>
@@ -186,7 +179,7 @@
                                                 <rect key="frame" x="161" y="0.0" width="135" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="135" id="FNh-Au-euY"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="FNh-Au-euY"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="28"/>
                                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -255,25 +248,18 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="firstBaseline" translatesAutoresizingMaskIntoConstraints="NO" id="Eqt-rO-JzB">
                                                         <rect key="frame" x="0.0" y="0.0" width="96.5" height="43"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="lbE-kO-XJC">
-                                                                <rect key="frame" x="0.0" y="20.5" width="70" height="22.5"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="70" id="CKX-1n-q2Z"/>
-                                                                </constraints>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="lbE-kO-XJC">
+                                                                <rect key="frame" x="0.0" y="20.5" width="96.5" height="22.5"/>
                                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCP-M5-jHX">
-                                                                <rect key="frame" x="70" y="23" width="26.5" height="0.0"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="lbE-kO-XJC" firstAttribute="top" secondItem="Eqt-rO-JzB" secondAttribute="top" constant="20.5" id="mTd-6V-WRs"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text=" содержание CO₂" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="SN2-F6-gNP">
                                                         <rect key="frame" x="0.0" y="43" width="96.5" height="17"/>
@@ -302,7 +288,7 @@
                                                 <rect key="frame" x="161" y="0.0" width="135" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="135" id="GXY-nH-gKs"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="GXY-nH-gKs"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="28"/>
                                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -372,25 +358,18 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="94" height="45"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ER1-BO-EiW">
-                                                                <rect key="frame" x="0.0" y="22.5" width="70" height="22.5"/>
+                                                                <rect key="frame" x="0.0" y="22.5" width="94" height="22.5"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="70" id="oKp-jF-UOJ"/>
-                                                                </constraints>
                                                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cmJ-vN-aVK">
-                                                                <rect key="frame" x="70" y="25" width="24" height="0.0"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                                <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="ER1-BO-EiW" firstAttribute="top" secondItem="izg-P2-e6f" secondAttribute="top" constant="22.5" id="Zl7-PF-Ovj"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text=" влажность" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="AyL-1n-zjw">
                                                         <rect key="frame" x="0.0" y="45" width="94" height="15"/>
@@ -419,7 +398,7 @@
                                                 <rect key="frame" x="161" y="0.0" width="135" height="70"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="135" id="zDB-vS-lOB"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135" id="zDB-vS-lOB"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="28"/>
                                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -594,9 +573,6 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="horizontalMode" value="YES"/>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="ventilateRoom:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ans-da-GdU"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -634,11 +610,8 @@
                         <outlet property="currentTemperature" destination="iSG-41-5bu" id="S4u-fi-bWN"/>
                         <outlet property="currentWet" destination="ER1-BO-EiW" id="BK2-33-dri"/>
                         <outlet property="minusButton" destination="0vC-IS-BPl" id="fUx-2y-zQS"/>
-                        <outlet property="modOfCurrentTemperature" destination="Pjw-dr-PPl" id="s8R-bf-l0d"/>
-                        <outlet property="modOfTheCurrentWet" destination="cmJ-vN-aVK" id="2zf-As-gZw"/>
                         <outlet property="peopleInRoom" destination="UjR-Pr-unn" id="RbJ-nN-OsM"/>
                         <outlet property="plusButton" destination="tbS-AD-2XF" id="Inn-Yh-xem"/>
-                        <outlet property="ppmLabel" destination="TCP-M5-jHX" id="uSI-wI-ZK2"/>
                         <outlet property="stackView" destination="Jyr-PG-SLT" id="AIb-UB-0oe"/>
                         <outlet property="stackViewCO2" destination="Eqt-rO-JzB" id="oS0-yn-fr8"/>
                         <outlet property="stackViewTemperature" destination="Bjt-P4-YRt" id="2YM-Vn-4Lt"/>

@@ -12,11 +12,8 @@ import SwiftyJSON
 struct CurrentRoomData {
 
     var currentTemperature: String = ""
-    var modOfCurrentTemperature: String = ""
     var currentWet: String = ""
-    var modOfCurrentWet: String = ""
     var currentGas: String = ""
-    var ppm: String = ""
     var peopleInRoom: String = ""
 
     var cellTemperature: String = ""
@@ -28,19 +25,14 @@ struct CurrentRoomData {
             for data in currentRoomData {
 
                 if data.0 == "1"{
-//                    self.currentTemperature = "\(Int(floor(data.1.doubleValue)))."
                     self.currentTemperature = "\(data.1.doubleValue)℃"
                     self.cellTemperature = "\(data.1.doubleValue)℃"
-//                    self.modOfCurrentTemperature = "\(String(String(data.1.doubleValue)[3...4]))℃"
                 } else if data.0 == "4"{
-//                    self.currentWet =  "\(Int(floor(data.1.doubleValue)))."
                     self.currentWet = "\(data.1.doubleValue)%"
                     self.cellWet = "\(data.1.doubleValue)%"
-//                    self.modOfCurrentWet = "\(String(String(data.1.doubleValue)[3...4]))%"
                 } else if data.0 == "3"{
                     self.currentGas = "\(data.1)ppm"
                     self.cellGas = "\(data.1)ppm"
-                    self.ppm = "ppm"
                 } else if data.0 == "5" {
                     if let people = data.1.string {
                         self.peopleInRoom = people

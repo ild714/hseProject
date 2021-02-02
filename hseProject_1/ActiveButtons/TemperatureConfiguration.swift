@@ -16,7 +16,7 @@ class TemperatureConfig {
 
         if let aimTemperatureInt = Int(String(string.prefix(2))) {
 
-            if aimTemperatureInt <= 0 {
+            if aimTemperatureInt <= 15 {
                 return nil
             }
 
@@ -24,22 +24,10 @@ class TemperatureConfig {
         } else {
             if let aimTemperatureInt = Int(String(string.prefix(1))) {
 
-                if aimTemperatureInt <= 0 {
+                if aimTemperatureInt <= 15 {
                     return nil
                 }
                 aimTmperatureIntResult = aimTemperatureInt
-            }
-        }
-
-        NetworkTemperatureResponse.getResponse(
-            with:
-                "https://vc-srvr.ru/app/ch_temp?did=40RRTM304FCdd5M80ods&rid=1&ch_temp=\(aimTmperatureIntResult)") {(result: Result<String, NetworkTemperatureError>)
-            in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error):
-                print(error)
             }
         }
 
@@ -51,7 +39,7 @@ class TemperatureConfig {
 
         if let aimTemperatureInt = Int(String(string.prefix(2))) {
 
-            if aimTemperatureInt >= 50 {
+            if aimTemperatureInt >= 30 {
                 return nil
             }
 
@@ -60,16 +48,6 @@ class TemperatureConfig {
             if let aimTemperatureInt = Int(String(string.prefix(1))) {
 
                 aimTmperatureIntResult = aimTemperatureInt
-            }
-        }
-
-        NetworkTemperatureResponse.getResponse(
-            with: "https://vc-srvr.ru/app/ch_temp?did=40RRTM304FCdd5M80ods&rid=1&ch_temp=\(aimTmperatureIntResult)") { (result: Result<String, NetworkTemperatureError>) in
-            switch result {
-            case .success(let result):
-                print(result)
-            case .failure(let error):
-                print(error)
             }
         }
 

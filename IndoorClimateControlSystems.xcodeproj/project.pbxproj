@@ -43,7 +43,6 @@
 		74282347258CEA07008F6524 /* ModelRoomsConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74282346258CEA07008F6524 /* ModelRoomsConfigProtocol.swift */; };
 		743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */; };
 		743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */; };
-		743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */; };
 		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 		7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */; };
 		746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */; };
@@ -133,7 +132,6 @@
 		74282346258CEA07008F6524 /* ModelRoomsConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelRoomsConfigProtocol.swift; sourceTree = "<group>"; };
 		743B8FC524E2EE5B009A929A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConfiguration.swift; sourceTree = "<group>"; };
-		743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTemperatureResponse.swift; sourceTree = "<group>"; };
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
 		746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCurrentRoomsViewController.swift; sourceTree = "<group>"; };
@@ -380,14 +378,6 @@
 			path = Assembly;
 			sourceTree = "<group>";
 		};
-		742822B5258B9523008F6524 /* NetworkTemperatureResponse */ = {
-			isa = PBXGroup;
-			children = (
-				743B8FC924E67DAE009A929A /* NetworkTemperatureResponse.swift */,
-			);
-			path = NetworkTemperatureResponse;
-			sourceTree = "<group>";
-		};
 		742822B6258B9536008F6524 /* NetworkScript */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,7 +445,6 @@
 			children = (
 				7470603A25AB95FB00C4CC93 /* NetworkScriptsLoad */,
 				7457B97B24DF0A3C00C16A0E /* NetworkRoomConfig */,
-				742822B5258B9523008F6524 /* NetworkTemperatureResponse */,
 				742822B6258B9536008F6524 /* NetworkScript */,
 			);
 			path = Networking;
@@ -941,7 +930,6 @@
 				7428233E258CE2C2008F6524 /* AppDatchikService.swift in Sources */,
 				7480039C24E1406A006DEBDE /* LabelLeftSideCustomClass.swift in Sources */,
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
-				743B8FCA24E67DAE009A929A /* NetworkTemperatureResponse.swift in Sources */,
 				746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */,
 				742822E9258BDA6F008F6524 /* PresentationAssembly.swift in Sources */,
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,
