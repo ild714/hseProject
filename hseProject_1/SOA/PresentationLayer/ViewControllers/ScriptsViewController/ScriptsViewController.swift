@@ -161,6 +161,9 @@ extension ScriptsViewController: UITableViewDelegate {
                 marks.append(false)
             }
         }
+        let networkSetScript = NetworkSetScript()
+        networkSetScript.sentDataScript(scId: Array(self.scriptsDict.keys.sorted())[indexPath.row])
+        
         tableView.reloadData()
     }
 }
