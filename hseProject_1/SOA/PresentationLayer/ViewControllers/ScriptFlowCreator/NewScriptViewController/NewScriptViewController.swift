@@ -59,16 +59,6 @@ class NewScriptViewController: UIViewController {
         textField.placeholder = "Новый сценарий"
         textField.layer.cornerRadius = 50
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        let defaults = UserDefaults.standard
-        let dictionary = defaults.dictionaryRepresentation()
-        dictionary.keys.forEach { key in
-            if key.contains("room") || key.contains("Scripts") {
-                print(key)
-                defaults.removeObject(forKey: key)
-            }
-        }
-    }
     @objc func roomsGroup() {
         if textField.text?.isEmpty == true {
             alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")

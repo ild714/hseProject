@@ -52,7 +52,16 @@ class ScriptsViewController: UIViewController {
         self.navigationController?.toolbar.isHidden = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newScripts))
     }
-
+    override func viewWillDisappear(_ animated: Bool) {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            if key.contains("room") || key.contains("Scripts") {
+                print(key)
+                defaults.removeObject(forKey: key)
+            }
+        }
+    }
     func userDefaultsCleaner() {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()

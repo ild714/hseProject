@@ -29,8 +29,10 @@ struct ServiceScript: Codable {
 
 class ScriptServiceViewController: UIViewController {
 
-    init?(coder: NSCoder, scriptCreator: JSON) {
+    init?(coder: NSCoder, scriptCreator: JSON, previousRoomId: Int, previousDayId: Int) {
         self.scriptCreator = scriptCreator
+        self.previousRoomId = previousRoomId
+        self.previousDayId = previousDayId
         super.init(coder: coder)
     }
 
@@ -38,9 +40,9 @@ class ScriptServiceViewController: UIViewController {
         super.init(coder: coder)
     }
     weak var delegate: ServiceUpdatedDataProtocol?
-    var indexOfService = 0
-    var previousRoomId = 0
-    var previousDayId = 0
+    private var indexOfService = 0
+    private var previousRoomId = 0
+    private var previousDayId = 0
     private var scriptCreator: JSON = []
     @IBOutlet weak var serviceLabel: UILabel!
     @IBOutlet weak var imageStack: UIStackView!
@@ -49,10 +51,10 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var humidityTextField: UITextField!
     @IBOutlet weak var co2TextField: UITextField!
-    var showCloseBool = true
-    var itemRight: UIBarButtonItem?
-    var selectedIndex: Int?
-    var selectedIndexChoosed = false
+    private var showCloseBool = true
+    private var itemRight: UIBarButtonItem?
+    private var selectedIndex: Int?
+    private var selectedIndexChoosed = false
     override func viewDidLoad() {
         super.viewDidLoad()
 

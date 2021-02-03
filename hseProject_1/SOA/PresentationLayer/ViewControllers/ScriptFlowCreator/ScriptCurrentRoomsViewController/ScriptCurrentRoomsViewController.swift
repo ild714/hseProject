@@ -33,7 +33,6 @@ class ScriptCurrentRoomsViewController: UIViewController {
     private var roomNumbers: [Int: [Int]] = [:] // intermediate variable for roomCurrentNumbersAndNames
     private var allRoomsForVC: [Int] = [] // room numbers for ScriptForRoomVC
     private var dynamicIntForRooms = 0
-    private var dynamicIntDays = 0
     private var scriptCreator: JSON = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private let cellIdentifier = String(describing: CurrentRoomsTableViewCell.self)
@@ -189,8 +188,6 @@ extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
 extension ScriptCurrentRoomsViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
-//        numbersDictForRoomSection()
-//        indexAndNamesForRoomSection()
         roomSavedJsonDataLoader()
         self.tableView.reloadData()
     }
@@ -201,8 +198,7 @@ extension ScriptCurrentRoomsViewController: ModelRoomsConfigDelegate {
 }
 
 extension ScriptCurrentRoomsViewController: DaysUpdatedDataProtocol {
-    func updateScript(script: JSON, dynamicInt: Int) {
-        self.dynamicIntDays = dynamicInt
+    func updateScript(script: JSON) {
         self.scriptCreator = script
     }
 }

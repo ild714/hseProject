@@ -210,9 +210,9 @@
 		2108898A24D19575000F6B4B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				74D65C9125840E9D007588F7 /* SignIn */,
 				74F606CB25C80FAF0035E86E /* MenuListController */,
 				74F606CA25C80F7B0035E86E /* ScriptFlowCreator */,
-				74D65C9125840E9D007588F7 /* SignIn */,
 				7497521D25596C6F00B88A21 /* ScriptsViewController */,
 				74171F192540EA2100746E9E /* RoomsViewController */,
 				740D1E0E25304E3E000253FA /* CollectionViewControllerLogic */,

@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 
 protocol DaysUpdatedDataProtocol: class {
-    func updateScript(script: JSON, dynamicInt: Int)
+    func updateScript(script: JSON)
 }
 
 class ScriptCurrentDaysViewController: UIViewController {
@@ -28,7 +28,7 @@ class ScriptCurrentDaysViewController: UIViewController {
     @IBOutlet weak var labelDescription: UILabel!
     weak var delegate: DaysUpdatedDataProtocol?
     private var indexOfRooms = 0
-    private var dynamicInt = 0
+    private var dynamicIntForDays = 0
     private var scriptCreator: JSON = []
     private var roomCurrentNumbersAndDays: [Int: [String]] = [:]
     private var presentationAssembly: PresentationAssemblyProtocol?
@@ -44,7 +44,7 @@ class ScriptCurrentDaysViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
-        self.dynamicInt = UserDefaults.standard.integer(forKey: "roomGroup\(indexOfRooms)")
+        self.dynamicIntForDays = UserDefaults.standard.integer(forKey: "roomGroup\(indexOfRooms)")
         setupNavigationVC()
         daysSavedJsonDataLoader()
         setupTableView()
@@ -56,7 +56,7 @@ class ScriptCurrentDaysViewController: UIViewController {
     }
     @objc func showRoomsScriptVC() {
         print(scriptCreator)
-        delegate?.updateScript(script: self.scriptCreator, dynamicInt: self.dynamicInt)
+        delegate?.updateScript(script: self.scriptCreator)
         self.navigationController?.popViewController(animated: true)
     }
     @objc func newDaysGroup() {
@@ -122,10 +122,8 @@ extension ScriptCurrentDaysViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        if let scriptServiceVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator) {
+        if let scriptServiceVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator, previousRoomId: self.indexOfRooms, previousDayId: indexPath.row) {
             scriptServiceVC.delegate = self
-            scriptServiceVC.previousRoomId = self.indexOfRooms
-            scriptServiceVC.previousDayId = indexPath.row
             navigationController?.pushViewController(scriptServiceVC, animated: true)
         }
     }
@@ -136,8 +134,8 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
     func save(daysString: [String]) {
         jsonForDaysSection(days: daysString)
         daysDict(days: daysString)
-        dynamicInt += 1
-        UserDefaults.standard.set(dynamicInt, forKey: "roomGroup\(indexOfRooms)")
+        dynamicIntForDays += 1
+        UserDefaults.standard.set(dynamicIntForDays, forKey: "roomGroup\(indexOfRooms)")
         tableView.reloadData()
     }
 
@@ -166,12 +164,12 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         }
 
         let json: JSON = JSON(stringToNumber)
-        scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(dynamicInt)"] = JSON()
-        scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(dynamicInt)"]["days"] = json
+        scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(dynamicIntForDays)"] = JSON()
+        scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(dynamicIntForDays)"]["days"] = json
     }
 
     func daysDict(days: [String]) {
-        self.roomCurrentNumbersAndDays[dynamicInt] = days
+        self.roomCurrentNumbersAndDays[dynamicIntForDays] = days
     }
 
 }

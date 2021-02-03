@@ -26,8 +26,8 @@ class ScriptForRoomViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    private var emtyVC = false
     weak var delegate: ScriptForRoomProtocol?
+    private var emtyVC = false
     private var roomNumbers: [Int] = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var modelRoomsConfig: ModelRoomsConfigProtocol?

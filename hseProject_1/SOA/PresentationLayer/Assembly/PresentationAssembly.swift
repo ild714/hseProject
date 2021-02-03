@@ -16,9 +16,9 @@ protocol PresentationAssemblyProtocol {
     func newScriptViewController() -> NewScriptViewController?
     func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
     func scriptForDaysViewController(scriptCreator: JSON, daysString: [String]) -> ScriptForDaysViewController?
-    func scriptServiceViewController(scriptCreator: JSON) -> ScriptServiceViewController?
+    func scriptServiceViewController(scriptCreator: JSON, previousRoomId: Int, previousDayId: Int) -> ScriptServiceViewController?
     func currentRoomsViewController(scriptCreator: JSON, rooms: [Int], dynamicIntForRooms: Int) -> ScriptCurrentRoomsViewController?
-    func currentDaysViewController(scriptCreator: JSON, indexOfRooms:Int) -> ScriptCurrentDaysViewController?
+    func currentDaysViewController(scriptCreator: JSON, indexOfRooms: Int) -> ScriptCurrentDaysViewController?
 }
 
 class PresentationAssembly: PresentationAssemblyProtocol {
@@ -86,10 +86,10 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             return scriptForDaysVC
         })
     }
-    func scriptServiceViewController(scriptCreator: JSON) -> ScriptServiceViewController? {
+    func scriptServiceViewController(scriptCreator: JSON, previousRoomId: Int, previousDayId: Int) -> ScriptServiceViewController? {
         let storyboard = UIStoryboard(name: "ScriptServiceViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptServiceViewController", creator: { coder in
-            let scriptServiceVC =  ScriptServiceViewController(coder: coder, scriptCreator: scriptCreator)
+            let scriptServiceVC =  ScriptServiceViewController(coder: coder, scriptCreator: scriptCreator,previousRoomId: previousRoomId, previousDayId: previousDayId)
             return scriptServiceVC
         })
     }

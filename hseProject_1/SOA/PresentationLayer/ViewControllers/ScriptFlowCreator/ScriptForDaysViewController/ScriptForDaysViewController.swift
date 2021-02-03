@@ -25,7 +25,7 @@ class ScriptForDaysViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    var emptyVC = false
+    private var emptyVC = false
     weak var delegate: ScriptForDaysProtocol?
     private var daysString: [String] = []
     private var presentationAssembly: PresentationAssemblyProtocol?
