@@ -14,9 +14,10 @@ protocol DaysUpdatedDataProtocol: class {
 }
 
 class ScriptCurrentDaysViewController: UIViewController {
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: JSON) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: JSON, indexOfRooms: Int) {
         self.presentationAssembly = presentationAssembly
         self.scriptCreator = scriptCreator
+        self.indexOfRooms = indexOfRooms
         super.init(coder: coder)
     }
 
@@ -24,13 +25,13 @@ class ScriptCurrentDaysViewController: UIViewController {
         super.init(coder: coder)
     }
 
-    weak var delegate: DaysUpdatedDataProtocol?
-    var previousNumber = 0
-    var dynamicInt = 0
-    var scriptCreator: JSON = []
-    var roomCurrentNumbersAndDays: [Int: [String]] = [:]
-    private var presentationAssembly: PresentationAssemblyProtocol?
     @IBOutlet weak var labelDescription: UILabel!
+    weak var delegate: DaysUpdatedDataProtocol?
+    private var indexOfRooms = 0
+    private var dynamicInt = 0
+    private var scriptCreator: JSON = []
+    private var roomCurrentNumbersAndDays: [Int: [String]] = [:]
+    private var presentationAssembly: PresentationAssemblyProtocol?
     private let cellIdentifier = String(describing: CurrentDaysTableViewCell.self)
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .grouped)
@@ -43,14 +44,15 @@ class ScriptCurrentDaysViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newDaysGroup))
-        self.dynamicInt = UserDefaults.standard.integer(forKey: "roomGroup\(previousNumber)")
+        self.dynamicInt = UserDefaults.standard.integer(forKey: "roomGroup\(indexOfRooms)")
+        setupNavigationVC()
         daysSavedJsonDataLoader()
         setupTableView()
-//        self.navigationController?.navigationBar.backItem?.title = "Назад"
+    }
+    func setupNavigationVC() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newDaysGroup))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: nil, action: nil)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(showRoomsScriptVC))
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .redo, target: self, action: #selector(showRoomsScriptVC))
     }
     @objc func showRoomsScriptVC() {
         print(scriptCreator)
@@ -104,17 +106,13 @@ extension ScriptCurrentDaysViewController: UITableViewDataSource {
         cell.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         var labelArrayString = ""
 
-        for sections in self.roomCurrentNumbersAndDays {
-            if sections.key == indexPath.row {
-                for section in sections.value {
-                    labelArrayString += section
-                    labelArrayString += "\n"
-                }
-                cell.configure(days: labelArrayString)
-            } else {
+        for sections in self.roomCurrentNumbersAndDays where sections.key == indexPath.row {
+            for section in sections.value {
+                labelArrayString += section
+                labelArrayString += "\n"
             }
+            cell.configure(days: String(labelArrayString.dropLast(1)))
         }
-
         return cell
     }
 }
@@ -126,7 +124,7 @@ extension ScriptCurrentDaysViewController: UITableViewDelegate {
 
         if let scriptServiceVC = presentationAssembly?.scriptServiceViewController(scriptCreator: self.scriptCreator) {
             scriptServiceVC.delegate = self
-            scriptServiceVC.previousRoomId = self.previousNumber
+            scriptServiceVC.previousRoomId = self.indexOfRooms
             scriptServiceVC.previousDayId = indexPath.row
             navigationController?.pushViewController(scriptServiceVC, animated: true)
         }
@@ -139,7 +137,7 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         jsonForDaysSection(days: daysString)
         daysDict(days: daysString)
         dynamicInt += 1
-        UserDefaults.standard.set(dynamicInt, forKey: "roomGroup\(previousNumber)")
+        UserDefaults.standard.set(dynamicInt, forKey: "roomGroup\(indexOfRooms)")
         tableView.reloadData()
     }
 
@@ -168,8 +166,8 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         }
 
         let json: JSON = JSON(stringToNumber)
-        scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(dynamicInt)"] = JSON()
-        scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(dynamicInt)"]["days"] = json
+        scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(dynamicInt)"] = JSON()
+        scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(dynamicInt)"]["days"] = json
     }
 
     func daysDict(days: [String]) {
@@ -180,10 +178,10 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
 
 extension ScriptCurrentDaysViewController {
     func daysSavedJsonDataLoader() {
-        print(scriptCreator["roomGroup\(previousNumber)"].count)
-        for num in 0..<scriptCreator["roomGroup\(previousNumber)"].count - 1 {
+        print(scriptCreator["roomGroup\(indexOfRooms)"].count)
+        for num in 0..<scriptCreator["roomGroup\(indexOfRooms)"].count - 1 {
             var numberToString: [String] = []
-            let daysInts = scriptCreator["roomGroup\(previousNumber)"]["dayGroup\(num)"]["days"]
+            let daysInts = scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(num)"]["days"]
             for day in daysInts.arrayValue {
                 switch day {
                 case 0:

@@ -21,7 +21,7 @@ class NewScriptViewController: UIViewController {
     }
     private var presentationAssembly: PresentationAssemblyProtocol?
     var scriptCreator: JSON = JSON()
-    var dynamicInt = 0
+    var dynamicIntForRooms = 0
     @IBOutlet weak var textField: UITextField!
 
     override func viewDidLoad() {
@@ -74,18 +74,17 @@ class NewScriptViewController: UIViewController {
             alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
         } else {
             if scriptCreator.isEmpty {
-                scriptCreator["did"] = JSON("10153")
+                scriptCreator["did"] = JSON("10155")
                 scriptCreator["name"] = JSON(textField.text ?? "Test1?")
                 print(scriptCreator)
-                if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: []) {
+                if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: [], dynamicIntForRooms: self.dynamicIntForRooms) {
                     currentRoomsVC.delegate = self
                     navigationController?.pushViewController(currentRoomsVC, animated: true)
                 }
             } else {
                 print(scriptCreator)
-                if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: []) {
+                if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: [], dynamicIntForRooms: self.dynamicIntForRooms) {
                     currentRoomsVC.delegate = self
-                    currentRoomsVC.dynamicInt = self.dynamicInt
                     navigationController?.pushViewController(currentRoomsVC, animated: true)
                 }
             }
@@ -107,9 +106,9 @@ extension NewScriptViewController: UITextFieldDelegate {
 }
 
 extension NewScriptViewController: NewScriptUpdatedDataProtocol {
-    func updateScript(script: JSON, dynamicInt: Int) {
+    func updateScript(script: JSON, dynamicIntForRooms: Int) {
         self.scriptCreator = script
-        self.dynamicInt = dynamicInt
+        self.dynamicIntForRooms = dynamicIntForRooms
     }
 
 }

@@ -197,8 +197,8 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message.description)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
     }
 }
 
@@ -206,7 +206,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message.description)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
     }
 }
