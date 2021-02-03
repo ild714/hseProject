@@ -9,81 +9,46 @@
 import UIKit
 
 extension ScriptServiceViewController: CellDelagate {
-    func close(index:Int) {
+    func close(index: Int) {
         closeCell(index: index)
     }
-    func updateCell(){
+    func updateCell() {
         tableView.reloadData()
     }
-    func update(number: Int, soundOnOff: Bool, houseOnOff: Bool, time: Date, temperature: Int, humidity: Int, co2: Int, co2OnOff: Bool){
+    func update(number: Int,
+                soundOnOff: Bool,
+                houseOnOff: Bool,
+                time: Date,
+                temperature: Int,
+                humidity: Int,
+                co2: Int,
+                co2OnOff: Bool) {
         self.serviceScripts[number].co2 = co2
         self.serviceScripts[number].co2OnOff = co2OnOff
-        
+
         self.serviceScripts[number].time = time
         print(serviceScripts[number].time)
-        
-//        self.serviceScripts[number].temperature = temperature
-        print(temperature)
-        print(humidity)
-        print(co2)
         self.serviceScripts[number].temperature = temperature
         self.serviceScripts[number].humidity = humidity
-        
+
         if self.serviceScripts[number].hotFloorOn {
-//            self.serviceScripts[number].temperature = 24
-//            self.serviceScripts[number].humidity = 40
             self.serviceScripts[number].houseOnOff = houseOnOff
-//            tableView.reloadData()
         } else {
             self.serviceScripts[number].houseOnOff = houseOnOff
-//            tableView.reloadData()
         }
-        
+
         self.serviceScripts[number].soundOnOff = soundOnOff
-//        jsonScriptSaver()
-//        saveScriptsInMemory()
-//        downloadDataScripts()
-        //saveScriptsInMemory()
-        tableView.reloadData()
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            group.leave()
+        }
+        group.notify(queue: .main) {
+            self.close(index: number)
+        }
     }
-    
-//    func updateCO2(number: Int, co2: Int, co2OnOff: Bool) {
-//        self.serviceScripts[number].co2 = co2
-//        self.serviceScripts[number].co2OnOff = co2OnOff
-//        tableView.reloadData()
-//    }
-//
-//    func updateTime(number: Int, time: Date) {
-//        self.serviceScripts[number].time = time
-//        print(serviceScripts[number].time)
-//        tableView.reloadData()
-//    }
-//
-//    func updateTemperature(number: Int, temperature: Int) {
-//        self.serviceScripts[number].temperature = temperature
-//        tableView.reloadData()
-//    }
-//
-//    func updateHumidity(number: Int, humidity: Int) {
-//        self.serviceScripts[number].humidity = humidity
-//        tableView.reloadData()
-//    }
-//
-//    func updateHouse(number: Int, houseOnOff: Bool) {
-//        if self.serviceScripts[number].hotFloorOn {
-//            self.serviceScripts[number].temperature = 24
-//            self.serviceScripts[number].humidity = 40
-//            self.serviceScripts[number].houseOnOff = houseOnOff
-//            tableView.reloadData()
-//        } else {
-//            self.serviceScripts[number].houseOnOff = houseOnOff
-//            tableView.reloadData()
-//        }
-//    }
-//    func updateSound(number: Int, soundOnOff: Bool) {
-//        self.serviceScripts[number].soundOnOff = soundOnOff
-//        tableView.reloadData()
-//    }
+
     func showAlert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

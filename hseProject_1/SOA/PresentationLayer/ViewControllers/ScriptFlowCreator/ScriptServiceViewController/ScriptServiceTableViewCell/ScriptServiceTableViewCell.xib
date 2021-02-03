@@ -105,7 +105,7 @@
                         <rect key="frame" x="12" y="53" width="376" height="173"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uoS-ga-yQi">
-                                <rect key="frame" x="14" y="8" width="323" height="157"/>
+                                <rect key="frame" x="12" y="8" width="323" height="157"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LLN-uE-CgC">
                                         <rect key="frame" x="0.0" y="0.0" width="323" height="115"/>
@@ -307,7 +307,7 @@
                         <constraints>
                             <constraint firstItem="uoS-ga-yQi" firstAttribute="top" secondItem="piL-a2-ear" secondAttribute="top" constant="8" id="E6s-T7-tTG"/>
                             <constraint firstAttribute="bottom" secondItem="uoS-ga-yQi" secondAttribute="bottom" constant="8" id="LjD-hu-rTX"/>
-                            <constraint firstItem="uoS-ga-yQi" firstAttribute="leading" secondItem="piL-a2-ear" secondAttribute="leading" constant="14" id="p3s-LX-Jin"/>
+                            <constraint firstItem="uoS-ga-yQi" firstAttribute="leading" secondItem="piL-a2-ear" secondAttribute="leading" constant="12" id="p3s-LX-Jin"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -331,6 +331,7 @@
                 <outlet property="co2Edited" destination="Z3o-Ls-vPw" id="7pP-f5-bjO"/>
                 <outlet property="co2Image" destination="Sx2-p5-TUv" id="CUA-FB-7rY"/>
                 <outlet property="co2Label" destination="SnB-2l-EQU" id="s9K-kx-pjL"/>
+                <outlet property="customView" destination="4Hp-aL-xmw" id="prV-KO-J9J"/>
                 <outlet property="houseImage" destination="KRv-H5-Gh3" id="kTo-HL-yZm"/>
                 <outlet property="humidityEdited" destination="gPe-ci-lFT" id="ZpC-WW-k6Z"/>
                 <outlet property="humidityImage" destination="cBl-I9-ZjM" id="Q5O-yv-w3O"/>

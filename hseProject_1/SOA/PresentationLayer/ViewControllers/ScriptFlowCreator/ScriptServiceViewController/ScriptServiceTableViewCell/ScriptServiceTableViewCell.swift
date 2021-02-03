@@ -28,7 +28,13 @@ class ScriptServiceTableViewCell: UITableViewCell {
         co2Edited.delegate = self
     }
 
-    func congigure(serviveScript: ServiceScript, number: Int) {
+    @IBOutlet weak var customView: ViewCustomClass!
+    func congigure(serviveScript: ServiceScript, number: Int, turnOnColor: Bool) {
+        if turnOnColor {
+            customView.backgroundColor = UIColor(redS: 212, greenS: 212, blueS: 212)
+        } else {
+            customView.backgroundColor = .white
+        }
         stack.axis = NSLayoutConstraint.Axis.horizontal
         stack.distribution = UIStackView.Distribution.fillEqually
         stack.spacing = 3
@@ -102,12 +108,9 @@ class ScriptServiceTableViewCell: UITableViewCell {
     @IBAction func soundTurnOnOff(_ sender: Any) {
         if soundTurnOn == true {
             soundImage.setImage(UIImage(named: "mute"), for: .normal)
-//            delegate?.updateSound(number: index, soundOnOff: soundTurnOn)
-            
+
         } else if soundTurnOn == false {
             soundImage.setImage(UIImage(named: "volume"), for: .normal)
-//            delegate?.updateSound(number: index, soundOnOff: soundTurnOn)
-            
         }
         soundTurnOn.toggle()
     }
@@ -122,27 +125,21 @@ class ScriptServiceTableViewCell: UITableViewCell {
             temperatureImage.image = UIImage(named: "темп_min")
             humidityImage.image = UIImage(named: "влажность_max")
             humidityEdited.text = "40"
-//            self.humidityLabel.text = "40"
             self.temperatureEdited.isUserInteractionEnabled = false
             self.humidityEdited.isUserInteractionEnabled = false
             temperatureEdited.text = "24"
-//            self.temperatureLabel.text = "24"
-//            delegate?.updateCell()
-//            delegate?.updateHouse(number: index, houseOnOff: houseTurnOn)
         } else if houseTurnOn == false {
             houseImage.setImage(UIImage(named: "home"), for: .normal)
             temperatureImage.image = UIImage(named: "темп_б")
             humidityImage.image = UIImage(named: "влажность_б")
             self.temperatureEdited.isUserInteractionEnabled = true
             self.humidityEdited.isUserInteractionEnabled = true
-//            delegate?.updateHouse(number: index, houseOnOff: houseTurnOn)
         }
         houseTurnOn.toggle()
     }
 
     @IBOutlet weak var time: UIDatePicker!
     @IBAction func changeTime(_ sender: Any) {
-//        delegate?.updateTime(number: index, time: time.date)
     }
 
     @IBOutlet weak var temperatureEdited: UITextField!
@@ -154,7 +151,6 @@ class ScriptServiceTableViewCell: UITableViewCell {
                 return
             } else {
                 intTemperature = temperatureEdited
-//                delegate?.updateTemperature(number: index, temperature: temperatureEdited)
             }
         } else {
             delegate?.showAlert(title: "Ошибка ввода температуры", message: "Ввведите снова теипературу")
@@ -170,7 +166,6 @@ class ScriptServiceTableViewCell: UITableViewCell {
                 return
             } else {
                 intHumidity = humidityEdited
-//                delegate?.updateHumidity(number: index, humidity: humidityEdited)
             }
         } else {
             delegate?.showAlert(title: "Ошибка ввода влажности", message: "Ввведите снова влажность")
@@ -185,13 +180,11 @@ class ScriptServiceTableViewCell: UITableViewCell {
             self.co2Edited.text = "--"
             self.co2Edited.isUserInteractionEnabled = false
             co2TurnOn.toggle()
-//            delegate?.updateCO2(number: index, co2: Int(co2Edited.text ?? "error") ?? 0, co2OnOff: co2TurnOn)
         } else if co2TurnOn == false {
            co2Image.setImage(UIImage(named: "со2_on"), for: .normal)
             self.co2Edited.isUserInteractionEnabled = true
             self.co2Edited.text = "800"
             co2TurnOn.toggle()
-//            delegate?.updateCO2(number: index, co2: Int(co2Edited.text ?? "error") ?? 0, co2OnOff: co2TurnOn)
         }
     }
     var intCO2 = 800
@@ -202,7 +195,6 @@ class ScriptServiceTableViewCell: UITableViewCell {
                 return
             } else {
                 intCO2 = co2Edited
-//                delegate?.updateCO2(number: index, co2: co2Edited, co2OnOff: co2TurnOn)
             }
         }
     }
@@ -210,19 +202,13 @@ class ScriptServiceTableViewCell: UITableViewCell {
         delegate?.update(number: index, soundOnOff: soundTurnOn, houseOnOff: houseTurnOn, time: time.date, temperature: intTemperature, humidity: intHumidity, co2: intCO2, co2OnOff: co2TurnOn)
     }
     @IBAction func closePressed(_ sender: Any) {
-        delegate?.close(index:index)
+        delegate?.close(index: index)
     }
 }
 
 protocol CellDelagate: class {
-//    func updateSound(number: Int, soundOnOff: Bool)
-//    func updateHouse(number: Int, houseOnOff: Bool)
-//    func updateTime(number: Int, time: Date)
-//    func updateTemperature(number: Int, temperature: Int)
-//    func updateHumidity(number: Int, humidity: Int)
-//    func updateCO2(number: Int, co2: Int, co2OnOff: Bool)
     func updateCell()
-    func close(index:Int)
+    func close(index: Int)
     func showAlert(title: String, message: String)
     func update(number: Int, soundOnOff: Bool, houseOnOff: Bool, time: Date, temperature: Int, humidity: Int, co2: Int, co2OnOff: Bool)
 }

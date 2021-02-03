@@ -89,7 +89,7 @@ class PresentationAssembly: PresentationAssemblyProtocol {
     func scriptServiceViewController(scriptCreator: JSON, previousRoomId: Int, previousDayId: Int) -> ScriptServiceViewController? {
         let storyboard = UIStoryboard(name: "ScriptServiceViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "ScriptServiceViewController", creator: { coder in
-            let scriptServiceVC =  ScriptServiceViewController(coder: coder, scriptCreator: scriptCreator,previousRoomId: previousRoomId, previousDayId: previousDayId)
+            let scriptServiceVC =  ScriptServiceViewController(coder: coder, scriptCreator: scriptCreator, previousRoomId: previousRoomId, previousDayId: previousDayId)
             return scriptServiceVC
         })
     }

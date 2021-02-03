@@ -53,8 +53,10 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var co2TextField: UITextField!
     private var showCloseBool = true
     private var itemRight: UIBarButtonItem?
+    private var itemLeft: UIBarButtonItem?
     private var selectedIndex: Int?
     private var selectedIndexChoosed = false
+    private var cleanColor = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -94,9 +96,11 @@ class ScriptServiceViewController: UIViewController {
         return tableView
     }()
     func setupNavigationVC() {
+        self.navigationItem.setHidesBackButton(true, animated: true)
         itemRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveAndClose))
+        itemLeft = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backVC))
         navigationItem.rightBarButtonItem = itemRight
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backVC))
+        navigationItem.leftBarButtonItem =  itemLeft
     }
     @objc func backVC() {
         navigationController?.popViewController(animated: true)
@@ -335,7 +339,7 @@ class ScriptServiceViewController: UIViewController {
         hightConstraints.isActive = true
         lowConstraints.isActive = false
     }
-    
+
     func alerts(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -365,7 +369,19 @@ extension ScriptServiceViewController: UITableViewDataSource {
         }
         cell.delegate = self
         cell.index = indexPath.row
-        cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1)
+        if cleanColor {
+            cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1, turnOnColor: false)
+            cell.isUserInteractionEnabled = true
+        } else {
+            if selectedIndex == nil {
+                cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1, turnOnColor: false)
+            } else if selectedIndex == indexPath.row {
+                cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1, turnOnColor: false)
+            } else {
+                cell.congigure(serviveScript: serviceScripts[indexPath.row], number: indexPath.row + 1, turnOnColor: true)
+                cell.isUserInteractionEnabled = false
+            }
+        }
         cell.selectionStyle = .none
 
         return cell
@@ -375,43 +391,56 @@ extension ScriptServiceViewController: UITableViewDataSource {
         if tableView.cellForRow(at: indexPath) as? ScriptServiceTableViewCell != nil {
 
             if showCloseBool {
+                cleanColor = false
                 self.selectedIndex = indexPath.row
                 self.selectedIndexChoosed = true
                 UIView.animate(withDuration: 1) {
                     self.changeConstraintsHigh()
+                    self.settingCreator.alpha = 0
                     self.view.layoutIfNeeded()
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
                 }
-                serviceLabel.text = "Изменяйте желаемые настройки"
-
-                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-                    self.settingCreator.alpha = 0
-                })
+                self.serviceLabel.text = "Изменяйте желаемые настройки"
                 self.navigationItem.setRightBarButton(nil, animated: true)
-                showCloseBool.toggle()
+                self.navigationItem.setLeftBarButton(nil, animated: true)
+                self.showCloseBool.toggle()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    tableView.reloadData()
+                }
             } else {
+                cleanColor = true
                 closeCell(index: indexPath.row)
             }
         }
     }
-    
+
     func closeCell(index: Int) {
-        self.selectedIndex = index
-        self.selectedIndexChoosed = false
-        UIView.animate(withDuration: 1) {
-            self.changeConstraintsLow()
-            self.view.layoutIfNeeded()
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+            group.leave()
         }
-        serviceLabel.text = "Добавляйте желаемые настройки"
-        closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
-        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-            self.settingCreator.alpha = 1
-        })
-        self.navigationItem.setRightBarButton(itemRight, animated: true)
-        showCloseBool.toggle()
+        group.notify(queue: .main) {
+            self.selectedIndex = index
+            self.selectedIndexChoosed = false
+            UIView.animate(withDuration: 1) {
+                self.changeConstraintsLow()
+                self.view.layoutIfNeeded()
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+            }
+            self.serviceLabel.text = "Добавляйте желаемые настройки"
+            self.closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
+            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+                self.settingCreator.alpha = 1
+            })
+            self.navigationItem.setRightBarButton(self.itemRight, animated: true)
+            self.navigationItem.setLeftBarButton(self.itemLeft, animated: true)
+            self.showCloseBool.toggle()
+        }
     }
 }
 

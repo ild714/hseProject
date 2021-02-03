@@ -12,4 +12,3 @@ protocol ModelRoomsConfigProtocol: class {
     func fetchRoomConfig()
     var delegate: ModelRoomsConfigDelegate? { get set }
 }
-
