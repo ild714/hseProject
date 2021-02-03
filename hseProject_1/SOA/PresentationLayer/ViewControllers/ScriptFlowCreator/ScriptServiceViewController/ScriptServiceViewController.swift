@@ -58,19 +58,22 @@ class ScriptServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let data = UserDefaults.standard.object(forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)") as? Data {
-            if let result = try? JSONDecoder().decode([ServiceScript].self, from: data) {
-                self.serviceScripts = result
-            }
-        }
+        downloadDataScripts()
         print("service!!!")
         print(serviceScripts)
         humidityTextField.delegate = self
         co2TextField.delegate = self
         temperatureTextField.delegate = self
+        setupNavigationVC()
         setupTableView()
     }
-
+    func downloadDataScripts() {
+        if let data = UserDefaults.standard.object(forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)") as? Data {
+            if let result = try? JSONDecoder().decode([ServiceScript].self, from: data) {
+                self.serviceScripts = result
+            }
+        }
+    }
     override func viewWillDisappear(_ animated: Bool) {
         jsonScriptSaver()
         self.delegate?.updateScript(script: self.scriptCreator)
@@ -88,11 +91,13 @@ class ScriptServiceViewController: UIViewController {
         tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         tableView.rowHeight = UITableView.automaticDimension
 
+        return tableView
+    }()
+    func setupNavigationVC() {
         itemRight = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveAndClose))
         navigationItem.rightBarButtonItem = itemRight
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(backVC))
-        return tableView
-    }()
+    }
     @objc func backVC() {
         navigationController?.popViewController(animated: true)
     }
@@ -106,18 +111,6 @@ class ScriptServiceViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15).isActive = true
     }
 
-    var hightConstraints: NSLayoutConstraint!
-    var lowConstraints: NSLayoutConstraint!
-    func changeConstraintsHigh() {
-        hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
-        lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
-        hightConstraints.isActive = false
-        lowConstraints.isActive = true
-    }
-    func changeConstraintsLow() {
-        hightConstraints.isActive = true
-        lowConstraints.isActive = false
-    }
     // Sound changer
     @IBOutlet weak var soundImage: UIButton!
     var soundTurnOn = true
@@ -234,9 +227,8 @@ class ScriptServiceViewController: UIViewController {
             self.alerts(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки")
         }
     }
-
+    var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
     func jsonScriptSaver() {
-        var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
 
         for serviceScriptNumber in 0..<serviceScripts.count {
             if self.serviceScripts[serviceScriptNumber].soundOnOff == true {
@@ -276,11 +268,6 @@ class ScriptServiceViewController: UIViewController {
     @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
     @IBAction func addScript(_ sender: Any) {
         self.selectedIndex = nil
-        if let text = closeButtonOrEditButton.titleLabel?.text {
-            if text == "Сохранить и закончить"{
-                saveAndClose()
-            }
-        }
 
         var serviceScript = ServiceScript()
         if let temperatureLabelInt = Int(temperatureTextField.text ?? "error") {
@@ -336,6 +323,19 @@ class ScriptServiceViewController: UIViewController {
         tableView.reloadData()
     }
 
+    var hightConstraints: NSLayoutConstraint!
+    var lowConstraints: NSLayoutConstraint!
+    func changeConstraintsHigh() {
+        hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
+        lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
+        hightConstraints.isActive = false
+        lowConstraints.isActive = true
+    }
+    func changeConstraintsLow() {
+        hightConstraints.isActive = true
+        lowConstraints.isActive = false
+    }
+    
     func alerts(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
@@ -385,30 +385,33 @@ extension ScriptServiceViewController: UITableViewDataSource {
                 }
                 serviceLabel.text = "Изменяйте желаемые настройки"
 
-                closeButtonOrEditButton.setTitle("Сохранить и закончить", for: .normal)
                 UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
                     self.settingCreator.alpha = 0
                 })
                 self.navigationItem.setRightBarButton(nil, animated: true)
                 showCloseBool.toggle()
             } else {
-                self.selectedIndex = indexPath.row
-                self.selectedIndexChoosed = false
-                UIView.animate(withDuration: 1) {
-                    self.changeConstraintsLow()
-                    self.view.layoutIfNeeded()
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
-                serviceLabel.text = "Добавляйте желаемые настройки"
-                closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
-                UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-                    self.settingCreator.alpha = 1
-                })
-                self.navigationItem.setRightBarButton(itemRight, animated: true)
-                showCloseBool.toggle()
+                closeCell(index: indexPath.row)
             }
         }
+    }
+    
+    func closeCell(index: Int) {
+        self.selectedIndex = index
+        self.selectedIndexChoosed = false
+        UIView.animate(withDuration: 1) {
+            self.changeConstraintsLow()
+            self.view.layoutIfNeeded()
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+        }
+        serviceLabel.text = "Добавляйте желаемые настройки"
+        closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
+        UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+            self.settingCreator.alpha = 1
+        })
+        self.navigationItem.setRightBarButton(itemRight, animated: true)
+        showCloseBool.toggle()
     }
 }
 
@@ -417,7 +420,7 @@ extension ScriptServiceViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let selectedIndex = self.selectedIndex {
             if indexPath.row == selectedIndex && selectedIndexChoosed {
-                return 180
+                return 230
             } else {
                 return 50
             }
