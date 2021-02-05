@@ -153,7 +153,7 @@ class ScriptServiceTableViewCell: UITableViewCell {
                 intTemperature = temperatureEdited
             }
         } else {
-            delegate?.showAlert(title: "Ошибка ввода температуры", message: "Ввведите снова теипературу")
+            delegate?.showAlert(title: "Ошибка ввода температуры", message: "Ввведите снова температуру")
         }
     }
 

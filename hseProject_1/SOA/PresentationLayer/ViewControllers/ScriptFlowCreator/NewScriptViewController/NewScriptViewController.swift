@@ -37,6 +37,41 @@ class NewScriptViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Сценарии", style: .plain, target: self, action: #selector(backToScripts))
+    }
+    @objc func backToScripts() {
+        print(scriptCreator)
+        if scriptCreator.count == 0 {
+            showAlertScript()
+        } else if scriptCreator.count == 2 {
+            showAlertScript()
+        } else {
+            var allDays: [Int] = []
+            for index in 0..<scriptCreator.count - 2 {
+                if scriptCreator["roomGroup\(index)"].count == 1 {
+                    showAlertScript()
+                    break
+                } else {
+                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
+                        let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
+                        for day in days.arrayValue {
+                            allDays.append(day.intValue)
+                        }
+                    }
+                    print(allDays)
+                }
+                if allDays.count < 7 {
+                    showAlertScript()
+                    allDays.removeAll()
+                } else {
+                    allDays.removeAll()
+                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 where scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"].count < 2  {
+                        showAlertScript()
+                    }
+                }
+            }
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
@@ -80,7 +115,16 @@ class NewScriptViewController: UIViewController {
             }
         }
     }
-
+    func showAlertScript() {
+//        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
+//            self.navigationController?.popViewController(animated: true)
+//        }))
+//        alertVC.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
+        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Заполните оставшиеся настройки", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
+    }
     func alert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))

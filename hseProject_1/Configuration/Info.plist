@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SET_SCRIPT_ID</key>
-	<string>$(SET_SCRIPT_ID)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>Russia</string>
 	<key>CFBundleExecutable</key>
@@ -25,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.930671898521-i7e7l2r541stcjqmnrdpg8e9q9t9no8j</string>
+				<string>com.googleusercontent.apps.288607549032-o75d6ua6trcmcca67np4nujkgel2co7b</string>
 			</array>
 		</dict>
 		<dict>
@@ -52,6 +50,8 @@
 	<string>$(ROOM_CONFIG)</string>
 	<key>SENT_DATA</key>
 	<string>$(SENT_DATA)</string>
+	<key>SET_SCRIPT_ID</key>
+	<string>$(SET_SCRIPT_ID)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -1,19 +1,19 @@
 //
-//  NetworkSetScript.swift
+//  DeleteScript.swift
 //  IndoorClimateControlSystems
 //
-//  Created by Ildar on 2/2/21.
+//  Created by Ildar on 2/4/21.
 //  Copyright © 2021 Ildar Nigmetzyanov. All rights reserved.
 //
-
 import UIKit
 
-class NetworkSetScript {
+class DeleteScript {
     func sentDataScript(scId: Int) {
-        guard let url = URL(string: "https://\(Bundle.main.infoDictionary?["SET_SCRIPT_ID"] as? String ?? "")?did=10155&sc_id=\(scId)") else {
+        guard let url = URL(string: "https://\(Bundle.main.infoDictionary?["DELETE_SCRIPT_ID"] as? String ?? "")?did=10155&sc_id=\(scId)") else {
             return
         }
         var request = URLRequest(url: url)
+        print(request.description)
         request.httpMethod = "GET"
         request.setValue(authorizationToken(), forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) {data, _, error in
@@ -37,6 +37,7 @@ class NetworkSetScript {
         guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
             return ""
         }
-        return "Google" + " " + token
+        return "Yandex" + " " + "AgAAAAAaGAgvAAa-ictSVhJT0UkruSzpJe4JCos"
     }
 }
+

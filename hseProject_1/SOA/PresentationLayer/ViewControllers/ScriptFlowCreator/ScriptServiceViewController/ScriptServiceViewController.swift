@@ -56,7 +56,7 @@ class ScriptServiceViewController: UIViewController {
     private var itemLeft: UIBarButtonItem?
     private var selectedIndex: Int?
     private var selectedIndexChoosed = false
-    private var cleanColor = false
+    var cleanColor = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -221,15 +221,59 @@ class ScriptServiceViewController: UIViewController {
 
     var serviceScripts: [ServiceScript] = []
     @objc func saveAndClose() {
-        if serviceScripts.count > 0 {
-            jsonScriptSaver()
-            let network = NetworkScript()
-            network.sentDataScript(script: scriptCreator)
-            self.navigationController?.dismiss(animated: true, completion: nil)
-            return
+        jsonScriptSaver()
+        if scriptCreator.count == 0 {
+            showAlertScript()
+        } else if scriptCreator.count == 2 {
+            showAlertScript()
         } else {
-            self.alerts(title: "Не заданы настройки для скрипта", message: "Введите необходимые настройки")
+            var allDays: [Int] = []
+            var localBool = true
+            var arrayBools: [Bool] = []
+            for index in 0..<scriptCreator.count - 2 {
+                localBool = true
+                if scriptCreator["roomGroup\(index)"].count == 1 {
+                    localBool = false
+                } else {
+                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
+                        let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
+                        for day in days.arrayValue {
+                            allDays.append(day.intValue)
+                        }
+                    }
+                    print(allDays)
+                }
+                if allDays.count < 7 {
+                    showAlertScript()
+                    allDays.removeAll()
+                    localBool = false
+                } else {
+                    print(scriptCreator)
+                    allDays.removeAll()
+                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 where scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"].count < 2 {
+                        localBool = false
+                    }
+                }
+                arrayBools.append(localBool)
+            }
+            if arrayBools.allSatisfy({$0}) {
+                    let network = NetworkScript()
+                    network.sentDataScript(script: scriptCreator)
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+            } else {
+                showAlertScript()
+            }
         }
+    }
+    func showAlertScript() {
+        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Заполните оставшиеся настройки", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
+    }
+    func alert(title: String, message: String) {
+        let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(vcAlert, animated: true)
     }
     var setting = SettingCreator(mute: 0, at_home: 0, time: "no time", temp: 24, hum: 40, co2: 800, must_use: [], dont_use: [])
     func jsonScriptSaver() {

@@ -77,6 +77,6 @@ class RequestRoomConfig: RequestRoomConfigProtocol {
         guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
             return ""
         }
-        return "Yandex" + " " + "AgAAAAAaGAgvAAa-ictSVhJT0UkruSzpJe4JCos"
+        return "Google" + " " + token
     }
 }

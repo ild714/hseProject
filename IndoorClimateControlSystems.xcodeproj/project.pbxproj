@@ -88,6 +88,7 @@
 		74BF502E25667A7B00DE45D1 /* ScriptServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF502D25667A7B00DE45D1 /* ScriptServiceViewController.swift */; };
 		74BF503125667AD200DE45D1 /* ScriptServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BF502F25667AD200DE45D1 /* ScriptServiceTableViewCell.swift */; };
 		74BF503225667AD200DE45D1 /* ScriptServiceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74BF503025667AD200DE45D1 /* ScriptServiceTableViewCell.xib */; };
+		74D3A18125CBF79800333DFD /* DeleteScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3A18025CBF79800333DFD /* DeleteScript.swift */; };
 		74D65C9325840EC2007588F7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D65C9225840EC2007588F7 /* SignInViewController.swift */; };
 		74D8C3BC258FD93300C46F85 /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D8C3BB258FD93300C46F85 /* CellDelegate.swift */; };
 		B9D138C36E79696786777963 /* Pods_IndoorClimateControlSystems.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B2F9E4F819DE1EBBADD153 /* Pods_IndoorClimateControlSystems.framework */; };
@@ -180,6 +181,7 @@
 		74BF502D25667A7B00DE45D1 /* ScriptServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptServiceViewController.swift; sourceTree = "<group>"; };
 		74BF502F25667AD200DE45D1 /* ScriptServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptServiceTableViewCell.swift; sourceTree = "<group>"; };
 		74BF503025667AD200DE45D1 /* ScriptServiceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScriptServiceTableViewCell.xib; sourceTree = "<group>"; };
+		74D3A18025CBF79800333DFD /* DeleteScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteScript.swift; sourceTree = "<group>"; };
 		74D65C9225840EC2007588F7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		74D8C3BB258FD93300C46F85 /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
 		9D7F6723EEE14063E574AF51 /* Pods-IndoorClimateControlSystems.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.debug.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.debug.xcconfig"; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74D3A17F25CBF77B00333DFD /* DeleteScript */,
 				7483E07325C95BC4005DF7B4 /* NetworkSetScript */,
 				7470603A25AB95FB00C4CC93 /* NetworkScriptsLoad */,
 				7457B97B24DF0A3C00C16A0E /* NetworkRoomConfig */,
@@ -658,6 +661,14 @@
 				74BF502B256679FB00DE45D1 /* ScriptServiceViewController.storyboard */,
 			);
 			path = ScriptServiceViewController;
+			sourceTree = "<group>";
+		};
+		74D3A17F25CBF77B00333DFD /* DeleteScript */ = {
+			isa = PBXGroup;
+			children = (
+				74D3A18025CBF79800333DFD /* DeleteScript.swift */,
+			);
+			path = DeleteScript;
 			sourceTree = "<group>";
 		};
 		74D65C9125840E9D007588F7 /* SignIn */ = {
@@ -941,6 +952,7 @@
 				7428233E258CE2C2008F6524 /* AppDatchikService.swift in Sources */,
 				7480039C24E1406A006DEBDE /* LabelLeftSideCustomClass.swift in Sources */,
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
+				74D3A18125CBF79800333DFD /* DeleteScript.swift in Sources */,
 				746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */,
 				742822E9258BDA6F008F6524 /* PresentationAssembly.swift in Sources */,
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,

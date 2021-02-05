@@ -25,6 +25,7 @@ class ScriptsViewController: UIViewController {
     var scriptsDict: [Int: String] = [:]
     var sortedDictValues: [String] = []
     var currentScript = 0
+    var arrayDict: [(key: Int, value: String)]? = nil
     static func storyboardInstance() -> ScriptsViewController? {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ScriptsViewController
@@ -40,8 +41,6 @@ class ScriptsViewController: UIViewController {
             self.loadScripts(group: group)
         }
         group.notify(queue: .main) {
-            print(self.scriptsDict)
-            self.createCheckList()
             self.sortDict()
             self.setupTableView()
         }
@@ -80,7 +79,7 @@ class ScriptsViewController: UIViewController {
                 for data in result {
                     if data.key == "cur" {
                         if let valueInt = data.value.int {
-                        self.currentScript = valueInt
+                            self.currentScript = valueInt
                         }
                     } else {
                         if let intData = Int(data.key) {
@@ -88,25 +87,15 @@ class ScriptsViewController: UIViewController {
                         }
                     }
                 }
-                group.leave()
                 print(self.scriptsDict)
+                group.leave()
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-    func createCheckList() {
-        print(Array(self.scriptsDict.keys.sorted()))
-        for scriptKey in Array(self.scriptsDict.keys.sorted()) {
-            if scriptKey == self.currentScript {
-                self.marks.append(true)
-            } else {
-                self.marks.append(false)
-            }
-        }
-    }
     func sortDict() {
-        sortedDictValues = Array(self.scriptsDict.values.sorted())
+        arrayDict = Array(self.scriptsDict)
     }
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .grouped)
@@ -142,7 +131,7 @@ class ScriptsViewController: UIViewController {
 extension ScriptsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sortedDictValues.count
+        return arrayDict?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,11 +140,13 @@ extension ScriptsViewController: UITableViewDataSource {
         }
 
         cell.selectionStyle = .none
-        print(sortedDictValues)
-        cell.configure(scriptText: sortedDictValues[indexPath.row], mark: marks[indexPath.row])
+        if let result = arrayDict?[indexPath.row] {
+            cell.configure(scriptText: result, selected: currentScript)
+        }
 
         return cell
     }
+    
 }
 
 // MARK: - ScriptsViewController delegate
@@ -163,15 +154,22 @@ extension ScriptsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.marks = []
 
-        for scriptCount in 0...sortedDictValues.count {
-            if scriptCount == indexPath.row {
-                marks.append(true)
-            } else {
-                marks.append(false)
-            }
-        }
         let networkSetScript = NetworkSetScript()
-        networkSetScript.sentDataScript(scId: Array(self.scriptsDict.keys.sorted())[indexPath.row])
+        if let key = arrayDict?[indexPath.row].key {
+            networkSetScript.sentDataScript(scId:key)
+            self.currentScript = key
+        }
         tableView.reloadData()
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+
+            let networkSetScript = DeleteScript()
+            if let key = arrayDict?[indexPath.row].key {
+                networkSetScript.sentDataScript(scId: key)
+                arrayDict?.remove(at: indexPath.row)
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

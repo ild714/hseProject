@@ -15,14 +15,14 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var backgroundCustomView: ViewCustomClass!
     let gradient: CAGradientLayer = CAGradientLayer()
 
-    func configure(scriptText: String, mark: Bool) {
+    func configure(scriptText: (key: Int, value: String), selected: Int) {
 
-        self.scriptLabel.text = scriptText
+        self.scriptLabel.text = scriptText.value
 
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
 
-        if mark {
+        if scriptText.key == selected {
             self.markImage.image = UIImage(named: "full_radio")
 
             gradient.colors = [UIColor.init(rgb: 0x5b80ea).cgColor, UIColor.init(rgb: 0x37b5dd).cgColor]

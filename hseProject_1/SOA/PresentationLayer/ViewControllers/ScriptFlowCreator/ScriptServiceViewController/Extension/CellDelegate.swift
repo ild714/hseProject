@@ -10,6 +10,7 @@ import UIKit
 
 extension ScriptServiceViewController: CellDelagate {
     func close(index: Int) {
+        cleanColor = true
         closeCell(index: index)
     }
     func updateCell() {
@@ -41,6 +42,8 @@ extension ScriptServiceViewController: CellDelagate {
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.main.async {
+            self.cleanColor = true
+            self.saveScriptsInMemory()
             self.tableView.reloadData()
             group.leave()
         }
