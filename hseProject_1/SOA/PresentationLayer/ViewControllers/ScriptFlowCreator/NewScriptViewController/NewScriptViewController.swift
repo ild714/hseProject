@@ -9,6 +9,10 @@
 import UIKit
 import SwiftyJSON
 
+protocol UpdateScripts:class {
+    func update()
+}
+
 class NewScriptViewController: UIViewController {
 
     init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol) {
@@ -19,6 +23,7 @@ class NewScriptViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    weak var delegate: UpdateScripts?
     private var presentationAssembly: PresentationAssemblyProtocol?
     var scriptCreator: JSON = JSON()
     var dynamicIntForRooms = 0
@@ -41,17 +46,53 @@ class NewScriptViewController: UIViewController {
     }
     @objc func backToScripts() {
         print(scriptCreator)
+//        if scriptCreator.count == 0 {
+//            showAlertScript()
+//        } else if scriptCreator.count == 2 {
+//            showAlertScript()
+//        } else {
+//            var allDays: [Int] = []
+//            for index in 0..<scriptCreator.count - 2 {
+//                if scriptCreator["roomGroup\(index)"].count == 1 {
+//                    showAlertScript()
+//                    break
+//                } else {
+//                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
+//                        let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
+//                        for day in days.arrayValue {
+//                            allDays.append(day.intValue)
+//                        }
+//                    }
+//                    print(allDays)
+//                }
+//                if allDays.count < 7 {
+//                    showAlertScript()
+//                    allDays.removeAll()
+//                } else {
+//                    allDays.removeAll()
+//                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 where scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"].count < 2  {
+//                        showAlertScript()
+//                    }
+//                }
+//            }
+//            self.navigationController?.popViewController(animated: true)
+//        }
         if scriptCreator.count == 0 {
             showAlertScript()
         } else if scriptCreator.count == 2 {
             showAlertScript()
         } else {
             var allDays: [Int] = []
+            var localBool = true
+            var arrayBools: [Bool] = []
+            var countRooms: Int = 0
             for index in 0..<scriptCreator.count - 2 {
+                localBool = true
                 if scriptCreator["roomGroup\(index)"].count == 1 {
-                    showAlertScript()
-                    break
+                    localBool = false
                 } else {
+                    countRooms += scriptCreator["roomGroup\(index)"]["rIDs"].array?.count ?? 100
+                        
                     for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
                         let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
                         for day in days.arrayValue {
@@ -63,14 +104,25 @@ class NewScriptViewController: UIViewController {
                 if allDays.count < 7 {
                     showAlertScript()
                     allDays.removeAll()
+                    localBool = false
                 } else {
+                    print(scriptCreator)
                     allDays.removeAll()
-                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 where scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"].count < 2  {
-                        showAlertScript()
+                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 where scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"].count < 2 {
+                        localBool = false
                     }
                 }
+                arrayBools.append(localBool)
             }
-            self.navigationController?.popViewController(animated: true)
+            if arrayBools.allSatisfy({$0}) {
+                if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount"){
+                    showSaveScript(script: self.scriptCreator)
+                } else {
+                    showAlertScript()
+                }
+            } else {
+                showAlertScript()
+            }
         }
     }
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -114,6 +166,19 @@ class NewScriptViewController: UIViewController {
                 }
             }
         }
+    }
+    func showSaveScript(script: JSON) {
+        let alertVC = UIAlertController(title: "Вы не сохранили сценарий", message: "Хотите сохранить", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
+            let network = NetworkScript()
+            network.sentDataScript(script: script)
+            self.delegate?.update()
+            self.navigationController?.popViewController(animated: true)
+        }))
+        alertVC.addAction(UIAlertAction(title: "Нет", style: .default, handler: {_ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alertVC, animated: true)
     }
     func showAlertScript() {
 //        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)

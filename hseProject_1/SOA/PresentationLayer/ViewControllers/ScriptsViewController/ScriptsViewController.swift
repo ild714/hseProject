@@ -121,6 +121,7 @@ class ScriptsViewController: UIViewController {
 
     @objc func newScripts() {
         if let newScriptVC = presentationAssembly?.newScriptViewController() {
+            newScriptVC.delegate = self
             navigationController?.pushViewController(newScriptVC, animated: true)
         }
     }
@@ -170,6 +171,20 @@ extension ScriptsViewController: UITableViewDelegate {
                 arrayDict?.remove(at: indexPath.row)
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+}
+
+extension ScriptsViewController: UpdateScripts {
+    func update() {
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.main.async {
+            self.loadScripts(group: group)
+        }
+        group.notify(queue: .main) {
+            self.sortDict()
+            self.tableView.reloadData()
         }
     }
 }

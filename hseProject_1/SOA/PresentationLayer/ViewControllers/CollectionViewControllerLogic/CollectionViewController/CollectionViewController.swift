@@ -192,13 +192,15 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 extension CollectionViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
         self.roomNumbersAndNames = result
+//        print(roomNumbersAndNames.count,"!!!")
+        UserDefaults.standard.set(roomNumbersAndNames.count, forKey: "RoomsCount")
         self.createPageControll()
         self.collectionView.reloadData()
     }
     func show1(error message: String) {
         print(message.description)
-//        self.showAlert()
-        self.viewDidLoad()
+        self.showAlert()
+//        self.viewDidLoad()
     }
 }
 
@@ -206,7 +208,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message.description)
-//        self.showAlert()
-        self.viewDidLoad()
+        self.showAlert()
+//        self.viewDidLoad()
     }
 }

@@ -30,10 +30,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
             if let token = user.authentication.idToken, let aToken = user.authentication.accessToken, let gmail = user.profile.email {
-                print(aToken)
-                print("token")
-                print(token)
-                print("token")
                 UserDefaults.standard.set(gmail, forKey: "UserEmail")
                 UserDefaults.standard.set(aToken, forKey: "Token")
             }

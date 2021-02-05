@@ -230,11 +230,14 @@ class ScriptServiceViewController: UIViewController {
             var allDays: [Int] = []
             var localBool = true
             var arrayBools: [Bool] = []
+            var countRooms: Int = 0
             for index in 0..<scriptCreator.count - 2 {
                 localBool = true
                 if scriptCreator["roomGroup\(index)"].count == 1 {
                     localBool = false
                 } else {
+                    countRooms += scriptCreator["roomGroup\(index)"]["rIDs"].array?.count ?? 100
+                        
                     for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
                         let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
                         for day in days.arrayValue {
@@ -257,9 +260,13 @@ class ScriptServiceViewController: UIViewController {
                 arrayBools.append(localBool)
             }
             if arrayBools.allSatisfy({$0}) {
+                if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount"){
                     let network = NetworkScript()
                     network.sentDataScript(script: scriptCreator)
                     self.navigationController?.dismiss(animated: true, completion: nil)
+                } else {
+                    showAlertScript()
+                }
             } else {
                 showAlertScript()
             }
