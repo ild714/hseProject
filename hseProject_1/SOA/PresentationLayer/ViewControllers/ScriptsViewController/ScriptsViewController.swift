@@ -25,7 +25,7 @@ class ScriptsViewController: UIViewController {
     var scriptsDict: [Int: String] = [:]
     var sortedDictValues: [String] = []
     var currentScript = 0
-    var arrayDict: [(key: Int, value: String)]? = nil
+    var arrayDict: [(key: Int, value: String)]?
     static func storyboardInstance() -> ScriptsViewController? {
         let storyboard = UIStoryboard(name: String(describing: self), bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? ScriptsViewController
@@ -147,7 +147,7 @@ extension ScriptsViewController: UITableViewDataSource {
 
         return cell
     }
-    
+
 }
 
 // MARK: - ScriptsViewController delegate
@@ -157,7 +157,7 @@ extension ScriptsViewController: UITableViewDelegate {
 
         let networkSetScript = NetworkSetScript()
         if let key = arrayDict?[indexPath.row].key {
-            networkSetScript.sentDataScript(scId:key)
+            networkSetScript.sentDataScript(scId: key)
             self.currentScript = key
         }
         tableView.reloadData()

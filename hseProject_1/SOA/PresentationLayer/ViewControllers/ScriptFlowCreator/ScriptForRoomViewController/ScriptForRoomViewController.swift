@@ -136,7 +136,7 @@ extension ScriptForRoomViewController: ModelRoomsConfigDelegate {
     func setup(result: [Int: String]) {
 
         self.roomNumbersAndNames = result.sorted { $0.0 < $1.0 }
-        
+
         var dicFiltered: [Int: String] = [:]
         for element in self.roomNumbersAndNames {
             if self.roomNumbers.contains(element.key) {

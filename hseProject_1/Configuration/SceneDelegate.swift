@@ -29,7 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //                    self.window?.makeKeyAndVisible()
 //                }
 //            } else {
-                
+
                 let signInVC = SignInViewController(rootAssembly: rootAssembly)
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()

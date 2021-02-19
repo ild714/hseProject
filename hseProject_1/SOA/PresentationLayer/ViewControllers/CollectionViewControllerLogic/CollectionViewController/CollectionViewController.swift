@@ -12,11 +12,12 @@ import SideMenu
 import GoogleSignIn
 
 class CollectionViewController: UIViewController, ToolBarWithPageControllProtocol {
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, modelRoomsConfig: ModelRoomsConfigProtocol, modelRoomDatchik: ModelAppDatchikProtocol) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, modelRoomsConfig: ModelRoomsConfigProtocol, modelRoomDatchik: ModelAppDatchikProtocol, modelAimData: ModelAimDataProtocol) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
         self.modelRoomsConfig = modelRoomsConfig
         self.modelRoomDatchik = modelRoomDatchik
+        self.modelAimData = modelAimData
         super.init(coder: coder)
     }
 
@@ -27,6 +28,8 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var roomNumbersAndNames: [Int: String] = [:]
     private var resultDatchik: [String: JSON] = [:]
+    private var aimRoomScripts: [Int: AimRoomScript] = [:]
+    private var modelAimData: ModelAimDataProtocol?
     private var modelRoomsConfig: ModelRoomsConfigProtocol?
     private var modelRoomDatchik: ModelAppDatchikProtocol?
     private var menu: SideMenuNavigationController?
@@ -56,6 +59,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         self.setColorForNavigationController()
         self.modelRoomsConfig?.fetchRoomConfig()
         self.loadAppDatchik()
+        self.modelAimData?.fetchAimData()
     }
     func loadAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
@@ -114,7 +118,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
                                                                            roomNumbersAndNames: self.roomNumbersAndNames,
                                                                            resultDatchik: self.resultDatchik,
                                                                            currentRoomData:
-                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])) {
+                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC]), aimRoom: Array(self.aimRoomScripts)) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
@@ -167,7 +171,7 @@ extension CollectionViewController: UICollectionViewDataSource {
         if let roomsVC = presentationAssembly?.roomsViewController(curentVC: indexPath.row + 1,
                                                                    roomNumbersAndNames: self.roomNumbersAndNames,
                                                                    resultDatchik: self.resultDatchik,
-                                                                   currentRoomData: CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])) {
+                                                                   currentRoomData: CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row]), aimRoom: Array(self.aimRoomScripts)) {
             navigationController?.pushViewController(roomsVC, animated: true)
         }
     }
@@ -199,8 +203,8 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message.description)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
     }
 }
 
@@ -208,7 +212,20 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message.description)
-        self.showAlert()
-//        self.viewDidLoad()
+//        self.showAlert()
+        self.viewDidLoad()
+    }
+}
+
+// MARK: - ModelAimDataDelegate
+extension CollectionViewController: ModelAimDataDelegate {
+    func setup(result: [Int: AimRoomScript]) {
+        self.aimRoomScripts = result
+    }
+
+    func show3(error message: String) {
+        print(message.description)
+//        self.showAlert()
+        self.viewDidLoad()
     }
 }

@@ -22,6 +22,11 @@
 		740D1E1025307EDC000253FA /* ToolBarWithPageControll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740D1E0F25307EDB000253FA /* ToolBarWithPageControll.swift */; };
 		74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74171F1D2541B2B400746E9E /* CurrentRoomData.swift */; };
 		74171F212541BBD000746E9E /* AimRoomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74171F202541BBD000746E9E /* AimRoomData.swift */; };
+		74210C7625DFF7A9002F75E3 /* CurrentScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C7525DFF7A9002F75E3 /* CurrentScript.swift */; };
+		74210C7A25DFFA65002F75E3 /* AimRoomScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C7925DFFA65002F75E3 /* AimRoomScript.swift */; };
+		74210C7E25DFFB2F002F75E3 /* AimRoomScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C7D25DFFB2F002F75E3 /* AimRoomScripts.swift */; };
+		74210C8225DFFF8C002F75E3 /* ModelAimDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C8125DFFF8C002F75E3 /* ModelAimDataProtocol.swift */; };
+		74210C8525DFFFF3002F75E3 /* ModelAimData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C8425DFFFF3002F75E3 /* ModelAimData.swift */; };
 		742822B9258B95A5008F6524 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822B8258B95A5008F6524 /* ParserProtocol.swift */; };
 		742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822BD258B97A5008F6524 /* SwiftyParser.swift */; };
 		742822C7258B9B12008F6524 /* RequestRoomConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */; };
@@ -113,6 +118,11 @@
 		740D1E0F25307EDB000253FA /* ToolBarWithPageControll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarWithPageControll.swift; sourceTree = "<group>"; };
 		74171F1D2541B2B400746E9E /* CurrentRoomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRoomData.swift; sourceTree = "<group>"; };
 		74171F202541BBD000746E9E /* AimRoomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimRoomData.swift; sourceTree = "<group>"; };
+		74210C7525DFF7A9002F75E3 /* CurrentScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentScript.swift; sourceTree = "<group>"; };
+		74210C7925DFFA65002F75E3 /* AimRoomScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimRoomScript.swift; sourceTree = "<group>"; };
+		74210C7D25DFFB2F002F75E3 /* AimRoomScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimRoomScripts.swift; sourceTree = "<group>"; };
+		74210C8125DFFF8C002F75E3 /* ModelAimDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAimDataProtocol.swift; sourceTree = "<group>"; };
+		74210C8425DFFFF3002F75E3 /* ModelAimData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAimData.swift; sourceTree = "<group>"; };
 		742822B8258B95A5008F6524 /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		742822BD258B97A5008F6524 /* SwiftyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyParser.swift; sourceTree = "<group>"; };
 		742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfigProtocol.swift; sourceTree = "<group>"; };
@@ -319,6 +329,32 @@
 			path = AimData;
 			sourceTree = "<group>";
 		};
+		74210C7425DFF462002F75E3 /* CurrentScript */ = {
+			isa = PBXGroup;
+			children = (
+				74210C7525DFF7A9002F75E3 /* CurrentScript.swift */,
+			);
+			path = CurrentScript;
+			sourceTree = "<group>";
+		};
+		74210C7825DFF962002F75E3 /* CurrentAimData */ = {
+			isa = PBXGroup;
+			children = (
+				74210C7925DFFA65002F75E3 /* AimRoomScript.swift */,
+				74210C7D25DFFB2F002F75E3 /* AimRoomScripts.swift */,
+			);
+			path = CurrentAimData;
+			sourceTree = "<group>";
+		};
+		74210C8025DFFF65002F75E3 /* ModelAimData */ = {
+			isa = PBXGroup;
+			children = (
+				74210C8125DFFF8C002F75E3 /* ModelAimDataProtocol.swift */,
+				74210C8425DFFFF3002F75E3 /* ModelAimData.swift */,
+			);
+			path = ModelAimData;
+			sourceTree = "<group>";
+		};
 		742822A1258B8269008F6524 /* SOA */ = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +483,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74210C7425DFF462002F75E3 /* CurrentScript */,
 				74D3A17F25CBF77B00333DFD /* DeleteScript */,
 				7483E07325C95BC4005DF7B4 /* NetworkSetScript */,
 				7470603A25AB95FB00C4CC93 /* NetworkScriptsLoad */,
@@ -486,6 +523,7 @@
 		74282344258CE98B008F6524 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				74210C8025DFFF65002F75E3 /* ModelAimData */,
 				74BB126725C905DF00C51F1D /* ModelRoomsConfig */,
 				74BB126825C9060800C51F1D /* ModelAppDatchik */,
 			);
@@ -682,6 +720,7 @@
 		74D8C34D258FA22200C46F85 /* DataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				74210C7825DFF962002F75E3 /* CurrentAimData */,
 				74171F1F2541BBB100746E9E /* AimData */,
 				74171F1C2541B29900746E9E /* CurrentData */,
 			);
@@ -954,6 +993,7 @@
 				216D2B7824D5C30900CFFF02 /* ButtonCustomClass.swift in Sources */,
 				74D3A18125CBF79800333DFD /* DeleteScript.swift in Sources */,
 				746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */,
+				74210C8225DFFF8C002F75E3 /* ModelAimDataProtocol.swift in Sources */,
 				742822E9258BDA6F008F6524 /* PresentationAssembly.swift in Sources */,
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,
 				7497522725597D6100B88A21 /* ScriptsViewController.swift in Sources */,
@@ -962,6 +1002,7 @@
 				74282347258CEA07008F6524 /* ModelRoomsConfigProtocol.swift in Sources */,
 				74BB126325C9053200C51F1D /* ModelAppDatchikProtocol.swift in Sources */,
 				74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */,
+				74210C7625DFF7A9002F75E3 /* CurrentScript.swift in Sources */,
 				2137EEBB24D054FF009B19FD /* AppDelegate.swift in Sources */,
 				7428233B258CE22E008F6524 /* AppDatchikServiceProtocol.swift in Sources */,
 				74BF502E25667A7B00DE45D1 /* ScriptServiceViewController.swift in Sources */,
@@ -970,6 +1011,7 @@
 				747F25C525B48A1200DA4FD9 /* ScriptCurrentDaysViewController.swift in Sources */,
 				74171F1E2541B2B400746E9E /* CurrentRoomData.swift in Sources */,
 				74282341258CE981008F6524 /* ModelAppDatchik.swift in Sources */,
+				74210C8525DFFFF3002F75E3 /* ModelAimData.swift in Sources */,
 				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
 				74B5E816257D316F00483972 /* NetworkScript.swift in Sources */,
 				742822E3258BCF81008F6524 /* RoomConfigsService.swift in Sources */,
@@ -980,11 +1022,13 @@
 				7470603C25ABA27200C4CC93 /* NetworkScriptsLoad.swift in Sources */,
 				7483E07525C95BEC005DF7B4 /* NetworkSetScript.swift in Sources */,
 				740D1E03252F41A0000253FA /* CustomCollectionViewCell.swift in Sources */,
+				74210C7E25DFFB2F002F75E3 /* AimRoomScripts.swift in Sources */,
 				742822D3258B9FB5008F6524 /* Requests.swift in Sources */,
 				742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */,
 				743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */,
 				742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */,
 				742822B9258B95A5008F6524 /* ParserProtocol.swift in Sources */,
+				74210C7A25DFFA65002F75E3 /* AimRoomScript.swift in Sources */,
 				7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */,
 				743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */,
 				740D1E1025307EDC000253FA /* ToolBarWithPageControll.swift in Sources */,
@@ -1151,7 +1195,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;
@@ -1174,7 +1218,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;

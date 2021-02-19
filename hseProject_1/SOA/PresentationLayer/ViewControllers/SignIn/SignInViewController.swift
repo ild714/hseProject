@@ -29,10 +29,11 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
 
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
-            if let tokenTime = user.authentication.idTokenExpirationDate, let aToken = user.authentication.accessToken, let gmail = user.profile.email {
-                print(tokenTime,"!!!")
+            if let refToken = user.authentication.refreshToken, let aToken = user.authentication.accessToken, let gmail = user.profile.email {
+//                print(tokenTime, "!!!")
                 UserDefaults.standard.set(gmail, forKey: "UserEmail")
                 UserDefaults.standard.set(aToken, forKey: "Token")
+                UserDefaults.standard.set(refToken, forKey: "refToken")
             }
             UserDefaults.standard.set(true, forKey: "Log_in")
             if let collectionViewController = rootAssembly?.presentationAssembly.collectionViewController() {
@@ -53,13 +54,12 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let signInButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
         signInButton.center = view.center
 
         GIDSignIn.sharedInstance()?.presentingViewController = self
-//        GIDSignIn.sharedInstance()?.
         GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         GIDSignIn.sharedInstance()?.delegate = self
 
         view.backgroundColor = .white

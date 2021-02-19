@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-protocol UpdateScripts:class {
+protocol UpdateScripts: class {
     func update()
 }
 
@@ -92,7 +92,7 @@ class NewScriptViewController: UIViewController {
                     localBool = false
                 } else {
                     countRooms += scriptCreator["roomGroup\(index)"]["rIDs"].array?.count ?? 100
-                        
+
                     for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
                         let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
                         for day in days.arrayValue {
@@ -115,7 +115,7 @@ class NewScriptViewController: UIViewController {
                 arrayBools.append(localBool)
             }
             if arrayBools.allSatisfy({$0}) {
-                if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount"){
+                if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount") {
                     showSaveScript(script: self.scriptCreator)
                 } else {
                     showAlertScript()

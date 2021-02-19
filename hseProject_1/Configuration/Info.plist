@@ -39,6 +39,8 @@
 	<string>$(CLIENT_ID)</string>
 	<key>DATCHIK</key>
 	<string>$(DATCHIK)</string>
+	<key>DELETE_SCRIPT_ID</key>
+	<string>$(DELETE_SCRIPT_ID)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>yandexauth</string>

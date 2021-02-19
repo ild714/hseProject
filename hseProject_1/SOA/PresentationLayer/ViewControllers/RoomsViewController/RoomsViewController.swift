@@ -18,19 +18,21 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
           curentVC: Int,
           roomNumbersAndNames: [Int: String],
           resultDatchik: [String: JSON],
-          currentRoomData: CurrentRoomData?) {
+          currentRoomData: CurrentRoomData?, aimData: [(key: Int, value: AimRoomScript)]) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
         self.curentVC = curentVC
         self.roomNumbersAndNames = roomNumbersAndNames
         self.resultDatchik = resultDatchik
         self.currentRoomData = currentRoomData
+        self.aimRoomsData = aimData
         super.init(coder: coder)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    private var aimRoomsData: [(key: Int, value: AimRoomScript)] = []
     private var presentationAssembly: PresentationAssemblyProtocol?
     private var menu: SideMenuNavigationController?
     private var userId = ""
@@ -70,7 +72,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.startAnimation()
         self.setupGesturesForRoomNumbersAndNames()
         self.setupCurrentResultAppDatchik()
-        self.setDefaultValuesForAimParamtrs()
+//        self.setDefaultValuesForAimParamtrs()
+        self.setupAimData()
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
@@ -147,6 +150,13 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
         }
     }
+    func setupAimData() {
+        let aimData = self.aimRoomsData[self.curentVC - 1]
+        self.aimTemperature.text = String(aimData.value.temp) + "℃"
+        self.aimGas.text = String(aimData.value.co2)
+        self.aimWet.text = String(aimData.value.humidity)
+        ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
+    }
 
     @IBAction func minusTemperature(_ sender: Any) {
         self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
@@ -166,7 +176,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
                                                                            roomNumbersAndNames: self.roomNumbersAndNames,
                                                                            resultDatchik: self.resultDatchik,
                                                                            currentRoomData:
-                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])) {
+                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC]), aimRoom: aimRoomsData) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
