@@ -34,6 +34,17 @@ class CustomTableViewCell: UITableViewCell {
             self.scriptLabel.textColor = .black
         }
     }
+    func configureJson(scriptText: String, index: Int) {
+
+        self.scriptLabel.text = scriptText
+
+        gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
+        gradient.colors = [UIColor.gray.cgColor, UIColor.gray.cgColor]
+        self.backgroundCustomView.layer.insertSublayer(gradient, at: 0)
+//        self.backgroundColor = .gray
+        self.markImage.isHidden = true
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
 

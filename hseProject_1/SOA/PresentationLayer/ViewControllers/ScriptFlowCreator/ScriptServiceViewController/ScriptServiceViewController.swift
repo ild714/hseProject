@@ -264,6 +264,17 @@ class ScriptServiceViewController: UIViewController {
                     let network = NetworkScript()
                     network.sentDataScript(script: scriptCreator)
                     self.navigationController?.dismiss(animated: true, completion: nil)
+                    
+                    let defaults = UserDefaults.standard
+                    let dictionary = defaults.dictionaryRepresentation()
+                    dictionary.keys.forEach { key in
+                        if key.contains("Json\(0+UserDefaults.standard.integer(forKey: "LastJSON"))") {
+                            print(key, "---")
+                            defaults.removeObject(forKey: key)
+                            var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                            UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                        }
+                    }
                 } else {
                     showAlertScript()
                 }
@@ -273,8 +284,34 @@ class ScriptServiceViewController: UIViewController {
         }
     }
     func showAlertScript() {
-        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Заполните оставшиеся настройки", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
+            print(self.scriptCreator)
+            var countScript = 0
+            if let countScriptDefaults = try? UserDefaults.standard.integer(forKey: "JSONCount") {
+                    countScript = countScriptDefaults
+            } else {
+                UserDefaults.standard.set(0, forKey: "JSONCount")
+            }
+            UserDefaults.standard.set(countScript+1, forKey: "JSONCount")
+            let defaults = UserDefaults.standard
+            let dictionary = defaults.dictionaryRepresentation()
+            dictionary.keys.forEach { key in
+                if key.contains("Json\(UserDefaults.standard.integer(forKey: "CurrentJSON"))") {
+                    print(key, "???")
+                    defaults.removeObject(forKey: key)
+                    var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                    UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                    UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
+                } else {
+                    print(countScript+1)
+                    UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
+                }
+            }
+            try? UserDefaults.standard.set(self.scriptCreator.rawData(), forKey: "Json\(countScript+1)")
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }))
+        alertVC.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
         self.present(alertVC, animated: true)
     }
     func alert(title: String, message: String) {

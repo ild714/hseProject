@@ -13,7 +13,7 @@ protocol PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController?
     func roomsViewController(curentVC: Int, roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?, aimRoom: [(key: Int, value: AimRoomScript)]) -> RoomsViewController?
     func scriptsViewController() -> ScriptsViewController?
-    func newScriptViewController() -> NewScriptViewController?
+    func newScriptViewController(scriptCreator: JSON) -> NewScriptViewController?
     func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
     func scriptForDaysViewController(scriptCreator: JSON, daysString: [String]) -> ScriptForDaysViewController?
     func scriptServiceViewController(scriptCreator: JSON, previousRoomId: Int, previousDayId: Int) -> ScriptServiceViewController?
@@ -66,10 +66,10 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                 return scriptsVC
         })
     }
-    func newScriptViewController() -> NewScriptViewController? {
+    func newScriptViewController(scriptCreator: JSON) -> NewScriptViewController? {
         let storyboard = UIStoryboard(name: "NewScriptViewController", bundle: nil)
         return storyboard.instantiateViewController(identifier: "NewScriptViewController", creator: { coder in
-                let newScriptVC =  NewScriptViewController(coder: coder, presentationAssembly: self)
+                let newScriptVC =  NewScriptViewController(coder: coder, presentationAssembly: self, scriptCreator: scriptCreator)
                 return newScriptVC
         })
     }

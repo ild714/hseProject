@@ -19,6 +19,7 @@ class ScriptsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    let headerTitles = ["Заполненные сценарии", "Черновик"]
     private var presentationAssembly: PresentationAssemblyProtocol?
     var safeArea: UILayoutGuide!
     var marks: [Bool] = []
@@ -120,7 +121,7 @@ class ScriptsViewController: UIViewController {
     }
 
     @objc func newScripts() {
-        if let newScriptVC = presentationAssembly?.newScriptViewController() {
+        if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: JSON()) {
             newScriptVC.delegate = self
             navigationController?.pushViewController(newScriptVC, animated: true)
         }
@@ -131,21 +132,64 @@ class ScriptsViewController: UIViewController {
 // MARK: - ScriptsViewController datasource
 extension ScriptsViewController: UITableViewDataSource {
 
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayDict?.count ?? 0
+        if section == 0 {
+            return arrayDict?.count ?? 0
+        } else if section == 1 {
+            if let countJson = try? UserDefaults.standard.integer(forKey: "JSONCount") {
+                return countJson
+            }
+        } else {
+            return 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustomTableViewCell else {
-            return UITableViewCell()
-        }
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustomTableViewCell else {
+                return UITableViewCell()
+            }
 
-        cell.selectionStyle = .none
-        if let result = arrayDict?[indexPath.row] {
-            cell.configure(scriptText: result, selected: currentScript)
-        }
+            cell.selectionStyle = .none
+            if let result = arrayDict?[indexPath.row] {
+                cell.configure(scriptText: result, selected: currentScript)
+            }
 
-        return cell
+            return cell
+        }
+        if indexPath.section == 1 {
+            let defaults = UserDefaults.standard
+            let dictionary = defaults.dictionaryRepresentation()
+            var stringScripts: [String] = []
+            dictionary.keys.forEach { key in
+                if key.contains("Json") {
+                    print(key)
+                    stringScripts.append(key)
+                }
+            }
+            print(stringScripts, "+++")
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustomTableViewCell else {
+                return UITableViewCell()
+            }
+
+            cell.selectionStyle = .none
+            for scriptJson in stringScripts {
+                let jsonData = UserDefaults.standard.object(forKey: scriptJson) as? Data
+                if let jsonData = jsonData {
+                    let json = try? JSON(data: jsonData)
+                    print(json, "!!!")
+                    cell.configureJson(scriptText: json?["name"].string ?? "No label text", index: indexPath.row)
+                }
+            }
+            cell.backgroundColor = .black
+
+            return cell
+        }
+        return UITableViewCell()
     }
 
 }
@@ -153,25 +197,63 @@ extension ScriptsViewController: UITableViewDataSource {
 // MARK: - ScriptsViewController delegate
 extension ScriptsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.marks = []
-
-        let networkSetScript = NetworkSetScript()
-        if let key = arrayDict?[indexPath.row].key {
-            networkSetScript.sentDataScript(scId: key)
-            self.currentScript = key
-        }
-        tableView.reloadData()
-    }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-
-            let networkSetScript = DeleteScript()
+        if indexPath.section == 0 {
+            self.marks = []
+            let networkSetScript = NetworkSetScript()
             if let key = arrayDict?[indexPath.row].key {
                 networkSetScript.sentDataScript(scId: key)
-                arrayDict?.remove(at: indexPath.row)
+                self.currentScript = key
             }
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.reloadData()
+        } else {
+            let jsonData = UserDefaults.standard.object(forKey: "Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") as? Data
+            if let jsonData = jsonData {
+                if let json = try? JSON(data: jsonData) {
+                    if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: json) {
+                        newScriptVC.delegate = self
+//                        print(indexPath.row + UserDefaults.standard.integer(forKey: "LastJSON"), "fff")
+                        print(UserDefaults.standard.integer(forKey: "LastJSON"))
+                        UserDefaults.standard.set(indexPath.row + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
+                        navigationController?.pushViewController(newScriptVC, animated: true)
+                    }
+                    print(json, "!!!")
+                }
+            }
         }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            if editingStyle == .delete {
+
+                let networkSetScript = DeleteScript()
+                if let key = arrayDict?[indexPath.row].key {
+                    networkSetScript.sentDataScript(scId: key)
+                    arrayDict?.remove(at: indexPath.row)
+                }
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+        if indexPath.section == 1 {
+            if editingStyle == .delete {
+                let defaults = UserDefaults.standard
+                let dictionary = defaults.dictionaryRepresentation()
+                dictionary.keys.forEach { key in
+                    if key.contains("Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") {
+                        print(key, "---")
+                        defaults.removeObject(forKey: key)
+                        var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                        UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+                }
+            }
+        }
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section < headerTitles.count {
+            return headerTitles[section]
+        }
+        return nil
     }
 }
 

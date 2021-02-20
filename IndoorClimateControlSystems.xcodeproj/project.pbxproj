@@ -355,6 +355,13 @@
 			path = ModelAimData;
 			sourceTree = "<group>";
 		};
+		74210CA325E18EA1002F75E3 /* NewUser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewUser;
+			sourceTree = "<group>";
+		};
 		742822A1258B8269008F6524 /* SOA */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +490,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74210CA325E18EA1002F75E3 /* NewUser */,
 				74210C7425DFF462002F75E3 /* CurrentScript */,
 				74D3A17F25CBF77B00333DFD /* DeleteScript */,
 				7483E07325C95BC4005DF7B4 /* NetworkSetScript */,

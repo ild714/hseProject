@@ -52,22 +52,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let rootAssembly = RootAssembly()
-            if UserDefaults.standard.bool(forKey: "Log_in") {
-                if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
-                    let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
-                    let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
-                    navigationController?.viewControllers = [collectionViewController]
-                    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-
-                    navigationController?.modalPresentationStyle = .fullScreen
-                    self.window?.rootViewController = navigationController
-                    self.window?.makeKeyAndVisible()
-                }
-            } else {
+//            if UserDefaults.standard.bool(forKey: "Log_in") {
+//                if let collectionViewController = rootAssembly.presentationAssembly.collectionViewController() {
+//                    let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
+//                    let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
+//                    navigationController?.viewControllers = [collectionViewController]
+//                    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//                    navigationController?.modalPresentationStyle = .fullScreen
+//                    self.window?.rootViewController = navigationController
+//                    self.window?.makeKeyAndVisible()
+//                }
+//            } else {
                 let signInVC = SignInViewController(rootAssembly: rootAssembly)
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()
-            }
+//            }
         }
     }
 

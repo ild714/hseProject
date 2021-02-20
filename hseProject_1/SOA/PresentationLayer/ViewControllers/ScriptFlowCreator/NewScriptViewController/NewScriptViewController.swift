@@ -15,8 +15,9 @@ protocol UpdateScripts: class {
 
 class NewScriptViewController: UIViewController {
 
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, scriptCreator: JSON) {
         self.presentationAssembly = presentationAssembly
+        self.scriptCreator = scriptCreator
         super.init(coder: coder)
     }
 
@@ -45,38 +46,6 @@ class NewScriptViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Сценарии", style: .plain, target: self, action: #selector(backToScripts))
     }
     @objc func backToScripts() {
-        print(scriptCreator)
-//        if scriptCreator.count == 0 {
-//            showAlertScript()
-//        } else if scriptCreator.count == 2 {
-//            showAlertScript()
-//        } else {
-//            var allDays: [Int] = []
-//            for index in 0..<scriptCreator.count - 2 {
-//                if scriptCreator["roomGroup\(index)"].count == 1 {
-//                    showAlertScript()
-//                    break
-//                } else {
-//                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 {
-//                        let days = scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"]["days"]
-//                        for day in days.arrayValue {
-//                            allDays.append(day.intValue)
-//                        }
-//                    }
-//                    print(allDays)
-//                }
-//                if allDays.count < 7 {
-//                    showAlertScript()
-//                    allDays.removeAll()
-//                } else {
-//                    allDays.removeAll()
-//                    for indexDays in 0..<scriptCreator["roomGroup\(index)"].count - 1 where scriptCreator["roomGroup\(index)"]["dayGroup\(indexDays)"].count < 2  {
-//                        showAlertScript()
-//                    }
-//                }
-//            }
-//            self.navigationController?.popViewController(animated: true)
-//        }
         if scriptCreator.count == 0 {
             showAlertScript()
         } else if scriptCreator.count == 2 {
@@ -142,6 +111,8 @@ class NewScriptViewController: UIViewController {
         view.endEditing(true)
     }
     func configureTextField() {
+        let text1 = self.scriptCreator["name"]
+        textField.text = text1.string
         textField.delegate = self
         textField.placeholder = "Новый сценарий"
         textField.layer.cornerRadius = 50
@@ -153,17 +124,26 @@ class NewScriptViewController: UIViewController {
             if scriptCreator.isEmpty {
                 scriptCreator["did"] = JSON("10155")
                 scriptCreator["name"] = JSON(textField.text ?? "Test1?")
-                print(scriptCreator)
                 if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: [], dynamicIntForRooms: self.dynamicIntForRooms) {
                     currentRoomsVC.delegate = self
                     navigationController?.pushViewController(currentRoomsVC, animated: true)
                 }
             } else {
-                print(scriptCreator)
                 if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: [], dynamicIntForRooms: self.dynamicIntForRooms) {
                     currentRoomsVC.delegate = self
                     navigationController?.pushViewController(currentRoomsVC, animated: true)
                 }
+            }
+        }
+    }
+    func scriptDraftSave() {
+        if textField.text?.isEmpty == true {
+            alert(title: "Ошибка ввода названия скрипта", message: "Введите название для скрипта")
+        } else {
+            if scriptCreator.isEmpty {
+                scriptCreator["did"] = JSON("10155")
+                scriptCreator["name"] = JSON(textField.text ?? "Test1?")
+            } else {
             }
         }
     }
@@ -181,13 +161,36 @@ class NewScriptViewController: UIViewController {
         self.present(alertVC, animated: true)
     }
     func showAlertScript() {
-//        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)
-//        alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
-//            self.navigationController?.popViewController(animated: true)
-//        }))
-//        alertVC.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
-        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Заполните оставшиеся настройки", preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
+        self.scriptDraftSave()
+        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
+            print(self.scriptCreator)
+            var countScript = 0
+            if let countScriptDefaults = try? UserDefaults.standard.integer(forKey: "JSONCount") {
+                    countScript = countScriptDefaults
+            } else {
+                UserDefaults.standard.set(0, forKey: "JSONCount")
+            }
+            UserDefaults.standard.set(countScript+1, forKey: "JSONCount")
+            let defaults = UserDefaults.standard
+            let dictionary = defaults.dictionaryRepresentation()
+            dictionary.keys.forEach { key in
+                if key.contains("Json\(UserDefaults.standard.integer(forKey: "CurrentJSON"))") {
+                    print(key, "???")
+                    defaults.removeObject(forKey: key)
+                    var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                    UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                    UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
+                } else {
+                    print(countScript+1)
+                    UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
+                }
+            }
+            try? UserDefaults.standard.set(self.scriptCreator.rawData(), forKey: "Json\(countScript+1)")
+            self.delegate?.update()
+            self.navigationController?.popViewController(animated: true)
+        }))
+        alertVC.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
         self.present(alertVC, animated: true)
     }
     func alert(title: String, message: String) {
