@@ -27,6 +27,7 @@
 		74210C7E25DFFB2F002F75E3 /* AimRoomScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C7D25DFFB2F002F75E3 /* AimRoomScripts.swift */; };
 		74210C8225DFFF8C002F75E3 /* ModelAimDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C8125DFFF8C002F75E3 /* ModelAimDataProtocol.swift */; };
 		74210C8525DFFFF3002F75E3 /* ModelAimData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210C8425DFFFF3002F75E3 /* ModelAimData.swift */; };
+		74210CA525E18F46002F75E3 /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74210CA425E18F45002F75E3 /* NewUser.swift */; };
 		742822B9258B95A5008F6524 /* ParserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822B8258B95A5008F6524 /* ParserProtocol.swift */; };
 		742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822BD258B97A5008F6524 /* SwiftyParser.swift */; };
 		742822C7258B9B12008F6524 /* RequestRoomConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */; };
@@ -123,6 +124,7 @@
 		74210C7D25DFFB2F002F75E3 /* AimRoomScripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimRoomScripts.swift; sourceTree = "<group>"; };
 		74210C8125DFFF8C002F75E3 /* ModelAimDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAimDataProtocol.swift; sourceTree = "<group>"; };
 		74210C8425DFFFF3002F75E3 /* ModelAimData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAimData.swift; sourceTree = "<group>"; };
+		74210CA425E18F45002F75E3 /* NewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		742822B8258B95A5008F6524 /* ParserProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserProtocol.swift; sourceTree = "<group>"; };
 		742822BD258B97A5008F6524 /* SwiftyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyParser.swift; sourceTree = "<group>"; };
 		742822C6258B9B12008F6524 /* RequestRoomConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfigProtocol.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 		74210CA325E18EA1002F75E3 /* NewUser */ = {
 			isa = PBXGroup;
 			children = (
+				74210CA425E18F45002F75E3 /* NewUser.swift */,
 			);
 			path = NewUser;
 			sourceTree = "<group>";
@@ -1023,6 +1026,7 @@
 				748426EF25174CB1006A09F7 /* StringExtension.swift in Sources */,
 				74B5E816257D316F00483972 /* NetworkScript.swift in Sources */,
 				742822E3258BCF81008F6524 /* RoomConfigsService.swift in Sources */,
+				74210CA525E18F46002F75E3 /* NewUser.swift in Sources */,
 				74975229255990F700B88A21 /* NewScriptViewController.swift in Sources */,
 				2137EEBD24D054FF009B19FD /* SceneDelegate.swift in Sources */,
 				7480039824E13F85006DEBDE /* ImageViewLeftSideCustomClass.swift in Sources */,

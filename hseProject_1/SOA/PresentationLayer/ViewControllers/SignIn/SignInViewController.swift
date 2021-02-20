@@ -61,6 +61,9 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         GIDSignIn.sharedInstance()?.delegate = self
+        
+        let newUser = NewUser()
+        newUser.newUser()
 
         view.backgroundColor = .white
         view.addSubview(signInButton)
