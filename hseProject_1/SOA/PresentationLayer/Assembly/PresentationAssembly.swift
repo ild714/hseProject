@@ -30,7 +30,13 @@ class PresentationAssembly: PresentationAssemblyProtocol {
             var modelAppDatchik = self.modelAppDatchik()
             var modelAimData = self.modelAimData()
             if let userEmail = UserDefaults.standard.object(forKey: "UserEmail") as? String {
-                let collectionVC =  CollectionViewController(coder: coder, presentationAssembly: self, userId: userEmail, modelRoomsConfig: modelRoomsConfig, modelRoomDatchik: modelAppDatchik, modelAimData: modelAimData)
+                let collectionVC =  CollectionViewController(
+                    coder: coder,
+                    presentationAssembly: self,
+                    userId: userEmail,
+                    modelRoomsConfig: modelRoomsConfig,
+                    modelRoomDatchik: modelAppDatchik,
+                    modelAimData: modelAimData)
                 modelAimData.delegate = collectionVC
                 modelRoomsConfig.delegate = collectionVC
                 modelAppDatchik.delegate = collectionVC

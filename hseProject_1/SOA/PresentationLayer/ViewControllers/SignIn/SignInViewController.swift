@@ -34,6 +34,9 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                 UserDefaults.standard.set(gmail, forKey: "UserEmail")
                 UserDefaults.standard.set(aToken, forKey: "Token")
                 UserDefaults.standard.set(refToken, forKey: "refToken")
+                print("111")
+                let newUser = NewUser()
+                newUser.newUser()
             }
             UserDefaults.standard.set(true, forKey: "Log_in")
             if let collectionViewController = rootAssembly?.presentationAssembly.collectionViewController() {
@@ -61,9 +64,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
         GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         GIDSignIn.sharedInstance()?.delegate = self
-        
-        let newUser = NewUser()
-        newUser.newUser()
 
         view.backgroundColor = .white
         view.addSubview(signInButton)

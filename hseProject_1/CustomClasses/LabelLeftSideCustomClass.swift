@@ -24,5 +24,4 @@ import UIKit
             self.layer.cornerRadius = cornerRadius
         }
     }
-
 }

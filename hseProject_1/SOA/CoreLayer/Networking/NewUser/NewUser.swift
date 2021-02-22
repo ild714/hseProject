@@ -23,7 +23,7 @@ class NewUser {
             guard error == nil else {
                 return
             }
-            if let data = data {
+            if data != nil {
             } else {
             }
         }.resume()

@@ -64,6 +64,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.minusButton.showsTouchWhenHighlighted = true
         self.createMenuForNavigationController()
         self.createButtonForNavigationController()
         self.addWhiteColorForStackViews()
@@ -79,7 +80,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         if let presentationAssembly = self.presentationAssembly {
             menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
             menu?.leftSide = true
-            menu?.enableSwipeToDismissGesture = false
+//            menu?.enableSwipeToDismissGesture = false
         }
     }
     func createButtonForNavigationController() {
@@ -151,14 +152,20 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         }
     }
     func setupAimData() {
-        let aimData = self.aimRoomsData[self.curentVC - 1]
-        self.aimTemperature.text = String(aimData.value.temp) + "℃"
-        self.aimGas.text = String(aimData.value.co2)
-        self.aimWet.text = String(aimData.value.humidity)
-        ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
+        if self.aimRoomsData.count != self.roomNumbersAndNames.count {
+            self.setDefaultValuesForAimParamtrs()
+        } else {
+            print(self.aimRoomsData.count)
+            let aimData = self.aimRoomsData[self.curentVC - 1]
+            self.aimTemperature.text = String(aimData.value.temp) + "℃"
+            self.aimGas.text = String(aimData.value.co2)
+            self.aimWet.text = String(aimData.value.humidity)
+            ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
+        }
     }
 
     @IBAction func minusTemperature(_ sender: Any) {
+//        minusButton.tintColor = .cyan
         self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
     }
 

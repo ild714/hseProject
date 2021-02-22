@@ -35,7 +35,7 @@ class ScriptsViewController: UIViewController {
     private let cellIdentifier = String(describing: CustomTableViewCell.self)
 
     override func viewDidLoad() {
-        userDefaultsCleaner()
+//        userDefaultsCleaner()
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.main.async {
@@ -53,20 +53,21 @@ class ScriptsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newScripts))
     }
     override func viewWillDisappear(_ animated: Bool) {
-        let defaults = UserDefaults.standard
-        let dictionary = defaults.dictionaryRepresentation()
-        dictionary.keys.forEach { key in
-            if key.contains("room") || key.contains("Scripts") {
-                print(key)
-                defaults.removeObject(forKey: key)
-            }
-        }
+//        let defaults = UserDefaults.standard
+//        let dictionary = defaults.dictionaryRepresentation()
+//        dictionary.keys.forEach { key in
+//            if key.contains("room") || key.contains("Scripts") {
+//                print(key)
+//                defaults.removeObject(forKey: key)
+//            }
+//        }
+        tableView.reloadData()
     }
     func userDefaultsCleaner() {
         let defaults = UserDefaults.standard
         let dictionary = defaults.dictionaryRepresentation()
         dictionary.keys.forEach { key in
-            if key.contains("room") || key.contains("Scripts") {
+            if key.contains("room") || key.contains("Scripts") || key.contains("dynamicIntForRooms") {
                 print(key)
                 defaults.removeObject(forKey: key)
             }
@@ -121,12 +122,24 @@ class ScriptsViewController: UIViewController {
     }
 
     @objc func newScripts() {
-        if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: JSON()) {
-            newScriptVC.delegate = self
-            navigationController?.pushViewController(newScriptVC, animated: true)
+        let count = UserDefaults.standard.integer(forKey: "JSONCount")
+        if count == 1 {
+            self.alert(title: "Остался незаполненный черновик", message: "Завершите заполнение черновика")
+        } else {
+            userDefaultsCleaner()
+            if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: JSON()) {
+                newScriptVC.delegate = self
+                newScriptVC.notNewScript = false
+                navigationController?.pushViewController(newScriptVC, animated: true)
+                UserDefaults.standard.set(0 + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
+            }
         }
     }
-
+    func alert(title: String, message: String) {
+        let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(vcAlert, animated: true)
+    }
 }
 
 // MARK: - ScriptsViewController datasource
@@ -155,13 +168,13 @@ extension ScriptsViewController: UITableViewDataSource {
             }
 
             cell.selectionStyle = .none
+            arrayDict = arrayDict?.sorted(by: { $0.0 < $1.0 })
             if let result = arrayDict?[indexPath.row] {
                 cell.configure(scriptText: result, selected: currentScript)
             }
 
             return cell
-        }
-        if indexPath.section == 1 {
+        } else if indexPath.section == 1 {
             let defaults = UserDefaults.standard
             let dictionary = defaults.dictionaryRepresentation()
             var stringScripts: [String] = []
@@ -175,16 +188,16 @@ extension ScriptsViewController: UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CustomTableViewCell else {
                 return UITableViewCell()
             }
-
+            stringScripts = stringScripts.sorted()
             cell.selectionStyle = .none
-            for scriptJson in stringScripts {
-                let jsonData = UserDefaults.standard.object(forKey: scriptJson) as? Data
-                if let jsonData = jsonData {
-                    let json = try? JSON(data: jsonData)
-                    print(json, "!!!")
-                    cell.configureJson(scriptText: json?["name"].string ?? "No label text", index: indexPath.row)
-                }
+
+            let jsonData = UserDefaults.standard.object(forKey: stringScripts[indexPath.row]) as? Data
+            if let jsonData = jsonData {
+                let json = try? JSON(data: jsonData)
+                print(json, "!!!")
+                cell.configureJson(scriptText: json?["name"].string ?? "No label text", index: indexPath.row)
             }
+
             cell.backgroundColor = .black
 
             return cell
@@ -241,7 +254,7 @@ extension ScriptsViewController: UITableViewDelegate {
                     if key.contains("Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") {
                         print(key, "---")
                         defaults.removeObject(forKey: key)
-                        var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                        let count = UserDefaults.standard.integer(forKey: "JSONCount")
                         UserDefaults.standard.set(count-1, forKey: "JSONCount")
                         tableView.deleteRows(at: [indexPath], with: .fade)
                     }

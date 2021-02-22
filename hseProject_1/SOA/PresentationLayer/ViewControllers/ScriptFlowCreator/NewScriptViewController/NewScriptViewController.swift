@@ -29,6 +29,7 @@ class NewScriptViewController: UIViewController {
     var scriptCreator: JSON = JSON()
     var dynamicIntForRooms = 0
     @IBOutlet weak var textField: UITextField!
+    var notNewScript = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -177,10 +178,12 @@ class NewScriptViewController: UIViewController {
             dictionary.keys.forEach { key in
                 if key.contains("Json\(UserDefaults.standard.integer(forKey: "CurrentJSON"))") {
                     print(key, "???")
-                    defaults.removeObject(forKey: key)
-                    var count = UserDefaults.standard.integer(forKey: "JSONCount")
-                    UserDefaults.standard.set(count-1, forKey: "JSONCount")
-                    UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
+//                    if self.notNewScript {
+                        defaults.removeObject(forKey: key)
+                        var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                        UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                        UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
+//                    }
                 } else {
                     print(countScript+1)
                     UserDefaults.standard.set(countScript+1, forKey: "LastJSON")

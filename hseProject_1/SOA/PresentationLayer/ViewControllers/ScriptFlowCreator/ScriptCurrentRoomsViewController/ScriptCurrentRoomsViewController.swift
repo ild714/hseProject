@@ -143,11 +143,20 @@ extension ScriptCurrentRoomsViewController: UITableViewDelegate {
 // MARK: - ScriptForRoomProtocol delegate
 extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
     func save(rooms: [Int]) {
-
-        self.jsonForRoomSection(rooms: rooms)
-        self.numbersDictForRoomSection()
-        self.indexAndNamesForRoomSection()
-        dynamicIntForRooms += 1
+        if let dynamicIntForRooms = try? UserDefaults.standard.integer(forKey: "dynamicIntForRooms") {
+            self.dynamicIntForRooms = dynamicIntForRooms
+            self.jsonForRoomSection(rooms: rooms)
+            self.numbersDictForRoomSection()
+            self.indexAndNamesForRoomSection()
+            self.dynamicIntForRooms += 1
+            UserDefaults.standard.set(self.dynamicIntForRooms, forKey: "dynamicIntForRooms")
+        } else {
+            self.jsonForRoomSection(rooms: rooms)
+            self.numbersDictForRoomSection()
+            self.indexAndNamesForRoomSection()
+            self.dynamicIntForRooms += 1
+            UserDefaults.standard.set(self.dynamicIntForRooms, forKey: "dynamicIntForRooms")
+        }
         self.tableView.reloadData()
     }
 

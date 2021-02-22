@@ -264,14 +264,14 @@ class ScriptServiceViewController: UIViewController {
                     let network = NetworkScript()
                     network.sentDataScript(script: scriptCreator)
                     self.navigationController?.dismiss(animated: true, completion: nil)
-                    
+
                     let defaults = UserDefaults.standard
                     let dictionary = defaults.dictionaryRepresentation()
                     dictionary.keys.forEach { key in
                         if key.contains("Json\(0+UserDefaults.standard.integer(forKey: "LastJSON"))") {
                             print(key, "---")
                             defaults.removeObject(forKey: key)
-                            var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                            let count = UserDefaults.standard.integer(forKey: "JSONCount")
                             UserDefaults.standard.set(count-1, forKey: "JSONCount")
                         }
                     }
@@ -300,7 +300,7 @@ class ScriptServiceViewController: UIViewController {
                 if key.contains("Json\(UserDefaults.standard.integer(forKey: "CurrentJSON"))") {
                     print(key, "???")
                     defaults.removeObject(forKey: key)
-                    var count = UserDefaults.standard.integer(forKey: "JSONCount")
+                    let count = UserDefaults.standard.integer(forKey: "JSONCount")
                     UserDefaults.standard.set(count-1, forKey: "JSONCount")
                     UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
                 } else {

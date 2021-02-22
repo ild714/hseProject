@@ -37,6 +37,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     private var curentVC: Int = 0
     private var safeArea: UILayoutGuide!
     private let cellIdentifier = String(describing: CustomCollectionViewCell.self)
+    private var errorCount = 0
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -59,6 +60,9 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         self.setColorForNavigationController()
         self.modelRoomsConfig?.fetchRoomConfig()
         self.loadAppDatchik()
+        self.modelAimData?.fetchAimData()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         self.modelAimData?.fetchAimData()
     }
     func loadAppDatchik() {
@@ -90,7 +94,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if let presentationAssembly = self.presentationAssembly {
             menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
             menu?.leftSide = true
-            menu?.enableSwipeToDismissGesture = false
+//            menu?.enableSwipeToDismissGesture = false
         }
     }
     func createButtonForNavigationController() {
@@ -203,8 +207,12 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message.description)
-//        self.showAlert()
-        self.viewDidLoad()
+        if errorCount < 10 {
+            self.viewDidLoad()
+            errorCount += 1
+        } else {
+//            self.showAlert()
+        }
     }
 }
 
@@ -212,8 +220,12 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message.description)
-//        self.showAlert()
-        self.viewDidLoad()
+        if errorCount < 10 {
+            self.viewDidLoad()
+            errorCount += 1
+        } else {
+//            self.showAlert()
+        }
     }
 }
 
@@ -225,7 +237,11 @@ extension CollectionViewController: ModelAimDataDelegate {
 
     func show3(error message: String) {
         print(message.description)
-//        self.showAlert()
-        self.viewDidLoad()
+        if errorCount < 10 {
+            self.viewDidLoad()
+            errorCount += 1
+        } else {
+//            self.showAlert()
+        }
     }
 }
