@@ -153,7 +153,7 @@ class NewScriptViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
             let network = NetworkScript()
             network.sentDataScript(script: script)
-            
+
             let defaults = UserDefaults.standard
             let dictionary = defaults.dictionaryRepresentation()
             dictionary.keys.forEach { key in
@@ -161,7 +161,7 @@ class NewScriptViewController: UIViewController {
                     print(key, "---")
                     defaults.removeObject(forKey: key)
                     let count = UserDefaults.standard.integer(forKey: "JSONCount")
-                    print(count,"!-!")
+                    print(count, "!-!")
                     UserDefaults.standard.set(count-1, forKey: "JSONCount")
                 }
             }
