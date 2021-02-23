@@ -118,12 +118,14 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         if sender.state == .ended {
             switch sender.direction {
             case .left:
-                if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1,
-                                                                           roomNumbersAndNames: self.roomNumbersAndNames,
-                                                                           resultDatchik: self.resultDatchik,
-                                                                           currentRoomData:
-                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC]), aimRoom: Array(self.aimRoomScripts)) {
-                    navigationController?.pushViewController(roomsVC, animated: true)
+                if Array(self.roomNumbersAndNames.keys.sorted()).count > 0 {
+                    if let roomsVC = presentationAssembly?.roomsViewController(curentVC: 1,
+                                                                               roomNumbersAndNames: self.roomNumbersAndNames,
+                                                                               resultDatchik: self.resultDatchik,
+                                                                               currentRoomData:
+                                                                                CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC]), aimRoom: Array(self.aimRoomScripts)) {
+                        navigationController?.pushViewController(roomsVC, animated: true)
+                    }
                 }
             case .up:
                 if let scriptsVC = self.presentationAssembly?.scriptsViewController() {

@@ -33,6 +33,7 @@ class CustomTableViewCell: UITableViewCell {
             self.gradient.removeFromSuperlayer()
             self.scriptLabel.textColor = .black
         }
+        self.markImage.isHidden = false
     }
     func configureJson(scriptText: String, index: Int) {
 

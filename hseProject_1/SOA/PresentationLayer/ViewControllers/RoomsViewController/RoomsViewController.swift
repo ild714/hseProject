@@ -152,7 +152,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         }
     }
     func setupAimData() {
-        if self.aimRoomsData.count != self.roomNumbersAndNames.count {
+        if self.aimRoomsData.count != self.roomNumbersAndNames.count || self.aimRoomsData.count == 0 {
             self.setDefaultValuesForAimParamtrs()
         } else {
             print(self.aimRoomsData.count)

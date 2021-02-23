@@ -61,7 +61,7 @@ class ScriptsViewController: UIViewController {
 //                defaults.removeObject(forKey: key)
 //            }
 //        }
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     func userDefaultsCleaner() {
         let defaults = UserDefaults.standard
@@ -76,6 +76,7 @@ class ScriptsViewController: UIViewController {
     func loadScripts(group: DispatchGroup) {
         let loadScripts = NetworkScriptLoad()
         loadScripts.getDataScripts { (result: Result<[String: JSON], NetworkSensorError>) in
+            self.scriptsDict.removeAll()
             switch result {
             case .success(let result):
                 for data in result {
@@ -90,6 +91,7 @@ class ScriptsViewController: UIViewController {
                     }
                 }
                 print(self.scriptsDict)
+                print("1!")
                 group.leave()
             case .failure(let error):
                 print(error.localizedDescription)
@@ -276,10 +278,18 @@ extension ScriptsViewController: UpdateScripts {
         group.enter()
         DispatchQueue.main.async {
             self.loadScripts(group: group)
+            print("2!")
         }
         group.notify(queue: .main) {
             self.sortDict()
             self.tableView.reloadData()
+//            self.viewDidLoad()
+//            self.tableView.reloadInputViews()
+            print("3!")
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                self.tableView.reloadData()
+//                print("4!")
+//            }
         }
     }
 }

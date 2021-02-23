@@ -9,7 +9,7 @@
 import UIKit
 import GoogleSignIn
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
     var navigationController: UINavigationController = UINavigationController()
@@ -20,6 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let rootAssembly = RootAssembly()
 
             GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
+            GIDSignIn.sharedInstance().delegate = self
             GIDSignIn.sharedInstance()?.restorePreviousSignIn()
 
             if UserDefaults.standard.bool(forKey: "Log_in") {
@@ -28,23 +29,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
                     navigationController?.viewControllers = [collectionViewController]
                     navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//
                     navigationController?.modalPresentationStyle = .fullScreen
                     self.window?.rootViewController = navigationController
                     self.window?.makeKeyAndVisible()
                 }
-
-//                let signInVC = SignInViewController(rootAssembly: rootAssembly)
-//                self.window?.rootViewController = signInVC
-//                self.window?.makeKeyAndVisible()
             } else {
 
                 let signInVC = SignInViewController(rootAssembly: rootAssembly)
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()
                 print("222")
-//                let newUser = NewUser()
-//                newUser.newUser()
             }
         }
     }
@@ -60,12 +54,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     }
 
+    @available(iOS 9.0, *)
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+      return GIDSignIn.sharedInstance().handle(url)
+    }
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!,
+              withError error: Error!) {
+        if error == nil {
+            if let refToken = user.authentication.refreshToken, let aToken = user.authentication.accessToken, let gmail = user.profile.email {
+                UserDefaults.standard.set(gmail, forKey: "UserEmail")
+                UserDefaults.standard.set(aToken, forKey: "Token")
+                UserDefaults.standard.set(refToken, forKey: "refToken")
+                print("222")
+                let newUser = NewUser()
+                newUser.newUser()
+            }
+        }
+    }
     func sceneWillEnterForeground(_ scene: UIScene) {
         if let windowScene = scene as? UIWindowScene {
             self.window = UIWindow(windowScene: windowScene)
             let rootAssembly = RootAssembly()
 
             GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
+            GIDSignIn.sharedInstance().delegate = self
             GIDSignIn.sharedInstance()?.restorePreviousSignIn()
 
             if UserDefaults.standard.bool(forKey: "Log_in") {
@@ -79,17 +91,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.window?.rootViewController = navigationController
                     self.window?.makeKeyAndVisible()
                 }
-//                let signInVC = SignInViewController(rootAssembly: rootAssembly)
-//                GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
-//                GIDSignIn.sharedInstance()?.restorePreviousSignIn()
-//                self.window?.rootViewController = signInVC
-//                self.window?.makeKeyAndVisible()
             } else {
                 let signInVC = SignInViewController(rootAssembly: rootAssembly)
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()
-//                let newUser = NewUser()
-//                newUser.newUser()
             }
         }
     }

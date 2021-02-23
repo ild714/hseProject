@@ -153,6 +153,18 @@ class NewScriptViewController: UIViewController {
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
             let network = NetworkScript()
             network.sentDataScript(script: script)
+            
+            let defaults = UserDefaults.standard
+            let dictionary = defaults.dictionaryRepresentation()
+            dictionary.keys.forEach { key in
+                if key.contains("Json\(0+UserDefaults.standard.integer(forKey: "LastJSON"))") {
+                    print(key, "---")
+                    defaults.removeObject(forKey: key)
+                    let count = UserDefaults.standard.integer(forKey: "JSONCount")
+                    print(count,"!-!")
+                    UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                }
+            }
             self.delegate?.update()
             self.navigationController?.popViewController(animated: true)
         }))
@@ -190,8 +202,8 @@ class NewScriptViewController: UIViewController {
                 }
             }
             try? UserDefaults.standard.set(self.scriptCreator.rawData(), forKey: "Json\(countScript+1)")
-            self.delegate?.update()
             self.navigationController?.popViewController(animated: true)
+            self.delegate?.update()
         }))
         alertVC.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil))
         self.present(alertVC, animated: true)

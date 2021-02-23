@@ -30,7 +30,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
             if let refToken = user.authentication.refreshToken, let aToken = user.authentication.accessToken, let gmail = user.profile.email {
-//                print(tokenTime, "!!!")
                 UserDefaults.standard.set(gmail, forKey: "UserEmail")
                 UserDefaults.standard.set(aToken, forKey: "Token")
                 UserDefaults.standard.set(refToken, forKey: "refToken")
@@ -62,7 +61,6 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
 
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
-        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
         GIDSignIn.sharedInstance()?.delegate = self
 
         view.backgroundColor = .white
