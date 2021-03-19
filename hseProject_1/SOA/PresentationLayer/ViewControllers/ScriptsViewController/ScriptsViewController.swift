@@ -11,6 +11,7 @@ import SwiftyJSON
 
 class ScriptsViewController: UIViewController {
 
+    @IBOutlet weak var loadAnimation: UIActivityIndicatorView!
     init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol) {
         self.presentationAssembly = presentationAssembly
         super.init(coder: coder)
@@ -36,14 +37,19 @@ class ScriptsViewController: UIViewController {
 
     override func viewDidLoad() {
 //        userDefaultsCleaner()
+        loadAnimation.startAnimating()
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.main.async {
             self.loadScripts(group: group)
         }
         group.notify(queue: .main) {
-            self.sortDict()
-            self.setupTableView()
+            if self.arrayDict?.count == 0 {
+                self.viewDidLoad()
+            } else {
+                self.sortDict()
+                self.setupTableView()
+            }
         }
         title = "Сценарии"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Arial", size: 20)!]
@@ -121,6 +127,10 @@ class ScriptsViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+        
+        tableView.reloadData()
+        loadAnimation.stopAnimating()
+        loadAnimation.isHidden = true
     }
 
     @objc func newScripts() {
@@ -278,18 +288,10 @@ extension ScriptsViewController: UpdateScripts {
         group.enter()
         DispatchQueue.main.async {
             self.loadScripts(group: group)
-            print("2!")
         }
         group.notify(queue: .main) {
             self.sortDict()
             self.tableView.reloadData()
-//            self.viewDidLoad()
-//            self.tableView.reloadInputViews()
-            print("3!")
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                self.tableView.reloadData()
-//                print("4!")
-//            }
         }
     }
 }

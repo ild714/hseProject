@@ -34,7 +34,16 @@ struct LabelActivity {
 
 class ActivityIndicator {
     private init() {}
-
+    
+    static func animateView(view: UIView) {
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        activityIndicator.center.x = view.center.x / 2
+        activityIndicator.center.y = view.center.y / 2
+        activityIndicator.startAnimating()
+        view.addSubview(activityIndicator)
+        
+    }
+    
     static func animateActivityLabel(labels: [LabelActivity]) {
 
         for label in labels {

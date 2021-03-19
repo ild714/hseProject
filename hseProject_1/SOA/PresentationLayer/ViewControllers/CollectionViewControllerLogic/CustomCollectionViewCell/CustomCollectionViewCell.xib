@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +19,9 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="was-qm-ghL">
                         <rect key="frame" x="0.0" y="0.0" width="186" height="194"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="oab-gw-Zny">
+                                <rect key="frame" x="83" y="87" width="20" height="20"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="oY5-Gg-jba">
                                 <rect key="frame" x="17" y="12" width="160" height="179.5"/>
                                 <subviews>
@@ -96,8 +99,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="oY5-Gg-jba" firstAttribute="leading" secondItem="was-qm-ghL" secondAttribute="leading" constant="17" id="67H-BY-We2"/>
+                            <constraint firstItem="oab-gw-Zny" firstAttribute="centerY" secondItem="was-qm-ghL" secondAttribute="centerY" id="6kC-rc-LYp"/>
                             <constraint firstItem="oY5-Gg-jba" firstAttribute="top" secondItem="was-qm-ghL" secondAttribute="top" constant="12" id="aj8-Wy-MMT"/>
                             <constraint firstAttribute="trailing" secondItem="oY5-Gg-jba" secondAttribute="trailing" constant="9" id="bxl-yT-0J5"/>
+                            <constraint firstItem="oab-gw-Zny" firstAttribute="centerX" secondItem="was-qm-ghL" secondAttribute="centerX" id="qua-5H-t7W"/>
                             <constraint firstAttribute="bottom" secondItem="oY5-Gg-jba" secondAttribute="bottom" constant="2.5" id="uPM-kF-7sQ"/>
                         </constraints>
                     </view>
@@ -113,10 +118,15 @@
             </constraints>
             <size key="customSize" width="393" height="2525"/>
             <connections>
+                <outlet property="animation" destination="oab-gw-Zny" id="K43-mu-7AO"/>
+                <outlet property="co2Image" destination="yHO-aK-gXp" id="mkT-nv-Hsh"/>
                 <outlet property="gas" destination="F3K-kg-zs6" id="MjJ-f9-BOc"/>
                 <outlet property="roomNameLabel" destination="JwB-LS-eqv" id="u44-Qx-oHo"/>
+                <outlet property="tempImage" destination="eZj-nK-Gjh" id="3BO-Fa-7Kf"/>
                 <outlet property="temperature" destination="wwT-Qc-Apt" id="gew-xS-kIx"/>
+                <outlet property="viewSelf" destination="was-qm-ghL" id="WhF-Ct-nLt"/>
                 <outlet property="wet" destination="X5q-Bx-fKK" id="gLT-bP-MzY"/>
+                <outlet property="wetImage" destination="R8L-m2-rbu" id="nQS-1g-0DA"/>
             </connections>
             <point key="canvasLocation" x="15.942028985507248" y="711.16071428571422"/>
         </collectionViewCell>

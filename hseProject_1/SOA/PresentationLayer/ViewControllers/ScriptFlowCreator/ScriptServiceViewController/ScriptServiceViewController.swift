@@ -60,6 +60,7 @@ class ScriptServiceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureKeyboard()
         downloadDataScripts()
         print("service!!!")
         print(serviceScripts)
@@ -68,6 +69,25 @@ class ScriptServiceViewController: UIViewController {
         temperatureTextField.delegate = self
         setupNavigationVC()
         setupTableView()
+    }
+    func configureKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
+    }
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height / 1.4
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     func downloadDataScripts() {
         if let data = UserDefaults.standard.object(forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)") as? Data {
@@ -418,12 +438,20 @@ class ScriptServiceViewController: UIViewController {
     var hightConstraints: NSLayoutConstraint!
     var lowConstraints: NSLayoutConstraint!
     func changeConstraintsHigh() {
+        closeButtonOrEditButton.isHidden = true
+        closeButtonOrEditButton.alpha = 0.0
         hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
         lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
         hightConstraints.isActive = false
         lowConstraints.isActive = true
     }
     func changeConstraintsLow() {
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+            self.closeButtonOrEditButton.alpha = 1.0 // Here you will get the animation you want
+        }, completion: { _ in
+            self.closeButtonOrEditButton.isHidden = false// Here you hide it when animation done
+        })
+//        closeButtonOrEditButton.isHidden = false
         hightConstraints.isActive = true
         lowConstraints.isActive = false
     }

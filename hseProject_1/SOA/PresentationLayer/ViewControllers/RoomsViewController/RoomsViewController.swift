@@ -158,8 +158,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             print(self.aimRoomsData.count)
             let aimData = self.aimRoomsData[self.curentVC - 1]
             self.aimTemperature.text = String(aimData.value.temp) + "℃"
-            self.aimGas.text = String(aimData.value.co2)
-            self.aimWet.text = String(aimData.value.humidity)
+            self.aimGas.text = String(aimData.value.co2) + "ppm"
+            self.aimWet.text = String(aimData.value.humidity) + "%"
             ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
         }
     }

@@ -227,5 +227,4 @@ extension NewScriptViewController: NewScriptUpdatedDataProtocol {
         self.scriptCreator = script
         self.dynamicIntForRooms = dynamicIntForRooms
     }
-
 }

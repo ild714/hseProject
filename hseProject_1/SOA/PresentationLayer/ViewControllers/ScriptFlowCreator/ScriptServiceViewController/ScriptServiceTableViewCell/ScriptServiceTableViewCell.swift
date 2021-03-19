@@ -61,9 +61,19 @@ class ScriptServiceTableViewCell: UITableViewCell {
             imageRadiator.heightAnchor.constraint(equalToConstant: 25).isActive = true
             imageRadiator.widthAnchor.constraint(equalToConstant: 25).isActive = true
             stack.addArrangedSubview(imageRadiator)
+        } else {
+            let imageRadiator = UIImageView(image: UIImage(named: "not_radiator"))
+            imageRadiator.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            imageRadiator.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            stack.addArrangedSubview(imageRadiator)
         }
         if serviveScript.hotFloorOn {
             let imageHotFloor = UIImageView(image: UIImage(named: "hotfloor"))
+            imageHotFloor.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            imageHotFloor.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            stack.addArrangedSubview(imageHotFloor)
+        } else {
+            let imageHotFloor = UIImageView(image: UIImage(named: "not_hotfloor"))
             imageHotFloor.heightAnchor.constraint(equalToConstant: 25).isActive = true
             imageHotFloor.widthAnchor.constraint(equalToConstant: 25).isActive = true
             stack.addArrangedSubview(imageHotFloor)
@@ -73,9 +83,19 @@ class ScriptServiceTableViewCell: UITableViewCell {
             imageHumidifier.heightAnchor.constraint(equalToConstant: 25).isActive = true
             imageHumidifier.widthAnchor.constraint(equalToConstant: 25).isActive = true
             stack.addArrangedSubview(imageHumidifier)
+        } else {
+            let imageHotFloor = UIImageView(image: UIImage(named: "not_humidifier"))
+            imageHotFloor.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            imageHotFloor.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            stack.addArrangedSubview(imageHotFloor)
         }
         if serviveScript.conditionerOn {
             let imageAirConditioner = UIImageView(image: UIImage(named: "air_conditioner"))
+            imageAirConditioner.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            imageAirConditioner.widthAnchor.constraint(equalToConstant: 25).isActive = true
+            stack.addArrangedSubview(imageAirConditioner)
+        } else {
+            let imageAirConditioner = UIImageView(image: UIImage(named: "not_air_conditioner"))
             imageAirConditioner.heightAnchor.constraint(equalToConstant: 25).isActive = true
             imageAirConditioner.widthAnchor.constraint(equalToConstant: 25).isActive = true
             stack.addArrangedSubview(imageAirConditioner)
