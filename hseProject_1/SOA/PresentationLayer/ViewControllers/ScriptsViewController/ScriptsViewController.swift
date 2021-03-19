@@ -9,6 +9,10 @@
 import UIKit
 import SwiftyJSON
 
+protocol CollectionUpdate: class {
+    func update()
+}
+
 class ScriptsViewController: UIViewController {
 
     @IBOutlet weak var loadAnimation: UIActivityIndicatorView!
@@ -20,6 +24,7 @@ class ScriptsViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+    weak var delegate: CollectionUpdate?
     let headerTitles = ["Заполненные сценарии", "Черновик"]
     private var presentationAssembly: PresentationAssemblyProtocol?
     var safeArea: UILayoutGuide!
@@ -59,6 +64,7 @@ class ScriptsViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newScripts))
     }
     override func viewWillDisappear(_ animated: Bool) {
+        self.delegate?.update()
 //        let defaults = UserDefaults.standard
 //        let dictionary = defaults.dictionaryRepresentation()
 //        dictionary.keys.forEach { key in

@@ -78,7 +78,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: nil))
             menu?.leftSide = true
 //            menu?.enableSwipeToDismissGesture = false
         }

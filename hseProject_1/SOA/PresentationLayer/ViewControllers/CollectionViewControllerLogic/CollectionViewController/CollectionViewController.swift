@@ -92,7 +92,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly))
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: self))
             menu?.leftSide = true
 //            menu?.enableSwipeToDismissGesture = false
         }
@@ -129,6 +129,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
                 }
             case .up:
                 if let scriptsVC = self.presentationAssembly?.scriptsViewController() {
+                    scriptsVC.delegate = self
                     let navigationController = UINavigationController()
                     navigationController.viewControllers = [scriptsVC]
                     present(navigationController, animated: true, completion: nil)
@@ -209,7 +210,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
     }
     func show1(error message: String) {
         print(message.description)
-        if errorCount < 3 {
+        if errorCount < 4 {
             self.viewDidLoad()
             errorCount += 1
         } else {
@@ -222,7 +223,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
 extension CollectionViewController: ModelAppDatchikDelegate {
     func show2(error message: String) {
         print(message.description)
-        if errorCount < 3 {
+        if errorCount < 4 {
             self.viewDidLoad()
             errorCount += 1
         } else {
@@ -239,11 +240,18 @@ extension CollectionViewController: ModelAimDataDelegate {
 
     func show3(error message: String) {
         print(message.description)
-        if errorCount < 3 {
+        if errorCount < 4 {
             self.viewDidLoad()
             errorCount += 1
         } else {
 //            self.showAlert()
         }
+    }
+}
+
+// MARK: - CollectionUpdate
+extension CollectionViewController: CollectionUpdate {
+    func update() {
+        self.modelAimData?.fetchAimData()
     }
 }

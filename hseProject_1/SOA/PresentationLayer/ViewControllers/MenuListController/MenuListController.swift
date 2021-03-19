@@ -13,10 +13,12 @@ class MenuListController: UITableViewController {
     var items = ["Сценарии"]
     var customColor = UIColor(rgb: 0x353343)
     var userId = ""
-
-    init(userId: String, presentationAssembly: PresentationAssemblyProtocol) {
+    var collection: CollectionViewController?
+    
+    init(userId: String, presentationAssembly: PresentationAssemblyProtocol,collectionSelf: CollectionViewController?) {
         self.presentationAssembly = presentationAssembly
         self.userId = String("User Login:\n \(userId)")
+        self.collection = collectionSelf
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -83,6 +85,7 @@ class MenuListController: UITableViewController {
             let navigationController = UINavigationController()
             navigationController.viewControllers = [scriptsVC]
             navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+            scriptsVC.delegate = self.collection
             present(navigationController, animated: true, completion: nil)
         }
     }

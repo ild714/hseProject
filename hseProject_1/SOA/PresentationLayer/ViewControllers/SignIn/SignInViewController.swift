@@ -43,6 +43,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                 let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController
 
                 navigationController?.viewControllers = [collectionViewController]
+                navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
                 navigationController?.modalPresentationStyle = .fullScreen
 
                 if let navigationVC = navigationController {
