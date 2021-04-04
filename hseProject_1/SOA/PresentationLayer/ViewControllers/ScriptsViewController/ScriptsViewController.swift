@@ -49,7 +49,7 @@ class ScriptsViewController: UIViewController {
             self.loadScripts(group: group)
         }
         group.notify(queue: .main) {
-            if self.arrayDict?.count == 0 {
+            if self.scriptsDict.count == 0 {
                 self.viewDidLoad()
             } else {
                 self.sortDict()
@@ -107,6 +107,7 @@ class ScriptsViewController: UIViewController {
                 group.leave()
             case .failure(let error):
                 print(error.localizedDescription)
+                group.leave()
             }
         }
     }

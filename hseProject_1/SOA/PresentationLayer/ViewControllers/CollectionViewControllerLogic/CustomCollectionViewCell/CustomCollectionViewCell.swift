@@ -42,8 +42,8 @@ class CustomCollectionViewCell: UICollectionViewCell {
             wetImage.isHidden = true
             co2Image.isHidden = true
         } else {
-            animation.stopAnimating()
             animation.isHidden = true
+            animation.stopAnimating()
             
             roomNameLabel.text = currentRoomText
             temperature.text = currentRoom.cellTemperature
