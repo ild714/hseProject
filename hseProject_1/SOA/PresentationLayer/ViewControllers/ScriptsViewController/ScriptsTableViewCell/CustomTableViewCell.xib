@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DqV-2n-srY" customClass="ViewCustomClass" customModule="IndoorClimateControlSystems" customModuleProvider="target">
-                        <rect key="frame" x="30" y="5" width="260" height="65"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aa9-xF-3Ea">
-                                <rect key="frame" x="40" y="20" width="180" height="25"/>
+                                <rect key="frame" x="70" y="25" width="180" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="Zob-3M-nLV"/>
                                 </constraints>
@@ -39,25 +39,25 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="height" constant="75" id="8Kd-3U-ntc"/>
                             <constraint firstItem="Aa9-xF-3Ea" firstAttribute="centerX" secondItem="DqV-2n-srY" secondAttribute="centerX" id="H1n-I2-vBK"/>
                             <constraint firstItem="u7F-GD-0PE" firstAttribute="leading" secondItem="DqV-2n-srY" secondAttribute="leading" constant="17" id="VWf-5Y-z6P"/>
                             <constraint firstItem="Aa9-xF-3Ea" firstAttribute="centerY" secondItem="DqV-2n-srY" secondAttribute="centerY" id="ope-Bd-Pel"/>
                             <constraint firstItem="u7F-GD-0PE" firstAttribute="top" secondItem="DqV-2n-srY" secondAttribute="top" constant="23" id="tc7-eV-1oz"/>
-                            <constraint firstAttribute="height" constant="65" id="uT0-zt-jII"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="15"/>
+                                <real key="value" value="0.0"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="DqV-2n-srY" secondAttribute="bottom" constant="5" id="07c-mj-1Vb"/>
-                    <constraint firstItem="DqV-2n-srY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="4jL-I2-yE9"/>
-                    <constraint firstAttribute="trailing" secondItem="DqV-2n-srY" secondAttribute="trailing" constant="30" id="EMP-yZ-l15"/>
-                    <constraint firstItem="DqV-2n-srY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="gmx-nJ-rDw"/>
+                    <constraint firstItem="DqV-2n-srY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4jL-I2-yE9"/>
+                    <constraint firstAttribute="trailing" secondItem="DqV-2n-srY" secondAttribute="trailing" id="EMP-yZ-l15"/>
+                    <constraint firstAttribute="bottom" secondItem="DqV-2n-srY" secondAttribute="bottom" id="erh-LC-J0I"/>
+                    <constraint firstItem="DqV-2n-srY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="gmx-nJ-rDw"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

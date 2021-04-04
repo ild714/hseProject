@@ -145,19 +145,19 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         for day in days {
             switch day {
             case "Понедельник":
-                stringToNumber.append(0)
-            case "Вторник":
                 stringToNumber.append(1)
-            case "Среда":
+            case "Вторник":
                 stringToNumber.append(2)
-            case "Четверг":
+            case "Среда":
                 stringToNumber.append(3)
-            case "Пятница":
+            case "Четверг":
                 stringToNumber.append(4)
-            case "Суббота":
+            case "Пятница":
                 stringToNumber.append(5)
-            case "Воскресенье":
+            case "Суббота":
                 stringToNumber.append(6)
+            case "Воскресенье":
+                stringToNumber.append(7)
             default:
                 print("error with days")
             }
@@ -182,19 +182,19 @@ extension ScriptCurrentDaysViewController {
             let daysInts = scriptCreator["roomGroup\(indexOfRooms)"]["dayGroup\(num)"]["days"]
             for day in daysInts.arrayValue {
                 switch day {
-                case 0:
-                    numberToString.append("Понедельник")
                 case 1:
-                    numberToString.append("Вторник")
+                    numberToString.append("Понедельник")
                 case 2:
-                    numberToString.append("Среда")
+                    numberToString.append("Вторник")
                 case 3:
-                    numberToString.append("Четверг")
+                    numberToString.append("Среда")
                 case 4:
-                    numberToString.append("Пятница")
+                    numberToString.append("Четверг")
                 case 5:
-                    numberToString.append("Суббота")
+                    numberToString.append("Пятница")
                 case 6:
+                    numberToString.append("Суббота")
+                case 7:
                     numberToString.append("Воскресенье")
                 default:
                     print("error with days")

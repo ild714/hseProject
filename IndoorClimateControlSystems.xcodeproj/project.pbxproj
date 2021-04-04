@@ -86,6 +86,7 @@
 		7497523C2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7497523A2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib */; };
 		7497523E2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */; };
 		74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A551AF256BF7F200A562FB /* GradientExtension.swift */; };
+		74AF36352619EA0D007D5832 /* CompleteScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF36342619EA0D007D5832 /* CompleteScript.swift */; };
 		74B5E814257D312100483972 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E813257D312000483972 /* Script.swift */; };
 		74B5E816257D316F00483972 /* NetworkScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E815257D316F00483972 /* NetworkScript.swift */; };
 		74B5E818257D339600483972 /* ScriptCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E817257D339600483972 /* ScriptCreater.swift */; };
@@ -185,6 +186,7 @@
 		7497523A2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScriptForDaysTableViewCell.xib; sourceTree = "<group>"; };
 		7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScriptForDaysViewController.storyboard; sourceTree = "<group>"; };
 		74A551AF256BF7F200A562FB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
+		74AF36342619EA0D007D5832 /* CompleteScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteScript.swift; sourceTree = "<group>"; };
 		74B5E813257D312000483972 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
 		74B5E815257D316F00483972 /* NetworkScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScript.swift; sourceTree = "<group>"; };
 		74B5E817257D339600483972 /* ScriptCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCreater.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74AF36332619E9D6007D5832 /* CompleteScript */,
 				74210CA325E18EA1002F75E3 /* NewUser */,
 				74210C7425DFF462002F75E3 /* CurrentScript */,
 				74D3A17F25CBF77B00333DFD /* DeleteScript */,
@@ -671,6 +674,14 @@
 				7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */,
 			);
 			path = ScriptForDaysViewController;
+			sourceTree = "<group>";
+		};
+		74AF36332619E9D6007D5832 /* CompleteScript */ = {
+			isa = PBXGroup;
+			children = (
+				74AF36342619EA0D007D5832 /* CompleteScript.swift */,
+			);
+			path = CompleteScript;
 			sourceTree = "<group>";
 		};
 		74B5E812257D30F700483972 /* ScriptStructures */ = {
@@ -1044,6 +1055,7 @@
 				7480039624E13ED4006DEBDE /* ButtonLeftSideCustomClass.swift in Sources */,
 				743B8FC624E2EE5B009A929A /* ActivityIndicator.swift in Sources */,
 				740D1E1025307EDC000253FA /* ToolBarWithPageControll.swift in Sources */,
+				74AF36352619EA0D007D5832 /* CompleteScript.swift in Sources */,
 				742822F0258BF7B5008F6524 /* RootAssembly.swift in Sources */,
 				748426EB25169446006A09F7 /* NavigationBar.swift in Sources */,
 				742822E6258BD3BA008F6524 /* ServiceAssembly.swift in Sources */,

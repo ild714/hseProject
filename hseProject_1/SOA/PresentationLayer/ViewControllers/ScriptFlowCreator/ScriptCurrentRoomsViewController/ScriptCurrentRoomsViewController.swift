@@ -47,10 +47,14 @@ class ScriptCurrentRoomsViewController: UIViewController {
     @IBOutlet weak var labelDescription: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupNavigationVC()
         modelRoomsConfig?.fetchRoomConfig()
         setupTableView()
+        print(scriptCreator.dictionary)
+//        roomSavedJsonDataLoader()
+//        tableView.reloadData()
     }
     func setupNavigationVC() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus"), style: .plain, target: self, action: #selector(newRoomsGroup))

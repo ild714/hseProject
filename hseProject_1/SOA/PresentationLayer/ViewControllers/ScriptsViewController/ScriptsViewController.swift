@@ -42,6 +42,7 @@ class ScriptsViewController: UIViewController {
 
     override func viewDidLoad() {
 //        userDefaultsCleaner()
+        
         loadAnimation.startAnimating()
         let group = DispatchGroup()
         group.enter()
@@ -57,7 +58,7 @@ class ScriptsViewController: UIViewController {
             }
         }
         title = "Сценарии"
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Arial", size: 20)!]
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "Arial", size: 20)!]
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.black]
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         self.navigationController?.toolbar.isHidden = true
@@ -65,15 +66,6 @@ class ScriptsViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.delegate?.update()
-//        let defaults = UserDefaults.standard
-//        let dictionary = defaults.dictionaryRepresentation()
-//        dictionary.keys.forEach { key in
-//            if key.contains("room") || key.contains("Scripts") {
-//                print(key)
-//                defaults.removeObject(forKey: key)
-//            }
-//        }
-//        tableView.reloadData()
     }
     func userDefaultsCleaner() {
         let defaults = UserDefaults.standard
@@ -119,7 +111,7 @@ class ScriptsViewController: UIViewController {
         tableView.register(UINib(nibName: String(describing: CustomTableViewCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorStyle = .none
+//        tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         return tableView
     }()
@@ -154,9 +146,23 @@ class ScriptsViewController: UIViewController {
             }
         }
     }
+    func editedScript(json: JSON){
+        let count = UserDefaults.standard.integer(forKey: "JSONCount")
+        if count == 1 {
+            self.alert(title: "Остался незаполненный черновик", message: "Завершите заполнение черновика")
+        } else {
+            userDefaultsCleaner()
+            if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: json) {
+                newScriptVC.delegate = self
+                newScriptVC.notNewScript = false
+                navigationController?.pushViewController(newScriptVC, animated: true)
+                UserDefaults.standard.set(0 + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
+            }
+        }
+    }
     func alert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        vcAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        vcAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: nil))
         self.present(vcAlert, animated: true)
     }
 }
@@ -164,6 +170,67 @@ class ScriptsViewController: UIViewController {
 // MARK: - ScriptsViewController datasource
 extension ScriptsViewController: UITableViewDataSource {
 
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let myAction1 = UITableViewRowAction(style: .default, title: "Delete") {[weak self] (action, indexPath) in
+            if indexPath.section == 0 {
+                
+
+                    let networkSetScript = DeleteScript()
+                if let key = self?.arrayDict?[indexPath.row].key {
+                        networkSetScript.sentDataScript(scId: key)
+                    self?.arrayDict?.remove(at: indexPath.row)
+                    }
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                
+            }
+            if indexPath.section == 1 {
+                
+                    let defaults = UserDefaults.standard
+                    let dictionary = defaults.dictionaryRepresentation()
+                    dictionary.keys.forEach { key in
+                        if key.contains("Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") {
+                            print(key, "---")
+                            defaults.removeObject(forKey: key)
+                            let count = UserDefaults.standard.integer(forKey: "JSONCount")
+                            UserDefaults.standard.set(count-1, forKey: "JSONCount")
+                            tableView.deleteRows(at: [indexPath], with: .fade)
+                        }
+                    }
+                }
+            
+        }
+        let myAction2 = UITableViewRowAction(style: .normal, title: "Edit") {[weak self] (action, indexPath) in
+            let networkCompleteScript = CompleteScript()
+            if let key = self?.arrayDict?[indexPath.row].key {
+                networkCompleteScript.getCompleteScript(id: key) { (result: Result<JSON, NetworkSensorError>) in
+                    switch result {
+                    case .success(let result):
+                        self?.editedScript(json: result)
+                        
+//                        let networkSetScript = DeleteScript()
+//                    if let key = self?.arrayDict?[indexPath.row].key {
+//                            networkSetScript.sentDataScript(scId: key)
+//                        self?.arrayDict?.remove(at: indexPath.row)
+//                        }
+//                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+
+        if indexPath.section == 0 {
+            return [myAction1,myAction2]
+        } else {
+            return [myAction1]
+        }
+    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -229,6 +296,7 @@ extension ScriptsViewController: UITableViewDataSource {
 // MARK: - ScriptsViewController delegate
 extension ScriptsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         if indexPath.section == 0 {
             self.marks = []
             let networkSetScript = NetworkSetScript()
@@ -243,7 +311,6 @@ extension ScriptsViewController: UITableViewDelegate {
                 if let json = try? JSON(data: jsonData) {
                     if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: json) {
                         newScriptVC.delegate = self
-//                        print(indexPath.row + UserDefaults.standard.integer(forKey: "LastJSON"), "fff")
                         print(UserDefaults.standard.integer(forKey: "LastJSON"))
                         UserDefaults.standard.set(indexPath.row + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
                         navigationController?.pushViewController(newScriptVC, animated: true)
@@ -253,34 +320,34 @@ extension ScriptsViewController: UITableViewDelegate {
             }
         }
     }
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            if editingStyle == .delete {
-
-                let networkSetScript = DeleteScript()
-                if let key = arrayDict?[indexPath.row].key {
-                    networkSetScript.sentDataScript(scId: key)
-                    arrayDict?.remove(at: indexPath.row)
-                }
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-        }
-        if indexPath.section == 1 {
-            if editingStyle == .delete {
-                let defaults = UserDefaults.standard
-                let dictionary = defaults.dictionaryRepresentation()
-                dictionary.keys.forEach { key in
-                    if key.contains("Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") {
-                        print(key, "---")
-                        defaults.removeObject(forKey: key)
-                        let count = UserDefaults.standard.integer(forKey: "JSONCount")
-                        UserDefaults.standard.set(count-1, forKey: "JSONCount")
-                        tableView.deleteRows(at: [indexPath], with: .fade)
-                    }
-                }
-            }
-        }
-    }
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if indexPath.section == 0 {
+//            if editingStyle == .delete {
+//
+//                let networkSetScript = DeleteScript()
+//                if let key = arrayDict?[indexPath.row].key {
+//                    networkSetScript.sentDataScript(scId: key)
+//                    arrayDict?.remove(at: indexPath.row)
+//                }
+//                tableView.deleteRows(at: [indexPath], with: .fade)
+//            }
+//        }
+//        if indexPath.section == 1 {
+//            if editingStyle == .delete {
+//                let defaults = UserDefaults.standard
+//                let dictionary = defaults.dictionaryRepresentation()
+//                dictionary.keys.forEach { key in
+//                    if key.contains("Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") {
+//                        print(key, "---")
+//                        defaults.removeObject(forKey: key)
+//                        let count = UserDefaults.standard.integer(forKey: "JSONCount")
+//                        UserDefaults.standard.set(count-1, forKey: "JSONCount")
+//                        tableView.deleteRows(at: [indexPath], with: .fade)
+//                    }
+//                }
+//            }
+//        }
+//    }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section < headerTitles.count {
             return headerTitles[section]

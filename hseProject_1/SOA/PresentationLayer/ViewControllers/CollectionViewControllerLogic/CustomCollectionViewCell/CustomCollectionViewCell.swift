@@ -32,8 +32,6 @@ class CustomCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         animation.startAnimating()
-//        ActivityIndicator.animateActivityLabel(labels: [LabelActivity(label: roomNameLabel), LabelActivity(label: wet), LabelActivity(label: gas), LabelActivity(label: temperature)])
-//        ActivityIndicator.animateView(view: viewSelf)
     }
 
     func configure(currentRoomText: String, currentRoom: CurrentRoomData) {
@@ -54,7 +52,5 @@ class CustomCollectionViewCell: UICollectionViewCell {
             wetImage.isHidden = false
             co2Image.isHidden = false
         }
-//        ActivityIndicator.stopAnimating(views: [wet, gas, temperature, roomNameLabel])
     }
-
 }
