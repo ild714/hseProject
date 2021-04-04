@@ -200,6 +200,8 @@ extension ScriptsViewController: UITableViewDataSource {
             
         }
         let myAction2 = UITableViewRowAction(style: .normal, title: "Edit") {[weak self] (action, indexPath) in
+            UserDefaults.standard.set(true, forKey: "edit")
+            
             let networkCompleteScript = CompleteScript()
             if let key = self?.arrayDict?[indexPath.row].key {
                 networkCompleteScript.getCompleteScript(id: key) { (result: Result<JSON, NetworkSensorError>) in

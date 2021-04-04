@@ -90,15 +90,55 @@ class ScriptServiceViewController: UIViewController {
         }
     }
     func downloadDataScripts() {
-        if let data = UserDefaults.standard.object(forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)") as? Data {
-            if let result = try? JSONDecoder().decode([ServiceScript].self, from: data) {
-                self.serviceScripts = result
+        if UserDefaults.standard.bool(forKey: "edit"){
+            //            self.serviceScripts.removeAll()
+            print(self.previousRoomId)
+            print("!!!")
+            print(self.self.previousDayId)
+            if let result = self.scriptCreator.dictionary?["roomGroup\(self.previousRoomId)"]?["dayGroup\(self.previousDayId)"] {
+                print(result)
+                for setting in result {
+                    if setting.0.hasPrefix("set"){
+                        print(setting)
+                        var mute = 0
+                        var temp = 0
+                        var hum = 0
+                        var co2 = 0
+                        var time = Date()
+                        var at_home = 0
+                        var at_home_bool = false
+                        if setting.0 == "mute" {
+                            mute = setting.1.intValue
+                        } else if setting.0 == "temp"{
+                            temp = setting.1.intValue
+                        } else if setting.0 == "hum" {
+                            hum = setting.1.intValue
+                        } else if setting.0 == "co2" {
+                            co2 = setting.1.intValue
+                        } else if setting.0 == "time" {
+                            //                        time = setting.1.
+                        } else if setting.0 == "at_home" {
+                            at_home = setting.1.intValue
+                            if at_home == 1 {
+                                at_home_bool = true
+                            }
+                        }
+                        self.serviceScripts.append(ServiceScript(time: Date(), temperature: temp, humidity: hum, co2: co2, radiatorOn: true, hotFloorOn: true, humidifierOn: true, conditionerOn: true, co2OnOff: true, soundOnOff: true, houseOnOff: at_home_bool))
+                    }
+                }
+            }
+        } else {
+            if let data = UserDefaults.standard.object(forKey: "Scripts\(self.previousRoomId)\(self.previousDayId)") as? Data {
+                if let result = try? JSONDecoder().decode([ServiceScript].self, from: data) {
+                    self.serviceScripts = result
+                }
             }
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
         jsonScriptSaver()
         self.delegate?.updateScript(script: self.scriptCreator)
+//        self.serviceScripts.removeAll()
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -280,6 +320,7 @@ class ScriptServiceViewController: UIViewController {
                 arrayBools.append(localBool)
             }
             if arrayBools.allSatisfy({$0}) {
+                UserDefaults.standard.set(false, forKey: "edit")
                 if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount") {
                     let network = NetworkScript()
                     network.sentDataScript(script: scriptCreator)
@@ -431,7 +472,11 @@ class ScriptServiceViewController: UIViewController {
         serviceScript.soundOnOff = soundTurnOn
 
         serviceScripts.append(serviceScript)
-        self.saveScriptsInMemory()
+        if UserDefaults.standard.bool(forKey: "edit") {
+            
+        } else {
+            self.saveScriptsInMemory()
+        }
         tableView.reloadData()
     }
 

@@ -30,7 +30,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="uncheck" translatesAutoresizingMaskIntoConstraints="NO" id="u7F-GD-0PE">
-                                <rect key="frame" x="17" y="23" width="15" height="15"/>
+                                <rect key="frame" x="17" y="30" width="15" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="9C8-wm-7qZ"/>
                                     <constraint firstAttribute="height" constant="15" id="9Un-P0-OFi"/>
@@ -43,7 +43,7 @@
                             <constraint firstItem="Aa9-xF-3Ea" firstAttribute="centerX" secondItem="DqV-2n-srY" secondAttribute="centerX" id="H1n-I2-vBK"/>
                             <constraint firstItem="u7F-GD-0PE" firstAttribute="leading" secondItem="DqV-2n-srY" secondAttribute="leading" constant="17" id="VWf-5Y-z6P"/>
                             <constraint firstItem="Aa9-xF-3Ea" firstAttribute="centerY" secondItem="DqV-2n-srY" secondAttribute="centerY" id="ope-Bd-Pel"/>
-                            <constraint firstItem="u7F-GD-0PE" firstAttribute="top" secondItem="DqV-2n-srY" secondAttribute="top" constant="23" id="tc7-eV-1oz"/>
+                            <constraint firstItem="u7F-GD-0PE" firstAttribute="top" secondItem="DqV-2n-srY" secondAttribute="top" constant="30" id="tc7-eV-1oz"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
