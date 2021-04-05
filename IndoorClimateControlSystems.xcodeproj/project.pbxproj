@@ -87,6 +87,7 @@
 		7497523E2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */; };
 		74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A551AF256BF7F200A562FB /* GradientExtension.swift */; };
 		74AF36352619EA0D007D5832 /* CompleteScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF36342619EA0D007D5832 /* CompleteScript.swift */; };
+		74AF3639261A3D67007D5832 /* UpdateScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF3638261A3D67007D5832 /* UpdateScript.swift */; };
 		74B5E814257D312100483972 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E813257D312000483972 /* Script.swift */; };
 		74B5E816257D316F00483972 /* NetworkScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E815257D316F00483972 /* NetworkScript.swift */; };
 		74B5E818257D339600483972 /* ScriptCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E817257D339600483972 /* ScriptCreater.swift */; };
@@ -187,6 +188,7 @@
 		7497523D2559A2BB00B88A21 /* ScriptForDaysViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScriptForDaysViewController.storyboard; sourceTree = "<group>"; };
 		74A551AF256BF7F200A562FB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		74AF36342619EA0D007D5832 /* CompleteScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteScript.swift; sourceTree = "<group>"; };
+		74AF3638261A3D67007D5832 /* UpdateScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScript.swift; sourceTree = "<group>"; };
 		74B5E813257D312000483972 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
 		74B5E815257D316F00483972 /* NetworkScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScript.swift; sourceTree = "<group>"; };
 		74B5E817257D339600483972 /* ScriptCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCreater.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74AF3637261A3D0D007D5832 /* UpdateScript */,
 				74AF36332619E9D6007D5832 /* CompleteScript */,
 				74210CA325E18EA1002F75E3 /* NewUser */,
 				74210C7425DFF462002F75E3 /* CurrentScript */,
@@ -682,6 +685,14 @@
 				74AF36342619EA0D007D5832 /* CompleteScript.swift */,
 			);
 			path = CompleteScript;
+			sourceTree = "<group>";
+		};
+		74AF3637261A3D0D007D5832 /* UpdateScript */ = {
+			isa = PBXGroup;
+			children = (
+				74AF3638261A3D67007D5832 /* UpdateScript.swift */,
+			);
+			path = UpdateScript;
 			sourceTree = "<group>";
 		};
 		74B5E812257D30F700483972 /* ScriptStructures */ = {
@@ -993,6 +1004,7 @@
 				746C355B25ACC240006CDBCD /* CurrentRoomsTableViewCell.swift in Sources */,
 				74D8C3BC258FD93300C46F85 /* CellDelegate.swift in Sources */,
 				742822D6258BA41E008F6524 /* RequestsFactory.swift in Sources */,
+				74AF3639261A3D67007D5832 /* UpdateScript.swift in Sources */,
 				748426F125175B0A006A09F7 /* StackExtension.swift in Sources */,
 				7497522E2559995200B88A21 /* ScriptForRoomViewController.swift in Sources */,
 				7480039224E13D24006DEBDE /* LabelRightSideCustomClass.swift in Sources */,

@@ -33,7 +33,8 @@ class NewScriptViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("!!!!!")
+        print(scriptCreator)
         configureKeyboard()
         configureTextField()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Дальше", style: .plain, target: self, action: #selector(roomsGroup))
@@ -47,6 +48,7 @@ class NewScriptViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Сценарии", style: .plain, target: self, action: #selector(backToScripts))
     }
     @objc func backToScripts() {
+        print(scriptCreator)
         if scriptCreator.count == 0 {
             showAlertScript()
         } else if scriptCreator.count == 2 {
@@ -85,6 +87,17 @@ class NewScriptViewController: UIViewController {
                 arrayBools.append(localBool)
             }
             if arrayBools.allSatisfy({$0}) {
+                if UserDefaults.standard.bool(forKey: "edit") {
+                    let updateScript = UpdateScript()
+                    self.scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
+                    self.scriptCreator["name"] = JSON(self.textField.text ?? "Test1?")
+//                    print("?!!")
+//                    print(self.scriptCreator)
+                    updateScript.sentUpdateDataScript(script: self.scriptCreator)
+                    UserDefaults.standard.set(false, forKey: "edit")
+                    self.delegate?.update()
+                    self.navigationController?.popViewController(animated: true)
+                } else
                 if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount") {
                     showSaveScript(script: self.scriptCreator)
                 } else {
@@ -130,6 +143,7 @@ class NewScriptViewController: UIViewController {
                     navigationController?.pushViewController(currentRoomsVC, animated: true)
                 }
             } else {
+                scriptCreator["name"] = JSON(textField.text ?? "Test1?")
                 if let currentRoomsVC = presentationAssembly?.currentRoomsViewController(scriptCreator: scriptCreator, rooms: [], dynamicIntForRooms: self.dynamicIntForRooms) {
                     currentRoomsVC.delegate = self
                     navigationController?.pushViewController(currentRoomsVC, animated: true)
@@ -149,6 +163,42 @@ class NewScriptViewController: UIViewController {
         }
     }
     func showSaveScript(script: JSON) {
+//        if UserDefaults.standard.bool(forKey: "edit") {
+//            let updateScript = UpdateScript()
+//            self.scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
+//            self.scriptCreator["name"] = JSON(self.textField.text ?? "Test1?")
+//            print("?!!")
+//            print(self.scriptCreator)
+//            updateScript.sentUpdateDataScript(script: self.scriptCreator)
+//            UserDefaults.standard.set(false, forKey: "edit")
+//            self.delegate?.update()
+//            self.navigationController?.popViewController(animated: true)
+        
+//            let alertVC = UIAlertController(title: "Вы не сохранили обновленный сценарий", message: "Хотите сохранить", preferredStyle: .alert)
+//            alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {[weak self]_ in
+//                print(UserDefaults.standard.integer(forKey: "id"))
+//                self?.scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
+//                self?.scriptCreator["name"] = JSON(self?.textField.text ?? "Test1?")
+//                print("?!!")
+//
+//                let updateScript = UpdateScript()
+//                if let scriptCreator = self?.scriptCreator {
+//                    print(self?.scriptCreator)
+//                updateScript.sentUpdateDataScript(script: scriptCreator)
+//                } else {
+//                    print("error with scriptCreator")
+//                }
+//                UserDefaults.standard.set(false, forKey: "edit")
+//                self?.delegate?.update()
+//                self?.navigationController?.popViewController(animated: true)
+//
+//            }))
+//            alertVC.addAction(UIAlertAction(title: "Нет", style: .default, handler: {_ in
+//                UserDefaults.standard.set(false, forKey: "edit")
+//                self.navigationController?.popViewController(animated: true)
+//            }))
+//            self.present(alertVC, animated: true)
+//        } else {
         let alertVC = UIAlertController(title: "Вы не сохранили сценарий", message: "Хотите сохранить", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
             let network = NetworkScript()
@@ -172,10 +222,29 @@ class NewScriptViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }))
         self.present(alertVC, animated: true)
+//        }
+    }
+    func exitForTheServer() {
+        let defaults = UserDefaults.standard
+        let dictionary = defaults.dictionaryRepresentation()
+        dictionary.keys.forEach { key in
+            if key.contains("room") || key.contains("Scripts") || key.contains("dynamicIntForRooms") {
+                print(key)
+                defaults.removeObject(forKey: key)
+            }
+        }
+        
+        UserDefaults.standard.set(0 + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
+        
+        UserDefaults.standard.set(false, forKey: "edit")
     }
     func showAlertScript() {
+        if UserDefaults.standard.bool(forKey: "edit") {
+            //exitForTheServer()
+        }
+        
         self.scriptDraftSave()
-        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнить как черновик?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
             print(self.scriptCreator)
             var countScript = 0

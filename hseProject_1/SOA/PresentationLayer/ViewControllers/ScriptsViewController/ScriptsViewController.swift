@@ -133,6 +133,7 @@ class ScriptsViewController: UIViewController {
     }
 
     @objc func newScripts() {
+        UserDefaults.standard.set(false, forKey: "edit")
         let count = UserDefaults.standard.integer(forKey: "JSONCount")
         if count == 1 {
             self.alert(title: "Остался незаполненный черновик", message: "Завершите заполнение черновика")
@@ -147,18 +148,18 @@ class ScriptsViewController: UIViewController {
         }
     }
     func editedScript(json: JSON){
-        let count = UserDefaults.standard.integer(forKey: "JSONCount")
-        if count == 1 {
-            self.alert(title: "Остался незаполненный черновик", message: "Завершите заполнение черновика")
-        } else {
-            userDefaultsCleaner()
+//        let count = UserDefaults.standard.integer(forKey: "JSONCount")
+//        if count == 1 {
+//            self.alert(title: "Остался незаполненный черновик", message: "Завершите заполнение черновика")
+//        } else {
+//            userDefaultsCleaner()
             if let newScriptVC = presentationAssembly?.newScriptViewController(scriptCreator: json) {
                 newScriptVC.delegate = self
                 newScriptVC.notNewScript = false
                 navigationController?.pushViewController(newScriptVC, animated: true)
-                UserDefaults.standard.set(0 + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
+//                UserDefaults.standard.set(0 + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
             }
-        }
+//        }
     }
     func alert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -184,7 +185,6 @@ extension ScriptsViewController: UITableViewDataSource {
                 
             }
             if indexPath.section == 1 {
-                
                     let defaults = UserDefaults.standard
                     let dictionary = defaults.dictionaryRepresentation()
                     dictionary.keys.forEach { key in
@@ -204,9 +204,12 @@ extension ScriptsViewController: UITableViewDataSource {
             
             let networkCompleteScript = CompleteScript()
             if let key = self?.arrayDict?[indexPath.row].key {
+                UserDefaults.standard.set(key, forKey: "id")
                 networkCompleteScript.getCompleteScript(id: key) { (result: Result<JSON, NetworkSensorError>) in
                     switch result {
                     case .success(let result):
+                        print("!?!?!")
+                        print(result)
                         self?.editedScript(json: result)
                         
 //                        let networkSetScript = DeleteScript()
@@ -217,6 +220,7 @@ extension ScriptsViewController: UITableViewDataSource {
 //                        tableView.deleteRows(at: [indexPath], with: .fade)
                     case .failure(let error):
                         print(error.localizedDescription)
+                        self?.alert(title: "Ошибка редактирования", message: "Попробуйте снова")
                     }
                 }
             }
@@ -308,6 +312,7 @@ extension ScriptsViewController: UITableViewDelegate {
             }
             tableView.reloadData()
         } else {
+            UserDefaults.standard.set(false, forKey: "edit")
             let jsonData = UserDefaults.standard.object(forKey: "Json\(indexPath.row+UserDefaults.standard.integer(forKey: "LastJSON"))") as? Data
             if let jsonData = jsonData {
                 if let json = try? JSON(data: jsonData) {

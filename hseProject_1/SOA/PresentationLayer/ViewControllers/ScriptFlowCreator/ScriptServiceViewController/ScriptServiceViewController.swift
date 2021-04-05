@@ -59,7 +59,8 @@ class ScriptServiceViewController: UIViewController {
     var cleanColor = false
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("!!!!!")
+        print(self.scriptCreator.dictionary)
         configureKeyboard()
         downloadDataScripts()
         print("service!!!")
@@ -79,7 +80,7 @@ class ScriptServiceViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height / 1.4
+                self.view.frame.origin.y -= keyboardSize.height / 2
             }
         }
     }
@@ -92,14 +93,18 @@ class ScriptServiceViewController: UIViewController {
     func downloadDataScripts() {
         if UserDefaults.standard.bool(forKey: "edit"){
             //            self.serviceScripts.removeAll()
-            print(self.previousRoomId)
-            print("!!!")
-            print(self.self.previousDayId)
+//            print(self.previousRoomId)
+//            print("!!!")
+//            print(self.self.previousDayId)
             if let result = self.scriptCreator.dictionary?["roomGroup\(self.previousRoomId)"]?["dayGroup\(self.previousDayId)"] {
                 print(result)
                 for setting in result {
                     if setting.0.hasPrefix("set"){
                         print(setting)
+                        print("1")
+                        print(setting.0)
+                        print("2")
+                        print(setting.1)
                         var mute = 0
                         var temp = 0
                         var hum = 0
@@ -107,22 +112,37 @@ class ScriptServiceViewController: UIViewController {
                         var time = Date()
                         var at_home = 0
                         var at_home_bool = false
-                        if setting.0 == "mute" {
-                            mute = setting.1.intValue
-                        } else if setting.0 == "temp"{
-                            temp = setting.1.intValue
-                        } else if setting.0 == "hum" {
-                            hum = setting.1.intValue
-                        } else if setting.0 == "co2" {
-                            co2 = setting.1.intValue
-                        } else if setting.0 == "time" {
-                            //                        time = setting.1.
-                        } else if setting.0 == "at_home" {
-                            at_home = setting.1.intValue
-                            if at_home == 1 {
-                                at_home_bool = true
+                        for data in setting.1 {
+                            if data.0 == "mute" {
+                                mute = data.1.intValue
+                            } else if data.0 == "temp"{
+                                temp = data.1.intValue
+                            } else if data.0 == "hum" {
+                                hum = data.1.intValue
+                            } else if data.0 == "co2" {
+                                co2 = data.1.intValue
+                            } else if data.0 == "time" {
+//                                time = data.1
+                                print(time)
+                                
+                                
+                                let formatter = DateFormatter()
+                                formatter.dateFormat = "HH:mm"
+//                                time = formatter.date(from: data.1.description) ?? Date()
+                                print("time!")
+                                print(data.1.stringValue)
+//                                print(formatter.date(from: data.1.stringValue)!)
+                                
+                            } else if data.0 == "at_home" {
+                                at_home = data.1.intValue
+                                if at_home == 1 {
+                                    at_home_bool = true
+                                } else {
+                                    at_home_bool = false
+                                }
                             }
                         }
+                        print(temp)
                         self.serviceScripts.append(ServiceScript(time: Date(), temperature: temp, humidity: hum, co2: co2, radiatorOn: true, hotFloorOn: true, humidifierOn: true, conditionerOn: true, co2OnOff: true, soundOnOff: true, houseOnOff: at_home_bool))
                     }
                 }
@@ -320,7 +340,16 @@ class ScriptServiceViewController: UIViewController {
                 arrayBools.append(localBool)
             }
             if arrayBools.allSatisfy({$0}) {
-                UserDefaults.standard.set(false, forKey: "edit")
+                if UserDefaults.standard.bool(forKey: "edit") {
+                    let updateScript = UpdateScript()
+                    print(UserDefaults.standard.integer(forKey: "id"))
+                    print("?!!")
+                    scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
+                    print(scriptCreator)
+                    updateScript.sentUpdateDataScript(script: scriptCreator)
+                    UserDefaults.standard.set(false, forKey: "edit")
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                } else 
                 if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount") {
                     let network = NetworkScript()
                     network.sentDataScript(script: scriptCreator)

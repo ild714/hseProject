@@ -47,12 +47,13 @@ class ScriptCurrentRoomsViewController: UIViewController {
     @IBOutlet weak var labelDescription: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("?????")
+        print(scriptCreator)
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         setupNavigationVC()
         modelRoomsConfig?.fetchRoomConfig()
         setupTableView()
-        print(scriptCreator.dictionary)
+//        print(scriptCreator.dictionary)
 //        roomSavedJsonDataLoader()
 //        tableView.reloadData()
     }
@@ -153,13 +154,17 @@ extension ScriptCurrentRoomsViewController: ScriptForRoomProtocol {
             self.numbersDictForRoomSection()
             self.indexAndNamesForRoomSection()
             self.dynamicIntForRooms += 1
-            UserDefaults.standard.set(self.dynamicIntForRooms, forKey: "dynamicIntForRooms")
+            if !UserDefaults.standard.bool(forKey: "edit") {
+                UserDefaults.standard.set(self.dynamicIntForRooms, forKey: "dynamicIntForRooms")
+            }
         } else {
             self.jsonForRoomSection(rooms: rooms)
             self.numbersDictForRoomSection()
             self.indexAndNamesForRoomSection()
             self.dynamicIntForRooms += 1
-            UserDefaults.standard.set(self.dynamicIntForRooms, forKey: "dynamicIntForRooms")
+            if !UserDefaults.standard.bool(forKey: "edit") {
+                UserDefaults.standard.set(self.dynamicIntForRooms, forKey: "dynamicIntForRooms")
+            }
         }
         self.tableView.reloadData()
     }

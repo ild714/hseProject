@@ -44,7 +44,9 @@ class ScriptCurrentDaysViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
-        self.dynamicIntForDays = UserDefaults.standard.integer(forKey: "roomGroup\(indexOfRooms)")
+        if !UserDefaults.standard.bool(forKey: "edit") {
+            self.dynamicIntForDays = UserDefaults.standard.integer(forKey: "roomGroup\(indexOfRooms)")
+        }
         setupNavigationVC()
         daysSavedJsonDataLoader()
         setupTableView()
@@ -135,7 +137,9 @@ extension ScriptCurrentDaysViewController: ScriptForDaysProtocol {
         jsonForDaysSection(days: daysString)
         daysDict(days: daysString)
         dynamicIntForDays += 1
-        UserDefaults.standard.set(dynamicIntForDays, forKey: "roomGroup\(indexOfRooms)")
+        if !UserDefaults.standard.bool(forKey: "edit") {
+            UserDefaults.standard.set(dynamicIntForDays, forKey: "roomGroup\(indexOfRooms)")
+        }
         tableView.reloadData()
     }
 
