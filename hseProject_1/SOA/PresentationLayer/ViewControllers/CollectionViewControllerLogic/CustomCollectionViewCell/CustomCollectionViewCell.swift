@@ -16,7 +16,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var wet: UILabel!
     @IBOutlet weak var gas: UILabel!
     @IBOutlet weak var animation: UIActivityIndicatorView!
-    
+
     @IBOutlet weak var tempImage: UIImageView!
     @IBOutlet weak var wetImage: UIImageView!
     @IBOutlet weak var co2Image: UIImageView!
@@ -42,12 +42,12 @@ class CustomCollectionViewCell: UICollectionViewCell {
         } else {
             animation.isHidden = true
             animation.stopAnimating()
-            
+
             roomNameLabel.text = currentRoomText
             temperature.text = currentRoom.cellTemperature
             wet.text = currentRoom.cellWet
             gas.text = currentRoom.cellGas
-            
+
             tempImage.isHidden = false
             wetImage.isHidden = false
             co2Image.isHidden = false

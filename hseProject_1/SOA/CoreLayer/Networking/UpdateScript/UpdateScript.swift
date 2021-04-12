@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class UpdateScript {
     func sentUpdateDataScript(script: JSON) {
-        
+
         guard let url = URL(string: "https://back.vc-app.ru/app/update_script") else {
             return
         }

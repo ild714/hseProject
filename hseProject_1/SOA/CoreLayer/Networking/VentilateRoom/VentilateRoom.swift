@@ -1,18 +1,18 @@
 //
-//  ChangeTemp.swift
+//  VentilateRoom.swift
 //  IndoorClimateControlSystems
 //
-//  Created by Ildar on 4/5/21.
+//  Created by Ildar on 4/12/21.
 //  Copyright © 2021 Ildar Nigmetzyanov. All rights reserved.
 //
 
 import Foundation
 import SwiftyJSON
 
-class ChangeTemp {
+class VentilateRoom {
 
-    func changeTemp(rid: Int, temp: Int, completion :@escaping () -> Void) {
-        guard let url = URL(string: "https://back.vc-app.ru/app/ch_temp?did=10155&rid=\(rid)&ch_temp=\(temp)") else {
+    func ventilate(rid: Int, completion :@escaping () -> Void) {
+        guard let url = URL(string: "https://back.vc-app.ru/app/flow?did=10155&rid=\(rid)") else {
             return
         }
         var request = URLRequest(url: url)
@@ -27,6 +27,9 @@ class ChangeTemp {
                 return
             }
             if let data = data {
+                if let decodedData = String(bytes: data, encoding: .utf8) {
+                    print(decodedData)
+                }
                 DispatchQueue.main.async {
                     completion()
                 }

@@ -91,7 +91,7 @@ class ScriptServiceViewController: UIViewController {
         }
     }
     func downloadDataScripts() {
-        if UserDefaults.standard.bool(forKey: "edit"){
+        if UserDefaults.standard.bool(forKey: "edit") {
             //            self.serviceScripts.removeAll()
 //            print(self.previousRoomId)
 //            print("!!!")
@@ -99,7 +99,7 @@ class ScriptServiceViewController: UIViewController {
             if let result = self.scriptCreator.dictionary?["roomGroup\(self.previousRoomId)"]?["dayGroup\(self.previousDayId)"] {
                 print(result)
                 for setting in result {
-                    if setting.0.hasPrefix("set"){
+                    if setting.0.hasPrefix("set") {
                         print(setting)
                         print("1")
                         print(setting.0)
@@ -124,15 +124,14 @@ class ScriptServiceViewController: UIViewController {
                             } else if data.0 == "time" {
 //                                time = data.1
                                 print(time)
-                                
-                                
+
                                 let formatter = DateFormatter()
                                 formatter.dateFormat = "HH:mm"
                                 time = formatter.date(from: data.1.description) ?? Date()
                                 print("time!")
                                 print(data.1.stringValue)
 //                                print(formatter.date(from: data.1.stringValue)!)
-                                
+
                             } else if data.0 == "at_home" {
                                 at_home = data.1.intValue
                                 if at_home == 1 {
@@ -349,7 +348,7 @@ class ScriptServiceViewController: UIViewController {
                     updateScript.sentUpdateDataScript(script: scriptCreator)
                     UserDefaults.standard.set(false, forKey: "edit")
                     self.navigationController?.dismiss(animated: true, completion: nil)
-                } else 
+                } else
                 if countRooms == UserDefaults.standard.integer(forKey: "RoomsCount") {
                     let network = NetworkScript()
                     network.sentDataScript(script: scriptCreator)
@@ -502,7 +501,7 @@ class ScriptServiceViewController: UIViewController {
 
         serviceScripts.append(serviceScript)
         if UserDefaults.standard.bool(forKey: "edit") {
-            
+
         } else {
             self.saveScriptsInMemory()
         }

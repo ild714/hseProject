@@ -14,8 +14,8 @@ class MenuListController: UITableViewController {
     var customColor = UIColor(rgb: 0x353343)
     var userId = ""
     var collection: CollectionViewController?
-    
-    init(userId: String, presentationAssembly: PresentationAssemblyProtocol,collectionSelf: CollectionViewController?) {
+
+    init(userId: String, presentationAssembly: PresentationAssemblyProtocol, collectionSelf: CollectionViewController?) {
         self.presentationAssembly = presentationAssembly
         self.userId = String("User Login:\n \(userId)")
         self.collection = collectionSelf

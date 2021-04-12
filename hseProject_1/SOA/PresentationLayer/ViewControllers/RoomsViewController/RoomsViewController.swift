@@ -43,7 +43,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     private var resultDatchik: [String: JSON] = [:]
     private var currentRoomData: CurrentRoomData?
     private var switchRoom = false
-    
+
     private var modelAimData: ModelAimDataProtocol?
 //    private var aimRoomScripts: [Int: AimRoomScript] = [:]
 
@@ -63,6 +63,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 
     @IBOutlet weak var peopleInRoom: LabelRightSideCustomClass!
 
+    @IBOutlet weak var ventilateButton: ButtonCustomClass!
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.toolbar.isHidden = false
@@ -80,12 +82,13 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setupCurrentResultAppDatchik()
 //        self.setDefaultValuesForAimParamtrs()
         self.modelAimData?.fetchAimData()
+//        self.ventilateButton.backgroundColor = .white
+//        self.ventilateButton.titleLabel?.textColor = .black
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
             menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: nil))
             menu?.leftSide = true
-//            menu?.enableSwipeToDismissGesture = false
         }
     }
     func createButtonForNavigationController() {
@@ -156,22 +159,27 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
         }
     }
+    var ventilate = 0
     func setupAimData() {
         if self.aimRoomsData.count != self.roomNumbersAndNames.count || self.aimRoomsData.count == 0 {
             self.setDefaultValuesForAimParamtrs()
         } else {
-//            print(self.aimRoomsData.count)
-//            self.aimRoomsData
             let aimData = self.aimRoomsData[self.curentVC - 1]
-//            print("roomId")
-//            print(aimData.key)
             if aimData.value.ch_temp != nil {
                 if let tempChanged = aimData.value.ch_temp {
-//                self.aimTemperature.text = String(aimData.value.temp) + "\(tempChanged)℃"
                     self.aimTemperature.text = "\(tempChanged)℃"
                 }
             } else {
                 self.aimTemperature.text = String(aimData.value.temp) + "℃"
+            }
+            if aimData.value.flow == 1 {
+                ventilate = 1
+                self.ventilateButton.startColor = UIColor(redS: 91, greenS: 128, blueS: 234, alpha: 1)
+                self.ventilateButton.endColor = UIColor(redS: 55, greenS: 181, blueS: 221, alpha: 1)
+                self.ventilateButton.setTitleColor(.white, for: .normal)
+            } else {
+                self.ventilateButton.backgroundColor = .white
+                self.ventilateButton.setTitleColor(UIColor(redS: 155, greenS: 155, blueS: 155), for: .normal)
             }
             self.aimGas.text = String(aimData.value.co2) + "ppm"
             self.aimWet.text = String(aimData.value.humidity) + "%"
@@ -185,7 +193,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         if let tempInt = Int(aimTemperature.text?.prefix(2) ?? "20") {
             print(tempInt)
             print(aimRoomsData[self.curentVC - 1].key)
-            changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt){
+            changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt) {
                 self.modelAimData?.fetchAimData()
             }
         }
@@ -197,7 +205,17 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         if let tempInt = Int(aimTemperature.text?.prefix(2) ?? "20") {
             print(tempInt)
             print(aimRoomsData[self.curentVC - 1].key)
-            changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt){
+            changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt) {
+                self.modelAimData?.fetchAimData()
+            }
+        }
+    }
+    @IBAction func ventilate(_ sender: Any) {
+        if ventilate == 1 {
+            showAlert(title: "Помещение уже проветривается", message: "")
+        } else {
+            let ventilateRoom = VentilateRoom()
+            ventilateRoom.ventilate(rid: aimRoomsData[self.curentVC - 1].key) {
                 self.modelAimData?.fetchAimData()
             }
         }
@@ -261,8 +279,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         minusButton.isEnabled = false
         plusButton.isEnabled = false
     }
-    func showAlert() {
-        let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+    func showAlert(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         self.present(alertVC, animated: true)
     }
@@ -271,8 +289,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 // MARK: - ModelAimDataDelegate
 extension RoomsViewController: ModelAimDataDelegate {
     func setup(result: [Int: AimRoomScript]) {
-        print("res")
-        print(result)
         aimRoomsData = result.sorted(by: { $0.0 < $1.0 })
         self.setupAimData()
     }

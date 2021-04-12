@@ -100,6 +100,7 @@
 		74D3A18125CBF79800333DFD /* DeleteScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D3A18025CBF79800333DFD /* DeleteScript.swift */; };
 		74D65C9325840EC2007588F7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D65C9225840EC2007588F7 /* SignInViewController.swift */; };
 		74D8C3BC258FD93300C46F85 /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D8C3BB258FD93300C46F85 /* CellDelegate.swift */; };
+		74EB9A7C262433CC00919F0E /* VentilateRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB9A7B262433CC00919F0E /* VentilateRoom.swift */; };
 		B9D138C36E79696786777963 /* Pods_IndoorClimateControlSystems.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B2F9E4F819DE1EBBADD153 /* Pods_IndoorClimateControlSystems.framework */; };
 /* End PBXBuildFile section */
 
@@ -202,6 +203,7 @@
 		74D3A18025CBF79800333DFD /* DeleteScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteScript.swift; sourceTree = "<group>"; };
 		74D65C9225840EC2007588F7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		74D8C3BB258FD93300C46F85 /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
+		74EB9A7B262433CC00919F0E /* VentilateRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VentilateRoom.swift; sourceTree = "<group>"; };
 		9D7F6723EEE14063E574AF51 /* Pods-IndoorClimateControlSystems.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.debug.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.debug.xcconfig"; sourceTree = "<group>"; };
 		A13E96CB6CCEDE3D42E9FF22 /* Pods-IndoorClimateControlSystems.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.release.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -499,6 +501,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74EB9A7A262433A800919F0E /* VentilateRoom */,
 				74AF363C261B5517007D5832 /* ChangeTemp */,
 				74AF3637261A3D0D007D5832 /* UpdateScript */,
 				74AF36332619E9D6007D5832 /* CompleteScript */,
@@ -815,6 +818,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		74EB9A7A262433A800919F0E /* VentilateRoom */ = {
+			isa = PBXGroup;
+			children = (
+				74EB9A7B262433CC00919F0E /* VentilateRoom.swift */,
+			);
+			path = VentilateRoom;
+			sourceTree = "<group>";
+		};
 		74F606CA25C80F7B0035E86E /* ScriptFlowCreator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1073,6 +1084,7 @@
 				742822D3258B9FB5008F6524 /* Requests.swift in Sources */,
 				742822F6258CA0FA008F6524 /* ModelRoomsConfig.swift in Sources */,
 				743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */,
+				74EB9A7C262433CC00919F0E /* VentilateRoom.swift in Sources */,
 				742822BE258B97A5008F6524 /* SwiftyParser.swift in Sources */,
 				742822B9258B95A5008F6524 /* ParserProtocol.swift in Sources */,
 				74210C7A25DFFA65002F75E3 /* AimRoomScript.swift in Sources */,

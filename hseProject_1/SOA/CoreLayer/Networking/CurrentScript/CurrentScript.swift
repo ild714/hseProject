@@ -22,7 +22,7 @@ class CurrentScript {
         request.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
         print("cuurent script")
         print(request.description)
-        
+
         URLSession.shared.dataTask(with: request) {data, _, error in
             guard error == nil else {
                 DispatchQueue.main.async {

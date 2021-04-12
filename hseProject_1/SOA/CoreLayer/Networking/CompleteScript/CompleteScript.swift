@@ -11,7 +11,7 @@ import SwiftyJSON
 
 class CompleteScript {
 
-    func getCompleteScript(id: Int,completion: @escaping (Result<JSON, NetworkSensorError>) -> Void) {
+    func getCompleteScript(id: Int, completion: @escaping (Result<JSON, NetworkSensorError>) -> Void) {
         guard let url = URL(string: "https://back.vc-app.ru/dev/script?did=10155&sc_id=\(id)") else {
             return
         }

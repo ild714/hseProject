@@ -173,7 +173,7 @@ class NewScriptViewController: UIViewController {
 //            UserDefaults.standard.set(false, forKey: "edit")
 //            self.delegate?.update()
 //            self.navigationController?.popViewController(animated: true)
-        
+
 //            let alertVC = UIAlertController(title: "Вы не сохранили обновленный сценарий", message: "Хотите сохранить", preferredStyle: .alert)
 //            alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {[weak self]_ in
 //                print(UserDefaults.standard.integer(forKey: "id"))
@@ -233,16 +233,16 @@ class NewScriptViewController: UIViewController {
                 defaults.removeObject(forKey: key)
             }
         }
-        
+
         UserDefaults.standard.set(0 + UserDefaults.standard.integer(forKey: "LastJSON"), forKey: "CurrentJSON")
-        
+
         UserDefaults.standard.set(false, forKey: "edit")
     }
     func showAlertScript() {
         if UserDefaults.standard.bool(forKey: "edit") {
             //exitForTheServer()
         }
-        
+
         self.scriptDraftSave()
         let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнить как черновик?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in

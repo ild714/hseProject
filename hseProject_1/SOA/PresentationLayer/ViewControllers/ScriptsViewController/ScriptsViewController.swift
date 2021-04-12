@@ -42,7 +42,7 @@ class ScriptsViewController: UIViewController {
 
     override func viewDidLoad() {
 //        userDefaultsCleaner()
-        
+
         loadAnimation.startAnimating()
         let group = DispatchGroup()
         group.enter()
@@ -126,7 +126,7 @@ class ScriptsViewController: UIViewController {
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
-        
+
         tableView.reloadData()
         loadAnimation.stopAnimating()
         loadAnimation.isHidden = true
@@ -147,7 +147,7 @@ class ScriptsViewController: UIViewController {
             }
         }
     }
-    func editedScript(json: JSON){
+    func editedScript(json: JSON) {
 //        let count = UserDefaults.standard.integer(forKey: "JSONCount")
 //        if count == 1 {
 //            self.alert(title: "Остался незаполненный черновик", message: "Завершите заполнение черновика")
@@ -172,9 +172,8 @@ class ScriptsViewController: UIViewController {
 extension ScriptsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let myAction1 = UITableViewRowAction(style: .default, title: "Delete") {[weak self] (action, indexPath) in
+        let myAction1 = UITableViewRowAction(style: .default, title: "Delete") {[weak self] (_, indexPath) in
             if indexPath.section == 0 {
-                
 
                     let networkSetScript = DeleteScript()
                 if let key = self?.arrayDict?[indexPath.row].key {
@@ -182,7 +181,7 @@ extension ScriptsViewController: UITableViewDataSource {
                     self?.arrayDict?.remove(at: indexPath.row)
                     }
                     tableView.deleteRows(at: [indexPath], with: .fade)
-                
+
             }
             if indexPath.section == 1 {
                     let defaults = UserDefaults.standard
@@ -197,11 +196,11 @@ extension ScriptsViewController: UITableViewDataSource {
                         }
                     }
                 }
-            
+
         }
-        let myAction2 = UITableViewRowAction(style: .normal, title: "Edit") {[weak self] (action, indexPath) in
+        let myAction2 = UITableViewRowAction(style: .normal, title: "Edit") {[weak self] (_, indexPath) in
             UserDefaults.standard.set(true, forKey: "edit")
-            
+
             let networkCompleteScript = CompleteScript()
             if let key = self?.arrayDict?[indexPath.row].key {
                 UserDefaults.standard.set(key, forKey: "id")
@@ -211,7 +210,7 @@ extension ScriptsViewController: UITableViewDataSource {
                         print("!?!?!")
                         print(result)
                         self?.editedScript(json: result)
-                        
+
 //                        let networkSetScript = DeleteScript()
 //                    if let key = self?.arrayDict?[indexPath.row].key {
 //                            networkSetScript.sentDataScript(scId: key)
@@ -227,7 +226,7 @@ extension ScriptsViewController: UITableViewDataSource {
         }
 
         if indexPath.section == 0 {
-            return [myAction1,myAction2]
+            return [myAction1, myAction2]
         } else {
             return [myAction1]
         }
@@ -236,7 +235,7 @@ extension ScriptsViewController: UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //
 //    }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -302,7 +301,7 @@ extension ScriptsViewController: UITableViewDataSource {
 // MARK: - ScriptsViewController delegate
 extension ScriptsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         if indexPath.section == 0 {
             self.marks = []
             let networkSetScript = NetworkSetScript()
