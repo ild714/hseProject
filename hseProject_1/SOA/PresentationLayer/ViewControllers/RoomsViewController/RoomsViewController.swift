@@ -87,7 +87,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: nil,roomsController: self))
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: nil, roomsController: self))
             menu?.leftSide = true
         }
     }
@@ -275,7 +275,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     @IBOutlet weak var minusButton: ButtonLeftSideCustomClass!
     @IBOutlet weak var plusButton: ButtonRightSideCustomClass!
-    
+
     var isSetDefault = false
     func setDefaultValuesForAimParamtrs() {
         isSetDefault = true

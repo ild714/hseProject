@@ -14,7 +14,7 @@ class LaunchScreenViewController: UIViewController {
         super.viewDidLoad()
 
     }
-    
+
     static func storyboardInstance() -> LaunchScreenViewController? {
         let storyboard = UIStoryboard(name: "LaunchScreenViewController", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? LaunchScreenViewController

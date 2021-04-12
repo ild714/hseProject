@@ -49,11 +49,11 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         collectionView.dataSource = self
         return collectionView
     }()
-    
+
     var launchVCMain: LaunchScreenViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if UserDefaults.standard.bool(forKey: "Log_in") {
             if let launchVC = LaunchScreenViewController.storyboardInstance() {
                 launchVC.modalPresentationStyle = .overFullScreen
@@ -103,7 +103,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: self,roomsController: nil))
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: self, roomsController: nil))
             menu?.leftSide = true
 //            menu?.enableSwipeToDismissGesture = false
         }
@@ -180,7 +180,7 @@ extension CollectionViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
             let currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
-        cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData,launchVC: self.launchVCMain)
+        cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData, launchVC: self.launchVCMain)
 
         return cell
     }

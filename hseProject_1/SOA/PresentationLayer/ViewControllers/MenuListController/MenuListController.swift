@@ -35,7 +35,7 @@ class MenuListController: UITableViewController {
         signInVC.modalPresentationStyle = .fullScreen
         UserDefaults.standard.set(false, forKey: "Log_in")
         self.present(signInVC, animated: true, completion: nil)
-        
+
     }
 
     override func viewDidLoad() {
