@@ -50,8 +50,14 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         return collectionView
     }()
 
+    var launchVCMain: LaunchScreenViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let launchVC = LaunchScreenViewController.storyboardInstance() {
+            launchVC.modalPresentationStyle = .overFullScreen
+            self.navigationController?.present(launchVC, animated: false, completion: nil)
+            launchVCMain = launchVC
+        }
         title = "Все комнаты"
         self.createPageControll()
         self.createGestureRecognizer()
@@ -169,7 +175,7 @@ extension CollectionViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
             let currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
-            cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData)
+        cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData,launchVC: self.launchVCMain)
 
         return cell
     }

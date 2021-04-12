@@ -101,6 +101,8 @@
 		74D65C9325840EC2007588F7 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D65C9225840EC2007588F7 /* SignInViewController.swift */; };
 		74D8C3BC258FD93300C46F85 /* CellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D8C3BB258FD93300C46F85 /* CellDelegate.swift */; };
 		74EB9A7C262433CC00919F0E /* VentilateRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB9A7B262433CC00919F0E /* VentilateRoom.swift */; };
+		74EB9A8226244CE100919F0E /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EB9A8126244CE100919F0E /* LaunchScreenViewController.swift */; };
+		74EB9A8526244D0100919F0E /* LaunchScreenViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74EB9A8426244D0100919F0E /* LaunchScreenViewController.storyboard */; };
 		B9D138C36E79696786777963 /* Pods_IndoorClimateControlSystems.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B2F9E4F819DE1EBBADD153 /* Pods_IndoorClimateControlSystems.framework */; };
 /* End PBXBuildFile section */
 
@@ -204,6 +206,8 @@
 		74D65C9225840EC2007588F7 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		74D8C3BB258FD93300C46F85 /* CellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDelegate.swift; sourceTree = "<group>"; };
 		74EB9A7B262433CC00919F0E /* VentilateRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VentilateRoom.swift; sourceTree = "<group>"; };
+		74EB9A8126244CE100919F0E /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		74EB9A8426244D0100919F0E /* LaunchScreenViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreenViewController.storyboard; sourceTree = "<group>"; };
 		9D7F6723EEE14063E574AF51 /* Pods-IndoorClimateControlSystems.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.debug.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.debug.xcconfig"; sourceTree = "<group>"; };
 		A13E96CB6CCEDE3D42E9FF22 /* Pods-IndoorClimateControlSystems.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndoorClimateControlSystems.release.xcconfig"; path = "Target Support Files/Pods-IndoorClimateControlSystems/Pods-IndoorClimateControlSystems.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -306,6 +310,7 @@
 		740D1E0E25304E3E000253FA /* CollectionViewControllerLogic */ = {
 			isa = PBXGroup;
 			children = (
+				74EB9A8026244CB500919F0E /* CopyLaunchScreen */,
 				74D8C34D258FA22200C46F85 /* DataStructures */,
 				74282344258CE98B008F6524 /* Models */,
 				7428231A258CC5F0008F6524 /* CustomCollectionViewCell */,
@@ -826,6 +831,15 @@
 			path = VentilateRoom;
 			sourceTree = "<group>";
 		};
+		74EB9A8026244CB500919F0E /* CopyLaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				74EB9A8126244CE100919F0E /* LaunchScreenViewController.swift */,
+				74EB9A8426244D0100919F0E /* LaunchScreenViewController.storyboard */,
+			);
+			path = CopyLaunchScreen;
+			sourceTree = "<group>";
+		};
 		74F606CA25C80F7B0035E86E /* ScriptFlowCreator */ = {
 			isa = PBXGroup;
 			children = (
@@ -918,6 +932,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7497523C2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib in Resources */,
+				74EB9A8526244D0100919F0E /* LaunchScreenViewController.storyboard in Resources */,
 				740D1E06252F46BF000253FA /* CollectionViewController.storyboard in Resources */,
 				74BF503225667AD200DE45D1 /* ScriptServiceTableViewCell.xib in Resources */,
 				749752252559707600B88A21 /* CustomTableViewCell.xib in Resources */,
@@ -1041,6 +1056,7 @@
 				748003A224E14457006DEBDE /* ButtonRightSideCustomClass.swift in Sources */,
 				7497523B2559A1E100B88A21 /* ScriptForDaysTableViewCell.swift in Sources */,
 				74282336258CDA35008F6524 /* RequestAppDatchikProtocol.swift in Sources */,
+				74EB9A8226244CE100919F0E /* LaunchScreenViewController.swift in Sources */,
 				742822C7258B9B12008F6524 /* RequestRoomConfigProtocol.swift in Sources */,
 				742822DF258BCDF9008F6524 /* RoomConfigsServiceProtocol.swift in Sources */,
 				742822ED258BDF44008F6524 /* MenuListController.swift in Sources */,

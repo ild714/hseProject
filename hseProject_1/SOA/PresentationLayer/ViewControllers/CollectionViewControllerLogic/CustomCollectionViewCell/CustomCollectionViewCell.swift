@@ -34,7 +34,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
         animation.startAnimating()
     }
 
-    func configure(currentRoomText: String, currentRoom: CurrentRoomData) {
+    func configure(currentRoomText: String, currentRoom: CurrentRoomData, launchVC: LaunchScreenViewController?) {
         if currentRoom.cellWet.isEmpty == true {
             tempImage.isHidden = true
             wetImage.isHidden = true
@@ -51,6 +51,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
             tempImage.isHidden = false
             wetImage.isHidden = false
             co2Image.isHidden = false
+            if let launchVC = launchVC {
+                launchVC.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }
