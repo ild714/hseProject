@@ -34,7 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, GIDSignInDelegate {
                     self.window?.makeKeyAndVisible()
                 }
             } else {
-
                 let signInVC = SignInViewController(rootAssembly: rootAssembly)
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()

@@ -87,7 +87,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: nil))
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: nil,roomsController: self))
             menu?.leftSide = true
         }
     }
@@ -215,8 +215,12 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             showAlert(title: "Помещение уже проветривается", message: "")
         } else {
             let ventilateRoom = VentilateRoom()
-            ventilateRoom.ventilate(rid: aimRoomsData[self.curentVC - 1].key) {
-                self.modelAimData?.fetchAimData()
+            if isSetDefault {
+            } else {
+                ventilateRoom.ventilate(rid: aimRoomsData[self.curentVC - 1].key) {
+                    self.modelAimData?.fetchAimData()
+                }
+                self.ventilateButton.isEnabled = false
             }
         }
     }
@@ -271,13 +275,17 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
     @IBOutlet weak var minusButton: ButtonLeftSideCustomClass!
     @IBOutlet weak var plusButton: ButtonRightSideCustomClass!
+    
+    var isSetDefault = false
     func setDefaultValuesForAimParamtrs() {
+        isSetDefault = true
         self.aimTemperature.text = "-"
         self.aimWet.text = "-"
         self.aimGas.text = "-"
         ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
         minusButton.isEnabled = false
         plusButton.isEnabled = false
+        self.ventilateButton.isEnabled = false
     }
     func showAlert(title: String, message: String) {
         let alertVC = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -296,5 +304,13 @@ extension RoomsViewController: ModelAimDataDelegate {
     func show3(error message: String) {
         print(message.description)
         self.setDefaultValuesForAimParamtrs()
+    }
+}
+
+// MARK: - CollectionUpdate
+extension RoomsViewController: RoomsViewUpdate {
+    func update() {
+//        self.modelAimData?.fetchAimData()
+        self.menu?.dismiss(animated: true, completion: nil)
     }
 }

@@ -12,6 +12,9 @@ import SwiftyJSON
 protocol CollectionUpdate: class {
     func update()
 }
+protocol RoomsViewUpdate: class {
+    func update()
+}
 
 class ScriptsViewController: UIViewController {
 
@@ -25,6 +28,7 @@ class ScriptsViewController: UIViewController {
         super.init(coder: coder)
     }
     weak var delegate: CollectionUpdate?
+    weak var delegateRoomsView: RoomsViewController?
     let headerTitles = ["Заполненные сценарии", "Черновик"]
     private var presentationAssembly: PresentationAssemblyProtocol?
     var safeArea: UILayoutGuide!
@@ -66,6 +70,7 @@ class ScriptsViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         self.delegate?.update()
+        self.delegateRoomsView?.update()
     }
     func userDefaultsCleaner() {
         let defaults = UserDefaults.standard

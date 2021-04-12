@@ -37,7 +37,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
                 let newUser = NewUser()
                 newUser.newUser()
             }
-            UserDefaults.standard.set(true, forKey: "Log_in")
+//            UserDefaults.standard.set(true, forKey: "Log_in")
             if let collectionViewController = rootAssembly?.presentationAssembly.collectionViewController() {
                 let storyboard: UIStoryboard = UIStoryboard(name: "CollectionViewController", bundle: nil)
                 let navigationController = storyboard.instantiateInitialViewController() as? UINavigationController

@@ -14,11 +14,13 @@ class MenuListController: UITableViewController {
     var customColor = UIColor(rgb: 0x353343)
     var userId = ""
     var collection: CollectionViewController?
+    var roomsController: RoomsViewController?
 
-    init(userId: String, presentationAssembly: PresentationAssemblyProtocol, collectionSelf: CollectionViewController?) {
+    init(userId: String, presentationAssembly: PresentationAssemblyProtocol, collectionSelf: CollectionViewController?, roomsController: RoomsViewController?) {
         self.presentationAssembly = presentationAssembly
         self.userId = String("User Login:\n \(userId)")
         self.collection = collectionSelf
+        self.roomsController = roomsController
         super.init(nibName: nil, bundle: nil)
     }
     required init?(coder: NSCoder) {
@@ -33,7 +35,7 @@ class MenuListController: UITableViewController {
         signInVC.modalPresentationStyle = .fullScreen
         UserDefaults.standard.set(false, forKey: "Log_in")
         self.present(signInVC, animated: true, completion: nil)
-
+        
     }
 
     override func viewDidLoad() {
@@ -84,8 +86,9 @@ class MenuListController: UITableViewController {
         if let scriptsVC = presentationAssembly?.scriptsViewController() {
             let navigationController = UINavigationController()
             navigationController.viewControllers = [scriptsVC]
-            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//            navigationController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
             scriptsVC.delegate = self.collection
+            scriptsVC.delegateRoomsView = self.roomsController
             present(navigationController, animated: true, completion: nil)
         }
     }

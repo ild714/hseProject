@@ -49,14 +49,19 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         collectionView.dataSource = self
         return collectionView
     }()
-
+    
     var launchVCMain: LaunchScreenViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let launchVC = LaunchScreenViewController.storyboardInstance() {
-            launchVC.modalPresentationStyle = .overFullScreen
-            self.navigationController?.present(launchVC, animated: false, completion: nil)
-            launchVCMain = launchVC
+        
+        if UserDefaults.standard.bool(forKey: "Log_in") {
+            if let launchVC = LaunchScreenViewController.storyboardInstance() {
+                launchVC.modalPresentationStyle = .overFullScreen
+                self.navigationController?.present(launchVC, animated: false, completion: nil)
+                launchVCMain = launchVC
+            }
+        } else {
+            UserDefaults.standard.set(true, forKey: "Log_in")
         }
         title = "Все комнаты"
         self.createPageControll()
@@ -98,7 +103,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
-            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: self))
+            menu = SideMenuNavigationController(rootViewController: MenuListController(userId: self.userId, presentationAssembly: presentationAssembly, collectionSelf: self,roomsController: nil))
             menu?.leftSide = true
 //            menu?.enableSwipeToDismissGesture = false
         }
@@ -259,5 +264,6 @@ extension CollectionViewController: ModelAimDataDelegate {
 extension CollectionViewController: CollectionUpdate {
     func update() {
         self.modelAimData?.fetchAimData()
+        self.menu?.dismiss(animated: true, completion: nil)
     }
 }
