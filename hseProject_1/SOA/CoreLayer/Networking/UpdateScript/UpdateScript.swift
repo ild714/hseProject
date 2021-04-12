@@ -11,8 +11,7 @@ import SwiftyJSON
 
 class UpdateScript {
     func sentUpdateDataScript(script: JSON) {
-        print("?///?")
-        print(script)
+        
         guard let url = URL(string: "https://back.vc-app.ru/app/update_script") else {
             return
         }
@@ -20,7 +19,7 @@ class UpdateScript {
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue(authorizationToken(), forHTTPHeaderField: "Authorization")
-        print(request.description)
+
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(script) {
             request.httpBody = data
@@ -32,9 +31,6 @@ class UpdateScript {
 
                 if let data = data {
                     if let data = String(bytes: data, encoding: .utf8) {
-                        print("!")
-                        print(data)
-                        print("!")
                     }
                 } else {
                     print("badData for script")

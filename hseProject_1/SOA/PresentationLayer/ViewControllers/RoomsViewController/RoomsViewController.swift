@@ -18,14 +18,16 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
           curentVC: Int,
           roomNumbersAndNames: [Int: String],
           resultDatchik: [String: JSON],
-          currentRoomData: CurrentRoomData?, aimData: [(key: Int, value: AimRoomScript)]) {
+          currentRoomData: CurrentRoomData?,
+          modelAimData: ModelAimDataProtocol) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
         self.curentVC = curentVC
         self.roomNumbersAndNames = roomNumbersAndNames
         self.resultDatchik = resultDatchik
         self.currentRoomData = currentRoomData
-        self.aimRoomsData = aimData
+//        self.aimRoomsData = aimData
+        self.modelAimData = modelAimData
         super.init(coder: coder)
     }
 
@@ -41,6 +43,9 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     private var resultDatchik: [String: JSON] = [:]
     private var currentRoomData: CurrentRoomData?
     private var switchRoom = false
+    
+    private var modelAimData: ModelAimDataProtocol?
+//    private var aimRoomScripts: [Int: AimRoomScript] = [:]
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var stackViewCO2: UIStackView!
@@ -74,7 +79,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setupGesturesForRoomNumbersAndNames()
         self.setupCurrentResultAppDatchik()
 //        self.setDefaultValuesForAimParamtrs()
-        self.setupAimData()
+        self.modelAimData?.fetchAimData()
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
@@ -155,9 +160,19 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         if self.aimRoomsData.count != self.roomNumbersAndNames.count || self.aimRoomsData.count == 0 {
             self.setDefaultValuesForAimParamtrs()
         } else {
-            print(self.aimRoomsData.count)
+//            print(self.aimRoomsData.count)
+//            self.aimRoomsData
             let aimData = self.aimRoomsData[self.curentVC - 1]
-            self.aimTemperature.text = String(aimData.value.temp) + "℃"
+//            print("roomId")
+//            print(aimData.key)
+            if aimData.value.ch_temp != nil {
+                if let tempChanged = aimData.value.ch_temp {
+//                self.aimTemperature.text = String(aimData.value.temp) + "\(tempChanged)℃"
+                    self.aimTemperature.text = "\(tempChanged)℃"
+                }
+            } else {
+                self.aimTemperature.text = String(aimData.value.temp) + "℃"
+            }
             self.aimGas.text = String(aimData.value.co2) + "ppm"
             self.aimWet.text = String(aimData.value.humidity) + "%"
             ActivityIndicator.stopAnimating(views: [self.aimTemperature, self.aimWet, self.aimGas])
@@ -165,12 +180,27 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
     }
 
     @IBAction func minusTemperature(_ sender: Any) {
-//        minusButton.tintColor = .cyan
+        let changeTemp = ChangeTemp()
         self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
+        if let tempInt = Int(aimTemperature.text?.prefix(2) ?? "20") {
+            print(tempInt)
+            print(aimRoomsData[self.curentVC - 1].key)
+            changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt){
+                self.modelAimData?.fetchAimData()
+            }
+        }
     }
 
     @IBAction func plusTemperature(_ sender: Any) {
+        let changeTemp = ChangeTemp()
         self.aimTemperature.text = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "15℃"
+        if let tempInt = Int(aimTemperature.text?.prefix(2) ?? "20") {
+            print(tempInt)
+            print(aimRoomsData[self.curentVC - 1].key)
+            changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt){
+                self.modelAimData?.fetchAimData()
+            }
+        }
     }
 
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
@@ -183,7 +213,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
                                                                            roomNumbersAndNames: self.roomNumbersAndNames,
                                                                            resultDatchik: self.resultDatchik,
                                                                            currentRoomData:
-                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC]), aimRoom: aimRoomsData) {
+                                                                            CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])) {
                     navigationController?.pushViewController(roomsVC, animated: true)
                 }
             case .up:
@@ -235,5 +265,20 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         self.present(alertVC, animated: true)
+    }
+}
+
+// MARK: - ModelAimDataDelegate
+extension RoomsViewController: ModelAimDataDelegate {
+    func setup(result: [Int: AimRoomScript]) {
+        print("res")
+        print(result)
+        aimRoomsData = result.sorted(by: { $0.0 < $1.0 })
+        self.setupAimData()
+    }
+
+    func show3(error message: String) {
+        print(message.description)
+        self.setDefaultValuesForAimParamtrs()
     }
 }

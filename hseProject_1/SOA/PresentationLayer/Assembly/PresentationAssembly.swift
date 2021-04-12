@@ -11,7 +11,7 @@ import SwiftyJSON
 
 protocol PresentationAssemblyProtocol {
     func collectionViewController() -> CollectionViewController?
-    func roomsViewController(curentVC: Int, roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?, aimRoom: [(key: Int, value: AimRoomScript)]) -> RoomsViewController?
+    func roomsViewController(curentVC: Int, roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?) -> RoomsViewController?
     func scriptsViewController() -> ScriptsViewController?
     func newScriptViewController(scriptCreator: JSON) -> NewScriptViewController?
     func scriptForRoomViewController(scriptCreator: JSON, roomNumbers: [Int]) -> ScriptForRoomViewController?
@@ -28,16 +28,15 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         return storyboard.instantiateViewController(identifier: "CollectionViewController", creator: { coder in
             let modelRoomsConfig = self.modelRoomsConfig()
             var modelAppDatchik = self.modelAppDatchik()
-            var modelAimData = self.modelAimData()
+//            var modelAimData = self.modelAimData()
             if let userEmail = UserDefaults.standard.object(forKey: "UserEmail") as? String {
                 let collectionVC =  CollectionViewController(
                     coder: coder,
                     presentationAssembly: self,
                     userId: userEmail,
                     modelRoomsConfig: modelRoomsConfig,
-                    modelRoomDatchik: modelAppDatchik,
-                    modelAimData: modelAimData)
-                modelAimData.delegate = collectionVC
+                    modelRoomDatchik: modelAppDatchik)
+//                modelAimData.delegate = collectionVC
                 modelRoomsConfig.delegate = collectionVC
                 modelAppDatchik.delegate = collectionVC
                 return collectionVC
@@ -47,8 +46,9 @@ class PresentationAssembly: PresentationAssemblyProtocol {
         })
     }
 
-    func roomsViewController(curentVC: Int, roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?, aimRoom: [(key: Int, value: AimRoomScript)]) -> RoomsViewController? {
+    func roomsViewController(curentVC: Int, roomNumbersAndNames: [Int: String], resultDatchik: [String: JSON], currentRoomData: CurrentRoomData?) -> RoomsViewController? {
         let storyboard = UIStoryboard(name: "RoomsViewController", bundle: nil)
+        var modelAimData = self.modelAimData()
         return storyboard.instantiateViewController(identifier: "RoomsViewController", creator: { coder in
             if let userId = UserDefaults.standard.object(forKey: "UserEmail") as? String {
                 let roomsVC =  RoomsViewController(coder: coder,
@@ -58,7 +58,8 @@ class PresentationAssembly: PresentationAssemblyProtocol {
                                                    roomNumbersAndNames: roomNumbersAndNames,
                                                    resultDatchik: resultDatchik,
                                                    currentRoomData: currentRoomData,
-                                                   aimData: aimRoom)
+                                                   modelAimData: modelAimData)
+                modelAimData.delegate = roomsVC
                 return roomsVC
             } else {
                 return nil

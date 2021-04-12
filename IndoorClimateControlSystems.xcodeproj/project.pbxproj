@@ -88,6 +88,7 @@
 		74A551B0256BF7F200A562FB /* GradientExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A551AF256BF7F200A562FB /* GradientExtension.swift */; };
 		74AF36352619EA0D007D5832 /* CompleteScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF36342619EA0D007D5832 /* CompleteScript.swift */; };
 		74AF3639261A3D67007D5832 /* UpdateScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF3638261A3D67007D5832 /* UpdateScript.swift */; };
+		74AF363E261B5528007D5832 /* ChangeTemp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74AF363D261B5528007D5832 /* ChangeTemp.swift */; };
 		74B5E814257D312100483972 /* Script.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E813257D312000483972 /* Script.swift */; };
 		74B5E816257D316F00483972 /* NetworkScript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E815257D316F00483972 /* NetworkScript.swift */; };
 		74B5E818257D339600483972 /* ScriptCreater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B5E817257D339600483972 /* ScriptCreater.swift */; };
@@ -189,6 +190,7 @@
 		74A551AF256BF7F200A562FB /* GradientExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientExtension.swift; sourceTree = "<group>"; };
 		74AF36342619EA0D007D5832 /* CompleteScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteScript.swift; sourceTree = "<group>"; };
 		74AF3638261A3D67007D5832 /* UpdateScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScript.swift; sourceTree = "<group>"; };
+		74AF363D261B5528007D5832 /* ChangeTemp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeTemp.swift; sourceTree = "<group>"; };
 		74B5E813257D312000483972 /* Script.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Script.swift; sourceTree = "<group>"; };
 		74B5E815257D316F00483972 /* NetworkScript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkScript.swift; sourceTree = "<group>"; };
 		74B5E817257D339600483972 /* ScriptCreater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCreater.swift; sourceTree = "<group>"; };
@@ -497,6 +499,7 @@
 		74282325258CC9A6008F6524 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				74AF363C261B5517007D5832 /* ChangeTemp */,
 				74AF3637261A3D0D007D5832 /* UpdateScript */,
 				74AF36332619E9D6007D5832 /* CompleteScript */,
 				74210CA325E18EA1002F75E3 /* NewUser */,
@@ -693,6 +696,14 @@
 				74AF3638261A3D67007D5832 /* UpdateScript.swift */,
 			);
 			path = UpdateScript;
+			sourceTree = "<group>";
+		};
+		74AF363C261B5517007D5832 /* ChangeTemp */ = {
+			isa = PBXGroup;
+			children = (
+				74AF363D261B5528007D5832 /* ChangeTemp.swift */,
+			);
+			path = ChangeTemp;
 			sourceTree = "<group>";
 		};
 		74B5E812257D30F700483972 /* ScriptStructures */ = {
@@ -1032,6 +1043,7 @@
 				740D1E00252F4097000253FA /* CollectionViewController.swift in Sources */,
 				7497522725597D6100B88A21 /* ScriptsViewController.swift in Sources */,
 				74B5E818257D339600483972 /* ScriptCreater.swift in Sources */,
+				74AF363E261B5528007D5832 /* ChangeTemp.swift in Sources */,
 				7497523425599B6F00B88A21 /* ScriptForRoomTableViewCell.swift in Sources */,
 				74282347258CEA07008F6524 /* ModelRoomsConfigProtocol.swift in Sources */,
 				74BB126325C9053200C51F1D /* ModelAppDatchikProtocol.swift in Sources */,
@@ -1231,7 +1243,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;
@@ -1254,7 +1266,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;

@@ -111,7 +111,7 @@ class ScriptsViewController: UIViewController {
         tableView.register(UINib(nibName: String(describing: CustomTableViewCell.self), bundle: nil), forCellReuseIdentifier: cellIdentifier)
         tableView.dataSource = self
         tableView.delegate = self
-//        tableView.separatorStyle = .none
+        tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.init(rgb: 0xf2f2f2)
         return tableView
     }()

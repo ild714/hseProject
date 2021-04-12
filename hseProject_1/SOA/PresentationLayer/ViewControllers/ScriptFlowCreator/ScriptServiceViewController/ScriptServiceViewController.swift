@@ -128,7 +128,7 @@ class ScriptServiceViewController: UIViewController {
                                 
                                 let formatter = DateFormatter()
                                 formatter.dateFormat = "HH:mm"
-//                                time = formatter.date(from: data.1.description) ?? Date()
+                                time = formatter.date(from: data.1.description) ?? Date()
                                 print("time!")
                                 print(data.1.stringValue)
 //                                print(formatter.date(from: data.1.stringValue)!)
@@ -143,7 +143,7 @@ class ScriptServiceViewController: UIViewController {
                             }
                         }
                         print(temp)
-                        self.serviceScripts.append(ServiceScript(time: Date(), temperature: temp, humidity: hum, co2: co2, radiatorOn: true, hotFloorOn: true, humidifierOn: true, conditionerOn: true, co2OnOff: true, soundOnOff: true, houseOnOff: at_home_bool))
+                        self.serviceScripts.append(ServiceScript(time: time, temperature: temp, humidity: hum, co2: co2, radiatorOn: true, hotFloorOn: true, humidifierOn: true, conditionerOn: true, co2OnOff: true, soundOnOff: true, houseOnOff: at_home_bool))
                     }
                 }
             }

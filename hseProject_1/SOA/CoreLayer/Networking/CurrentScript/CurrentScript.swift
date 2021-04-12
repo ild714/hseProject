@@ -20,7 +20,9 @@ class CurrentScript {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
-
+        print("cuurent script")
+        print(request.description)
+        
         URLSession.shared.dataTask(with: request) {data, _, error in
             guard error == nil else {
                 DispatchQueue.main.async {
@@ -35,10 +37,14 @@ class CurrentScript {
                             temp: data["temp"].intValue,
                             co2: data["co2"].intValue,
                             humidity: data["humidity"].intValue,
-                            ch_temp: nil,
+                            ch_temp: data["ch_temp"].intValue,
                             flow: data["flow"].intValue)
+                        print("current scripts data")
+                        print(self.currentScripts)
                     }
-                    completion(.success(self.currentScripts))
+                    DispatchQueue.main.async {
+                        completion(.success(self.currentScripts))
+                    }
                 } else {
                     DispatchQueue.main.async {
                         completion(.failure(.badEncodingJSON))

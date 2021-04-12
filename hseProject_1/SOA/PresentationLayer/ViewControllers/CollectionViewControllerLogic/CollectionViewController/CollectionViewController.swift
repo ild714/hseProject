@@ -12,12 +12,12 @@ import SideMenu
 import GoogleSignIn
 
 class CollectionViewController: UIViewController, ToolBarWithPageControllProtocol {
-    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, modelRoomsConfig: ModelRoomsConfigProtocol, modelRoomDatchik: ModelAppDatchikProtocol, modelAimData: ModelAimDataProtocol) {
+    init?(coder: NSCoder, presentationAssembly: PresentationAssemblyProtocol, userId: String, modelRoomsConfig: ModelRoomsConfigProtocol, modelRoomDatchik: ModelAppDatchikProtocol) {
         self.presentationAssembly = presentationAssembly
         self.userId = userId
         self.modelRoomsConfig = modelRoomsConfig
         self.modelRoomDatchik = modelRoomDatchik
-        self.modelAimData = modelAimData
+//        self.modelAimData = modelAimData
         super.init(coder: coder)
     }
 
@@ -60,10 +60,10 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         self.setColorForNavigationController()
         self.modelRoomsConfig?.fetchRoomConfig()
         self.loadAppDatchik()
-        self.modelAimData?.fetchAimData()
+//        self.modelAimData?.fetchAimData()
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.modelAimData?.fetchAimData()
+//        self.modelAimData?.fetchAimData()
     }
     func loadAppDatchik() {
         modelRoomDatchik?.fetchAppDatchik(type: .current) { (result: [String: JSON]) in
@@ -123,7 +123,7 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
                                                                                roomNumbersAndNames: self.roomNumbersAndNames,
                                                                                resultDatchik: self.resultDatchik,
                                                                                currentRoomData:
-                                                                                CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC]), aimRoom: Array(self.aimRoomScripts)) {
+                                                                                CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC])) {
                         navigationController?.pushViewController(roomsVC, animated: true)
                     }
                 }
@@ -178,7 +178,7 @@ extension CollectionViewController: UICollectionViewDataSource {
         if let roomsVC = presentationAssembly?.roomsViewController(curentVC: indexPath.row + 1,
                                                                    roomNumbersAndNames: self.roomNumbersAndNames,
                                                                    resultDatchik: self.resultDatchik,
-                                                                   currentRoomData: CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row]), aimRoom: Array(self.aimRoomScripts)) {
+                                                                   currentRoomData: CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])) {
             navigationController?.pushViewController(roomsVC, animated: true)
         }
     }
