@@ -51,9 +51,9 @@ class CustomCollectionViewCell: UICollectionViewCell {
             tempImage.isHidden = false
             wetImage.isHidden = false
             co2Image.isHidden = false
-            if let launchVC = launchVC {
-                launchVC.dismiss(animated: true, completion: nil)
-            }
+//            if let launchVC = launchVC {
+//                launchVC.dismiss(animated: true, completion: nil)
+//            }
         }
     }
 }

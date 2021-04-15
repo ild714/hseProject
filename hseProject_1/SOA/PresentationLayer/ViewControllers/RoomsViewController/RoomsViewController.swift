@@ -82,8 +82,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setupCurrentResultAppDatchik()
 //        self.setDefaultValuesForAimParamtrs()
         self.modelAimData?.fetchAimData()
-//        self.ventilateButton.backgroundColor = .white
-//        self.ventilateButton.titleLabel?.textColor = .black
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
@@ -143,7 +141,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.setTitleAndPageControll()
     }
     func setTitleAndPageControll() {
-        self.title = Array(self.roomNumbersAndNames.values.sorted())[self.curentVC - 1]
+        let keyId = Array(self.roomNumbersAndNames.keys.sorted())[self.curentVC - 1]
+        self.title = self.roomNumbersAndNames[keyId] ?? "No value"
         self.createPageControll()
     }
     func createPageControll() {

@@ -54,15 +54,15 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UserDefaults.standard.bool(forKey: "Log_in") {
-            if let launchVC = LaunchScreenViewController.storyboardInstance() {
-                launchVC.modalPresentationStyle = .overFullScreen
-                self.navigationController?.present(launchVC, animated: false, completion: nil)
-                launchVCMain = launchVC
-            }
-        } else {
-            UserDefaults.standard.set(true, forKey: "Log_in")
-        }
+//        if UserDefaults.standard.bool(forKey: "Log_in") {
+//            if let launchVC = LaunchScreenViewController.storyboardInstance() {
+//                launchVC.modalPresentationStyle = .overFullScreen
+//                self.navigationController?.present(launchVC, animated: false, completion: nil)
+//                launchVCMain = launchVC
+//            }
+//        } else {
+//            UserDefaults.standard.set(true, forKey: "Log_in")
+//        }
         title = "Все комнаты"
         self.createPageControll()
         self.createGestureRecognizer()
@@ -179,9 +179,15 @@ extension CollectionViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
+        print("cuurent")
+        let keyId = Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row]
             let currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
-        cell.configure(currentRoomText: Array(self.roomNumbersAndNames.values.sorted())[indexPath.row], currentRoom: currentRoomData, launchVC: self.launchVCMain)
+        cell.configure(currentRoomText: self.roomNumbersAndNames[keyId] ?? "No value", currentRoom: currentRoomData, launchVC: self.launchVCMain)
 
+//        if let launchVCMain = launchVCMain {
+//            launchVCMain.dismiss(animated: true, completion: nil)
+//        }
+        
         return cell
     }
 
@@ -212,9 +218,21 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - ModelRoomsConfigDelegate
 extension CollectionViewController: ModelRoomsConfigDelegate {
+    // Sort inputted dictionary with keys alphabetically.
+//    func sortWithKeys(_ dict: [Int: String]) -> [Int: String] {
+//        let sorted = dict.sorted(by: { $0.key > $1.key })
+//        var newDict: [Int: String] = [:]
+//        for sortedDict in sorted {
+//            newDict[sortedDict.key] = sortedDict.value
+//        }
+//        print("reess")
+//        print(newDict)
+//        return newDict
+//    }
+    
     func setup(result: [Int: String]) {
+        
         self.roomNumbersAndNames = result
-//        print(roomNumbersAndNames.count,"!!!")
         UserDefaults.standard.set(roomNumbersAndNames.count, forKey: "RoomsCount")
         self.createPageControll()
         self.collectionView.reloadData()
