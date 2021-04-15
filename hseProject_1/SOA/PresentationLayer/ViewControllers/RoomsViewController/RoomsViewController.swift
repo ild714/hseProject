@@ -159,6 +159,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         }
     }
     var ventilate = 0
+    var chNotNil = false
     func setupAimData() {
         if self.aimRoomsData.count != self.roomNumbersAndNames.count || self.aimRoomsData.count == 0 {
             self.setDefaultValuesForAimParamtrs()
@@ -166,7 +167,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             let aimData = self.aimRoomsData[self.curentVC - 1]
             if aimData.value.ch_temp != nil {
                 if let tempChanged = aimData.value.ch_temp {
-                    self.aimTemperature.text = "\(tempChanged)℃"
+//                    chNotNil = true
+                    self.aimTemperature.text = "\(tempChanged)/\(String(aimData.value.temp))℃"
                 }
             } else {
                 self.aimTemperature.text = String(aimData.value.temp) + "℃"
@@ -188,10 +190,9 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 
     @IBAction func minusTemperature(_ sender: Any) {
         let changeTemp = ChangeTemp()
-        self.aimTemperature.text = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
-        if let tempInt = Int(aimTemperature.text?.prefix(2) ?? "20") {
-            print(tempInt)
-            print(aimRoomsData[self.curentVC - 1].key)
+        
+        let aimTempCopy = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
+        if let tempInt = Int(aimTempCopy.prefix(2) ) {
             changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt) {
                 self.modelAimData?.fetchAimData()
             }
@@ -200,8 +201,8 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 
     @IBAction func plusTemperature(_ sender: Any) {
         let changeTemp = ChangeTemp()
-        self.aimTemperature.text = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "15℃"
-        if let tempInt = Int(aimTemperature.text?.prefix(2) ?? "20") {
+        let aimTempCopy = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "15℃"
+        if let tempInt = Int(aimTempCopy.prefix(2)) {
             print(tempInt)
             print(aimRoomsData[self.curentVC - 1].key)
             changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt) {
