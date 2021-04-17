@@ -1271,7 +1271,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.2;
+				MARKETING_VERSION = 1.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;
@@ -1294,7 +1294,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.2;
+				MARKETING_VERSION = 1.5.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nigmetzyanov.IndoorClimateControlSystems;
 				PRODUCT_NAME = IndoorClimateControlSystems;
 				SWIFT_VERSION = 5.0;

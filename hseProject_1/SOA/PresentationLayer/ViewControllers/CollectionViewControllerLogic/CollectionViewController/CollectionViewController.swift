@@ -53,15 +53,15 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UserDefaults.standard.bool(forKey: "Log_in") {
-            if let launchVC = LaunchScreenViewController.storyboardInstance() {
-                launchVC.modalPresentationStyle = .overFullScreen
-                self.navigationController?.present(launchVC, animated: false, completion: nil)
-                launchVCMain = launchVC
-            }
-        } else {
-            UserDefaults.standard.set(true, forKey: "Log_in")
-        }
+//        if UserDefaults.standard.bool(forKey: "Log_in") {
+//            if let launchVC = LaunchScreenViewController.storyboardInstance() {
+//                launchVC.modalPresentationStyle = .overFullScreen
+//                self.navigationController?.present(launchVC, animated: false, completion: nil)
+//                launchVCMain = launchVC
+//            }
+//        } else {
+//            UserDefaults.standard.set(true, forKey: "Log_in")
+//        }
         title = "Все комнаты"
         self.createPageControll()
         self.createGestureRecognizer()
@@ -181,9 +181,9 @@ extension CollectionViewController: UICollectionViewDataSource {
             let currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
         cell.configure(currentRoomText: self.roomNumbersAndNames[keyId] ?? "No value", currentRoom: currentRoomData, launchVC: self.launchVCMain)
 
-        if let launchVCMain = launchVCMain {
-            launchVCMain.dismiss(animated: true, completion: nil)
-        }
+//        if let launchVCMain = launchVCMain {
+//            launchVCMain.dismiss(animated: true, completion: nil)
+//        }
         
         return cell
     }
