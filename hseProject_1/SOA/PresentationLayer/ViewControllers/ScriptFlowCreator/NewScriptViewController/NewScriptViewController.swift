@@ -33,8 +33,6 @@ class NewScriptViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("!!!!!")
-        print(scriptCreator)
         configureKeyboard()
         configureTextField()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Дальше", style: .plain, target: self, action: #selector(roomsGroup))
@@ -115,7 +113,6 @@ class NewScriptViewController: UIViewController {
             }
         }
     }
-
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0

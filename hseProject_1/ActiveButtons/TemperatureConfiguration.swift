@@ -15,22 +15,18 @@ class TemperatureConfig {
         var aimTmperatureIntResult = 0
 
         if let aimTemperatureInt = Int(String(string.prefix(2))) {
-
             if aimTemperatureInt <= 15 {
                 return nil
             }
-
             aimTmperatureIntResult = aimTemperatureInt
         } else {
             if let aimTemperatureInt = Int(String(string.prefix(1))) {
-
                 if aimTemperatureInt <= 15 {
                     return nil
                 }
                 aimTmperatureIntResult = aimTemperatureInt
             }
         }
-
         return String(aimTmperatureIntResult - 1) + "℃"
     }
 
@@ -38,19 +34,15 @@ class TemperatureConfig {
         var aimTmperatureIntResult = 0
 
         if let aimTemperatureInt = Int(String(string.prefix(2))) {
-
             if aimTemperatureInt >= 30 {
                 return nil
             }
-
             aimTmperatureIntResult = aimTemperatureInt
         } else {
             if let aimTemperatureInt = Int(String(string.prefix(1))) {
-
                 aimTmperatureIntResult = aimTemperatureInt
             }
         }
-
         return String(aimTmperatureIntResult + 1) + "℃"
     }
 }

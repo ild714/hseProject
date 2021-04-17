@@ -57,19 +57,19 @@ class ScriptServiceViewController: UIViewController {
     private var selectedIndex: Int?
     private var selectedIndexChoosed = false
     var cleanColor = false
+    var hightConstraints: NSLayoutConstraint!
+    var lowConstraints: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("!!!!!")
-        print(self.scriptCreator.dictionary)
+        settingCreator.isHidden = true
         configureKeyboard()
         downloadDataScripts()
-        print("service!!!")
-        print(serviceScripts)
         humidityTextField.delegate = self
         co2TextField.delegate = self
         temperatureTextField.delegate = self
         setupNavigationVC()
         setupTableView()
+        changeConstraintsLow()
     }
     func configureKeyboard() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -445,9 +445,7 @@ class ScriptServiceViewController: UIViewController {
             scriptCreator["roomGroup\(self.previousRoomId)"]["dayGroup\(self.previousDayId)"]["setting\(serviceScriptNumber)"]["dont_use"] = JSON(setting.dont_use)
         }
     }
-
-    @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
-    @IBAction func addScript(_ sender: Any) {
+    @IBAction func saveSetting(_ sender: Any) {
         self.selectedIndex = nil
 
         var serviceScript = ServiceScript()
@@ -507,26 +505,63 @@ class ScriptServiceViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    @IBAction func closeSetting(_ sender: Any) {
+        settingCreator.isHidden = true
+//        hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
+        if hightConstraints1 != nil {
+            hightConstraints1.isActive = false
+        }
+        if hightConstraints != nil {
+            hightConstraints.isActive = true
+        }
+//        changeConstraintsLow()
+    }
+    var hightConstraints1: NSLayoutConstraint!
+    @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
+    @IBAction func addScript(_ sender: Any) {
+//        changeConstraintsHigh()
+        hightConstraints1 = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
+//        self.reloadInputViews()
+//        self.updateViewConstraints()
+        if hightConstraints != nil {
+            hightConstraints.isActive = false
+        }
+        hightConstraints1.isActive = true
+//        settingCreator.layoutIfNeeded()
+        settingCreator.isHidden = false
+    }
 
-    var hightConstraints: NSLayoutConstraint!
-    var lowConstraints: NSLayoutConstraint!
+    
     func changeConstraintsHigh() {
-        closeButtonOrEditButton.isHidden = true
-        closeButtonOrEditButton.alpha = 0.0
-        hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
+//        closeButtonOrEditButton.isHidden = true
+//        closeButtonOrEditButton.alpha = 0.0
         lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
         hightConstraints.isActive = false
         lowConstraints.isActive = true
+        self.reloadInputViews()
     }
     func changeConstraintsLow() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-            self.closeButtonOrEditButton.alpha = 1.0 // Here you will get the animation you want
-        }, completion: { _ in
-            self.closeButtonOrEditButton.isHidden = false// Here you hide it when animation done
-        })
+        hightConstraints = tableView.bottomAnchor.constraint(equalTo: closeButtonOrEditButton.topAnchor, constant: -15)
+//        lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
+        if lowConstraints != nil {
+            lowConstraints.isActive = false
+        }
+//        lowConstraints.isActive = false
+        if hightConstraints != nil {
+            hightConstraints.isActive = true
+        }
+//        self.closeButtonOrEditButton.alpha = 1.0
 //        closeButtonOrEditButton.isHidden = false
-        hightConstraints.isActive = true
-        lowConstraints.isActive = false
+//        UIView.animate(withDuration: 3, delay: 0, options: [], animations: {
+//            self.closeButtonOrEditButton.alpha = 1.0
+//            self.closeButtonOrEditButton.isHidden = true
+//        }, completion: { _ in
+            self.closeButtonOrEditButton.isHidden = false
+//        })
+//        hightConstraints = tableView.bottomAnchor.constraint(equalTo: closeButtonOrEditButton.topAnchor, constant: -15)
+        if hightConstraints1 != nil {
+            hightConstraints1.isActive = false
+        }
     }
 
     func alerts(title: String, message: String) {
@@ -585,7 +620,9 @@ extension ScriptServiceViewController: UITableViewDataSource {
                 self.selectedIndexChoosed = true
                 UIView.animate(withDuration: 1) {
                     self.changeConstraintsHigh()
-                    self.settingCreator.alpha = 0
+//                    self.settingCreator.alpha = 0
+                    self.settingCreator.isHidden = true
+//                    self.closeButtonOrEditButton.isHidden = true
                     self.view.layoutIfNeeded()
                     self.tableView.beginUpdates()
                     self.tableView.endUpdates()
@@ -618,14 +655,16 @@ extension ScriptServiceViewController: UITableViewDataSource {
             UIView.animate(withDuration: 1) {
                 self.changeConstraintsLow()
                 self.view.layoutIfNeeded()
+                self.settingCreator.isHidden = false
+//                self.closeButtonOrEditButton.isHidden = false
                 self.tableView.beginUpdates()
                 self.tableView.endUpdates()
             }
             self.serviceLabel.text = "Добавляйте желаемые настройки"
             self.closeButtonOrEditButton.setTitle("Добавить настройку", for: .normal)
-            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
-                self.settingCreator.alpha = 1
-            })
+//            UIView.animate(withDuration: 1, delay: 0, options: [], animations: {
+//                self.settingCreator.alpha = 1
+//            })
             self.navigationItem.setRightBarButton(self.itemRight, animated: true)
             self.navigationItem.setLeftBarButton(self.itemLeft, animated: true)
             self.showCloseBool.toggle()

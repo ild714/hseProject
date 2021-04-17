@@ -218,20 +218,8 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - ModelRoomsConfigDelegate
 extension CollectionViewController: ModelRoomsConfigDelegate {
-    // Sort inputted dictionary with keys alphabetically.
-//    func sortWithKeys(_ dict: [Int: String]) -> [Int: String] {
-//        let sorted = dict.sorted(by: { $0.key > $1.key })
-//        var newDict: [Int: String] = [:]
-//        for sortedDict in sorted {
-//            newDict[sortedDict.key] = sortedDict.value
-//        }
-//        print("reess")
-//        print(newDict)
-//        return newDict
-//    }
-    
+
     func setup(result: [Int: String]) {
-        
         self.roomNumbersAndNames = result
         UserDefaults.standard.set(roomNumbersAndNames.count, forKey: "RoomsCount")
         self.createPageControll()
@@ -282,6 +270,6 @@ extension CollectionViewController: ModelAimDataDelegate {
 extension CollectionViewController: CollectionUpdate {
     func update() {
         self.modelAimData?.fetchAimData()
-        self.menu?.dismiss(animated: true, completion: nil)
+//        self.menu?.dismiss(animated: true, completion: nil)
     }
 }

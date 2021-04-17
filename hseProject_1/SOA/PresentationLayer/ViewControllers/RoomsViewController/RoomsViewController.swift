@@ -175,12 +175,12 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             }
             if aimData.value.flow == 1 {
                 ventilate = 1
+                self.ventilateButton.backgroundColor = .white
+                self.ventilateButton.setTitleColor(UIColor(redS: 155, greenS: 155, blueS: 155), for: .normal)
+            } else {
                 self.ventilateButton.startColor = UIColor(redS: 91, greenS: 128, blueS: 234, alpha: 1)
                 self.ventilateButton.endColor = UIColor(redS: 55, greenS: 181, blueS: 221, alpha: 1)
                 self.ventilateButton.setTitleColor(.white, for: .normal)
-            } else {
-                self.ventilateButton.backgroundColor = .white
-                self.ventilateButton.setTitleColor(UIColor(redS: 155, greenS: 155, blueS: 155), for: .normal)
             }
             self.aimGas.text = String(aimData.value.co2) + "ppm"
             self.aimWet.text = String(aimData.value.humidity) + "%"
@@ -190,7 +190,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
 
     @IBAction func minusTemperature(_ sender: Any) {
         let changeTemp = ChangeTemp()
-        
         let aimTempCopy = TemperatureConfig.minus(string: aimTemperature.text ?? "20") ?? "30℃"
         if let tempInt = Int(aimTempCopy.prefix(2) ) {
             changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt) {
@@ -203,8 +202,6 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         let changeTemp = ChangeTemp()
         let aimTempCopy = TemperatureConfig.plus(string: aimTemperature.text ?? "20") ?? "15℃"
         if let tempInt = Int(aimTempCopy.prefix(2)) {
-            print(tempInt)
-            print(aimRoomsData[self.curentVC - 1].key)
             changeTemp.changeTemp(rid: aimRoomsData[self.curentVC - 1].key, temp: tempInt) {
                 self.modelAimData?.fetchAimData()
             }
@@ -310,7 +307,7 @@ extension RoomsViewController: ModelAimDataDelegate {
 // MARK: - CollectionUpdate
 extension RoomsViewController: RoomsViewUpdate {
     func update() {
-//        self.modelAimData?.fetchAimData()
-        self.menu?.dismiss(animated: true, completion: nil)
+        self.modelAimData?.fetchAimData()
+//        self.menu?.dismiss(animated: true, completion: nil)
     }
 }

@@ -26,7 +26,7 @@ class ChangeTemp {
                 }
                 return
             }
-            if let data = data {
+            if data != nil {
                 DispatchQueue.main.async {
                     completion()
                 }
