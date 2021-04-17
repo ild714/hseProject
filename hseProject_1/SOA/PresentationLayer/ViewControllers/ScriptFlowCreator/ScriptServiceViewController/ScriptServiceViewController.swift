@@ -80,7 +80,7 @@ class ScriptServiceViewController: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= keyboardSize.height / 2
+                self.view.frame.origin.y -= keyboardSize.height / 1.4
             }
         }
     }
@@ -92,10 +92,6 @@ class ScriptServiceViewController: UIViewController {
     }
     func downloadDataScripts() {
         if UserDefaults.standard.bool(forKey: "edit") {
-            //            self.serviceScripts.removeAll()
-//            print(self.previousRoomId)
-//            print("!!!")
-//            print(self.self.previousDayId)
             if let result = self.scriptCreator.dictionary?["roomGroup\(self.previousRoomId)"]?["dayGroup\(self.previousDayId)"] {
                 print(result)
                 for setting in result {
@@ -122,7 +118,6 @@ class ScriptServiceViewController: UIViewController {
                             } else if data.0 == "co2" {
                                 co2 = data.1.intValue
                             } else if data.0 == "time" {
-//                                time = data.1
                                 print(time)
 
                                 let formatter = DateFormatter()
@@ -130,8 +125,6 @@ class ScriptServiceViewController: UIViewController {
                                 time = formatter.date(from: data.1.description) ?? Date()
                                 print("time!")
                                 print(data.1.stringValue)
-//                                print(formatter.date(from: data.1.stringValue)!)
-
                             } else if data.0 == "at_home" {
                                 at_home = data.1.intValue
                                 if at_home == 1 {
@@ -157,7 +150,6 @@ class ScriptServiceViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         jsonScriptSaver()
         self.delegate?.updateScript(script: self.scriptCreator)
-//        self.serviceScripts.removeAll()
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -200,10 +192,11 @@ class ScriptServiceViewController: UIViewController {
     @IBAction func soundOnOff(_ sender: Any) {
         if soundTurnOn == true {
             soundImage.setImage(UIImage(named: "mute"), for: .normal)
-            conditionerTurnOn.toggle()
+            conditionerTurnOn = false
             conditionerImage.isEnabled = false
             soundTurnOn.toggle()
         } else {
+            conditionerTurnOn = true
             soundImage.setImage(UIImage(named: "volume"), for: .normal)
             conditionerImage.isEnabled = true
             soundTurnOn.toggle()
@@ -507,34 +500,26 @@ class ScriptServiceViewController: UIViewController {
     }
     @IBAction func closeSetting(_ sender: Any) {
         settingCreator.isHidden = true
-//        hightConstraints = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
         if hightConstraints1 != nil {
             hightConstraints1.isActive = false
         }
         if hightConstraints != nil {
             hightConstraints.isActive = true
         }
-//        changeConstraintsLow()
     }
     var hightConstraints1: NSLayoutConstraint!
     @IBOutlet weak var closeButtonOrEditButton: ButtonCustomClass!
     @IBAction func addScript(_ sender: Any) {
-//        changeConstraintsHigh()
         hightConstraints1 = tableView.bottomAnchor.constraint(equalTo: settingCreator.topAnchor, constant: -15)
-//        self.reloadInputViews()
-//        self.updateViewConstraints()
         if hightConstraints != nil {
             hightConstraints.isActive = false
         }
         hightConstraints1.isActive = true
-//        settingCreator.layoutIfNeeded()
         settingCreator.isHidden = false
     }
 
     
     func changeConstraintsHigh() {
-//        closeButtonOrEditButton.isHidden = true
-//        closeButtonOrEditButton.alpha = 0.0
         lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
         hightConstraints.isActive = false
         lowConstraints.isActive = true
@@ -542,23 +527,13 @@ class ScriptServiceViewController: UIViewController {
     }
     func changeConstraintsLow() {
         hightConstraints = tableView.bottomAnchor.constraint(equalTo: closeButtonOrEditButton.topAnchor, constant: -15)
-//        lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
         if lowConstraints != nil {
             lowConstraints.isActive = false
         }
-//        lowConstraints.isActive = false
         if hightConstraints != nil {
             hightConstraints.isActive = true
         }
-//        self.closeButtonOrEditButton.alpha = 1.0
-//        closeButtonOrEditButton.isHidden = false
-//        UIView.animate(withDuration: 3, delay: 0, options: [], animations: {
-//            self.closeButtonOrEditButton.alpha = 1.0
-//            self.closeButtonOrEditButton.isHidden = true
-//        }, completion: { _ in
-            self.closeButtonOrEditButton.isHidden = false
-//        })
-//        hightConstraints = tableView.bottomAnchor.constraint(equalTo: closeButtonOrEditButton.topAnchor, constant: -15)
+        self.closeButtonOrEditButton.isHidden = false
         if hightConstraints1 != nil {
             hightConstraints1.isActive = false
         }

@@ -89,8 +89,6 @@ class NewScriptViewController: UIViewController {
                     let updateScript = UpdateScript()
                     self.scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
                     self.scriptCreator["name"] = JSON(self.textField.text ?? "Test1?")
-//                    print("?!!")
-//                    print(self.scriptCreator)
                     updateScript.sentUpdateDataScript(script: self.scriptCreator)
                     UserDefaults.standard.set(false, forKey: "edit")
                     self.delegate?.update()
@@ -154,8 +152,11 @@ class NewScriptViewController: UIViewController {
         } else {
             if scriptCreator.isEmpty {
                 scriptCreator["did"] = JSON("10155")
+                print("test1")
                 scriptCreator["name"] = JSON(textField.text ?? "Test1?")
             } else {
+                print("test2")
+                scriptCreator["name"] = JSON(textField.text ?? "Test1?")
             }
         }
     }
@@ -239,10 +240,10 @@ class NewScriptViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "edit") {
             //exitForTheServer()
         }
-
         self.scriptDraftSave()
         let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнить как черновик?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
+            print("test3")
             print(self.scriptCreator)
             var countScript = 0
             if let countScriptDefaults = try? UserDefaults.standard.integer(forKey: "JSONCount") {
@@ -256,12 +257,10 @@ class NewScriptViewController: UIViewController {
             dictionary.keys.forEach { key in
                 if key.contains("Json\(UserDefaults.standard.integer(forKey: "CurrentJSON"))") {
                     print(key, "???")
-//                    if self.notNewScript {
                         defaults.removeObject(forKey: key)
                         var count = UserDefaults.standard.integer(forKey: "JSONCount")
                         UserDefaults.standard.set(count-1, forKey: "JSONCount")
                         UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
-//                    }
                 } else {
                     print(countScript+1)
                     UserDefaults.standard.set(countScript+1, forKey: "LastJSON")
