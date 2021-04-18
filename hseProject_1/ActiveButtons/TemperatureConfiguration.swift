@@ -34,7 +34,7 @@ class TemperatureConfig {
         var aimTmperatureIntResult = 0
 
         if let aimTemperatureInt = Int(String(string.prefix(2))) {
-            if aimTemperatureInt >= 30 {
+            if aimTemperatureInt >= 50 {
                 return nil
             }
             aimTmperatureIntResult = aimTemperatureInt
