@@ -366,7 +366,7 @@ class ScriptServiceViewController: UIViewController {
         }
     }
     func showAlertScript() {
-        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнаить как черновик?", preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохранить как черновик?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
             print(self.scriptCreator)
             var countScript = 0

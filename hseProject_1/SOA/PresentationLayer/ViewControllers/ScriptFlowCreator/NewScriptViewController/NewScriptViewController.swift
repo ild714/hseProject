@@ -161,42 +161,6 @@ class NewScriptViewController: UIViewController {
         }
     }
     func showSaveScript(script: JSON) {
-//        if UserDefaults.standard.bool(forKey: "edit") {
-//            let updateScript = UpdateScript()
-//            self.scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
-//            self.scriptCreator["name"] = JSON(self.textField.text ?? "Test1?")
-//            print("?!!")
-//            print(self.scriptCreator)
-//            updateScript.sentUpdateDataScript(script: self.scriptCreator)
-//            UserDefaults.standard.set(false, forKey: "edit")
-//            self.delegate?.update()
-//            self.navigationController?.popViewController(animated: true)
-
-//            let alertVC = UIAlertController(title: "Вы не сохранили обновленный сценарий", message: "Хотите сохранить", preferredStyle: .alert)
-//            alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {[weak self]_ in
-//                print(UserDefaults.standard.integer(forKey: "id"))
-//                self?.scriptCreator["sc_id"] = JSON(UserDefaults.standard.integer(forKey: "id"))
-//                self?.scriptCreator["name"] = JSON(self?.textField.text ?? "Test1?")
-//                print("?!!")
-//
-//                let updateScript = UpdateScript()
-//                if let scriptCreator = self?.scriptCreator {
-//                    print(self?.scriptCreator)
-//                updateScript.sentUpdateDataScript(script: scriptCreator)
-//                } else {
-//                    print("error with scriptCreator")
-//                }
-//                UserDefaults.standard.set(false, forKey: "edit")
-//                self?.delegate?.update()
-//                self?.navigationController?.popViewController(animated: true)
-//
-//            }))
-//            alertVC.addAction(UIAlertAction(title: "Нет", style: .default, handler: {_ in
-//                UserDefaults.standard.set(false, forKey: "edit")
-//                self.navigationController?.popViewController(animated: true)
-//            }))
-//            self.present(alertVC, animated: true)
-//        } else {
         let alertVC = UIAlertController(title: "Вы не сохранили сценарий", message: "Хотите сохранить", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
             let network = NetworkScript()
@@ -220,7 +184,6 @@ class NewScriptViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }))
         self.present(alertVC, animated: true)
-//        }
     }
     func exitForTheServer() {
         let defaults = UserDefaults.standard
@@ -243,8 +206,6 @@ class NewScriptViewController: UIViewController {
         self.scriptDraftSave()
         let alertVC = UIAlertController(title: "Вы заполнили не весь сценарий", message: "Хотите сохрнить как черновик?", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Да", style: .default, handler: {_ in
-            print("test3")
-            print(self.scriptCreator)
             var countScript = 0
             if let countScriptDefaults = try? UserDefaults.standard.integer(forKey: "JSONCount") {
                     countScript = countScriptDefaults
@@ -256,7 +217,6 @@ class NewScriptViewController: UIViewController {
             let dictionary = defaults.dictionaryRepresentation()
             dictionary.keys.forEach { key in
                 if key.contains("Json\(UserDefaults.standard.integer(forKey: "CurrentJSON"))") {
-                    print(key, "???")
                         defaults.removeObject(forKey: key)
                         var count = UserDefaults.standard.integer(forKey: "JSONCount")
                         UserDefaults.standard.set(count-1, forKey: "JSONCount")
