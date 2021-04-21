@@ -79,9 +79,14 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.deleteBackButtonFromNavigation()
         self.startAnimation()
         self.setupGesturesForRoomNumbersAndNames()
-        self.setupCurrentResultAppDatchik()
 //        self.setDefaultValuesForAimParamtrs()
-        self.modelAimData?.fetchAimData()
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" ||  UserDefaults.standard.object(forKey: "UserEmail") as? String == "test" {
+            self.setupCurrentResultAppDatchikTest()
+            setDefaultValuesForAimParamtrs()
+        } else {
+            self.setupCurrentResultAppDatchik()
+            self.modelAimData?.fetchAimData()
+        }
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
@@ -155,6 +160,16 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             self.currentGas.text = currentRoomData?.currentGas
             self.peopleInRoom.text = currentRoomData?.peopleInRoom
 
+            ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+        }
+    }
+    func setupCurrentResultAppDatchikTest() {
+        if self.roomNumbersAndNames.count > 0 {
+            self.currentTemperature.text = "20℃"
+            self.currentWet.text = "44.0%"
+            self.currentGas.text = "686ppm"
+            self.peopleInRoom.text = "0"
+            
             ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
         }
     }

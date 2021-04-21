@@ -50,15 +50,24 @@ class ScriptsViewController: UIViewController {
         loadAnimation.startAnimating()
         let group = DispatchGroup()
         group.enter()
-        DispatchQueue.main.async {
-            self.loadScripts(group: group)
-        }
-        group.notify(queue: .main) {
-            if self.scriptsDict.count == 0 {
-                self.viewDidLoad()
-            } else {
-                self.sortDict()
-                self.setupTableView()
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "test" {
+            self.alertTest(title: "Для работы со сценариями создайте аккаунт", message: "Необходимо выйти из тестового режима и войти с помощью учетной записи")
+        } else if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" {
+            loadAnimation.stopAnimating()
+            loadAnimation.isHidden = true
+        } else{
+            
+            
+            DispatchQueue.main.async {
+                self.loadScripts(group: group)
+            }
+            group.notify(queue: .main) {
+                if self.scriptsDict.count == 0 {
+                    self.viewDidLoad()
+                } else {
+                    self.sortDict()
+                    self.setupTableView()
+                }
             }
         }
         title = "Сценарии"
@@ -161,6 +170,11 @@ class ScriptsViewController: UIViewController {
     func alert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vcAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: nil))
+        self.present(vcAlert, animated: true)
+    }
+    func alertTest(title: String, message: String) {
+        let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        vcAlert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         self.present(vcAlert, animated: true)
     }
 }

@@ -61,6 +61,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         }
     }
     
+    let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 115, height: 40))
     override func viewDidLoad() {
         super.viewDidLoad()
         let signInButton = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 100, height: 50))
@@ -78,6 +79,29 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         sighInBtn.center = CGPoint(x: view.center.x, y: view.center.y + 50)
         sighInBtn.addTarget(self, action: #selector(signInActionBtn), for: .touchUpInside)
         self.view.addSubview(sighInBtn)
+        
+        
+        
+        
+        testButton.backgroundColor = UIColor.init(red: 102/255.0, green: 178/255.0, blue: 255/255.0, alpha: 1)
+        testButton.setTitle("Test application", for: .normal)
+        testButton.center = CGPoint(x: view.center.x, y: view.center.y + 100)
+        testButton.layer.cornerRadius = 5
+        testButton.titleLabel?.minimumScaleFactor = 0.5
+        testButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        testButton.addTarget(self,
+                         action: #selector(testApp),
+                         for: .touchUpInside)
+        testButton.titleLabel?.font = UIFont(name: "Helvetica", size:12)
+        testButton.setTitleColor(.gray, for: .highlighted)
+        self.view.addSubview(testButton)
+        
+//        testButton.topAnchor.constraint(equalTo: sighInBtn.bottomAnchor, constant: -10).isActive = true
+    }
+    
+    @objc func testApp() {
+        UserDefaults.standard.set("test", forKey: "UserEmail")
+        self.signInComplete()
     }
     
     @objc func signInActionBtn() {
