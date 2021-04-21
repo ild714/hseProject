@@ -51,6 +51,7 @@
 		743B8FC824E5D612009A929A /* TemperatureConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */; };
 		7457B97624DDCC4C00C16A0E /* ViewCustomClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */; };
 		7457B97D24DF26F100C16A0E /* RequestRoomConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */; };
+		745DE3962630724E000DA00F /* SignInViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745DE3952630724E000DA00F /* SignInViewController.storyboard */; };
 		746C354A25ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */; };
 		746C354F25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 746C354E25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard */; };
 		746C355B25ACC240006CDBCD /* CurrentRoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746C355925ACC240006CDBCD /* CurrentRoomsTableViewCell.swift */; };
@@ -154,6 +155,7 @@
 		743B8FC724E5D612009A929A /* TemperatureConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureConfiguration.swift; sourceTree = "<group>"; };
 		7457B97524DDCC4C00C16A0E /* ViewCustomClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCustomClass.swift; sourceTree = "<group>"; };
 		7457B97C24DF26F100C16A0E /* RequestRoomConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestRoomConfig.swift; sourceTree = "<group>"; };
+		745DE3952630724E000DA00F /* SignInViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignInViewController.storyboard; sourceTree = "<group>"; };
 		746C354925ACAB3B006CDBCD /* ScriptCurrentRoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptCurrentRoomsViewController.swift; sourceTree = "<group>"; };
 		746C354E25ACAC05006CDBCD /* CurrentRoomsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurrentRoomsViewController.storyboard; sourceTree = "<group>"; };
 		746C355925ACC240006CDBCD /* CurrentRoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentRoomsTableViewCell.swift; sourceTree = "<group>"; };
@@ -765,6 +767,7 @@
 			isa = PBXGroup;
 			children = (
 				74D65C9225840EC2007588F7 /* SignInViewController.swift */,
+				745DE3952630724E000DA00F /* SignInViewController.storyboard */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -932,6 +935,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7497523C2559A1E100B88A21 /* ScriptForDaysTableViewCell.xib in Resources */,
+				745DE3962630724E000DA00F /* SignInViewController.storyboard in Resources */,
 				74EB9A8526244D0100919F0E /* LaunchScreenViewController.storyboard in Resources */,
 				740D1E06252F46BF000253FA /* CollectionViewController.storyboard in Resources */,
 				74BF503225667AD200DE45D1 /* ScriptServiceTableViewCell.xib in Resources */,

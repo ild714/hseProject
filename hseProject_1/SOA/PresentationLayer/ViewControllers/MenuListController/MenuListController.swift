@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import KeychainAccess
 
 class MenuListController: UITableViewController {
     var items = ["Сценарии"]
@@ -31,10 +32,16 @@ class MenuListController: UITableViewController {
     @objc func exit() {
         GIDSignIn.sharedInstance()?.signOut()
 
-        let signInVC = SignInViewController(rootAssembly: RootAssembly())
-        signInVC.modalPresentationStyle = .fullScreen
+//        let signInVC = SignInViewController(rootAssembly: RootAssembly())
+        let signInVC = SignInViewController.storyboardInstance()
+        signInVC?.rootAssembly = RootAssembly()
+        signInVC?.modalPresentationStyle = .fullScreen
         UserDefaults.standard.set(false, forKey: "Log_in")
-        self.present(signInVC, animated: true, completion: nil)
+        if let signInVC = signInVC {
+            self.present(signInVC, animated: true, completion: nil)
+        }
+//        let keychain = Keychain(service: "com.nigmetzyanov.IndoorClimateControlSystems")
+//        keychain["email"] = nil
 
     }
 

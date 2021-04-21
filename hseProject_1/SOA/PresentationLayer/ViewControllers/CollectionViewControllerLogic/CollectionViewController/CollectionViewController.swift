@@ -68,8 +68,12 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         self.createMenuForNavigationController()
         self.createButtonForNavigationController()
         self.setColorForNavigationController()
-        self.modelRoomsConfig?.fetchRoomConfig()
-        self.loadAppDatchik()
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" {
+            showAlertApple()
+        } else {
+            self.modelRoomsConfig?.fetchRoomConfig()
+            self.loadAppDatchik()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
     }
@@ -81,6 +85,11 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
     }
     func showAlert() {
         let alertVC = UIAlertController(title: "Ошибка подключения к wi-fi", message: "Включите wi-fi и перезапустите приложение", preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+        self.present(alertVC, animated: true)
+    }
+    func showAlertApple() {
+        let alertVC = UIAlertController(title: "Ошибка получения данных", message: "Используйте учетную запись Google", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         self.present(alertVC, animated: true)
     }
