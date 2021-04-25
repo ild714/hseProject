@@ -84,7 +84,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         
         
         testButton.backgroundColor = UIColor.init(red: 102/255.0, green: 178/255.0, blue: 255/255.0, alpha: 1)
-        testButton.setTitle("Test application", for: .normal)
+        testButton.setTitle("Continue without Sign in", for: .normal)
         testButton.center = CGPoint(x: view.center.x, y: view.center.y + 100)
         testButton.layer.cornerRadius = 5
         testButton.titleLabel?.minimumScaleFactor = 0.5
@@ -127,9 +127,26 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
 //            print(credential.user)
 //            print(credential.email)
 //            let keychain = Keychain(service: "com.nigmetzyanov.IndoorClimateControlSystems")
-            print(credential.identityToken?.description)
+//            print(credential.authorizationCode)
+            guard let authorizationCode = credential.authorizationCode,
+                  let authCode = String(data: authorizationCode, encoding: .utf8) else {
+                print("Problem with the authorizationCode")
+                return
+            }
+            print("!")
+            print(authCode)
+            print("!")
+            guard let id = credential.identityToken,
+                  let idToken = String(data: id, encoding: .utf8) else {
+                print("Problem with the authorizationCode")
+                return
+            }
+            print("!")
+            print(idToken)
+            print("!")
             UserDefaults.standard.set("apple", forKey: "UserEmail")
-
+            print(credential)
+            
             self.signInComplete()
         case let credentials as ASPasswordCredential:
             print(credentials.password)
@@ -141,10 +158,10 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-//        print(error.localizedDescription)
-        let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        print(error.localizedDescription)
+//        let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+//        present(alert, animated: true, completion: nil)
     }
 }
 

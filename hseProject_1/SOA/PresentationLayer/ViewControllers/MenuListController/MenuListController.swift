@@ -19,7 +19,11 @@ class MenuListController: UITableViewController {
 
     init(userId: String, presentationAssembly: PresentationAssemblyProtocol, collectionSelf: CollectionViewController?, roomsController: RoomsViewController?) {
         self.presentationAssembly = presentationAssembly
-        self.userId = String("User Login:\n \(userId)")
+        if userId == "test"{
+            self.userId = String("User Login:\n user1")
+        } else {
+            self.userId = String("User Login:\n \(userId)")
+        }
         self.collection = collectionSelf
         self.roomsController = roomsController
         super.init(nibName: nil, bundle: nil)
