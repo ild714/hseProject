@@ -17,7 +17,11 @@ class NetworkScript {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue(authorizationToken(), forHTTPHeaderField: "Authorization")
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" {
+            request.setValue(self.authorizationTokenYan(), forHTTPHeaderField: "Authorization")
+        } else {
+            request.setValue(self.authorizationToken(), forHTTPHeaderField: "Authorization")
+        }
 
         let encoder = JSONEncoder()
         if let data = try? encoder.encode(script) {
@@ -46,5 +50,11 @@ class NetworkScript {
             return ""
         }
         return "Google" + " " + token
+    }
+    func authorizationTokenYan() -> String {
+        guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
+            return ""
+        }
+        return "Yandex" + " " + "AgAAAAAaGAgvAAa-ictSVhJT0UkruSzpJe4JCos"
     }
 }

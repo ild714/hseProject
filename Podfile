@@ -16,6 +16,7 @@ target 'IndoorClimateControlSystems' do
 	pod 'GoogleSignIn'
 	pod 'SideMenu'
 	pod 'SwiftLint'
+	pod 'KeychainAccess'
   # Pods for IndoorClimateControlSystems
 
 end

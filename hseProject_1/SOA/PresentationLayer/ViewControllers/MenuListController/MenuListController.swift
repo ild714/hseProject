@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import KeychainAccess
 
 class MenuListController: UITableViewController {
     var items = ["Сценарии"]
@@ -18,7 +19,11 @@ class MenuListController: UITableViewController {
 
     init(userId: String, presentationAssembly: PresentationAssemblyProtocol, collectionSelf: CollectionViewController?, roomsController: RoomsViewController?) {
         self.presentationAssembly = presentationAssembly
-        self.userId = String("User Login:\n \(userId)")
+        if userId == "test"{
+            self.userId = String("User Login:\n user1")
+        } else {
+            self.userId = String("User Login:\n \(userId)")
+        }
         self.collection = collectionSelf
         self.roomsController = roomsController
         super.init(nibName: nil, bundle: nil)
@@ -31,10 +36,16 @@ class MenuListController: UITableViewController {
     @objc func exit() {
         GIDSignIn.sharedInstance()?.signOut()
 
-        let signInVC = SignInViewController(rootAssembly: RootAssembly())
-        signInVC.modalPresentationStyle = .fullScreen
+//        let signInVC = SignInViewController(rootAssembly: RootAssembly())
+        let signInVC = SignInViewController.storyboardInstance()
+        signInVC?.rootAssembly = RootAssembly()
+        signInVC?.modalPresentationStyle = .fullScreen
         UserDefaults.standard.set(false, forKey: "Log_in")
-        self.present(signInVC, animated: true, completion: nil)
+        if let signInVC = signInVC {
+            self.present(signInVC, animated: true, completion: nil)
+        }
+//        let keychain = Keychain(service: "com.nigmetzyanov.IndoorClimateControlSystems")
+//        keychain["email"] = nil
 
     }
 

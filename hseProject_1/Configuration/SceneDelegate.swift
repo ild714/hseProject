@@ -34,7 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, GIDSignInDelegate {
                     self.window?.makeKeyAndVisible()
                 }
             } else {
-                let signInVC = SignInViewController(rootAssembly: rootAssembly)
+                let signInVC = SignInViewController.storyboardInstance()
+                signInVC?.rootAssembly = rootAssembly
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()
                 print("222")
@@ -91,7 +92,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, GIDSignInDelegate {
                     self.window?.makeKeyAndVisible()
                 }
             } else {
-                let signInVC = SignInViewController(rootAssembly: rootAssembly)
+                let signInVC = SignInViewController.storyboardInstance()
+                signInVC?.rootAssembly = rootAssembly
                 self.window?.rootViewController = signInVC
                 self.window?.makeKeyAndVisible()
             }

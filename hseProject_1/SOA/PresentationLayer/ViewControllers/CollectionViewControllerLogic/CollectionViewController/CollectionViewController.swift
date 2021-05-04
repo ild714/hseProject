@@ -68,8 +68,15 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         self.createMenuForNavigationController()
         self.createButtonForNavigationController()
         self.setColorForNavigationController()
-        self.modelRoomsConfig?.fetchRoomConfig()
-        self.loadAppDatchik()
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" ||  UserDefaults.standard.object(forKey: "UserEmail") as? String == "test" {
+//            showAlertApple()
+            self.roomNumbersAndNames = [1: "Кухня"]
+            self.createPageControll()
+            self.collectionView.reloadData()
+        } else {
+            self.modelRoomsConfig?.fetchRoomConfig()
+            self.loadAppDatchik()
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
     }
@@ -84,6 +91,11 @@ class CollectionViewController: UIViewController, ToolBarWithPageControllProtoco
         alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
         self.present(alertVC, animated: true)
     }
+//    func showAlertApple() {
+//        let alertVC = UIAlertController(title: "Ошибка получения данных", message: "Используйте учетную запись Google", preferredStyle: .alert)
+//        alertVC.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+//        self.present(alertVC, animated: true)
+//    }
     func createPageControll() {
         self.createPageControl(viewController: self, number: self.curentVC, allAmountOfPages: self.roomNumbersAndNames.count + 1)
     }
@@ -176,15 +188,18 @@ extension CollectionViewController: UICollectionViewDataSource {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? CustomCollectionViewCell ?? CustomCollectionViewCell()
 
-        print("cuurent")
+        print("curent")
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "test" ||  UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" {
+            cell.configureTest()
+        } else {
         let keyId = Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row]
             let currentRoomData = CurrentRoomData(result: resultDatchik, curentRoom: Array(self.roomNumbersAndNames.keys.sorted())[indexPath.row])
         cell.configure(currentRoomText: self.roomNumbersAndNames[keyId] ?? "No value", currentRoom: currentRoomData, launchVC: self.launchVCMain)
-
+        }
 //        if let launchVCMain = launchVCMain {
 //            launchVCMain.dismiss(animated: true, completion: nil)
 //        }
-        
+
         return cell
     }
 
@@ -228,7 +243,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
             self.viewDidLoad()
             errorCount += 1
         } else {
-//            self.showAlert()
+            self.showAlert()
         }
     }
 }
@@ -241,7 +256,7 @@ extension CollectionViewController: ModelAppDatchikDelegate {
             self.viewDidLoad()
             errorCount += 1
         } else {
-//            self.showAlert()
+            self.showAlert()
         }
     }
 }
@@ -258,7 +273,7 @@ extension CollectionViewController: ModelAimDataDelegate {
             self.viewDidLoad()
             errorCount += 1
         } else {
-//            self.showAlert()
+            self.showAlert()
         }
     }
 }

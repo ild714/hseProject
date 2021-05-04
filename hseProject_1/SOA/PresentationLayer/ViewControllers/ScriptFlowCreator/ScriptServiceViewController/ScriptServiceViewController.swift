@@ -518,7 +518,6 @@ class ScriptServiceViewController: UIViewController {
         settingCreator.isHidden = false
     }
 
-    
     func changeConstraintsHigh() {
         lowConstraints = tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15)
         hightConstraints.isActive = false

@@ -79,9 +79,14 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
         self.deleteBackButtonFromNavigation()
         self.startAnimation()
         self.setupGesturesForRoomNumbersAndNames()
-        self.setupCurrentResultAppDatchik()
 //        self.setDefaultValuesForAimParamtrs()
-        self.modelAimData?.fetchAimData()
+        if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" ||  UserDefaults.standard.object(forKey: "UserEmail") as? String == "test" {
+            self.setupCurrentResultAppDatchikTest()
+            setDefaultValuesForAimParamtrs()
+        } else {
+            self.setupCurrentResultAppDatchik()
+            self.modelAimData?.fetchAimData()
+        }
     }
     func createMenuForNavigationController() {
         if let presentationAssembly = self.presentationAssembly {
@@ -158,6 +163,16 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
         }
     }
+    func setupCurrentResultAppDatchikTest() {
+        if self.roomNumbersAndNames.count > 0 {
+            self.currentTemperature.text = "20℃"
+            self.currentWet.text = "44.0%"
+            self.currentGas.text = "686ppm"
+            self.peopleInRoom.text = "0"
+
+            ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
+        }
+    }
     var ventilate = 0
     var chNotNil = false
     func setupAimData() {
@@ -168,7 +183,11 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             if aimData.value.ch_temp != nil {
                 if let tempChanged = aimData.value.ch_temp {
 //                    chNotNil = true
-                    self.aimTemperature.text = "\(tempChanged)/\(String(aimData.value.temp))℃"
+                    if tempChanged == aimData.value.temp {
+                        self.aimTemperature.text = String(aimData.value.temp) + "℃"
+                    } else {
+                        self.aimTemperature.text = "\(tempChanged)/\(String(aimData.value.temp))℃"
+                    }
                 }
             } else {
                 self.aimTemperature.text = String(aimData.value.temp) + "℃"

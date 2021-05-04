@@ -34,6 +34,17 @@ class CustomCollectionViewCell: UICollectionViewCell {
         animation.startAnimating()
     }
 
+    func configureTest() {
+
+        roomNameLabel.text = "Кухня"
+        temperature.text = "20℃"
+        wet.text = "44.0%"
+        gas.text = "686ppm"
+
+        animation.isHidden = true
+        animation.stopAnimating()
+    }
+
     func configure(currentRoomText: String, currentRoom: CurrentRoomData, launchVC: LaunchScreenViewController?) {
         if currentRoom.cellWet.isEmpty == true {
             tempImage.isHidden = true
