@@ -169,7 +169,7 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             self.currentWet.text = "44.0%"
             self.currentGas.text = "686ppm"
             self.peopleInRoom.text = "0"
-            
+
             ActivityIndicator.stopAnimating(views: [self.currentTemperature, self.currentWet, self.currentGas, self.peopleInRoom])
         }
     }
@@ -183,7 +183,11 @@ class RoomsViewController: UIViewController, ToolBarWithPageControllProtocol {
             if aimData.value.ch_temp != nil {
                 if let tempChanged = aimData.value.ch_temp {
 //                    chNotNil = true
-                    self.aimTemperature.text = "\(tempChanged)/\(String(aimData.value.temp))℃"
+                    if tempChanged == aimData.value.temp {
+                        self.aimTemperature.text = String(aimData.value.temp) + "℃"
+                    } else {
+                        self.aimTemperature.text = "\(tempChanged)/\(String(aimData.value.temp))℃"
+                    }
                 }
             } else {
                 self.aimTemperature.text = String(aimData.value.temp) + "℃"

@@ -50,7 +50,7 @@ class VentilateRoom {
         }
         return "Google" + " " + token
     }
-    
+
     func authorizationTokenYan() -> String {
         guard let token = UserDefaults.standard.object(forKey: "Token") as? String else {
             return ""

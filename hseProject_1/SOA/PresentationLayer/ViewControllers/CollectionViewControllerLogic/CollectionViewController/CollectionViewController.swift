@@ -199,7 +199,7 @@ extension CollectionViewController: UICollectionViewDataSource {
 //        if let launchVCMain = launchVCMain {
 //            launchVCMain.dismiss(animated: true, completion: nil)
 //        }
-        
+
         return cell
     }
 
@@ -243,7 +243,7 @@ extension CollectionViewController: ModelRoomsConfigDelegate {
             self.viewDidLoad()
             errorCount += 1
         } else {
-//            self.showAlert()
+            self.showAlert()
         }
     }
 }
@@ -256,7 +256,7 @@ extension CollectionViewController: ModelAppDatchikDelegate {
             self.viewDidLoad()
             errorCount += 1
         } else {
-//            self.showAlert()
+            self.showAlert()
         }
     }
 }
@@ -273,7 +273,7 @@ extension CollectionViewController: ModelAimDataDelegate {
             self.viewDidLoad()
             errorCount += 1
         } else {
-//            self.showAlert()
+            self.showAlert()
         }
     }
 }

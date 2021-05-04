@@ -12,9 +12,9 @@ import AuthenticationServices
 import KeychainAccess
 
 class SignInViewController: UIViewController, GIDSignInDelegate {
-   
+
     var rootAssembly: RootAssembly?
-    
+
     //    init(rootAssembly: RootAssembly) {
 //        self.rootAssembly = rootAssembly
 //        super.init(nibName: nil, bundle: nil)
@@ -60,7 +60,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
             }
         }
     }
-    
+
     let testButton = UIButton(frame: CGRect(x: 0, y: 0, width: 115, height: 40))
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,19 +70,16 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         GIDSignIn.sharedInstance()?.presentingViewController = self
         GIDSignIn.sharedInstance()?.clientID = Bundle.main.infoDictionary?["CLIENT_ID"] as? String ?? ""
         GIDSignIn.sharedInstance()?.delegate = self
-        
+
         view.backgroundColor = .white
         view.addSubview(signInButton)
-        
+
         let sighInBtn = ASAuthorizationAppleIDButton()
         sighInBtn.frame = CGRect(x: 20, y: (UIScreen.main.bounds.size.height - 170), width: 115, height: 40)
         sighInBtn.center = CGPoint(x: view.center.x, y: view.center.y + 50)
         sighInBtn.addTarget(self, action: #selector(signInActionBtn), for: .touchUpInside)
         self.view.addSubview(sighInBtn)
-        
-        
-        
-        
+
         testButton.backgroundColor = UIColor.init(red: 102/255.0, green: 178/255.0, blue: 255/255.0, alpha: 1)
         testButton.setTitle("Continue without Sign in", for: .normal)
         testButton.center = CGPoint(x: view.center.x, y: view.center.y + 100)
@@ -92,18 +89,18 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         testButton.addTarget(self,
                          action: #selector(testApp),
                          for: .touchUpInside)
-        testButton.titleLabel?.font = UIFont(name: "Helvetica", size:12)
+        testButton.titleLabel?.font = UIFont(name: "Helvetica", size: 12)
         testButton.setTitleColor(.gray, for: .highlighted)
         self.view.addSubview(testButton)
-        
+
 //        testButton.topAnchor.constraint(equalTo: sighInBtn.bottomAnchor, constant: -10).isActive = true
     }
-    
+
     @objc func testApp() {
         UserDefaults.standard.set("test", forKey: "UserEmail")
         self.signInComplete()
     }
-    
+
     @objc func signInActionBtn() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
@@ -113,7 +110,7 @@ class SignInViewController: UIViewController, GIDSignInDelegate {
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    
+
     static func storyboardInstance() -> SignInViewController? {
         let storyboard = UIStoryboard(name: "SignInViewController", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: String(describing: self)) as? SignInViewController
@@ -146,7 +143,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             print("!")
             UserDefaults.standard.set("apple", forKey: "UserEmail")
             print(credential)
-            
+
             self.signInComplete()
         case let credentials as ASPasswordCredential:
             print(credentials.password)
@@ -156,7 +153,7 @@ extension SignInViewController: ASAuthorizationControllerDelegate {
             present(alert, animated: true, completion: nil)
         }
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
 //        let alert = UIAlertController(title: "Error", message: "\(error.localizedDescription)", preferredStyle: .alert)

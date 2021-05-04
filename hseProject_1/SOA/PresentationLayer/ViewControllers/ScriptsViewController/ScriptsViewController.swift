@@ -52,18 +52,23 @@ class ScriptsViewController: UIViewController {
         group.enter()
         if UserDefaults.standard.object(forKey: "UserEmail") as? String == "test" {
             self.alertTest(title: "Для работы со сценариями создайте аккаунт", message: "Необходимо выйти из тестового режима и войти с помощью учетной записи")
-        } else if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" {
             loadAnimation.stopAnimating()
             loadAnimation.isHidden = true
-        } else{
-            
-            
+        } else if UserDefaults.standard.object(forKey: "UserEmail") as? String == "apple" {
+            self.alertTest(title: "Для работы со сценариями войдите с помощью аккаунта google", message: "Необходимо выйти из учетной записи apple и войти с помощью учетной записи google")
+            loadAnimation.stopAnimating()
+            loadAnimation.isHidden = true
+        } else {
+
             DispatchQueue.main.async {
                 self.loadScripts(group: group)
             }
             group.notify(queue: .main) {
                 if self.scriptsDict.count == 0 {
-                    self.viewDidLoad()
+//                    self.viewDidLoad()
+                    self.alert(title: "Ошибка", message: "Нет созданных сценариев или отсутсвует подключение к интернету")
+                    self.loadAnimation.stopAnimating()
+                    self.loadAnimation.isHidden = true
                 } else {
                     self.sortDict()
                     self.setupTableView()
@@ -111,13 +116,18 @@ class ScriptsViewController: UIViewController {
                 print("1!")
                 group.leave()
             case .failure(let error):
+                print("444")
                 print(error.localizedDescription)
                 group.leave()
             }
         }
     }
     func sortDict() {
-        arrayDict = Array(self.scriptsDict)
+//        if self.scriptsDict.count == 0 {
+//            alert(title: "Ошибка", message: "Созданных сценариев нет. Добавьте их на сервере")
+//        } else {
+            arrayDict = Array(self.scriptsDict)
+//        }
     }
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: view.frame, style: .grouped)
@@ -169,7 +179,7 @@ class ScriptsViewController: UIViewController {
     }
     func alert(title: String, message: String) {
         let vcAlert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        vcAlert.addAction(UIAlertAction(title: "Да", style: .default, handler: nil))
+        vcAlert.addAction(UIAlertAction(title: "Ок", style: .default, handler: nil))
         self.present(vcAlert, animated: true)
     }
     func alertTest(title: String, message: String) {
@@ -211,7 +221,7 @@ extension ScriptsViewController: UITableViewDataSource {
         }
         let myAction2 = UITableViewRowAction(style: .normal, title: "Edit") {[weak self] (_, indexPath) in
             UserDefaults.standard.set(true, forKey: "edit")
-             
+
             let networkCompleteScript = CompleteScript()
             if let key = self?.arrayDict?[indexPath.row].key {
                 UserDefaults.standard.set(key, forKey: "id")
@@ -236,7 +246,7 @@ extension ScriptsViewController: UITableViewDataSource {
             return [myAction1]
         }
     }
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -344,8 +354,11 @@ extension ScriptsViewController: UpdateScripts {
             self.loadScripts(group: group)
         }
         group.notify(queue: .main) {
-            self.sortDict()
-            self.tableView.reloadData()
+            
+                
+                self.sortDict()
+                self.tableView.reloadData()
+            
         }
     }
 }
